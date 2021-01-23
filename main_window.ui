@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>MainWindow</class>
+ <widget class="QMainWindow" name="MainWindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>1145</width>
+    <height>790</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>MainWindow</string>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <widget class="QGroupBox" name="groupBox">
+    <property name="geometry">
+     <rect>
+      <x>20</x>
+      <y>10</y>
+      <width>771</width>
+      <height>731</height>
+     </rect>
+    </property>
+    <property name="title">
+     <string/>
+    </property>
+    <widget class="QPushButton" name="pushButton">
+     <property name="geometry">
+      <rect>
+       <x>300</x>
+       <y>660</y>
+       <width>171</width>
+       <height>41</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Comparar con original</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="image_viewer">
+     <property name="geometry">
+      <rect>
+       <x>60</x>
+       <y>60</y>
+       <width>651</width>
+       <height>541</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>TextLabel</string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignCenter</set>
+     </property>
+    </widget>
+   </widget>
+   <widget class="QGroupBox" name="groupBox_2">
+    <property name="geometry">
+     <rect>
+      <x>810</x>
+      <y>10</y>
+      <width>321</width>
+      <height>731</height>
+     </rect>
+    </property>
+    <property name="title">
+     <string/>
+    </property>
+   </widget>
+  </widget>
+  <widget class="QStatusBar" name="statusbar"/>
+  <widget class="QMenuBar" name="menubar">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>1145</width>
+     <height>21</height>
+    </rect>
+   </property>
+   <widget class="QMenu" name="archive_menu">
+    <property name="title">
+     <string>Archivo</string>
+    </property>
+    <addaction name="load_image_menu_option"/>
+   </widget>
+   <widget class="QMenu" name="filter_menu">
+    <property name="title">
+     <string>Filtros</string>
+    </property>
+    <addaction name="bilateral_filter_menu_option"/>
+    <addaction name="anisotropic_filter_menu_option"/>
+   </widget>
+   <addaction name="archive_menu"/>
+   <addaction name="filter_menu"/>
+  </widget>
+  <action name="load_image_menu_option">
+   <property name="text">
+    <string>Cargar imagen</string>
+   </property>
+   <property name="shortcutContext">
+    <enum>Qt::WindowShortcut</enum>
+   </property>
+   <property name="iconVisibleInMenu">
+    <bool>true</bool>
+   </property>
+  </action>
+  <action name="bilateral_filter_menu_option">
+   <property name="text">
+    <string>Filtro bilateral</string>
+   </property>
+  </action>
+  <action name="anisotropic_filter_menu_option">
+   <property name="text">
+    <string>Filtro anisotrópico</string>
+   </property>
+  </action>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>
