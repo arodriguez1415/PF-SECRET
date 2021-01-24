@@ -1,7 +1,8 @@
-from PyQt5.QtCore import QRect, QSize, QPoint
-from PyQt5.QtGui import QPixmap, QPainter, QImage
+from PyQt5 import QtCore
 from src.Classes.Project_image import Project_image
 import src.Backend.Menus.archive_menu as archive_menu
+from src.Classes.QDrawable_label import QDrawable_label
+
 
 def set_style(main_window):
     stylesheets_paths_list = []
@@ -15,13 +16,21 @@ def configure_windows(main_window, app):
 
 
 def set_initial_configuration(main_window):
-
+    main_window.image_viewer = replace_image_viewer(main_window.image_viewer)
     return
 
 
 def configure_main_window_connections(main_window):
-    main_window.load_image_menu_option.triggered.connect(lambda: load_image(main_window))
-    return
+    image_viewer = main_window.image_viewer
+    main_window.load_image_menu_option.triggered.connect(lambda: load_image(image_viewer))
+
+
+def replace_image_viewer(image_viewer):
+    drawable_image_viewer = QDrawable_label(image_viewer.parent())
+    drawable_image_viewer.setGeometry(image_viewer.geometry())
+    drawable_image_viewer.setAlignment(QtCore.Qt.AlignCenter)
+    drawable_image_viewer.setObjectName("image_viewer")
+    return drawable_image_viewer
 
 
 def load_image(main_window):
@@ -32,12 +41,5 @@ def load_image(main_window):
         load_image_on_screen(image_wrapper, main_window)
 
 
-def load_image_on_screen(image_wrapper, main_window):
-    qimage_size = QSize(image_wrapper.width, image_wrapper.height)
-    qimage_starting_point = QPoint(0, 0)
-    pixel_map = QPixmap(qimage_size)
-    image_viewer = main_window.image_viewer
-    painter = QPainter(pixel_map)
-    painter.drawImage(QRect(qimage_starting_point, qimage_size), QImage(image_wrapper.showable_image_path))
-    image_viewer.setPixmap(pixel_map)
-    painter.end()
+def load_image_on_screen(image_wrapper, image_viewer):
+    image_viewer.set_label_image(image_wrapper)
