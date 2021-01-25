@@ -11,7 +11,7 @@ class QDrawable_label(QLabel):
     def _init__(self, *args):
         QLabel.__init__(self, *args)
 
-    def set_label_image(self, image_wrapper):
+    def set_screen_image(self, image_wrapper):
         qimage_size = QSize(image_wrapper.width, image_wrapper.height)
         qimage_starting_point = QPoint(0, 0)
         pixel_map = QPixmap(qimage_size)
@@ -70,3 +70,9 @@ class QDrawable_label(QLabel):
         self.points_list.append(to_point)
         self.polygon_finalized = True
         self.setPixmap(current_image)
+
+    def get_polygon(self):
+        if self.polygon_finalized:
+            return self.points_list
+        else:
+            raise Exception("Polygon not finalized")

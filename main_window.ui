@@ -49,25 +49,278 @@
       </rect>
      </property>
      <property name="text">
-      <string>TextLabel</string>
+      <string>No hay ninguna imagen cargada</string>
      </property>
      <property name="alignment">
       <set>Qt::AlignCenter</set>
      </property>
     </widget>
    </widget>
-   <widget class="QGroupBox" name="groupBox_2">
+   <widget class="QStackedWidget" name="stacked_feature_windows">
     <property name="geometry">
      <rect>
-      <x>810</x>
-      <y>10</y>
-      <width>321</width>
+      <x>819</x>
+      <y>9</y>
+      <width>311</width>
       <height>731</height>
      </rect>
     </property>
-    <property name="title">
-     <string/>
-    </property>
+    <widget class="QWidget" name="bilateral_options"/>
+    <widget class="QWidget" name="mgac_options">
+     <widget class="QLabel" name="mgac_label">
+      <property name="geometry">
+       <rect>
+        <x>0</x>
+        <y>10</y>
+        <width>221</width>
+        <height>41</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>14</pointsize>
+       </font>
+      </property>
+      <property name="text">
+       <string>Opciones del MGAC:</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="iterations_mgac_label">
+      <property name="geometry">
+       <rect>
+        <x>20</x>
+        <y>60</y>
+        <width>181</width>
+        <height>41</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>12</pointsize>
+       </font>
+      </property>
+      <property name="text">
+       <string>Número de iteraciones:</string>
+      </property>
+     </widget>
+     <widget class="QLineEdit" name="iterations_mgac_input">
+      <property name="geometry">
+       <rect>
+        <x>20</x>
+        <y>100</y>
+        <width>221</width>
+        <height>31</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>250</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="threshold_mgac_label">
+      <property name="geometry">
+       <rect>
+        <x>20</x>
+        <y>140</y>
+        <width>181</width>
+        <height>41</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>12</pointsize>
+       </font>
+      </property>
+      <property name="text">
+       <string>Umbral:</string>
+      </property>
+     </widget>
+     <widget class="QLineEdit" name="threshold_mgac_input">
+      <property name="geometry">
+       <rect>
+        <x>20</x>
+        <y>180</y>
+        <width>221</width>
+        <height>31</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>0.35</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="smoothing_mgac_label">
+      <property name="geometry">
+       <rect>
+        <x>20</x>
+        <y>220</y>
+        <width>181</width>
+        <height>41</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>12</pointsize>
+       </font>
+      </property>
+      <property name="text">
+       <string>Suavizado de bordes</string>
+      </property>
+     </widget>
+     <widget class="QLineEdit" name="smoothing_mgac_input">
+      <property name="geometry">
+       <rect>
+        <x>20</x>
+        <y>260</y>
+        <width>221</width>
+        <height>31</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>0</string>
+      </property>
+     </widget>
+     <widget class="QLineEdit" name="balloon_mgac_input">
+      <property name="geometry">
+       <rect>
+        <x>20</x>
+        <y>350</y>
+        <width>221</width>
+        <height>31</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>-1</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="balloon_mgac_label">
+      <property name="geometry">
+       <rect>
+        <x>20</x>
+        <y>300</y>
+        <width>181</width>
+        <height>41</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>12</pointsize>
+       </font>
+      </property>
+      <property name="text">
+       <string>Variable de succión</string>
+      </property>
+     </widget>
+     <widget class="Line" name="line">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>400</y>
+        <width>281</width>
+        <height>16</height>
+       </rect>
+      </property>
+      <property name="orientation">
+       <enum>Qt::Horizontal</enum>
+      </property>
+     </widget>
+     <widget class="QLineEdit" name="alpha_mgac_input">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>520</y>
+        <width>221</width>
+        <height>31</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>200</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="alpha_mgac_label">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>470</y>
+        <width>181</width>
+        <height>41</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>12</pointsize>
+       </font>
+      </property>
+      <property name="text">
+       <string>Alpha</string>
+      </property>
+     </widget>
+     <widget class="QLineEdit" name="sigma_mgac_input">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>610</y>
+        <width>221</width>
+        <height>31</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>2</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="sigma_mgac_label">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>560</y>
+        <width>181</width>
+        <height>41</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>12</pointsize>
+       </font>
+      </property>
+      <property name="text">
+       <string>Sigma</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="mgac_secondary_label">
+      <property name="geometry">
+       <rect>
+        <x>0</x>
+        <y>420</y>
+        <width>341</width>
+        <height>41</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>14</pointsize>
+       </font>
+      </property>
+      <property name="text">
+       <string>Opciones secundarias del MGAC:</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="apply_mgac_button">
+      <property name="geometry">
+       <rect>
+        <x>140</x>
+        <y>670</y>
+        <width>161</width>
+        <height>41</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>14</pointsize>
+       </font>
+      </property>
+      <property name="text">
+       <string>Aplicar</string>
+      </property>
+     </widget>
+    </widget>
    </widget>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
@@ -93,8 +346,15 @@
     <addaction name="bilateral_filter_menu_option"/>
     <addaction name="anisotropic_filter_menu_option"/>
    </widget>
+   <widget class="QMenu" name="border_detection_menu">
+    <property name="title">
+     <string>Detección de bordes</string>
+    </property>
+    <addaction name="mgac_menu_option"/>
+   </widget>
    <addaction name="archive_menu"/>
    <addaction name="filter_menu"/>
+   <addaction name="border_detection_menu"/>
   </widget>
   <action name="load_image_menu_option">
    <property name="text">
@@ -115,6 +375,11 @@
   <action name="anisotropic_filter_menu_option">
    <property name="text">
     <string>Filtro anisotrópico</string>
+   </property>
+  </action>
+  <action name="mgac_menu_option">
+   <property name="text">
+    <string>mgac</string>
    </property>
   </action>
  </widget>

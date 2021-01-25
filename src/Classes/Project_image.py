@@ -9,6 +9,7 @@ class Project_image:
     image_array = None
     showable_image_path = None
     method = None
+    method_name = None
     width = 0
     height = 0
 
@@ -16,12 +17,11 @@ class Project_image:
         image = Project_image.read_image(raw_image_path)
         image_width = Project_image.get_image_width(image)
         image_height = Project_image.get_image_height(image)
-        normalized_image_data = Project_image.normalized_image_data(image)
-        image_array = Project_image.convert_in_image_array(normalized_image_data)
-        showable_image_path = Project_image.save_showable_image(image_array)
+        normalized_image_array = Project_image.normalized_image_data(image)
+        showable_image_path = Project_image.save_showable_image(normalized_image_array)
 
         self.set_raw_image_path(raw_image_path)
-        self.set_image_array(image_array)
+        self.set_image_array(normalized_image_array)
         self.set_showable_image_path(showable_image_path)
         self.set_size(image_width, image_height)
 
@@ -63,12 +63,8 @@ class Project_image:
         return dst
 
     @staticmethod
-    def convert_in_image_array(image_data):
-        image_array = Image.fromarray(image_data)
-        return image_array
-
-    @staticmethod
     def save_showable_image(image_array):
+        image = Image.fromarray(image_array)
         image_path = constants.TEMPORARY_DIRECTORY + "original.tif"
-        image_array.save(image_path)
+        image.save(image_path)
         return image_path
