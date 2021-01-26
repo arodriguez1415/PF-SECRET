@@ -4,11 +4,9 @@ import numpy as np
 from matplotlib import pyplot as plt
 from matplotlib.path import Path
 from scipy import ndimage as ndi
-from PIL import Image
 
-partial_save_path = "./generated/"
 
-def generate_image_with_contours_mask(image, contour):
+def save_image_with_contours_mask(image, contour, save_path):
     fig = plt.figure(figsize=(7, 7))
     fig.clf()
     ax2 = fig.add_subplot(1, 1, 1)
@@ -17,14 +15,12 @@ def generate_image_with_contours_mask(image, contour):
     fig.canvas.draw()
     plt.axis('off')
     extent = ax2.get_window_extent().transformed(fig.dpi_scale_trans.inverted())
-    full_save_path = partial_save_path + "mgac_mask.tif"
-    plt.savefig(full_save_path, bbox_inches=extent)
-    image_with_contours = Image.open(full_save_path)
+    plt.savefig(save_path, bbox_inches=extent)
     plt.close('all')
-    return image_with_contours
+    return save_path
 
 
-def generate_image_with_contours(image, contour):
+def save_image_with_contours(image, contour, save_path):
     fig = plt.figure(figsize=(7, 7))
     fig.clf()
     ax1 = fig.add_subplot(1, 1, 1)
@@ -33,22 +29,13 @@ def generate_image_with_contours(image, contour):
     fig.canvas.draw()
     plt.axis('off')
     extent = ax1.get_window_extent().transformed(fig.dpi_scale_trans.inverted())
-    full_save_path = partial_save_path + "mgac.tif"
-    plt.savefig(full_save_path, bbox_inches=extent)
-    image_with_contours = Image.open(full_save_path)
+    plt.savefig(save_path, bbox_inches=extent)
     plt.close('all')
-    return image_with_contours
+    return save_path
 
 
-def mgac_process(polygon_region, img, iterations, threshold, smoothing, ballon, alpha, sigma):
-    mgac_contour_image = mgac_line_detection(polygon_region, img, iterations, threshold, smoothing, ballon, alpha, sigma)
-    # mgac_line_detection_method = Mgac(iterations, threshold, smoothing, ballon, alpha, sigma)
-    # save_and_load_final_image(mgac_contour_image, method="mgac")
-
-
-def mgac_line_detection(polygon_region, img, iterations, threshold, smoothing, ballon, alpha, sigma):
+def mgac_border_detection(polygon_region, img, iterations, threshold, smoothing, ballon, alpha, sigma):
     gimg = inverse_gaussian_gradient(img, alpha=alpha, sigma=sigma)
-    print(gimg)
     callback = visual_callback_2d(img)
     init_ls = polygon_level_set(polygon_region, gimg.shape[0], gimg.shape[1])
     final_contour = morphological_geodesic_active_contour(gimg, iterations=iterations,
@@ -56,9 +43,7 @@ def mgac_line_detection(polygon_region, img, iterations, threshold, smoothing, b
                                                           init_level_set=init_ls,
                                                           smoothing=smoothing, threshold=threshold,
                                                           balloon=ballon)
-    contour_image = generate_image_with_contours(img, final_contour)
-    mask_contour_image = generate_image_with_contours_mask(img, final_contour)
-    return contour_image
+    return final_contour
 
 
 class _fcycle(object):

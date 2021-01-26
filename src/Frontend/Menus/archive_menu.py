@@ -9,10 +9,12 @@ def configure_archive_menu_connections(main_window):
 
 
 def load_image(image_viewer):
+    project_mastermind = Project_mastermind.get_instance()
     image_path = get_image_path()
     if image_path:
+        project_mastermind.clear_processing()
         image_wrapper = Project_image(image_path)
-        Project_mastermind.get_instance().add_image_process(image_wrapper)
+        project_mastermind.add_image_process(image_wrapper)
         set_image_on_screen(image_wrapper, image_viewer)
 
 

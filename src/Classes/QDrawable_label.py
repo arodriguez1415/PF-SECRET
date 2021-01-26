@@ -12,6 +12,8 @@ class QDrawable_label(QLabel):
         QLabel.__init__(self, *args)
 
     def set_screen_image(self, image_wrapper):
+        self.points_list.clear()
+        self.polygon_finalized = False
         qimage_size = QSize(image_wrapper.width, image_wrapper.height)
         qimage_starting_point = QPoint(0, 0)
         pixel_map = QPixmap(qimage_size)
@@ -20,8 +22,6 @@ class QDrawable_label(QLabel):
         self.setFixedWidth(image_wrapper.width)
         self.setFixedHeight(image_wrapper.height)
         self.setPixmap(pixel_map)
-        self.points_list.clear()
-        self.polygon_finalized = False
         painter.end()
 
     def mouseReleaseEvent(self, event):
@@ -45,6 +45,7 @@ class QDrawable_label(QLabel):
         painter.drawPoint(point)
         self.points_list.append(point)
         self.setPixmap(current_image)
+        painter.end()
 
     def draw_line(self, event):
         current_image = self.pixmap()
@@ -57,6 +58,7 @@ class QDrawable_label(QLabel):
         painter.drawLine(from_point, to_point)
         self.points_list.append(to_point)
         self.setPixmap(current_image)
+        painter.end()
 
     def finalize_polygon(self):
         current_image = self.pixmap()
@@ -70,9 +72,15 @@ class QDrawable_label(QLabel):
         self.points_list.append(to_point)
         self.polygon_finalized = True
         self.setPixmap(current_image)
+        painter.end()
 
     def get_polygon(self):
         if self.polygon_finalized:
             return self.points_list
         else:
-            raise Exception("Polygon not finalized")
+            return []
+
+    def clear_region(self):
+        self.points_list = []
+        self.polygon_finalized = False
+

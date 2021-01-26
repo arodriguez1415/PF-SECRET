@@ -147,6 +147,7 @@ class Ui_MainWindow(object):
         self.menubar.addAction(self.border_detection_menu.menuAction())
 
         self.retranslateUi(MainWindow)
+        self.stacked_feature_windows.setCurrentIndex(0)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
 
     def retranslateUi(self, MainWindow):
@@ -156,7 +157,7 @@ class Ui_MainWindow(object):
         self.image_viewer.setText(_translate("MainWindow", "No hay ninguna imagen cargada"))
         self.mgac_label.setText(_translate("MainWindow", "Opciones del MGAC:"))
         self.iterations_mgac_label.setText(_translate("MainWindow", "Número de iteraciones:"))
-        self.iterations_mgac_input.setText(_translate("MainWindow", "250"))
+        self.iterations_mgac_input.setText(_translate("MainWindow", "20"))
         self.threshold_mgac_label.setText(_translate("MainWindow", "Umbral:"))
         self.threshold_mgac_input.setText(_translate("MainWindow", "0.35"))
         self.smoothing_mgac_label.setText(_translate("MainWindow", "Suavizado de bordes"))

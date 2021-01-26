@@ -8,14 +8,17 @@ class Region:
 
     def __init__(self):
         self.set_drawable_label()
+        self.points.clear()
 
     def set_drawable_label(self):
         project_mastermind = Project_mastermind.get_instance()
         drawable_label = project_mastermind.main_window.image_viewer
         self.drawable_label = drawable_label
 
-    def get_actual_region(self):
+    def get_region(self):
         region_qpoints = self.drawable_label.get_polygon()
+        if len(region_qpoints) == 0:
+            return self.get_square_region()
         for qpoint in region_qpoints:
             x_axis = qpoint.x()
             y_axis = qpoint.y()

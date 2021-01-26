@@ -65,6 +65,9 @@
       <height>731</height>
      </rect>
     </property>
+    <property name="currentIndex">
+     <number>0</number>
+    </property>
     <widget class="QWidget" name="bilateral_options"/>
     <widget class="QWidget" name="mgac_options">
      <widget class="QLabel" name="mgac_label">
@@ -113,7 +116,7 @@
        </rect>
       </property>
       <property name="text">
-       <string>250</string>
+       <string>20</string>
       </property>
      </widget>
      <widget class="QLabel" name="threshold_mgac_label">
