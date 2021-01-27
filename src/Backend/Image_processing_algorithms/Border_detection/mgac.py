@@ -6,47 +6,8 @@ from matplotlib.path import Path
 from scipy import ndimage as ndi
 
 
-def save_image_with_contours_mask(image, contour, save_path):
-    fig = plt.figure(figsize=(7, 7))
-    fig.clf()
-    ax2 = fig.add_subplot(1, 1, 1)
-    ax_u = ax2.imshow(np.zeros_like(image), cmap='binary_r', vmin=0, vmax=1)
-    ax_u.set_data(contour)
-    fig.canvas.draw()
-    plt.axis('off')
-    extent = ax2.get_window_extent().transformed(fig.dpi_scale_trans.inverted())
-    plt.savefig(save_path, bbox_inches=extent)
-    plt.close('all')
-    return save_path
-
-
-def save_image_with_contours(image, contour, save_path):
-    fig = plt.figure(figsize=(7, 7))
-    fig.clf()
-    ax1 = fig.add_subplot(1, 1, 1)
-    ax1.imshow(image, cmap=plt.cm.gray, vmin=0, vmax=255)
-    ax1.contour(contour, [0.5], colors='r', linewidths=1)
-    fig.canvas.draw()
-    plt.axis('off')
-    extent = ax1.get_window_extent().transformed(fig.dpi_scale_trans.inverted())
-    plt.savefig(save_path, bbox_inches=extent)
-    plt.close('all')
-    return save_path
-
-
-def mgac_border_detection(polygon_region, img, iterations, threshold, smoothing, ballon, alpha, sigma):
-    gimg = inverse_gaussian_gradient(img, alpha=alpha, sigma=sigma)
-    callback = visual_callback_2d(img)
-    init_ls = polygon_level_set(polygon_region, gimg.shape[0], gimg.shape[1])
-    final_contour = morphological_geodesic_active_contour(gimg, iterations=iterations,
-                                                          iter_callback=callback,
-                                                          init_level_set=init_ls,
-                                                          smoothing=smoothing, threshold=threshold,
-                                                          balloon=ballon)
-    return final_contour
-
-
 class _fcycle(object):
+
     def __init__(self, iterable):
         """Call functions from the iterable each time it is called."""
         self.funcs = cycle(iterable)
@@ -87,9 +48,11 @@ def sup_inf(u):
 
     erosions = []
     for P_i in P:
-        erosions.append(ndi.binary_erosion(u, P_i))
+        erosions.append(ndi.binary_erosion(u, P_i).astype(np.int8))
 
-    return np.array(erosions, dtype=np.int8).max(initial=0)
+    # noinspection PyArgumentList
+    return np.stack(erosions, axis=0).max(0)
+
 
 
 def inf_sup(u):
@@ -105,13 +68,54 @@ def inf_sup(u):
 
     dilations = []
     for P_i in P:
-        dilations.append(ndi.binary_dilation(u, P_i))
+        dilations.append(ndi.binary_dilation(u, P_i).astype(np.int8))
 
-    return np.array(dilations, dtype=np.int8).min(initial=0)
+    # noinspection PyArgumentList
+    return np.stack(dilations, axis=0).min(0)
 
 
-_curvop = _fcycle([lambda u: sup_inf(inf_sup(u)),  # SIoIS
+_curvop = _fcycle([lambda u: sup_inf(inf_sup(u)),   # SIoIS
                    lambda u: inf_sup(sup_inf(u))])  # ISoSI
+
+
+def save_image_with_contours_mask(image, contour, save_path):
+    fig = plt.figure(figsize=(7, 7))
+    fig.clf()
+    ax2 = fig.add_subplot(1, 1, 1)
+    ax_u = ax2.imshow(np.zeros_like(image), cmap='binary_r', vmin=0, vmax=1)
+    ax_u.set_data(contour)
+    fig.canvas.draw()
+    plt.axis('off')
+    extent = ax2.get_window_extent().transformed(fig.dpi_scale_trans.inverted())
+    plt.savefig(save_path, bbox_inches=extent)
+    plt.close('all')
+    return save_path
+
+
+def save_image_with_contours(image, contour, save_path):
+    fig = plt.figure(figsize=(7, 7))
+    fig.clf()
+    ax1 = fig.add_subplot(1, 1, 1)
+    ax1.imshow(image, cmap=plt.cm.gray, vmin=0, vmax=255)
+    ax1.contour(contour, [0.5], colors='r', linewidths=1)
+    fig.canvas.draw()
+    plt.axis('off')
+    extent = ax1.get_window_extent().transformed(fig.dpi_scale_trans.inverted())
+    plt.savefig(save_path, bbox_inches=extent)
+    plt.close('all')
+    return save_path
+
+
+def mgac_border_detection(polygon_region, img, iterations, threshold, smoothing, ballon, alpha, sigma):
+    gimg = inverse_gaussian_gradient(img, alpha=alpha, sigma=sigma)
+    callback = visual_callback_2d(img)
+    init_ls = polygon_level_set(polygon_region, gimg.shape[0], gimg.shape[1])
+    final_contour = morphological_geodesic_active_contour(gimg, iterations=iterations,
+                                                          iter_callback=callback,
+                                                          init_level_set=init_ls,
+                                                          smoothing=smoothing, threshold=threshold,
+                                                          balloon=ballon)
+    return final_contour
 
 
 def visual_callback_2d(background, fig=None):
@@ -182,7 +186,7 @@ def circle_level_set(image_shape, center=None, radius=None):
 
     grid = np.mgrid[[slice(i) for i in image_shape]]
     grid = (grid.T - center).T
-    phi = radius - np.sqrt(np.sum((grid) ** 2, 0))
+    phi = radius - np.sqrt(np.sum(grid ** 2, 0))
     res = np.int8(phi > 0)
     return res
 
@@ -229,7 +233,7 @@ def morphological_chan_vese(image, iterations, init_level_set='checkerboard',
 
         # Smoothing
         for _ in range(smoothing):
-            u = _curvop(u)
+            u = _fcycle([sup_inf(inf_sup(u)), inf_sup(sup_inf(u))])
 
         iter_callback(u)
 
@@ -275,8 +279,8 @@ def morphological_geodesic_active_contour(gimage, iterations,
             aux += el1 * el2
         u[aux > 0] = 1
         u[aux < 0] = 0
-
         # Smoothing
+
         for _ in range(smoothing):
             u = _curvop(u)
 

@@ -66,14 +66,183 @@
      </rect>
     </property>
     <property name="currentIndex">
-     <number>0</number>
+     <number>2</number>
     </property>
-    <widget class="QWidget" name="bilateral_options"/>
+    <widget class="QWidget" name="blank_page"/>
+    <widget class="QWidget" name="anisotropic_options">
+     <widget class="QLabel" name="anisotropic_filter_label">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>10</y>
+        <width>271</width>
+        <height>41</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>14</pointsize>
+       </font>
+      </property>
+      <property name="text">
+       <string>Opciones del Filtro Anisotrópico:</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="apply_anisotropic_filter_button">
+      <property name="geometry">
+       <rect>
+        <x>140</x>
+        <y>670</y>
+        <width>161</width>
+        <height>41</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>14</pointsize>
+       </font>
+      </property>
+      <property name="text">
+       <string>Aplicar</string>
+      </property>
+     </widget>
+    </widget>
+    <widget class="QWidget" name="bilateral_options">
+     <widget class="QLabel" name="bilateral_filter_label">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>10</y>
+        <width>271</width>
+        <height>41</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>14</pointsize>
+       </font>
+      </property>
+      <property name="text">
+       <string>Opciones del Filtro Bilateral:</string>
+      </property>
+     </widget>
+     <widget class="QLineEdit" name="window_size_bilateral_filter_input">
+      <property name="geometry">
+       <rect>
+        <x>20</x>
+        <y>260</y>
+        <width>221</width>
+        <height>31</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>5</string>
+      </property>
+     </widget>
+     <widget class="QLineEdit" name="sigma_r_bilateral_filter_input">
+      <property name="geometry">
+       <rect>
+        <x>20</x>
+        <y>100</y>
+        <width>221</width>
+        <height>31</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>2</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="sigma_s_bilateral_filter_label">
+      <property name="geometry">
+       <rect>
+        <x>20</x>
+        <y>140</y>
+        <width>181</width>
+        <height>41</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>12</pointsize>
+       </font>
+      </property>
+      <property name="text">
+       <string>Sigma s:</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="apply_bilateral_filter_button">
+      <property name="geometry">
+       <rect>
+        <x>140</x>
+        <y>670</y>
+        <width>161</width>
+        <height>41</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>14</pointsize>
+       </font>
+      </property>
+      <property name="text">
+       <string>Aplicar</string>
+      </property>
+     </widget>
+     <widget class="QLineEdit" name="sigma_s_bilateral_filter_input">
+      <property name="geometry">
+       <rect>
+        <x>20</x>
+        <y>180</y>
+        <width>221</width>
+        <height>31</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>2</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="window_size_bilateral_filter_label">
+      <property name="geometry">
+       <rect>
+        <x>20</x>
+        <y>220</y>
+        <width>181</width>
+        <height>41</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>12</pointsize>
+       </font>
+      </property>
+      <property name="text">
+       <string>Window size</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="sigma_r_bilateral_filter_label">
+      <property name="geometry">
+       <rect>
+        <x>20</x>
+        <y>60</y>
+        <width>181</width>
+        <height>41</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>12</pointsize>
+       </font>
+      </property>
+      <property name="text">
+       <string>Sigma r:</string>
+      </property>
+     </widget>
+    </widget>
     <widget class="QWidget" name="mgac_options">
      <widget class="QLabel" name="mgac_label">
       <property name="geometry">
        <rect>
-        <x>0</x>
+        <x>10</x>
         <y>10</y>
         <width>221</width>
         <height>41</height>

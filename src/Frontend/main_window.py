@@ -1,5 +1,6 @@
 from PyQt5 import QtCore
 import src.Frontend.Menus.archive_menu as archive_menu
+import src.Frontend.Menus.filter_menu as filter_menu
 import src.Frontend.Menus.border_detection_menu as border_detection_menu
 from src.Classes.QDrawable_label import QDrawable_label
 
@@ -17,11 +18,13 @@ def configure_windows(main_window, app):
 
 def set_initial_configuration(main_window):
     main_window.image_viewer = replace_image_viewer(main_window.image_viewer)
+    main_window.stacked_feature_windows.setCurrentIndex(0)
     return
 
 
 def configure_main_window_connections(main_window):
     archive_menu.configure_archive_menu_connections(main_window)
+    filter_menu.configure_filter_menu_connections(main_window)
     border_detection_menu.configure_border_detection_menu_connections(main_window)
 
 
