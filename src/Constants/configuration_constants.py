@@ -1,2 +1,2 @@
 DOCTOR_DIRECTORY = r""
-TEMPORARY_DIRECTORY = r"./Resources/Temp_files/"
+TEMPORARY_VIDEO_DIRECTORY_PATH = r"./Generated/video_frames/"

@@ -1,3 +1,6 @@
+import os
+
+
 partial_save_path = "./generated/"
 
 
@@ -5,6 +8,7 @@ class Project_mastermind:
     __instance = None
     image_processing_list = []
     image_processing_stage = 0
+    original_image_directory = None
     main_window = None
     app = None
 
@@ -20,12 +24,6 @@ class Project_mastermind:
     def get_instance():
         return Project_mastermind.__instance
 
-    def create_stage_path_name(self, method_name):
-        file_extension = ".tif"
-        save_path = partial_save_path + "stage-" + str(self.image_processing_stage) + "-" + method_name
-        full_save_path = save_path + file_extension
-        return full_save_path
-
     def add_image_process(self, image_wrapper):
         self.image_processing_list.append(image_wrapper)
         self.image_processing_stage += 1
@@ -39,3 +37,21 @@ class Project_mastermind:
     def clear_processing(self):
         self.image_processing_list = []
         self.image_processing_stage = 0
+
+    def set_original_image_directory(self, original_image_path):
+        original_directory = os.path.dirname(original_image_path)
+        self.original_image_directory = original_directory
+
+    def get_original_image_directory(self):
+        return self.original_image_directory
+
+    def create_stage_path_name(self, method_name):
+        file_extension = ".tif"
+        stage_save_path = partial_save_path + "stage-" + str(self.image_processing_stage) + "-" + method_name
+        full_save_path = stage_save_path + file_extension
+        return full_save_path
+
+    def create_video_path_name(self, video_name):
+        file_extension = ".avi"
+        video_save_path = partial_save_path + video_name + file_extension
+        return video_save_path

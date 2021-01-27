@@ -3,6 +3,7 @@ import src.Frontend.Menus.archive_menu as archive_menu
 import src.Frontend.Menus.filter_menu as filter_menu
 import src.Frontend.Menus.border_detection_menu as border_detection_menu
 from src.Classes.QDrawable_label import QDrawable_label
+from src.Frontend.Menus import video_menu as video_menu
 
 
 def set_style(main_window):
@@ -26,6 +27,7 @@ def configure_main_window_connections(main_window):
     archive_menu.configure_archive_menu_connections(main_window)
     filter_menu.configure_filter_menu_connections(main_window)
     border_detection_menu.configure_border_detection_menu_connections(main_window)
+    video_menu.configure_video_menu_connections(main_window)
 
 
 def replace_image_viewer(image_viewer):

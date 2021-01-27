@@ -13,6 +13,7 @@ def load_image(image_viewer):
     image_path = get_image_path()
     if image_path:
         project_mastermind.clear_processing()
+        project_mastermind.set_original_image_directory(image_path)
         image_wrapper = Project_image(image_path)
         project_mastermind.add_image_process(image_wrapper)
         set_image_on_screen(image_wrapper, image_viewer)

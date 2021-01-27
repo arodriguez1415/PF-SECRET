@@ -6,6 +6,7 @@ from src.Classes.Project_mastermind import Project_mastermind
 from src.Classes.Project_image import Project_image
 from PIL import Image
 
+
 def configure_filter_menu_connections(main_window):
     stacked_feature_windows = main_window.stacked_feature_windows
     main_window.anisotropic_filter_menu_option.triggered.connect(

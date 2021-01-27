@@ -66,7 +66,7 @@
      </rect>
     </property>
     <property name="currentIndex">
-     <number>2</number>
+     <number>3</number>
     </property>
     <widget class="QWidget" name="blank_page"/>
     <widget class="QWidget" name="anisotropic_options">
@@ -524,9 +524,17 @@
     </property>
     <addaction name="mgac_menu_option"/>
    </widget>
+   <widget class="QMenu" name="menuVideo">
+    <property name="title">
+     <string>Video</string>
+    </property>
+    <addaction name="generate_video_with_processing_menu_option"/>
+    <addaction name="generate_video_without_processing_menu_option"/>
+   </widget>
    <addaction name="archive_menu"/>
    <addaction name="filter_menu"/>
    <addaction name="border_detection_menu"/>
+   <addaction name="menuVideo"/>
   </widget>
   <action name="load_image_menu_option">
    <property name="text">
@@ -552,6 +560,16 @@
   <action name="mgac_menu_option">
    <property name="text">
     <string>mgac</string>
+   </property>
+  </action>
+  <action name="generate_video_with_processing_menu_option">
+   <property name="text">
+    <string>Generar video con imagen procesada</string>
+   </property>
+  </action>
+  <action name="generate_video_without_processing_menu_option">
+   <property name="text">
+    <string>Generar video sin imagen procesada</string>
    </property>
   </action>
  </widget>
