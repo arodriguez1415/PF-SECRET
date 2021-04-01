@@ -6,7 +6,9 @@ from main_window import Ui_MainWindow
 
 
 def catch_exceptions(t, val, tb):
-    QtWidgets.QMessageBox.critical(None, "An exception was raised", "Exception type: {}".format(t))
+    if t == SystemExit or t == KeyboardInterrupt or t == GeneratorExit:
+       sys.exit()
+    QtWidgets.QMessageBox.critical(None, "An exception was raised", "Exception type: {t}\nMessage: {val}")
     old_hook(t, val, tb)
 
 

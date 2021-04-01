@@ -1,29 +1,31 @@
 from src.Backend.Image_processing_algorithms.filters import anisotropic_filter as anisotropic_filter_functions
 from src.Backend.Image_processing_algorithms.filters import bilateral_filter as bilateral_filter_functions
+from src.Classes.Image_wrapper import Image_wrapper
 from src.Classes.Methods.Anisotropic_Filter import Anisotropic_Filter
 from src.Classes.Methods.Bilateral_Filter import Bilateral_Filter
 from src.Classes.Project_mastermind import Project_mastermind
-from src.Classes.Project_image import Project_image
+from src.Classes.Image_wrapper import Image_wrapper
 from PIL import Image
 
 
 def configure_filter_menu_connections(main_window):
-    stacked_feature_windows = main_window.stacked_feature_windows
-    main_window.anisotropic_filter_menu_option.triggered.connect(
-        lambda: load_anisotropic_options(stacked_feature_windows))
+    main_window.anisotropic_filter_menu_option_2.triggered.connect(
+        lambda: load_anisotropic_options(main_window))
     main_window.bilateral_filter_menu_option.triggered.connect(
-        lambda: load_bilateral_options(stacked_feature_windows))
+        lambda: load_bilateral_options(main_window))
     main_window.apply_anisotropic_filter_button.clicked.connect(lambda: anisotropic_filter(main_window))
     main_window.apply_bilateral_filter_button.clicked.connect(lambda: bilateral_filter(main_window))
 
 
-def load_anisotropic_options(stacked_feature_windows):
-    stacked_feature_windows.setCurrentIndex(1)
+def load_anisotropic_options(main_window):
+    page = main_window.anisotropic_filter_options
+    stacked_feature_windows = main_window.stacked_feature_windows
+    stacked_feature_windows.setCurrentWidget(page)
     return
 
 
 def load_bilateral_options(stacked_feature_windows):
-    stacked_feature_windows.setCurrentIndex(2)
+    print("Posible eliminacion")
     return
 
 
@@ -32,10 +34,8 @@ def anisotropic_filter(main_window):
     image_array = project_mastermind.get_last_image()
     image = Image.fromarray(image_array)
     image_filtered_array = anisotropic_filter_functions.anisotropic_diffusion_filter_medpy(image)
-    anisotropic_filter_method = Anisotropic_Filter()
-    save_image_path = project_mastermind.create_stage_path_name(anisotropic_filter_method.name)
-    anisotropic_filter_functions.save_anisotropic_image(image_filtered_array, save_image_path)
-    image_wrapper = Project_image(save_image_path, anisotropic_filter_method)
+    anisotropic_method = Anisotropic_Filter()
+    image_wrapper = Image_wrapper(image_filtered_array, anisotropic_method)
     project_mastermind.add_image_process(image_wrapper)
     main_window.image_viewer.set_screen_image(image_wrapper)
 
@@ -51,6 +51,6 @@ def bilateral_filter(main_window):
     bilateral_filter_method = Bilateral_Filter(sigma_r, sigma_s, window_size)
     save_image_path = project_mastermind.create_stage_path_name(bilateral_filter_method.name)
     bilateral_filter_functions.save_bilateral_image(image_filtered_array, save_image_path)
-    image_wrapper = Project_image(save_image_path, bilateral_filter_method)
-    project_mastermind.add_image_process(image_wrapper)
-    main_window.image_viewer.set_screen_image(image_wrapper)
+    #image_wrapper = Project_image(save_image_path, bilateral_filter_method)
+    #project_mastermind.add_image_process(image_wrapper)
+    #main_window.image_viewer.set_screen_image(image_wrapper)

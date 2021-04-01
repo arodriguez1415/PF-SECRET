@@ -1,0 +1,81 @@
+#polygon_region_button:hover{
+	background-color: #99BBF5;
+}
+
+#polygon_region_button{
+ background-position: center;
+ background-repeat: no-repeat;
+ /* background-size: cover; */
+ background-color: transparent;
+ background-image: url("./Resources/Icons/polygon_icon.png");
+ border: 2px solid #AAA;
+}
+
+#polygon_region_button:clicked{
+  background-color: black;
+}
+
+#polygon_region_button:focus{
+  background-color: #99AAFF;
+}
+
+#square_region_button{
+ background-position: center;
+ background-repeat: no-repeat;
+ /* background-size: cover; */
+ background-color: transparent;
+ background-image: url("./Resources/Icons/square_icon.png");
+ border: 2px solid #AAA;
+}
+
+#square_region_button:hover{
+	background-color: #99BBF5;
+}
+
+#square_region_button:focus{
+  background-color: #99AAFF;
+}
+
+#clear_region_button{
+ background-position: center;
+ background-repeat: no-repeat;
+ /* background-size: cover; */
+ background-color: transparent;
+ background-image: url("./Resources/Icons/clear_selection_icon.png");
+ border: 2px solid #AAA;
+}
+
+#clear_region_button:hover{
+	background-color: #99BBF5;
+}
+
+#undo_button{
+ background-position: center;
+ background-repeat: no-repeat;
+ /* background-size: cover; */
+ background-color: transparent;
+ background-image: url("./Resources/Icons/undo_icon.png");
+ border: 2px solid #AAA;
+}
+
+#undo_button:hover{
+	background-color: #99BBF5;
+}
+
+#save_image_button{
+ background-position: center;
+ background-repeat: no-repeat;
+ /* background-size: cover; */
+ background-color: transparent;
+ background-image: url("./Resources/Icons/save_icon.png");
+ border: 2px solid #AAA;
+}
+
+#save_image_button:hover{
+	background-color: #99BBF5;
+}
+
+
+#image_viewer{
+ border: 1px solid #DDD;
+}

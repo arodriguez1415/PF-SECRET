@@ -7,7 +7,8 @@ import os
 
 
 def generate_video():
-    os.mkdir(configuration_constants.TEMPORARY_VIDEO_DIRECTORY_PATH)
+    if not os.path.isdir(configuration_constants.TEMPORARY_VIDEO_DIRECTORY_PATH):
+        os.mkdir(configuration_constants.TEMPORARY_VIDEO_DIRECTORY_PATH)
     images_paths_list = get_original_images()
     frames_paths_list = generate_frames(images_paths_list)
     save_video(frames_paths_list)
@@ -17,7 +18,7 @@ def generate_video():
 
 def get_original_images():
     project_mastermind = Project_mastermind.get_instance()
-    original_directory = project_mastermind.get_original_image_directory()
+    original_directory = project_mastermind.get_original_image_dir()
     images_list_paths = get_files_from_directory(original_directory)
     return images_list_paths
     # generate_frames(images_list_paths)
@@ -25,7 +26,7 @@ def get_original_images():
     # generate_video(path_constants.GENERATED_VIDEO_IMAGES, frame_list)
 
 
-def generate_frames(images_path, apply_methods_flag=False):
+def generate_frames(images_path, apply_methods_flag=True):
     index = 0
     frames_paths_list = []
     for image_path in images_path:
@@ -33,12 +34,20 @@ def generate_frames(images_path, apply_methods_flag=False):
         image_array = np.uint8(image)
         frame_path = configuration_constants.TEMPORARY_VIDEO_DIRECTORY_PATH + "frame" + str(index) + ".tif"
         if apply_methods_flag:
-            print("JE")
-            # image = apply_methods(image)
+            image_array = apply_methods(image_array)
         cv.imwrite(frame_path, np.uint8(image_array))
         frames_paths_list.append(frame_path)
         index = index + 1
     return frames_paths_list
+
+
+def apply_methods(image_array):
+    project_mastermind = Project_mastermind.get_instance()
+    image_processing_list = project_mastermind.get_image_processing_list()
+    for i in range(0, len(image_processing_list)):
+        current_image_wrapper = image_processing_list[i]
+        image_array = current_image_wrapper.method.apply_method(image_array)
+    return image_array
 
 
 # Cambiar como se genera el path, preguntando que nombre quiere

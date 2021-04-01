@@ -1,34 +1,53 @@
+import qimage2ndarray as qimage2ndarray
 from PyQt5.QtCore import QPoint, QSize, QRect, Qt
-from PyQt5.QtGui import QPainter, QPen, QColor, QPixmap, QImage
+from PyQt5.QtGui import QPainter, QPen, QColor, QPixmap
 from PyQt5.QtWidgets import QLabel
 
 
 class QDrawable_label(QLabel):
 
     points_list = []
+    paint_flag = False
+    square_flag = False
     polygon_finalized = False
+    actual_image_wrapper = None
 
     def _init__(self, *args):
         QLabel.__init__(self, *args)
 
+    def clear_paint_flag(self):
+        self.paint_flag = False
+
+    def set_paint_flag(self):
+        self.paint_flag = True
+
+    def set_square_flag(self):
+        self.square_flag = True
+
     def set_screen_image(self, image_wrapper):
+        if image_wrapper is None:
+            return
         self.points_list.clear()
         self.polygon_finalized = False
+        self.actual_image_wrapper = image_wrapper
         qimage_size = QSize(image_wrapper.width, image_wrapper.height)
         qimage_starting_point = QPoint(0, 0)
         pixel_map = QPixmap(qimage_size)
         painter = QPainter(pixel_map)
-        painter.drawImage(QRect(qimage_starting_point, qimage_size), QImage(image_wrapper.showable_image_path))
+        image = qimage2ndarray.array2qimage(image_wrapper.image_array)
+        painter.drawImage(QRect(qimage_starting_point, qimage_size), image)
         self.setFixedWidth(image_wrapper.width)
         self.setFixedHeight(image_wrapper.height)
         self.setPixmap(pixel_map)
         painter.end()
 
     def mouseReleaseEvent(self, event):
-        if self.polygon_finalized:
+        if self.polygon_finalized or not self.paint_flag:
             return
         if len(self.points_list) == 0:
             self.draw_point(event)
+        elif self.square_flag:
+            self.finalize_square(event)
         else:
             if event.button() == Qt.LeftButton:
                 self.draw_line(event)
@@ -36,6 +55,8 @@ class QDrawable_label(QLabel):
                 self.finalize_polygon()
 
     def draw_point(self, event):
+        if not self.paint_flag or self.actual_image_wrapper is None:
+            return
         current_image = self.pixmap()
         painter = QPainter(current_image)
         point = QPoint(event.x(), event.y())
@@ -72,15 +93,37 @@ class QDrawable_label(QLabel):
         self.points_list.append(to_point)
         self.polygon_finalized = True
         self.setPixmap(current_image)
+        self.paint_flag = False
+        painter.end()
+
+    def finalize_square(self, event):
+        line_pen = QPen(QColor("blue"))
+        line_pen.setWidth(3)
+        current_image = self.pixmap()
+        painter = QPainter(current_image)
+        painter.setPen(line_pen)
+        bottom_left_point = QPoint(self.points_list[0].x(), event.y())
+        bottom_right_point = QPoint(event.x(), event.y())
+        top_right_point = QPoint(event.x(), self.points_list[0].y())
+        painter.drawLine(self.points_list[0], bottom_left_point)
+        painter.drawLine(self.points_list[0], top_right_point)
+        painter.drawLine(bottom_left_point, bottom_right_point)
+        painter.drawLine(top_right_point, bottom_right_point)
+        self.points_list.append(top_right_point)
+        self.points_list.append(bottom_left_point)
+        self.points_list.append(bottom_right_point)
+        self.setPixmap(current_image)
+        self.paint_flag = False
+        self.square_flag = False
         painter.end()
 
     def get_polygon(self):
-        if self.polygon_finalized:
-            return self.points_list
-        else:
-            return []
+        return self.points_list
 
     def clear_region(self):
         self.points_list = []
         self.polygon_finalized = False
+        self.paint_flag = False
+        self.square_flag = False
+        self.set_screen_image(self.actual_image_wrapper)
 
