@@ -10,6 +10,7 @@ import src.Frontend.toolBox as toolBox
 import src.Frontend.Utils.plot_comparator as plot_comparator
 import src.Frontend.Menus.preprocessing_menu as preprocessing_menu
 import src.Frontend.Menus.border_detection_menu as border_detection_menu
+import src.Frontend.Menus.metrics_menu as metrics_menu
 import src.Frontend.Menus.video_menu as video_menu
 
 
@@ -41,6 +42,7 @@ def configure_main_window_connections(main_window):
     texture_menu.configure_texture_menu_connections(main_window)
     filter_menu.configure_filter_menu_connections(main_window)
     border_detection_menu.configure_border_detection_menu_connections(main_window)
+    metrics_menu.configure_metrics_menu_connections(main_window)
     video_menu.configure_video_menu_connections(main_window)
     toolBox.configure_toolBox_connections(main_window)
     preprocessing_menu.configure_preprocessing_menu_connections(main_window)

@@ -15,9 +15,21 @@ def compare_with_original(original, modified):
     plt.axis('off')
     plt.show()
 
+
+def plot_metric_over_time(metric_values):
+    time_values = range(0, len(metric_values))
+
+    plt.plot(time_values, metric_values)
+    plt.title('Unemployment Rate Vs Year')
+    plt.xlabel('Perimetro en pixeles')
+    plt.ylabel('Tiempo')
+    plt.show()
+
+
 def show_image(title, image):
     if title is not None:
         plt.title(title)
     plt.imshow(image, cmap='gray')
     plt.axis('off')
     plt.show()
+
