@@ -20,7 +20,7 @@ def plot_metric_over_time(metric_values):
     time_values = range(0, len(metric_values))
 
     plt.plot(time_values, metric_values)
-    plt.title('Unemployment Rate Vs Year')
+    plt.title('Perimetro en el tiempo')
     plt.xlabel('Perimetro en pixeles')
     plt.ylabel('Tiempo')
     plt.show()

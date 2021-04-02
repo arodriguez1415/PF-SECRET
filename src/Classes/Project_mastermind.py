@@ -1,5 +1,9 @@
 import os
+
+from PyQt5.QtWidgets import QProgressDialog
+
 import src.Frontend.Utils.message as messages
+from src.Constants import string_constants
 
 partial_save_path = "./generated/"
 
@@ -9,6 +13,7 @@ class Project_mastermind:
     image_processing_list = []
     original_image_path = None
     original_image_dir = None
+    current_progress_bar = None
     main_window = None
     app = None
 
@@ -23,6 +28,15 @@ class Project_mastermind:
     @staticmethod
     def get_instance():
         return Project_mastermind.__instance
+
+    def set_current_progress_bar(self, progress_bar):
+        self.current_progress_bar = progress_bar
+
+    def get_current_progress_bar(self):
+        return self.current_progress_bar
+
+    def reset_current_progress_bar(self):
+        self.current_progress_bar = QProgressDialog("", string_constants.CANCEL_BUTTON_TEXT, 0, 0)
 
     def add_image_process(self, image_wrapper):
         self.image_processing_list.append(image_wrapper)

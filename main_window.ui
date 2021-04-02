@@ -880,11 +880,18 @@
     <addaction name="borders_video_menu_option"/>
     <addaction name="mask_borders_video_menu_option"/>
    </widget>
+   <widget class="QMenu" name="metrics_menu">
+    <property name="title">
+     <string>Metricas</string>
+    </property>
+    <addaction name="perimeter_over_time_metrics_menu_option"/>
+   </widget>
    <addaction name="archive_menu"/>
    <addaction name="preprocessing_menu"/>
    <addaction name="texture_menu"/>
    <addaction name="filters_menu"/>
    <addaction name="border_detection_menu"/>
+   <addaction name="metrics_menu"/>
    <addaction name="video_menu"/>
   </widget>
   <action name="load_main_image_menu_option">
@@ -1067,6 +1074,11 @@
   <action name="mask_borders_video_menu_option">
    <property name="text">
     <string>Generar video de mascara de bordes</string>
+   </property>
+  </action>
+  <action name="perimeter_over_time_metrics_menu_option">
+   <property name="text">
+    <string>Perimetro en el tiempo</string>
    </property>
   </action>
  </widget>
