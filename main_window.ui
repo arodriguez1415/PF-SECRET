@@ -170,7 +170,7 @@
      </rect>
     </property>
     <property name="currentIndex">
-     <number>3</number>
+     <number>5</number>
     </property>
     <widget class="QWidget" name="blank_page"/>
     <widget class="QWidget" name="anisotropic_filter_options">
@@ -831,6 +831,258 @@
       </property>
      </widget>
     </widget>
+    <widget class="QWidget" name="adaptive_threshold_options">
+     <widget class="QLabel" name="adaptive_threshold_title">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>20</y>
+        <width>271</width>
+        <height>51</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>16</pointsize>
+       </font>
+      </property>
+      <property name="text">
+       <string>Umbralización adaptativa</string>
+      </property>
+     </widget>
+     <widget class="QSlider" name="adaptive_threshold_c_constant_spinner">
+      <property name="geometry">
+       <rect>
+        <x>20</x>
+        <y>350</y>
+        <width>181</width>
+        <height>22</height>
+       </rect>
+      </property>
+      <property name="minimum">
+       <number>1</number>
+      </property>
+      <property name="maximum">
+       <number>50</number>
+      </property>
+      <property name="orientation">
+       <enum>Qt::Horizontal</enum>
+      </property>
+     </widget>
+     <widget class="QLabel" name="adaptive_threshold_c_constant_label">
+      <property name="geometry">
+       <rect>
+        <x>20</x>
+        <y>250</y>
+        <width>181</width>
+        <height>31</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>14</pointsize>
+       </font>
+      </property>
+      <property name="text">
+       <string>Constante C</string>
+      </property>
+     </widget>
+     <widget class="QComboBox" name="adaptive_threshold_method_box">
+      <property name="geometry">
+       <rect>
+        <x>20</x>
+        <y>490</y>
+        <width>181</width>
+        <height>31</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>10</pointsize>
+       </font>
+      </property>
+      <property name="editable">
+       <bool>false</bool>
+      </property>
+      <property name="placeholderText">
+       <string/>
+      </property>
+      <item>
+       <property name="text">
+        <string>Umbralización de la media</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>Umbralización gaussiana</string>
+       </property>
+      </item>
+     </widget>
+     <widget class="QPushButton" name="adaptive_threshold_method_help">
+      <property name="geometry">
+       <rect>
+        <x>210</x>
+        <y>490</y>
+        <width>31</width>
+        <height>31</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>14</pointsize>
+       </font>
+      </property>
+      <property name="text">
+       <string>?</string>
+      </property>
+     </widget>
+     <widget class="QSpinBox" name="adaptive_threshold_window_size_box">
+      <property name="geometry">
+       <rect>
+        <x>20</x>
+        <y>130</y>
+        <width>181</width>
+        <height>31</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>12</pointsize>
+       </font>
+      </property>
+      <property name="minimum">
+       <number>1</number>
+      </property>
+      <property name="maximum">
+       <number>20</number>
+      </property>
+     </widget>
+     <widget class="QSpinBox" name="adaptive_threshold_c_constant_box">
+      <property name="geometry">
+       <rect>
+        <x>20</x>
+        <y>300</y>
+        <width>181</width>
+        <height>31</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>12</pointsize>
+       </font>
+      </property>
+      <property name="minimum">
+       <number>1</number>
+      </property>
+      <property name="maximum">
+       <number>50</number>
+      </property>
+     </widget>
+     <widget class="QLabel" name="adaptive_threshold_method_label">
+      <property name="geometry">
+       <rect>
+        <x>20</x>
+        <y>440</y>
+        <width>181</width>
+        <height>31</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>14</pointsize>
+       </font>
+      </property>
+      <property name="text">
+       <string>Metodo:</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="adaptive_threshold_window_size_help">
+      <property name="geometry">
+       <rect>
+        <x>210</x>
+        <y>130</y>
+        <width>31</width>
+        <height>31</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>14</pointsize>
+       </font>
+      </property>
+      <property name="text">
+       <string>?</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="adaptive_threshold_add_process_button">
+      <property name="geometry">
+       <rect>
+        <x>120</x>
+        <y>610</y>
+        <width>161</width>
+        <height>41</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Añadir proceso</string>
+      </property>
+     </widget>
+     <widget class="QSlider" name="adaptive_threshold_window_size_spinner">
+      <property name="geometry">
+       <rect>
+        <x>20</x>
+        <y>180</y>
+        <width>181</width>
+        <height>22</height>
+       </rect>
+      </property>
+      <property name="minimum">
+       <number>1</number>
+      </property>
+      <property name="maximum">
+       <number>20</number>
+      </property>
+      <property name="orientation">
+       <enum>Qt::Horizontal</enum>
+      </property>
+     </widget>
+     <widget class="QLabel" name="adaptive_threshold_window_size_label">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>90</y>
+        <width>271</width>
+        <height>31</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>14</pointsize>
+       </font>
+      </property>
+      <property name="text">
+       <string>Tamaño de ventana de vecinos</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="adaptive_threshold_c_constant_help">
+      <property name="geometry">
+       <rect>
+        <x>210</x>
+        <y>300</y>
+        <width>31</width>
+        <height>31</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>14</pointsize>
+       </font>
+      </property>
+      <property name="text">
+       <string>?</string>
+      </property>
+     </widget>
+    </widget>
    </widget>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
@@ -854,6 +1106,7 @@
     <property name="title">
      <string>Preprocesamiento</string>
     </property>
+    <addaction name="adaptive_threshold_preprocessing_menu_option"/>
    </widget>
    <widget class="QMenu" name="texture_menu">
     <property name="title">
@@ -885,6 +1138,10 @@
      <string>Metricas</string>
     </property>
     <addaction name="perimeter_over_time_metrics_menu_option"/>
+    <addaction name="area_over_time_metrics_menu_option"/>
+    <addaction name="axis_ratio_over_time_metrics_menu_option"/>
+    <addaction name="perimeter_and_area_over_time_metrics_menu_option"/>
+    <addaction name="all_metrics_over_time_metrics_menu_option"/>
    </widget>
    <addaction name="archive_menu"/>
    <addaction name="preprocessing_menu"/>
@@ -1081,6 +1338,31 @@
     <string>Perimetro en el tiempo</string>
    </property>
   </action>
+  <action name="area_over_time_metrics_menu_option">
+   <property name="text">
+    <string>Area en el tiempo</string>
+   </property>
+  </action>
+  <action name="adaptive_threshold_preprocessing_menu_option">
+   <property name="text">
+    <string>Umbralización adaptativa</string>
+   </property>
+  </action>
+  <action name="perimeter_and_area_over_time_metrics_menu_option">
+   <property name="text">
+    <string>Perímetro y área en el tiempo</string>
+   </property>
+  </action>
+  <action name="axis_ratio_over_time_metrics_menu_option">
+   <property name="text">
+    <string>Razón de ejes en el tiempo</string>
+   </property>
+  </action>
+  <action name="all_metrics_over_time_metrics_menu_option">
+   <property name="text">
+    <string>Todas las métricas en el tiempo</string>
+   </property>
+  </action>
  </widget>
  <resources/>
  <connections>
@@ -1145,6 +1427,70 @@
     <hint type="destinationlabel">
      <x>958</x>
      <y>156</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>adaptive_threshold_window_size_spinner</sender>
+   <signal>valueChanged(int)</signal>
+   <receiver>adaptive_threshold_window_size_box</receiver>
+   <slot>setValue(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>858</x>
+     <y>210</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>852</x>
+     <y>174</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>adaptive_threshold_window_size_box</sender>
+   <signal>valueChanged(int)</signal>
+   <receiver>adaptive_threshold_window_size_spinner</receiver>
+   <slot>setValue(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>921</x>
+     <y>160</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>922</x>
+     <y>202</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>adaptive_threshold_c_constant_box</sender>
+   <signal>valueChanged(int)</signal>
+   <receiver>adaptive_threshold_c_constant_spinner</receiver>
+   <slot>setValue(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>864</x>
+     <y>347</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>866</x>
+     <y>373</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>adaptive_threshold_c_constant_spinner</sender>
+   <signal>valueChanged(int)</signal>
+   <receiver>adaptive_threshold_c_constant_box</receiver>
+   <slot>setValue(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>963</x>
+     <y>377</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>958</x>
+     <y>343</y>
     </hint>
    </hints>
   </connection>

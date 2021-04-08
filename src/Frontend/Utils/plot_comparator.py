@@ -16,13 +16,25 @@ def compare_with_original(original, modified):
     plt.show()
 
 
-def plot_metric_over_time(metric_values):
+def plot_metric_over_time(metric_values, plot_title, x_label, y_label):
     time_values = range(0, len(metric_values))
 
     plt.plot(time_values, metric_values)
-    plt.title('Perimetro en el tiempo')
-    plt.xlabel('Perimetro en pixeles')
-    plt.ylabel('Tiempo')
+    plt.title(plot_title)
+    plt.xlabel(x_label)
+    plt.ylabel(y_label)
+    plt.show()
+
+
+def plot_metrics_over_time(metrics_values, plot_titles, x_labels, y_label):
+    time_values = range(0, len(metrics_values[0]))
+
+    for i in range(0, len(metrics_values)):
+        plt.subplot(1, len(metrics_values), i + 1)
+        plt.plot(time_values, metrics_values[i])
+        plt.title(plot_titles[i])
+        plt.xlabel(x_labels[i])
+        plt.ylabel(y_label)
     plt.show()
 
 

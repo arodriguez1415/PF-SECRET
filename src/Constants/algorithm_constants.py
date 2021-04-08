@@ -1,3 +1,5 @@
+import cv2 as cv
+
 # --- LBP methods ---
 
 # original local binary pattern which is gray scale but not rotation invariant.
@@ -12,3 +14,8 @@ LBP_UNIFORM = "uniform"
 
 # non rotation-invariant uniform patterns variant which is only gray scale invariant
 LBP_NRI_UNIFORM = "nri_uniform"
+
+# --- Adaptative threshold mathods ---
+
+ADAPTIVE_THRESHOLD_MEAN = cv.ADAPTIVE_THRESH_MEAN_C
+ADAPTIVE_THRESHOLD_GAUSSIAN = cv.ADAPTIVE_THRESH_GAUSSIAN_C
