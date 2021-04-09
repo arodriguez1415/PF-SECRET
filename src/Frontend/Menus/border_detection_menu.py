@@ -21,6 +21,7 @@ def load_mgac_options(main_window):
 def mgac(main_window):
     project_mastermind = Project_mastermind.get_instance()
     polygon_region = Region()
+    polygon_region.get_region()
     image_array = project_mastermind.get_last_image()
     image = Image.fromarray(image_array)
     iterations = int(main_window.iterations_mgac_input.text())
@@ -31,7 +32,7 @@ def mgac(main_window):
     sigma = int(main_window.sigma_mgac_input.text())
     borders_image = mgac_functions.mgac_borders(polygon_region.points, image, iterations,
                                                 threshold, smoothing, balloon, alpha, sigma)
-    mgac_method = Mgac(polygon_region, iterations, threshold, smoothing, balloon, alpha, sigma)
+    mgac_method = Mgac(polygon_region.points, iterations, threshold, smoothing, balloon, alpha, sigma)
     image_wrapper = Image_wrapper(borders_image, mgac_method)
     project_mastermind.add_image_process(image_wrapper)
     main_window.image_viewer.set_screen_image(image_wrapper)

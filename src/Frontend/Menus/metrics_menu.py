@@ -18,7 +18,6 @@ def configure_metrics_menu_connections(main_window):
         connect(lambda: show_all_metrics_over_time())
 
 
-
 def show_perimeter_over_time():
     array_images_list = video_file_manipulation.get_video_as_array()
     progress_bar.start_progress_bar(string_constants.CALCULATE_PERIMETERS_TITLE,
@@ -64,6 +63,7 @@ def show_area_and_perimeter_over_time():
     y_label = string_constants.AREA_Y_LABEL
     if area_values_list is not None and perimeter_values_list is not None:
         plot_comparator.plot_metrics_over_time(metrics_values, plot_titles, x_labels, y_label)
+
 
 def show_all_metrics_over_time():
     array_images_list = video_file_manipulation.get_video_as_array()

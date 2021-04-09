@@ -28,6 +28,9 @@ CALCULATE_AXIS_RATIO_DESCRIPTION = "Calculando razón de ejes"
 CALCULATE_METRICS_TITLE = "Calculo de métricas"
 CALCULATE_METRICS_DESCRIPTION = "Calculando métricas"
 
+GENERATE_MASK_VIDEOS_TITLE = "Generación de máscaras de células"
+GENERATE_MASK_VIDEOS_DESCRIPTION = "Calculando máscaras de células"
+
 # Metrics plot
 
 PERIMETER_PLOT_TITLE = "Perímetro en el tiempo"

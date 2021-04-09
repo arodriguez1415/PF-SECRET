@@ -1132,6 +1132,7 @@
     </property>
     <addaction name="borders_video_menu_option"/>
     <addaction name="mask_borders_video_menu_option"/>
+    <addaction name="mask_borders_of_multiple_cells_video_menu_option"/>
    </widget>
    <widget class="QMenu" name="metrics_menu">
     <property name="title">
@@ -1361,6 +1362,11 @@
   <action name="all_metrics_over_time_metrics_menu_option">
    <property name="text">
     <string>Todas las métricas en el tiempo</string>
+   </property>
+  </action>
+  <action name="mask_borders_of_multiple_cells_video_menu_option">
+   <property name="text">
+    <string>Generar video de mascara de bordes de celulas en carpeta</string>
    </property>
   </action>
  </widget>

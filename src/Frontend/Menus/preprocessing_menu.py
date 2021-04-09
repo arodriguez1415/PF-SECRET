@@ -1,4 +1,5 @@
 from src.Classes.Image_wrapper import Image_wrapper
+from src.Classes.Methods.Adaptive_threshold import Adaptive_threshold
 from src.Classes.Project_mastermind import Project_mastermind
 from src.Backend.Image_processing_algorithms.Preprocessing import adaptive_threshold
 
@@ -38,7 +39,8 @@ def show_adaptive_threshold(main_window):
         window_size = window_size + 1
 
     lpb_image = adaptive_threshold.adaptive_threshold(current_image_array, method, window_size, constant)
-    image_wrapper = Image_wrapper(lpb_image)
+    adaptive_threshold_method = Adaptive_threshold(window_size, constant, method)
+    image_wrapper = Image_wrapper(lpb_image, adaptive_threshold_method)
     main_window.image_viewer.set_screen_image(image_wrapper)
 
 

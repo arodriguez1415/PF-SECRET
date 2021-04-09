@@ -2,14 +2,14 @@ from pathlib import Path
 import os
 from tkinter import filedialog, Tk
 
-from src.Constants.configuration_constants import TEST_IMAGES_DIR
+from src.Constants.configuration_constants import TEST_IMAGES_DIR, GENERAL_DIRECTORY
 
 
 def get_image_path():
     root = Tk()
     root.withdraw()
     initial_absolute_directory_path = os.path.abspath(TEST_IMAGES_DIR)
-    file_path = filedialog.askopenfilename(initialdir=initial_absolute_directory_path, title='Choose Image',
+    file_path = filedialog.askopenfilename(initialdir=initial_absolute_directory_path, title='Elegir imagen',
                                            filetypes=[("Image files", "*.tif;;*.pgm;;*.ppm;;*.jpg;;*.raw"),
                                                       ("ppm", "*.PPM"),
                                                       ("jpg", "*.JPG"),
@@ -18,6 +18,15 @@ def get_image_path():
                                                       ("All files", "*")])
     root.destroy()
     return file_path
+
+
+def get_directory_path():
+    root = Tk()
+    root.withdraw()
+    initial_absolute_directory_path = os.path.abspath(GENERAL_DIRECTORY)
+    directory_path = filedialog.askdirectory(initialdir=initial_absolute_directory_path, title='Elegir carpeta')
+    root.destroy()
+    return directory_path
 
 
 def get_image_dir(file_path):
