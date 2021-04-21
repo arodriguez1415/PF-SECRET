@@ -24,6 +24,16 @@ def read_metrics_data(file_path):
     return metrics_data
 
 
+def read_multiple_metrics_data(file_paths_list):
+    metrics_data_list = []
+
+    for file_path in file_paths_list:
+        metrics_data = read_metrics_data(file_path)
+        metrics_data_list.append(metrics_data)
+
+    return metrics_data_list
+
+
 def setup_metrics_data(file_path):
     if os.path.exists(file_path):
         metrics_data = pd.read_excel(file_path)
@@ -73,3 +83,10 @@ def get_frames(metrics_data):
 
 def get_metric(metrics_data, metric_type):
     return metrics_data[metric_type].values.tolist()
+
+
+def get_metric_avg(metrics_data, metric_type):
+    metric_values_list = metrics_data[metric_type].values.tolist()
+    metric_values_list_length = len(metric_values_list)
+    metric_values_sum = sum(metric_values_list)
+    return metric_values_sum / metric_values_list_length

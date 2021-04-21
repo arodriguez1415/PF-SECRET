@@ -1471,7 +1471,10 @@
      <string>Metricas</string>
     </property>
     <addaction name="generate_metrics_menu_option"/>
+    <addaction name="separator"/>
     <addaction name="plot_metrics_menu_option"/>
+    <addaction name="plot_perimeter_distribution_menu_option"/>
+    <addaction name="plot_area_distribution_menu_option"/>
    </widget>
    <addaction name="archive_menu"/>
    <addaction name="preprocessing_menu"/>
@@ -1706,6 +1709,16 @@
   <action name="plot_metrics_menu_option">
    <property name="text">
     <string>Graficar métricas de máscara</string>
+   </property>
+  </action>
+  <action name="plot_area_distribution_menu_option">
+   <property name="text">
+    <string>Graficar distribución de áreas</string>
+   </property>
+  </action>
+  <action name="plot_perimeter_distribution_menu_option">
+   <property name="text">
+    <string>Graficar distribución de perímetros</string>
    </property>
   </action>
  </widget>

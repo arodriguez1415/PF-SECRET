@@ -14,6 +14,15 @@ def configure_metrics_menu_connections(main_window):
     main_window.generate_metrics_menu_option.triggered.connect(lambda: load_generate_metrics_options(main_window))
     main_window.plot_metrics_menu_option.triggered.connect(lambda: load_plot_metrics_options(main_window))
 
+    main_window.plot_perimeter_distribution_menu_option.triggered.connect(lambda:
+                                                                          plot_metric_distribution
+                                                                          (main_window,
+                                                                           algorithm_constants.PERIMETER_METRIC))
+    main_window.plot_area_distribution_menu_option.triggered.connect(lambda:
+                                                                     plot_metric_distribution
+                                                                     (main_window,
+                                                                      algorithm_constants.AREA_METRIC))
+
     main_window.generate_metrics_load_mask_video_button.clicked.connect(lambda: load_mask_video_path(main_window))
     main_window.plot_metrics_load_dataframe_button.clicked.connect(lambda: load_metrics_data_path(main_window))
 
@@ -112,7 +121,7 @@ def plot_metrics(main_window):
             frames_values_list = metrics_file.get_frames(metrics_data)
             metric_values_list = metrics_file.get_metric(metrics_data, metric_key)
             if i == len(metric_keys_list) - 1:
-                show_metric(metric_key, metric_values_list, frames_values_list,show_flag=True)
+                show_metric(metric_key, metric_values_list, frames_values_list, show_flag=True)
             else:
                 show_metric(metric_key, metric_values_list, frames_values_list, show_flag=False)
 
@@ -151,3 +160,15 @@ def show_metric(metric_type, metric_values_list, frames_values_list, show_flag):
                                            string_constants.AXIS_RATIO_X_LABEL,
                                            string_constants.AXIS_RATIO_Y_LABEL,
                                            show_flag=show_flag)
+
+
+def plot_metric_distribution(main_window, metric_type):
+    metrics_data_paths = dataframe_file_manipulation.get_multiple_dataframes_path()
+    metrics_data_list = metrics_file.read_multiple_metrics_data(metrics_data_paths)
+    metrics_avg_list = []
+
+    for metrics_data in metrics_data_list:
+        metric_avg = metrics_file.get_metric_avg(metrics_data, metric_type)
+        metrics_avg_list.append(metric_avg)
+
+    metrics_plot.plot_metric_histogram(metrics_avg_list)
