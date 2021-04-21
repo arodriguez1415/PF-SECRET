@@ -21,10 +21,8 @@ def generate_mask_video_of_all_cells():
         if progress_bar.is_progress_bar_cancelled():
             return None
         specified_methods_to_apply = set_methods_to_apply(images_list_paths[0])
-        save_name = set_save_name(images_list_paths[0])
         video_generator.generate_video(images_list=images_list_paths,
-                                       specified_methods_to_apply=specified_methods_to_apply,
-                                       save_name=save_name)
+                                       specified_methods_to_apply=specified_methods_to_apply)
         progress_bar.increment_value_progress_bar()
 
 

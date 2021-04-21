@@ -7,8 +7,7 @@ import numpy as np
 from src.Constants import configuration_constants
 
 
-def get_video_as_array():
-    video_path = get_video_path()
+def get_video_as_array(video_path):
     return get_video_frames_as_array(video_path)
 
 

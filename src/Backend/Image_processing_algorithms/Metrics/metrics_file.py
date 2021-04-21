@@ -1,0 +1,75 @@
+import os
+import pandas as pd
+
+from src.Constants import configuration_constants
+from src.Constants import algorithm_constants
+
+
+def generate_metrics_dir():
+    if not os.path.isdir(configuration_constants.METRICS_DIRECTORY_PATH):
+        os.mkdir(configuration_constants.METRICS_DIRECTORY_PATH)
+
+
+def set_metrics_save_name(video_path_sample):
+    image_path_sample = video_path_sample.replace("\\", "/")
+    file_name_with_extension = image_path_sample.split('/')[-1]
+    file_name_with_xlsx_extension = os.path.splitext(file_name_with_extension)[0] + '.xlsx'
+    dir_save_path = configuration_constants.METRICS_DIRECTORY_PATH
+    save_path = dir_save_path + file_name_with_xlsx_extension
+    return save_path
+
+
+def read_metrics_data(file_path):
+    metrics_data = pd.read_excel(file_path)
+    return metrics_data
+
+
+def setup_metrics_data(file_path):
+    if os.path.exists(file_path):
+        metrics_data = pd.read_excel(file_path)
+    else:
+        metrics_data = pd.DataFrame()
+    return metrics_data
+
+
+def save_metric(video_file_path, metric_values_list, metric_type):
+    generate_metrics_dir()
+    metrics_file_path = set_metrics_save_name(video_file_path)
+    frames_values_list = range(0, len(metric_values_list))
+    metrics_data = setup_metrics_data(metrics_file_path)
+
+    if metric_type == algorithm_constants.PERIMETER_METRIC:
+        metrics_data = save_perimeter(metrics_data, metric_values_list, frames_values_list)
+    elif metric_type == algorithm_constants.AREA_METRIC:
+        metrics_data = save_area(metrics_data, metric_values_list, frames_values_list)
+    elif metric_type == algorithm_constants.AXIS_RATE_METRIC:
+        metrics_data = save_axis_rate(metrics_data, metric_values_list, frames_values_list)
+
+    metrics_data = metrics_data[metrics_data.filter(regex='^(?!Unnamed)').columns]
+    metrics_data.to_excel(metrics_file_path)
+
+
+def save_perimeter(metrics_data, perimeter_values_list, frames_values_list):
+    metrics_data[algorithm_constants.FRAMES_HEADER] = frames_values_list
+    metrics_data[algorithm_constants.PERIMETER_HEADER] = perimeter_values_list
+    return metrics_data
+
+
+def save_area(metrics_data, area_values_list, frames_values_list):
+    metrics_data[algorithm_constants.FRAMES_HEADER] = frames_values_list
+    metrics_data[algorithm_constants.AREA_HEADER] = area_values_list
+    return metrics_data
+
+
+def save_axis_rate(metrics_data, axis_rate_values_list, frames_values_list):
+    metrics_data[algorithm_constants.FRAMES_HEADER] = frames_values_list
+    metrics_data[algorithm_constants.AXIS_RATE_HEADER] = axis_rate_values_list
+    return metrics_data
+
+
+def get_frames(metrics_data):
+    return metrics_data[algorithm_constants.FRAMES_HEADER].values.tolist()
+
+
+def get_metric(metrics_data, metric_type):
+    return metrics_data[metric_type].values.tolist()

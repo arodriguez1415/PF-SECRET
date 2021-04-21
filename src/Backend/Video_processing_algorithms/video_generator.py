@@ -6,13 +6,14 @@ import numpy as np
 import os
 
 
-def generate_video(images_list=None, specified_methods_to_apply=None, save_name=None):
+def generate_video(images_list=None, specified_methods_to_apply=None):
     if not os.path.isdir(configuration_constants.TEMPORARY_VIDEO_DIRECTORY_PATH):
         os.mkdir(configuration_constants.TEMPORARY_VIDEO_DIRECTORY_PATH)
     images_paths_list = images_list
     if images_list is None:
         images_paths_list = get_original_images()
     frames_paths_list = generate_frames(images_paths_list, specified_methods_to_apply)
+    save_name = set_save_name(images_paths_list[0])
     save_video(frames_paths_list, save_name)
     delete_frames(frames_paths_list)
     os.rmdir(configuration_constants.TEMPORARY_VIDEO_DIRECTORY_PATH)
@@ -58,7 +59,7 @@ def apply_methods_specified(image_array, specified_methods_to_apply):
     return image_array
 
 
-def save_video(frames_paths_list, save_name):
+def save_video(frames_paths_list, save_name="asd"):
     height, width, layers = cv.imread(frames_paths_list[0]).shape
     video_path = Project_mastermind.get_instance().create_video_path_name(save_name)
     video = cv.VideoWriter(video_path, 0, 1, (width, height))
@@ -82,3 +83,10 @@ def get_files_from_directory(directory):
 def delete_frames(frames_paths_list):
     for frame_path in frames_paths_list:
         os.remove(frame_path)
+
+
+def set_save_name(image_path_sample):
+    image_path_sample = image_path_sample.replace("\\", "/")
+    save_path = image_path_sample.split('/')[-5] + " - " + image_path_sample.split('/')[-4] + " - " + \
+                image_path_sample.split('/')[-3] + " - " + image_path_sample.split('/')[-2]
+    return save_path

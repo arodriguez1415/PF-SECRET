@@ -49,7 +49,7 @@ def get_col_axis(matrix):
                 consecutive_ones += 1
             else:
                 if consecutive_ones > max_consecutive_ones:
-                    max_row = row
+                    max_col = row
                     max_consecutive_ones = consecutive_ones
                 consecutive_ones = 0
         if consecutive_ones > max_consecutive_ones:
