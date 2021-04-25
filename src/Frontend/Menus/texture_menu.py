@@ -1,4 +1,5 @@
 import src.Backend.Image_processing_algorithms.Texture.lbp as texture_lbp
+from src.Backend.Image_processing_algorithms.Texture import fractal_dimention
 from src.Classes.Image_wrapper import Image_wrapper
 from src.Classes.Project_mastermind import Project_mastermind
 from src.Frontend.Utils.message import show_message
@@ -6,6 +7,7 @@ from src.Frontend.Utils.message import show_message
 
 def configure_texture_menu_connections(main_window):
     main_window.lbp_menu_option.triggered.connect(lambda: lbp_options(main_window))
+    main_window.fractal_dimension_menu_option.triggered.connect(lambda: fractal_dimension_options(main_window))
 
     main_window.lbp_add_process_button.clicked.connect(lambda: add_process(main_window))
 
@@ -16,12 +18,31 @@ def configure_texture_menu_connections(main_window):
     main_window.lbp_symmetric_points_information_button.clicked.connect(lambda: show_symmetric_points_info())
     main_window.lbp_method_information_button.clicked.connect(lambda: show_method_info())
 
+    main_window.fractal_dimension_apply_button.clicked.connect(lambda: generate_fractal_dimension(main_window))
+
 
 def lbp_options(main_window):
     page = main_window.lbp_options
     stacked_feature_windows = main_window.stacked_feature_windows
     stacked_feature_windows.setCurrentWidget(page)
     return
+
+
+def fractal_dimension_options(main_window):
+    page = main_window.fractal_dimension_options
+    stacked_feature_windows = main_window.stacked_feature_windows
+    stacked_feature_windows.setCurrentWidget(page)
+    return
+
+
+def generate_fractal_dimension(main_window):
+    project_mastermind = Project_mastermind.get_instance()
+    current_image_array = project_mastermind.get_last_image()
+    method = main_window.fractal_dimension_function_combobox.currentText()
+
+    fractal_dimension_image = fractal_dimention.fractal_dimension_texture(current_image_array, method)
+    image_wrapper = Image_wrapper(fractal_dimension_image)
+    main_window.image_viewer.set_screen_image(image_wrapper)
 
 
 def show_lbp(main_window):
