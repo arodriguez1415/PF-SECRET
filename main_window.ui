@@ -170,7 +170,7 @@
      </rect>
     </property>
     <property name="currentIndex">
-     <number>5</number>
+     <number>8</number>
     </property>
     <widget class="QWidget" name="blank_page"/>
     <widget class="QWidget" name="anisotropic_filter_options">
@@ -1320,6 +1320,94 @@
       </property>
      </widget>
     </widget>
+    <widget class="QWidget" name="generate_fractal_dimension_metrics_options">
+     <widget class="QLabel" name="generate_fractal_dimension_metrics_title">
+      <property name="geometry">
+       <rect>
+        <x>20</x>
+        <y>30</y>
+        <width>261</width>
+        <height>51</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>16</pointsize>
+       </font>
+      </property>
+      <property name="text">
+       <string>Generar dimensión Fractal:</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="generate_fractal_dimension_metrics_region_label">
+      <property name="geometry">
+       <rect>
+        <x>20</x>
+        <y>90</y>
+        <width>261</width>
+        <height>51</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>12</pointsize>
+       </font>
+      </property>
+      <property name="text">
+       <string>Seleccionar tipo de región:</string>
+      </property>
+     </widget>
+     <widget class="QComboBox" name="generate_fractal_dimension_metrics_region_combobox">
+      <property name="geometry">
+       <rect>
+        <x>20</x>
+        <y>160</y>
+        <width>251</width>
+        <height>41</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>10</pointsize>
+       </font>
+      </property>
+      <item>
+       <property name="text">
+        <string>Borde</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>PeriNuclear</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>Nuclear</string>
+       </property>
+      </item>
+     </widget>
+     <widget class="QPushButton" name="generate_fractal_dimension_metrics_apply_button">
+      <property name="geometry">
+       <rect>
+        <x>80</x>
+        <y>240</y>
+        <width>191</width>
+        <height>51</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>10</pointsize>
+        <weight>75</weight>
+        <bold>true</bold>
+       </font>
+      </property>
+      <property name="text">
+       <string>Generar y guardar métrica</string>
+      </property>
+     </widget>
+    </widget>
     <widget class="QWidget" name="plot_metrics_options">
      <widget class="QPushButton" name="plot_metrics_generate_button">
       <property name="geometry">
@@ -1543,6 +1631,7 @@
      <string>Metricas</string>
     </property>
     <addaction name="generate_metrics_menu_option"/>
+    <addaction name="generate_fractal_dimention_metrics_menu_option"/>
     <addaction name="separator"/>
     <addaction name="plot_metrics_menu_option"/>
     <addaction name="plot_perimeter_distribution_menu_option"/>
@@ -1796,6 +1885,11 @@
   <action name="fractal_dimension_menu_option">
    <property name="text">
     <string>Dimensión Fractal</string>
+   </property>
+  </action>
+  <action name="generate_fractal_dimention_metrics_menu_option">
+   <property name="text">
+    <string>Generar métricas de dimensión fractal</string>
    </property>
   </action>
  </widget>

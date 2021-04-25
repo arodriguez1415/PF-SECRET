@@ -14,11 +14,13 @@ def show_and_generate_final_image(im, sorted_fd, coordinates, x_length, y_length
 
     for i in range(0, 4):  # rojo
         index = (sorted_fd[i])[1]
-        image_mark = generate_image_with_mark(im.shape[0], im.shape[1], coordinates[index], x_length, y_length, image_mark, 2)
+        image_mark = generate_image_with_mark(im.shape[0], im.shape[1], coordinates[index], x_length, y_length,
+                                              image_mark, 2)
 
     for i in range(4, 8):  # verde
         index = (sorted_fd[i])[1]
-        image_mark = generate_image_with_mark(im.shape[0], im.shape[1], coordinates[index], x_length, y_length, image_mark, 1)
+        image_mark = generate_image_with_mark(im.shape[0], im.shape[1], coordinates[index], x_length, y_length,
+                                              image_mark, 1)
 
     cv.imshow("fd mark", image_mark)
     return image_mark
@@ -44,8 +46,10 @@ def generate_image_with_mark(image_height, image_width, coordinate, x_length, y_
 
     for y in range(0, image_height):
         for x in range(0, image_width):
-            if (coordinate[0] == y or y == coordinate[0] + x_length) and (coordinate[1] <= x <= coordinate[1] + y_length) \
-                    or (coordinate[0] <= y <= coordinate[0] + x_length) and (coordinate[1] == x or x == coordinate[1] + y_length):
+            if (coordinate[0] == y or y == coordinate[0] + x_length) and (
+                    coordinate[1] <= x <= coordinate[1] + y_length) \
+                    or (coordinate[0] <= y <= coordinate[0] + x_length) and (
+                    coordinate[1] == x or x == coordinate[1] + y_length):
                 border_image[y, x, color] = np.uint8(255)
 
     return border_image
@@ -76,8 +80,11 @@ def generate_pieces(im):
     y_pieces = calculate_pieces(height)
     x_length = width // x_pieces
     y_length = height // y_pieces
+    tiles = []
+    for x in range(0, im.shape[0], x_length):
+        for y in range(0, im.shape[1], y_length):
+            tiles.append(im[x:x + x_length, y:y + y_length])
 
-    tiles = [im[x:x + x_length, y:y + y_length] for x in range(0, im.shape[0], x_length) for y in range(0, im.shape[1], y_length)]
     coordinates = [[x, y] for x in range(0, im.shape[0], x_length) for y in range(0, im.shape[1], y_length)]
 
     return [tiles, coordinates, x_length, y_length]
@@ -103,6 +110,23 @@ def fractal_dimension_texture(image, function):
         sorted_fd = fractal_dimension_texture_github(tiles, len(tiles))
 
     return show_and_generate_final_image(im, sorted_fd, coordinates, x_length, y_length)
+
+
+def generate_tile_from_region(image, region_points):
+    if len(region_points) > 4:
+        print("Son mas de 4 puntos")
+
+    tile_array = image[region_points[0][1]: region_points[3][1], region_points[0][0]: region_points[3][0]]
+
+    return tile_array
+
+
+def get_fractal_dimension_texture(image, region_points):
+    image = np.float16(image)
+    image.shape += (1,)
+    tiles = generate_tile_from_region(image, region_points)
+    fractal_dimension_value = fractal_dimension_github(tiles, n_offsets=10)
+    return fractal_dimension_value
 
 
 def fractal_dimension_texture_stackoverflow(tiles, tiles_length):

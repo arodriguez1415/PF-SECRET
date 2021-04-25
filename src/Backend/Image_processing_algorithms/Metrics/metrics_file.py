@@ -10,10 +10,19 @@ def generate_metrics_dir():
         os.mkdir(configuration_constants.METRICS_DIRECTORY_PATH)
 
 
-def set_metrics_save_name(video_path_sample):
+def set_metrics_save_name_from_video(video_path_sample):
     image_path_sample = video_path_sample.replace("\\", "/")
     file_name_with_extension = image_path_sample.split('/')[-1]
     file_name_with_xlsx_extension = os.path.splitext(file_name_with_extension)[0] + '.xlsx'
+    dir_save_path = configuration_constants.METRICS_DIRECTORY_PATH
+    save_path = dir_save_path + file_name_with_xlsx_extension
+    return save_path
+
+def set_metrics_save_name_from_image(image_path_sample):
+    image_path_sample = image_path_sample.replace("\\", "/")
+    file_name = image_path_sample.split('/')[-5] + " - " + image_path_sample.split('/')[-4] + " - " + \
+                image_path_sample.split('/')[-3] + " - " + image_path_sample.split('/')[-2]
+    file_name_with_xlsx_extension = file_name + '.xlsx'
     dir_save_path = configuration_constants.METRICS_DIRECTORY_PATH
     save_path = dir_save_path + file_name_with_xlsx_extension
     return save_path
@@ -42,9 +51,9 @@ def setup_metrics_data(file_path):
     return metrics_data
 
 
-def save_metric(video_file_path, metric_values_list, metric_type):
+def save_mask_metric(video_file_path, metric_values_list, metric_type):
     generate_metrics_dir()
-    metrics_file_path = set_metrics_save_name(video_file_path)
+    metrics_file_path = set_metrics_save_name_from_video(video_file_path)
     frames_values_list = range(0, len(metric_values_list))
     metrics_data = setup_metrics_data(metrics_file_path)
 
@@ -54,6 +63,22 @@ def save_metric(video_file_path, metric_values_list, metric_type):
         metrics_data = save_area(metrics_data, metric_values_list, frames_values_list)
     elif metric_type == algorithm_constants.AXIS_RATE_METRIC:
         metrics_data = save_axis_rate(metrics_data, metric_values_list, frames_values_list)
+
+    metrics_data = metrics_data[metrics_data.filter(regex='^(?!Unnamed)').columns]
+    metrics_data.to_excel(metrics_file_path)
+
+
+def save_fractal_dimension_metric(image_file_path, fractal_dimension_value, metric_type):
+    generate_metrics_dir()
+    metrics_file_path = set_metrics_save_name_from_image(image_file_path)
+    metrics_data = setup_metrics_data(metrics_file_path)
+
+    if metric_type == algorithm_constants.BORDER_FRACTAL_DIMENSION_METRIC:
+        metrics_data[algorithm_constants.BORDER_FRACTAL_DIMENSION_HEADER] = fractal_dimension_value
+    elif metric_type == algorithm_constants.PERINUCLEAR_FRACTAL_DIMENSION_METRIC:
+        metrics_data[algorithm_constants.PERINUCLEAR_FRACTAL_DIMENSION_HEADER] = fractal_dimension_value
+    elif metric_type == algorithm_constants.NUCLEAR_FRACTAL_DIMENSION_METRIC:
+        metrics_data[algorithm_constants.NUCLEAR_FRACTAL_DIMENSION_HEADER] = fractal_dimension_value
 
     metrics_data = metrics_data[metrics_data.filter(regex='^(?!Unnamed)').columns]
     metrics_data.to_excel(metrics_file_path)
@@ -75,7 +100,6 @@ def save_axis_rate(metrics_data, axis_rate_values_list, frames_values_list):
     metrics_data[algorithm_constants.FRAMES_HEADER] = frames_values_list
     metrics_data[algorithm_constants.AXIS_RATE_HEADER] = axis_rate_values_list
     return metrics_data
-
 
 def get_frames(metrics_data):
     return metrics_data[algorithm_constants.FRAMES_HEADER].values.tolist()

@@ -1,9 +1,12 @@
 from src.Backend.Image_processing_algorithms.Archive_manipulation import dataframe_file_manipulation
 from src.Backend.Image_processing_algorithms.Archive_manipulation import video_file_manipulation
+from src.Backend.Image_processing_algorithms.Texture import fractal_dimention
 from src.Backend.Image_processing_algorithms.Metrics import metrics_file
 from src.Backend.Image_processing_algorithms.Metrics import perimeter_metric
 from src.Backend.Image_processing_algorithms.Metrics import area_metric
 from src.Backend.Image_processing_algorithms.Metrics import axis_metric
+from src.Classes.Project_mastermind import Project_mastermind
+from src.Classes.Region import Region
 from src.Constants import algorithm_constants
 from src.Constants import string_constants
 from src.Frontend.Utils import progress_bar
@@ -12,6 +15,8 @@ from src.Frontend.Utils import metrics_plot
 
 def configure_metrics_menu_connections(main_window):
     main_window.generate_metrics_menu_option.triggered.connect(lambda: load_generate_metrics_options(main_window))
+    main_window.generate_fractal_dimention_metrics_menu_option.triggered.connect \
+        (lambda: load_generate_fractal_dimension_metrics_options(main_window))
     main_window.plot_metrics_menu_option.triggered.connect(lambda: load_plot_metrics_options(main_window))
 
     main_window.plot_perimeter_distribution_menu_option.triggered.connect(lambda:
@@ -27,11 +32,20 @@ def configure_metrics_menu_connections(main_window):
     main_window.plot_metrics_load_dataframe_button.clicked.connect(lambda: load_metrics_data_path(main_window))
 
     main_window.generate_metrics_generate_button.clicked.connect(lambda: generate_metrics(main_window))
+    main_window.generate_fractal_dimension_metrics_apply_button.clicked.connect\
+        (lambda: generate_fractal_dimension_metrics(main_window))
     main_window.plot_metrics_generate_button.clicked.connect(lambda: plot_metrics(main_window))
 
 
 def load_generate_metrics_options(main_window):
     page = main_window.generate_metrics_options
+    stacked_feature_windows = main_window.stacked_feature_windows
+    stacked_feature_windows.setCurrentWidget(page)
+    return
+
+
+def load_generate_fractal_dimension_metrics_options(main_window):
+    page = main_window.generate_fractal_dimension_metrics_options
     stacked_feature_windows = main_window.stacked_feature_windows
     stacked_feature_windows.setCurrentWidget(page)
     return
@@ -62,7 +76,7 @@ def generate_metrics(main_window):
     for metric_key in metrics_dictionary.keys():
         if metrics_dictionary[metric_key]:
             metric_values_list = generate_metric(metric_key, array_images_list)
-            metrics_file.save_metric(mask_video_path, metric_values_list, metric_key)
+            metrics_file.save_mask_metric(mask_video_path, metric_values_list, metric_key)
 
 
 def generate_metric(metric_type, array_images_list):
@@ -101,6 +115,17 @@ def get_checked_metrics_count(metrics_dictionary):
             checked_values = checked_values + 1
 
     return checked_values
+
+
+def generate_fractal_dimension_metrics(main_window):
+    project_mastermind = Project_mastermind.get_instance()
+    image_path = project_mastermind.get_original_image_path()
+    current_image_array = project_mastermind.get_last_image()
+    region_type = main_window.generate_fractal_dimension_metrics_region_combobox.currentText()
+    region_points = Region().get_region()
+
+    fractal_value = fractal_dimention.get_fractal_dimension_texture(current_image_array, region_points)
+    metrics_file.save_fractal_dimension_metric(image_path, fractal_value, region_type)
 
 
 def load_metrics_data_path(main_window):

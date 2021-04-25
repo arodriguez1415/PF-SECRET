@@ -13,7 +13,7 @@ class Region:
     def __init__(self):
         self.set_drawable_label()
         self.points.clear()
-        self.points = None
+        self.points = []
 
     def set_drawable_label(self):
         project_mastermind = Project_mastermind.get_instance()
