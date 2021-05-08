@@ -1373,17 +1373,17 @@
       </property>
       <item>
        <property name="text">
-        <string>Borde</string>
+        <string>Border Fractal dimension</string>
        </property>
       </item>
       <item>
        <property name="text">
-        <string>PeriNuclear</string>
+        <string>Perinuclear Fractal dimension</string>
        </property>
       </item>
       <item>
        <property name="text">
-        <string>Nuclear</string>
+        <string>Nuclear Fractal dimension</string>
        </property>
       </item>
      </widget>
@@ -1636,6 +1636,7 @@
     <addaction name="plot_metrics_menu_option"/>
     <addaction name="plot_perimeter_distribution_menu_option"/>
     <addaction name="plot_area_distribution_menu_option"/>
+    <addaction name="plot_border_fractal_distribution_menu_option"/>
    </widget>
    <addaction name="archive_menu"/>
    <addaction name="preprocessing_menu"/>
@@ -1890,6 +1891,11 @@
   <action name="generate_fractal_dimention_metrics_menu_option">
    <property name="text">
     <string>Generar métricas de dimensión fractal</string>
+   </property>
+  </action>
+  <action name="plot_border_fractal_distribution_menu_option">
+   <property name="text">
+    <string>Graficar distribución de bordes fractales</string>
    </property>
   </action>
  </widget>

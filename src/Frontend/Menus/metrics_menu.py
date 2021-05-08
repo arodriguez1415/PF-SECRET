@@ -21,18 +21,20 @@ def configure_metrics_menu_connections(main_window):
 
     main_window.plot_perimeter_distribution_menu_option.triggered.connect(lambda:
                                                                           plot_metric_distribution
-                                                                          (main_window,
-                                                                           algorithm_constants.PERIMETER_METRIC))
+                                                                          (algorithm_constants.PERIMETER_METRIC))
     main_window.plot_area_distribution_menu_option.triggered.connect(lambda:
                                                                      plot_metric_distribution
-                                                                     (main_window,
-                                                                      algorithm_constants.AREA_METRIC))
+                                                                     (algorithm_constants.AREA_METRIC))
+    main_window.plot_border_fractal_distribution_menu_option.triggered.connect(lambda:
+                                                                               plot_metric_distribution
+                                                                               (
+                                                                                   algorithm_constants.BORDER_FRACTAL_DIMENSION_METRIC))
 
     main_window.generate_metrics_load_mask_video_button.clicked.connect(lambda: load_mask_video_path(main_window))
     main_window.plot_metrics_load_dataframe_button.clicked.connect(lambda: load_metrics_data_path(main_window))
 
     main_window.generate_metrics_generate_button.clicked.connect(lambda: generate_metrics(main_window))
-    main_window.generate_fractal_dimension_metrics_apply_button.clicked.connect\
+    main_window.generate_fractal_dimension_metrics_apply_button.clicked.connect \
         (lambda: generate_fractal_dimension_metrics(main_window))
     main_window.plot_metrics_generate_button.clicked.connect(lambda: plot_metrics(main_window))
 
@@ -123,7 +125,6 @@ def generate_fractal_dimension_metrics(main_window):
     current_image_array = project_mastermind.get_last_image()
     region_type = main_window.generate_fractal_dimension_metrics_region_combobox.currentText()
     region_points = Region().get_region()
-
     fractal_value = fractal_dimention.get_fractal_dimension_texture(current_image_array, region_points)
     metrics_file.save_fractal_dimension_metric(image_path, fractal_value, region_type)
 
@@ -187,7 +188,7 @@ def show_metric(metric_type, metric_values_list, frames_values_list, show_flag):
                                            show_flag=show_flag)
 
 
-def plot_metric_distribution(main_window, metric_type):
+def plot_metric_distribution(metric_type):
     metrics_data_paths = dataframe_file_manipulation.get_multiple_dataframes_path()
     metrics_data_list = metrics_file.read_multiple_metrics_data(metrics_data_paths)
     metrics_avg_list = []

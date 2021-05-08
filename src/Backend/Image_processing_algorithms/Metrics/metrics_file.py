@@ -74,11 +74,11 @@ def save_fractal_dimension_metric(image_file_path, fractal_dimension_value, metr
     metrics_data = setup_metrics_data(metrics_file_path)
 
     if metric_type == algorithm_constants.BORDER_FRACTAL_DIMENSION_METRIC:
-        metrics_data[algorithm_constants.BORDER_FRACTAL_DIMENSION_HEADER] = fractal_dimension_value
+        metrics_data[algorithm_constants.BORDER_FRACTAL_DIMENSION_HEADER] = fractal_dimension_value[0]
     elif metric_type == algorithm_constants.PERINUCLEAR_FRACTAL_DIMENSION_METRIC:
-        metrics_data[algorithm_constants.PERINUCLEAR_FRACTAL_DIMENSION_HEADER] = fractal_dimension_value
+        metrics_data[algorithm_constants.PERINUCLEAR_FRACTAL_DIMENSION_HEADER] = fractal_dimension_value[0]
     elif metric_type == algorithm_constants.NUCLEAR_FRACTAL_DIMENSION_METRIC:
-        metrics_data[algorithm_constants.NUCLEAR_FRACTAL_DIMENSION_HEADER] = fractal_dimension_value
+        metrics_data[algorithm_constants.NUCLEAR_FRACTAL_DIMENSION_HEADER] = fractal_dimension_value[0]
 
     metrics_data = metrics_data[metrics_data.filter(regex='^(?!Unnamed)').columns]
     metrics_data.to_excel(metrics_file_path)
@@ -101,6 +101,7 @@ def save_axis_rate(metrics_data, axis_rate_values_list, frames_values_list):
     metrics_data[algorithm_constants.AXIS_RATE_HEADER] = axis_rate_values_list
     return metrics_data
 
+
 def get_frames(metrics_data):
     return metrics_data[algorithm_constants.FRAMES_HEADER].values.tolist()
 
@@ -109,8 +110,14 @@ def get_metric(metrics_data, metric_type):
     return metrics_data[metric_type].values.tolist()
 
 
+def get_fractal_dimension(metrics_data, metric_type):
+    return metrics_data[metric_type].values.tolist()[0]
+
+
 def get_metric_avg(metrics_data, metric_type):
-    metric_values_list = metrics_data[metric_type].values.tolist()
-    metric_values_list_length = len(metric_values_list)
-    metric_values_sum = sum(metric_values_list)
-    return metric_values_sum / metric_values_list_length
+    if metric_type in metrics_data.columns:
+        metric_values_list = metrics_data[metric_type].values.tolist()
+        metric_values_list_length = len(metric_values_list)
+        metric_values_sum = sum(metric_values_list)
+        return metric_values_sum / metric_values_list_length
+    return 0
