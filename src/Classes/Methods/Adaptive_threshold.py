@@ -10,6 +10,6 @@ class Adaptive_threshold:
         self.method_type = method_type
 
     def apply_method(self, image_array):
-        result_array_image = adaptive_threshold.adaptive_threshold(image_array, self.method_type,
-                                                                   self.window_size, self.c_constant)
+        result_array_image = adaptive_threshold.adaptive_threshold(image_array, self.window_size,
+                                                                   self.c_constant, self.method_type)
         return result_array_image

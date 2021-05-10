@@ -1,3 +1,4 @@
+from src.Backend.Image_processing_algorithms.Operations import common_operations
 from src.Constants import configuration_constants as configuration_constants
 from src.Classes.Project_mastermind import Project_mastermind
 from PIL import Image
@@ -31,8 +32,8 @@ def generate_frames(images_path, specified_methods_to_apply, apply_methods_flag=
     frames_paths_list = []
     for image_path in images_path:
         image = Image.open(image_path)
-        image_array = np.uint8(image)
-        frame_path = configuration_constants.TEMPORARY_VIDEO_DIRECTORY_PATH + "frame" + str(index) + ".tif"
+        image_array = common_operations.normalize_from_pil_image(image)
+        frame_path = configuration_constants.TEMPORARY_VIDEO_DIRECTORY_PATH + "frame - " + str(index) + ".tif"
         if apply_methods_flag:
             if specified_methods_to_apply is None:
                 image_array = apply_methods_from_process(image_array)
@@ -47,10 +48,11 @@ def generate_frames(images_path, specified_methods_to_apply, apply_methods_flag=
 def apply_methods_from_process(image_array):
     project_mastermind = Project_mastermind.get_instance()
     image_processing_list = project_mastermind.get_image_processing_list()
+    result_image_array = image_array
     for i in range(0, len(image_processing_list)):
         current_image_wrapper = image_processing_list[i]
-        image_array = current_image_wrapper.method.apply_method(image_array)
-    return image_array
+        result_image_array = current_image_wrapper.method.apply_method(result_image_array)
+    return result_image_array
 
 
 def apply_methods_specified(image_array, specified_methods_to_apply):

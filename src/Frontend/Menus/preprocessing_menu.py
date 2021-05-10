@@ -38,7 +38,7 @@ def show_adaptive_threshold(main_window):
     if window_size % 2 == 0:
         window_size = window_size + 1
 
-    lpb_image = adaptive_threshold.adaptive_threshold(current_image_array, method, window_size, constant)
+    lpb_image = adaptive_threshold.adaptive_threshold(current_image_array, window_size, constant, method)
     adaptive_threshold_method = Adaptive_threshold(window_size, constant, method)
     image_wrapper = Image_wrapper(lpb_image, adaptive_threshold_method)
     main_window.image_viewer.set_screen_image(image_wrapper)

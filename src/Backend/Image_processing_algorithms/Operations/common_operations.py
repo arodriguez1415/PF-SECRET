@@ -8,6 +8,16 @@ def normalize(array):
     return result.astype(np.uint8)
 
 
+def normalize_from_pil_image(pil_image):
+    image_data = np.array(pil_image)
+    image_width = pil_image.width
+    image_height = pil_image.height
+    dst = np.zeros((image_height, image_width))
+    dst = cv2.normalize(image_data, dst, 0, 255, cv2.NORM_MINMAX, cv2.CV_8UC1)
+    return dst
+
+
+
 def is_RGB(image_array):
     dimensions = len(image_array.shape)
     if dimensions == 2:
