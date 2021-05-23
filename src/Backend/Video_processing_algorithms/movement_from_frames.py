@@ -7,17 +7,17 @@ from src.Backend.Video_processing_algorithms import video_generator
 from src.Constants import configuration_constants
 
 
-def create_motion_image(threshold, max_value):
+def create_motion_image(threshold):
     frames_path_list = generate_frames()
-    motion_image_array = get_motion(frames_path_list, threshold, max_value)
-    coloured_motion_image_array = cv2.applyColorMap(motion_image_array, cv2.COLORMAP_HOT)
+    uncolored_motion_image_array = get_motion(frames_path_list, threshold)
+    coloured_motion_image_array = cv2.applyColorMap(uncolored_motion_image_array, cv2.COLORMAP_HOT)
 
-    #save_path = partial_save_path + "motion-heatmap.jpg"
-    #cv2.imwrite(save_path, color_image)
+    # save_path = partial_save_path + "motion-heatmap.jpg"
+    # cv2.imwrite(save_path, color_image)
 
     video_generator.delete_frames(frames_path_list)
     os.rmdir(configuration_constants.TEMPORARY_VIDEO_DIRECTORY_PATH)
-    return coloured_motion_image_array
+    return uncolored_motion_image_array, coloured_motion_image_array
 
 
 def generate_frames():
@@ -30,7 +30,7 @@ def generate_frames():
 
 
 def get_grayscale(frame_path):
-    frame = cv2.imread(os.path.join(configuration_constants.TEMPORARY_VIDEO_DIRECTORY_PATH, frame_path))
+    frame = cv2.imread(os.path.join(frame_path))
     rows, cols, dimensions = frame.shape
     grayscale_frame = np.zeros((rows, cols), np.uint8)
     for row in range(rows):
@@ -39,7 +39,7 @@ def get_grayscale(frame_path):
     return grayscale_frame
 
 
-def get_motion(frames_path_list, threshold, max_value):
+def get_motion(frames_path_list, threshold):
     previous_grayscale_frame = get_grayscale(frames_path_list[0])
     ret, previous_grayscale_frame = cv2.threshold(previous_grayscale_frame, threshold, 255, cv2.THRESH_BINARY)
     # cv2.imshow('frame', previous_grayscale_frame)
@@ -51,20 +51,21 @@ def get_motion(frames_path_list, threshold, max_value):
         current_grayscale_frame = get_grayscale(frames_path_list[i])
         ret, current_grayscale_frame = cv2.threshold(current_grayscale_frame, threshold, 255, cv2.THRESH_BINARY)
         accumulated_motion = get_frame_motion(current_grayscale_frame, previous_grayscale_frame,
-                                                      accumulated_motion, max_value)
+                                              accumulated_motion)
         previous_grayscale_frame = current_grayscale_frame
     accumulated_motion = normalize_values(accumulated_motion)
     return accumulated_motion
 
 
-def get_frame_motion(current_frame, previous_frame, accum_motion, constant):
+def get_frame_motion(current_frame, previous_frame, accumulated_motion):
+    MIN_MOVEMENT_VALUE = 1
     rows, cols = current_frame.shape
     for row in range(rows):
         for col in range(cols):
             difference = abs(int(current_frame[row][col]) - int(previous_frame[row][col]))
-            if difference >= constant:
-                accum_motion[row][col] = accum_motion[row][col] + 1
-    return accum_motion
+            if difference >= MIN_MOVEMENT_VALUE:
+                accumulated_motion[row][col] = accumulated_motion[row][col] + 1
+    return accumulated_motion
 
 
 def normalize_values(accumulated_motion):

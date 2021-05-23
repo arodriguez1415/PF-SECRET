@@ -1447,6 +1447,45 @@
        <string>Generar mapa de calor</string>
       </property>
      </widget>
+     <widget class="QLabel" name="generate_heat_map_threshold_label">
+      <property name="geometry">
+       <rect>
+        <x>20</x>
+        <y>100</y>
+        <width>271</width>
+        <height>31</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>14</pointsize>
+       </font>
+      </property>
+      <property name="text">
+       <string>Umbral:</string>
+      </property>
+     </widget>
+     <widget class="QSpinBox" name="generate_heat_map_threshold_input">
+      <property name="geometry">
+       <rect>
+        <x>20</x>
+        <y>150</y>
+        <width>261</width>
+        <height>41</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>12</pointsize>
+       </font>
+      </property>
+      <property name="minimum">
+       <number>1</number>
+      </property>
+      <property name="maximum">
+       <number>255</number>
+      </property>
+     </widget>
     </widget>
     <widget class="QWidget" name="generate_movement_metrics_options">
      <widget class="QLabel" name="generate_movement_metrics_region_label">
