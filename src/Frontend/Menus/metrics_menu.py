@@ -140,6 +140,8 @@ def generate_fractal_dimension_metrics(main_window):
 
 def generate_movement_metrics(main_window):
     project_mastermind = Project_mastermind.get_instance()
+    image_path = project_mastermind.get_original_image_path()
+    # movement_image_array = project_mastermind.get_last_image()
     region_type = main_window.generate_fractal_dimension_metrics_region_combobox.currentText()
     region_points = Region().get_region()
 
