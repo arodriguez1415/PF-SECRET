@@ -10,5 +10,5 @@ class Image_wrapper:
     def __init__(self, image_array, method=Original()):
         self.image_array = image_array
         self.method = method
-        self.width = image_array.shape[0]
-        self.height = image_array.shape[1]
+        self.width = image_array.shape[1]
+        self.height = image_array.shape[0]
