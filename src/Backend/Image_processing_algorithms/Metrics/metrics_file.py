@@ -73,12 +73,29 @@ def save_fractal_dimension_metric(image_file_path, fractal_dimension_value, metr
     metrics_file_path = set_metrics_save_name_from_image(image_file_path)
     metrics_data = setup_metrics_data(metrics_file_path)
 
+    print(fractal_dimension_value)
     if metric_type == algorithm_constants.BORDER_FRACTAL_DIMENSION_METRIC:
         metrics_data[algorithm_constants.BORDER_FRACTAL_DIMENSION_HEADER] = fractal_dimension_value[0]
     elif metric_type == algorithm_constants.PERINUCLEAR_FRACTAL_DIMENSION_METRIC:
         metrics_data[algorithm_constants.PERINUCLEAR_FRACTAL_DIMENSION_HEADER] = fractal_dimension_value[0]
     elif metric_type == algorithm_constants.NUCLEAR_FRACTAL_DIMENSION_METRIC:
         metrics_data[algorithm_constants.NUCLEAR_FRACTAL_DIMENSION_HEADER] = fractal_dimension_value[0]
+
+    metrics_data = metrics_data[metrics_data.filter(regex='^(?!Unnamed)').columns]
+    metrics_data.to_excel(metrics_file_path)
+
+
+def save_motion_metric(image_file_path, motion_value, metric_type):
+    generate_metrics_dir()
+    metrics_file_path = set_metrics_save_name_from_image(image_file_path)
+    metrics_data = setup_metrics_data(metrics_file_path)
+
+    if metric_type == algorithm_constants.BORDER_MOVEMENT_METRIC:
+        metrics_data[algorithm_constants.BORDER_MOVEMENT_HEADER] = motion_value
+    elif metric_type == algorithm_constants.PERINUCLEAR_MOVEMENT_METRIC:
+        metrics_data[algorithm_constants.PERINUCLEAR_MOVEMENT_HEADER] = motion_value
+    elif metric_type == algorithm_constants.NUCLEAR_MOVEMENT_METRIC:
+        metrics_data[algorithm_constants.NUCLEAR_MOVEMENT_HEADER] = motion_value
 
     metrics_data = metrics_data[metrics_data.filter(regex='^(?!Unnamed)').columns]
     metrics_data.to_excel(metrics_file_path)

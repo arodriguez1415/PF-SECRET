@@ -16,6 +16,7 @@ class Project_mastermind:
     current_progress_bar = None
     main_window = None
     app = None
+    heat_map_image_array = None
 
     def __init__(self, app, main_window):
         if Project_mastermind.__instance is not None:
@@ -71,6 +72,9 @@ class Project_mastermind:
             return
         return self.image_processing_list[0]
 
+    def get_heat_map_image_array(self):
+        return self.heat_map_image_array
+
     def clear_processing(self):
         self.image_processing_list = []
 
@@ -95,6 +99,9 @@ class Project_mastermind:
 
     def set_image_processing_list(self, image_processing_list):
         self.image_processing_list = image_processing_list
+
+    def set_heat_map_image_array(self, heat_map_image_array):
+        self.heat_map_image_array = heat_map_image_array
 
     def create_video_path_name(self, video_name):
         file_extension = ".avi"

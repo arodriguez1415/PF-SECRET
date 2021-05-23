@@ -1,5 +1,6 @@
 from src.Backend.Video_processing_algorithms.movement_from_frames import create_motion_image
 from src.Classes.Image_wrapper import Image_wrapper
+from src.Classes.Project_mastermind import Project_mastermind
 
 
 def configure_movement_menu_connections(main_window):
@@ -18,7 +19,9 @@ def load_heat_map_options(main_window):
 
 
 def generate_heat_map(main_window):
+    project_mastermind = Project_mastermind.get_instance()
     threshold_value = main_window.generate_heat_map_threshold_input.value()
     uncolored_motion_image_array, coloured_motion_image_array = create_motion_image(threshold_value)
     image_wrapper = Image_wrapper(coloured_motion_image_array, "")
+    project_mastermind.set_heat_map_image_array(uncolored_motion_image_array)
     main_window.image_viewer.set_screen_image(image_wrapper)

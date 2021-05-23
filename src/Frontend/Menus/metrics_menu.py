@@ -38,6 +38,7 @@ def configure_metrics_menu_connections(main_window):
     main_window.generate_metrics_generate_button.clicked.connect(lambda: generate_metrics(main_window))
     main_window.generate_fractal_dimension_metrics_apply_button.clicked.connect \
         (lambda: generate_fractal_dimension_metrics(main_window))
+    main_window.generate_movement_metrics_apply_button.clicked.connect(lambda: generate_movement_metrics(main_window))
     main_window.plot_metrics_generate_button.clicked.connect(lambda: plot_metrics(main_window))
 
 
@@ -141,9 +142,12 @@ def generate_fractal_dimension_metrics(main_window):
 def generate_movement_metrics(main_window):
     project_mastermind = Project_mastermind.get_instance()
     image_path = project_mastermind.get_original_image_path()
-    # movement_image_array = project_mastermind.get_last_image()
-    region_type = main_window.generate_fractal_dimension_metrics_region_combobox.currentText()
+    heat_map_array = project_mastermind.get_heat_map_image_array()
+    region_type = main_window.generate_movement_metrics_region_combobox.currentText()
     region_points = Region().get_region()
+    avg_motion_value = 5     # Cambiar
+    metrics_file.save_motion_metric(image_path, avg_motion_value, region_type)
+
 
 def load_metrics_data_path(main_window):
     dataframe_path = dataframe_file_manipulation.get_dataframe_path()
