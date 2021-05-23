@@ -17,6 +17,8 @@ def configure_metrics_menu_connections(main_window):
     main_window.generate_metrics_menu_option.triggered.connect(lambda: load_generate_metrics_options(main_window))
     main_window.generate_fractal_dimention_metrics_menu_option.triggered.connect \
         (lambda: load_generate_fractal_dimension_metrics_options(main_window))
+    main_window.generate_movement_metrics_menu_option.triggered.connect \
+        (lambda: load_generate_movement_metrics_options(main_window))
     main_window.plot_metrics_menu_option.triggered.connect(lambda: load_plot_metrics_options(main_window))
 
     main_window.plot_perimeter_distribution_menu_option.triggered.connect(lambda:
@@ -55,6 +57,13 @@ def load_generate_fractal_dimension_metrics_options(main_window):
 
 def load_plot_metrics_options(main_window):
     page = main_window.plot_metrics_options
+    stacked_feature_windows = main_window.stacked_feature_windows
+    stacked_feature_windows.setCurrentWidget(page)
+    return
+
+
+def load_generate_movement_metrics_options(main_window):
+    page = main_window.generate_movement_metrics_options
     stacked_feature_windows = main_window.stacked_feature_windows
     stacked_feature_windows.setCurrentWidget(page)
     return
@@ -128,6 +137,11 @@ def generate_fractal_dimension_metrics(main_window):
     fractal_value = fractal_dimention.get_fractal_dimension_texture(current_image_array, region_points)
     metrics_file.save_fractal_dimension_metric(image_path, fractal_value, region_type)
 
+
+def generate_movement_metrics(main_window):
+    project_mastermind = Project_mastermind.get_instance()
+    region_type = main_window.generate_fractal_dimension_metrics_region_combobox.currentText()
+    region_points = Region().get_region()
 
 def load_metrics_data_path(main_window):
     dataframe_path = dataframe_file_manipulation.get_dataframe_path()

@@ -170,7 +170,7 @@
      </rect>
     </property>
     <property name="currentIndex">
-     <number>9</number>
+     <number>8</number>
     </property>
     <widget class="QWidget" name="blank_page"/>
     <widget class="QWidget" name="anisotropic_filter_options">
@@ -1373,17 +1373,17 @@
       </property>
       <item>
        <property name="text">
-        <string>Border Fractal dimension</string>
+        <string>Border - Dimension Fractal</string>
        </property>
       </item>
       <item>
        <property name="text">
-        <string>Perinuclear Fractal dimension</string>
+        <string>Perinuclear - Dimension Fractal</string>
        </property>
       </item>
       <item>
        <property name="text">
-        <string>Nuclear Fractal dimension</string>
+        <string>Nuclear - Dimension Fractal</string>
        </property>
       </item>
      </widget>
@@ -1481,17 +1481,17 @@
       </property>
       <item>
        <property name="text">
-        <string>Borde</string>
+        <string>Borde - Movimiento</string>
        </property>
       </item>
       <item>
        <property name="text">
-        <string>Perinúcleo</string>
+        <string>Perinúcleo - Movimiento</string>
        </property>
       </item>
       <item>
        <property name="text">
-        <string>Núcleo</string>
+        <string>Núcleo - Movimiento</string>
        </property>
       </item>
      </widget>
