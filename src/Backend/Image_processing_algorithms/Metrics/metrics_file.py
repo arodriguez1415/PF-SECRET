@@ -1,6 +1,8 @@
 import os
 import pandas as pd
 
+from src.Backend.Video_processing_algorithms.video_generator import get_files_from_directory
+from src.Classes.Project_mastermind import Project_mastermind
 from src.Constants import configuration_constants
 from src.Constants import algorithm_constants
 
@@ -17,6 +19,7 @@ def set_metrics_save_name_from_video(video_path_sample):
     dir_save_path = configuration_constants.METRICS_DIRECTORY_PATH
     save_path = dir_save_path + file_name_with_xlsx_extension
     return save_path
+
 
 def set_metrics_save_name_from_image(image_path_sample):
     image_path_sample = image_path_sample.replace("\\", "/")
@@ -48,6 +51,7 @@ def setup_metrics_data(file_path):
         metrics_data = pd.read_excel(file_path)
     else:
         metrics_data = pd.DataFrame()
+        set_frames(metrics_data)
     return metrics_data
 
 
@@ -121,6 +125,18 @@ def save_axis_rate(metrics_data, axis_rate_values_list, frames_values_list):
 
 def get_frames(metrics_data):
     return metrics_data[algorithm_constants.FRAMES_HEADER].values.tolist()
+
+
+def set_frames(metrics_data):
+    project_mastermind = Project_mastermind.get_instance()
+    images_dir = project_mastermind.get_original_image_dir()
+    images_list = get_files_from_directory(images_dir)
+    frames_values_list = []
+
+    for i in range(0, len(images_list)):
+        frames_values_list.append(i)
+
+    metrics_data[algorithm_constants.FRAMES_HEADER] = frames_values_list
 
 
 def get_metric(metrics_data, metric_type):

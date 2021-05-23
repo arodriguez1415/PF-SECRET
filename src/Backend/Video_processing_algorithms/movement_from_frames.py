@@ -42,8 +42,6 @@ def get_grayscale(frame_path):
 def get_motion(frames_path_list, threshold):
     previous_grayscale_frame = get_grayscale(frames_path_list[0])
     ret, previous_grayscale_frame = cv2.threshold(previous_grayscale_frame, threshold, 255, cv2.THRESH_BINARY)
-    # cv2.imshow('frame', previous_grayscale_frame)
-    # cv2.waitKey(0)
     rows, cols = previous_grayscale_frame.shape
     accumulated_motion = np.zeros((rows, cols), np.uint8)
 
@@ -75,3 +73,22 @@ def normalize_values(accumulated_motion):
         for col in range(cols):
             accumulated_motion[row][col] = accumulated_motion[row][col] * 255 / max_value
     return accumulated_motion
+
+
+def get_avg_motion_in_region(region, motion_array):
+    accumulated_motion = 0
+    values_quantity = 0
+
+    left_top_point = region[0]
+    right_bottom_point = region[-1]
+
+    cols_init = left_top_point[0]
+    cols_end = right_bottom_point[0]
+    rows_init = left_top_point[1]
+    rows_end = right_bottom_point[1]
+    for i in range(rows_init, rows_end):
+        for j in range(cols_init, cols_end):
+            accumulated_motion += motion_array[i][j]
+            values_quantity += 1
+
+    return accumulated_motion / values_quantity

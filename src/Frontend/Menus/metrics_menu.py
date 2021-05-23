@@ -5,6 +5,7 @@ from src.Backend.Image_processing_algorithms.Metrics import metrics_file
 from src.Backend.Image_processing_algorithms.Metrics import perimeter_metric
 from src.Backend.Image_processing_algorithms.Metrics import area_metric
 from src.Backend.Image_processing_algorithms.Metrics import axis_metric
+from src.Backend.Video_processing_algorithms.movement_from_frames import get_avg_motion_in_region
 from src.Classes.Project_mastermind import Project_mastermind
 from src.Classes.Region import Region
 from src.Constants import algorithm_constants
@@ -145,7 +146,7 @@ def generate_movement_metrics(main_window):
     heat_map_array = project_mastermind.get_heat_map_image_array()
     region_type = main_window.generate_movement_metrics_region_combobox.currentText()
     region_points = Region().get_region()
-    avg_motion_value = 5     # Cambiar
+    avg_motion_value = get_avg_motion_in_region(region_points, heat_map_array)
     metrics_file.save_motion_metric(image_path, avg_motion_value, region_type)
 
 
