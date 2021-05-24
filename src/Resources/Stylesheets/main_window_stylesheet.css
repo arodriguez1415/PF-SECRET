@@ -36,6 +36,23 @@
   background-color: #99AAFF;
 }
 
+#fixed_square_region_button{
+ background-position: center;
+ background-repeat: no-repeat;
+ /* background-size: cover; */
+ background-color: transparent;
+ background-image: url("./Resources/Icons/fixed_square_icon.png");
+ border: 2px solid #AAA;
+}
+
+#fixed_square_region_button:hover{
+	background-color: #99BBF5;
+}
+
+#fixed_square_region_button:focus{
+  background-color: #99AAFF;
+}
+
 #clear_region_button{
  background-position: center;
  background-repeat: no-repeat;
