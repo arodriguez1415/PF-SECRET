@@ -236,7 +236,7 @@ def plot_distribution_metrics(main_window):
                                                plot_title=plot_title,
                                                x_label=plot_x_label,
                                                y_label=plot_y_label,
-                                               show_flag=False)
+                                               show_flag=True)
 
 
 def get_plotting_distribution_metrics_dictionary(main_window):

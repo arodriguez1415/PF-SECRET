@@ -32,6 +32,11 @@ def rgb_to_gray(image_array):
     return image_array
 
 
+def bgr_to_rgb(image_array):
+    rgb_image_array = cv2.cvtColor(image_array, cv2.COLOR_BGR2RGB)
+    return rgb_image_array
+
+
 def threshold(image_array, threshold_value):
     image_array[image_array < threshold_value] = 0
     image_array[image_array >= threshold_value] = 255
