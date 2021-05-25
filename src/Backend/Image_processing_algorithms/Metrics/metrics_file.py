@@ -94,31 +94,33 @@ def save_motion_metric(image_file_path, motion_value, metric_type):
     metrics_file_path = set_metrics_save_name_from_image(image_file_path)
     metrics_data = setup_metrics_data(metrics_file_path)
 
+    print(metric_type)
+
     if metric_type == algorithm_constants.BORDER_MOVEMENT_METRIC:
         metrics_data[algorithm_constants.BORDER_MOVEMENT_HEADER] = motion_value
+        print("Era borde")
     elif metric_type == algorithm_constants.PERINUCLEAR_MOVEMENT_METRIC:
         metrics_data[algorithm_constants.PERINUCLEAR_MOVEMENT_HEADER] = motion_value
+        print("Era peri")
     elif metric_type == algorithm_constants.NUCLEAR_MOVEMENT_METRIC:
         metrics_data[algorithm_constants.NUCLEAR_MOVEMENT_HEADER] = motion_value
+        print("Era nucleo")
 
     metrics_data = metrics_data[metrics_data.filter(regex='^(?!Unnamed)').columns]
     metrics_data.to_excel(metrics_file_path)
 
 
 def save_perimeter(metrics_data, perimeter_values_list, frames_values_list):
-    metrics_data[algorithm_constants.FRAMES_HEADER] = frames_values_list
     metrics_data[algorithm_constants.PERIMETER_HEADER] = perimeter_values_list
     return metrics_data
 
 
 def save_area(metrics_data, area_values_list, frames_values_list):
-    metrics_data[algorithm_constants.FRAMES_HEADER] = frames_values_list
     metrics_data[algorithm_constants.AREA_HEADER] = area_values_list
     return metrics_data
 
 
 def save_axis_rate(metrics_data, axis_rate_values_list, frames_values_list):
-    metrics_data[algorithm_constants.FRAMES_HEADER] = frames_values_list
     metrics_data[algorithm_constants.AXIS_RATE_HEADER] = axis_rate_values_list
     return metrics_data
 

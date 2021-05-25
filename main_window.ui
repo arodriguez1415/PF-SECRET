@@ -93,7 +93,7 @@
        <string/>
       </property>
      </widget>
-      <widget class="QPushButton" name="fixed_square_region_button">
+     <widget class="QPushButton" name="fixed_square_region_button">
       <property name="geometry">
        <rect>
         <x>10</x>
@@ -183,7 +183,7 @@
      </rect>
     </property>
     <property name="currentIndex">
-     <number>9</number>
+     <number>8</number>
     </property>
     <widget class="QWidget" name="blank_page"/>
     <widget class="QWidget" name="anisotropic_filter_options">
@@ -1386,17 +1386,17 @@
       </property>
       <item>
        <property name="text">
-        <string>Border - Dimension Fractal</string>
+        <string>Borde - Dimension Fractal</string>
        </property>
       </item>
       <item>
        <property name="text">
-        <string>Perinuclear - Dimension Fractal</string>
+        <string>Perinúcleo - Dimension Fractal</string>
        </property>
       </item>
       <item>
        <property name="text">
-        <string>Nuclear - Dimension Fractal</string>
+        <string>Núcleo - Dimension Fractal</string>
        </property>
       </item>
      </widget>
@@ -1754,6 +1754,226 @@
       </property>
      </widget>
     </widget>
+    <widget class="QWidget" name="plot_distribution_metrics_option">
+     <widget class="QLabel" name="plot_metrics_distribution_title">
+      <property name="geometry">
+       <rect>
+        <x>20</x>
+        <y>30</y>
+        <width>271</width>
+        <height>41</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>14</pointsize>
+       </font>
+      </property>
+      <property name="text">
+       <string>Graficar distribución de métrica</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="plot_metrics_distribution_label">
+      <property name="geometry">
+       <rect>
+        <x>20</x>
+        <y>100</y>
+        <width>271</width>
+        <height>41</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>14</pointsize>
+       </font>
+      </property>
+      <property name="text">
+       <string>Métrica a graficar:</string>
+      </property>
+     </widget>
+     <widget class="QCheckBox" name="plot_metrics_distribution_area_checkbox">
+      <property name="geometry">
+       <rect>
+        <x>20</x>
+        <y>200</y>
+        <width>151</width>
+        <height>31</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>14</pointsize>
+       </font>
+      </property>
+      <property name="text">
+       <string>Área</string>
+      </property>
+     </widget>
+     <widget class="QCheckBox" name="plot_metrics_distribution_perimeter_checkbox">
+      <property name="geometry">
+       <rect>
+        <x>20</x>
+        <y>160</y>
+        <width>151</width>
+        <height>31</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>14</pointsize>
+       </font>
+      </property>
+      <property name="text">
+       <string>Perímetro</string>
+      </property>
+     </widget>
+     <widget class="QCheckBox" name="plot_metrics_distribution_axis_rate_checkbox">
+      <property name="geometry">
+       <rect>
+        <x>20</x>
+        <y>240</y>
+        <width>151</width>
+        <height>31</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>14</pointsize>
+       </font>
+      </property>
+      <property name="text">
+       <string>Razón de ejes</string>
+      </property>
+     </widget>
+     <widget class="QCheckBox" name="plot_metrics_distribution_fractal_border_checkbox">
+      <property name="geometry">
+       <rect>
+        <x>20</x>
+        <y>280</y>
+        <width>251</width>
+        <height>31</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>14</pointsize>
+       </font>
+      </property>
+      <property name="text">
+       <string>Borde - Dimensión fractal</string>
+      </property>
+     </widget>
+     <widget class="QCheckBox" name="plot_metrics_distribution_fractal_perinuclear_checkbox">
+      <property name="geometry">
+       <rect>
+        <x>20</x>
+        <y>320</y>
+        <width>281</width>
+        <height>31</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>14</pointsize>
+       </font>
+      </property>
+      <property name="text">
+       <string>Perinucleo - Dimensión fractal</string>
+      </property>
+     </widget>
+     <widget class="QCheckBox" name="plot_metrics_distribution_fractal_nuclear_checkbox">
+      <property name="geometry">
+       <rect>
+        <x>20</x>
+        <y>360</y>
+        <width>251</width>
+        <height>31</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>14</pointsize>
+       </font>
+      </property>
+      <property name="text">
+       <string>Nucleo - Dimensión fractal</string>
+      </property>
+     </widget>
+     <widget class="QCheckBox" name="plot_metrics_distribution_movement_nuclear_checkbox">
+      <property name="geometry">
+       <rect>
+        <x>20</x>
+        <y>480</y>
+        <width>251</width>
+        <height>31</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>14</pointsize>
+       </font>
+      </property>
+      <property name="text">
+       <string>Nucleo - Movimiento</string>
+      </property>
+     </widget>
+     <widget class="QCheckBox" name="plot_metrics_distribution_movement_border_checkbox">
+      <property name="geometry">
+       <rect>
+        <x>20</x>
+        <y>400</y>
+        <width>251</width>
+        <height>31</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>14</pointsize>
+       </font>
+      </property>
+      <property name="text">
+       <string>Borde - Movimiento</string>
+      </property>
+     </widget>
+     <widget class="QCheckBox" name="plot_metrics_distribution_movement_perinuclear_checkbox">
+      <property name="geometry">
+       <rect>
+        <x>20</x>
+        <y>440</y>
+        <width>281</width>
+        <height>31</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>14</pointsize>
+       </font>
+      </property>
+      <property name="text">
+       <string>Perinucleo - Movimiento</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="plot_metrics_distribution_button">
+      <property name="geometry">
+       <rect>
+        <x>130</x>
+        <y>550</y>
+        <width>151</width>
+        <height>41</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>10</pointsize>
+        <weight>75</weight>
+        <bold>true</bold>
+       </font>
+      </property>
+      <property name="text">
+       <string>Graficar distribución</string>
+      </property>
+     </widget>
+    </widget>
    </widget>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
@@ -1815,9 +2035,7 @@
     <addaction name="generate_fractal_dimention_metrics_menu_option"/>
     <addaction name="separator"/>
     <addaction name="plot_metrics_menu_option"/>
-    <addaction name="plot_perimeter_distribution_menu_option"/>
-    <addaction name="plot_area_distribution_menu_option"/>
-    <addaction name="plot_border_fractal_distribution_menu_option"/>
+    <addaction name="plot_distribution_metric_menu_option"/>
    </widget>
    <widget class="QMenu" name="movement_menu">
     <property name="title">
@@ -1830,9 +2048,9 @@
    <addaction name="texture_menu"/>
    <addaction name="filters_menu"/>
    <addaction name="border_detection_menu"/>
+   <addaction name="movement_menu"/>
    <addaction name="metrics_menu"/>
    <addaction name="video_menu"/>
-   <addaction name="movement_menu"/>
   </widget>
   <action name="load_main_image_menu_option">
    <property name="text">
@@ -2094,6 +2312,11 @@
   <action name="generate_heat_map_menu_option">
    <property name="text">
     <string>Generar mapa de calor</string>
+   </property>
+  </action>
+  <action name="plot_distribution_metric_menu_option">
+   <property name="text">
+    <string>Graficar distribución de métrica</string>
    </property>
   </action>
  </widget>

@@ -27,13 +27,13 @@ PERIMETER_METRIC = "Perimeter"
 AREA_METRIC = "Area"
 AXIS_RATE_METRIC = "Axis Rate"
 
-BORDER_FRACTAL_DIMENSION_METRIC = "Border - Dimension Fractal"
-PERINUCLEAR_FRACTAL_DIMENSION_METRIC = "Perinuclear - Dimension Fractal"
-NUCLEAR_FRACTAL_DIMENSION_METRIC = "Nuclear - Dimension Fractal"
+BORDER_FRACTAL_DIMENSION_METRIC = "Borde - Dimension Fractal"
+PERINUCLEAR_FRACTAL_DIMENSION_METRIC = "Perinúcleo - Dimension Fractal"
+NUCLEAR_FRACTAL_DIMENSION_METRIC = "Núcleo - Dimension Fractal"
 
 BORDER_MOVEMENT_METRIC = "Borde - Movimiento"
-PERINUCLEAR_MOVEMENT_METRIC = "Perinuclear - Movimiento"
-NUCLEAR_MOVEMENT_METRIC = "Nuclear - Movimiento"
+PERINUCLEAR_MOVEMENT_METRIC = "Perinúcleo - Movimiento"
+NUCLEAR_MOVEMENT_METRIC = "Núcleo - Movimiento"
 
 
 # Metrics dataframe headers
@@ -41,12 +41,12 @@ PERIMETER_HEADER = "Perimeter"
 AREA_HEADER = "Area"
 AXIS_RATE_HEADER = "Axis Rate"
 
-BORDER_FRACTAL_DIMENSION_HEADER = "Border - Dimension Fractal"
-PERINUCLEAR_FRACTAL_DIMENSION_HEADER = "Perinuclear - Dimension Fractal"
-NUCLEAR_FRACTAL_DIMENSION_HEADER = "Nuclear - Dimension Fractal"
+BORDER_FRACTAL_DIMENSION_HEADER = "Borde - Dimension Fractal"
+PERINUCLEAR_FRACTAL_DIMENSION_HEADER = "Perinúcleo - Dimension Fractal"
+NUCLEAR_FRACTAL_DIMENSION_HEADER = "Núcleo - Dimension Fractal"
 
 BORDER_MOVEMENT_HEADER = "Borde - Movimiento"
-PERINUCLEAR_MOVEMENT_HEADER = "Perinuclear - Movimiento"
-NUCLEAR_MOVEMENT_HEADER = "Nuclear - Movimiento"
+PERINUCLEAR_MOVEMENT_HEADER = "Perinúcleo - Movimiento"
+NUCLEAR_MOVEMENT_HEADER = "Núcleo - Movimiento"
 
 FRAMES_HEADER = "Frames"

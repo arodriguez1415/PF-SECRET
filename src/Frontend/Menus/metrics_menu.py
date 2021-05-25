@@ -20,18 +20,10 @@ def configure_metrics_menu_connections(main_window):
         (lambda: load_generate_fractal_dimension_metrics_options(main_window))
     main_window.generate_movement_metrics_menu_option.triggered.connect \
         (lambda: load_generate_movement_metrics_options(main_window))
-    main_window.plot_metrics_menu_option.triggered.connect(lambda: load_plot_metrics_options(main_window))
-
-    main_window.plot_perimeter_distribution_menu_option.triggered.connect(lambda:
-                                                                          plot_metric_distribution
-                                                                          (algorithm_constants.PERIMETER_METRIC))
-    main_window.plot_area_distribution_menu_option.triggered.connect(lambda:
-                                                                     plot_metric_distribution
-                                                                     (algorithm_constants.AREA_METRIC))
-    main_window.plot_border_fractal_distribution_menu_option.triggered.connect(lambda:
-                                                                               plot_metric_distribution
-                                                                               (
-                                                                                   algorithm_constants.BORDER_FRACTAL_DIMENSION_METRIC))
+    main_window.plot_metrics_menu_option.triggered.connect \
+        (lambda: load_plot_metrics_options(main_window))
+    main_window.plot_distribution_metric_menu_option.triggered.connect \
+        (lambda: load_plot_distribution_metrics_option(main_window))
 
     main_window.generate_metrics_load_mask_video_button.clicked.connect(lambda: load_mask_video_path(main_window))
     main_window.plot_metrics_load_dataframe_button.clicked.connect(lambda: load_metrics_data_path(main_window))
@@ -41,6 +33,7 @@ def configure_metrics_menu_connections(main_window):
         (lambda: generate_fractal_dimension_metrics(main_window))
     main_window.generate_movement_metrics_apply_button.clicked.connect(lambda: generate_movement_metrics(main_window))
     main_window.plot_metrics_generate_button.clicked.connect(lambda: plot_metrics(main_window))
+    main_window.plot_metrics_distribution_button.clicked.connect(lambda: plot_distribution_metrics(main_window))
 
 
 def load_generate_metrics_options(main_window):
@@ -66,6 +59,13 @@ def load_plot_metrics_options(main_window):
 
 def load_generate_movement_metrics_options(main_window):
     page = main_window.generate_movement_metrics_options
+    stacked_feature_windows = main_window.stacked_feature_windows
+    stacked_feature_windows.setCurrentWidget(page)
+    return
+
+
+def load_plot_distribution_metrics_option(main_window):
+    page = main_window.plot_distribution_metrics_option
     stacked_feature_windows = main_window.stacked_feature_windows
     stacked_feature_windows.setCurrentWidget(page)
     return
@@ -209,13 +209,106 @@ def show_metric(metric_type, metric_values_list, frames_values_list, show_flag):
                                            show_flag=show_flag)
 
 
-def plot_metric_distribution(metric_type):
+def plot_distribution_metrics(main_window):
     metrics_data_paths = dataframe_file_manipulation.get_multiple_dataframes_path()
     metrics_data_list = metrics_file.read_multiple_metrics_data(metrics_data_paths)
-    metrics_avg_list = []
+    distribution_metrics_dictionary = get_plotting_distribution_metrics_dictionary(main_window)
 
-    for metrics_data in metrics_data_list:
-        metric_avg = metrics_file.get_metric_avg(metrics_data, metric_type)
-        metrics_avg_list.append(metric_avg)
+    metric_keys_list = list(distribution_metrics_dictionary.keys())
 
-    metrics_plot.plot_metric_histogram(metrics_avg_list)
+    for i in range(0, len(metric_keys_list)):
+        metric_key = metric_keys_list[i]
+        metrics_avg_list = []
+        for metrics_data in metrics_data_list:
+            metric_avg = metrics_file.get_metric_avg(metrics_data, metric_key)
+            metrics_avg_list.append(metric_avg)
+        plot_title = get_distribution_title(metric_key)
+        plot_x_label = get_distribution_x_label(metric_key)
+        plot_y_label = get_distribution_y_label(metric_key)
+        if i == len(metric_keys_list) - 1:
+            metrics_plot.plot_metric_histogram(metrics_avg_list,
+                                               plot_title=plot_title,
+                                               x_label=plot_x_label,
+                                               y_label=plot_y_label,
+                                               show_flag=True)
+        else:
+            metrics_plot.plot_metric_histogram(metrics_avg_list,
+                                               plot_title=plot_title,
+                                               x_label=plot_x_label,
+                                               y_label=plot_y_label,
+                                               show_flag=False)
+
+
+def get_plotting_distribution_metrics_dictionary(main_window):
+    metrics_dictionary = {}
+
+    is_perimeter_checked = main_window.plot_metrics_distribution_perimeter_checkbox.isChecked()
+    metrics_dictionary[algorithm_constants.PERIMETER_METRIC] = is_perimeter_checked
+
+    is_area_checked = main_window.plot_metrics_distribution_area_checkbox.isChecked()
+    metrics_dictionary[algorithm_constants.AREA_METRIC] = is_area_checked
+
+    is_axis_rate_checked = main_window.plot_metrics_distribution_axis_rate_checkbox.isChecked()
+    metrics_dictionary[algorithm_constants.AXIS_RATE_METRIC] = is_axis_rate_checked
+
+    is_border_fractal_checked = main_window.plot_metrics_distribution_fractal_border_checkbox.isChecked()
+    metrics_dictionary[algorithm_constants.BORDER_FRACTAL_DIMENSION_METRIC] = is_border_fractal_checked
+
+    is_perinuclear_fractal_checked = main_window.plot_metrics_distribution_fractal_perinuclear_checkbox.isChecked()
+    metrics_dictionary[algorithm_constants.PERINUCLEAR_FRACTAL_DIMENSION_METRIC] = is_perinuclear_fractal_checked
+
+    is_nuclear_fractal_checked = main_window.plot_metrics_distribution_fractal_nuclear_checkbox.isChecked()
+    metrics_dictionary[algorithm_constants.NUCLEAR_FRACTAL_DIMENSION_METRIC] = is_nuclear_fractal_checked
+
+    is_border_movement_checked = main_window.plot_metrics_distribution_movement_border_checkbox.isChecked()
+    metrics_dictionary[algorithm_constants.BORDER_MOVEMENT_METRIC] = is_border_movement_checked
+
+    is_perinuclear_movement_checked = main_window.plot_metrics_distribution_movement_perinuclear_checkbox.isChecked()
+    metrics_dictionary[algorithm_constants.PERINUCLEAR_MOVEMENT_METRIC] = is_perinuclear_movement_checked
+
+    is_nuclear_movement_checked = main_window.plot_metrics_distribution_movement_nuclear_checkbox.isChecked()
+    metrics_dictionary[algorithm_constants.NUCLEAR_MOVEMENT_METRIC] = is_nuclear_movement_checked
+
+    return metrics_dictionary
+
+
+def get_distribution_title(metric_type):
+    return {
+        algorithm_constants.PERIMETER_METRIC: "Distribucion de perimetros",
+        algorithm_constants.AREA_METRIC: "Distribucion de areas",
+        algorithm_constants.AXIS_RATE_METRIC: "Distribucion de razon de ejes",
+        algorithm_constants.BORDER_FRACTAL_DIMENSION_METRIC: "Fractal dimension - borde distribucion",
+        algorithm_constants.PERINUCLEAR_FRACTAL_DIMENSION_METRIC: "Fractal dimension - perinucleo distribucion",
+        algorithm_constants.NUCLEAR_FRACTAL_DIMENSION_METRIC: "Fractal dimension - nucleo distribution",
+        algorithm_constants.BORDER_MOVEMENT_METRIC: "Movimiento - borde distribucion",
+        algorithm_constants.PERINUCLEAR_MOVEMENT_METRIC: "Movimiento - perinucleo distribucion",
+        algorithm_constants.NUCLEAR_MOVEMENT_METRIC: "Movimiento - nucleo distribution",
+    }.get(metric_type, "Titulo no encontrado!")
+
+
+def get_distribution_x_label(metric_type):
+    return {
+        algorithm_constants.PERIMETER_METRIC: "Valores de perimetro en pixeles",
+        algorithm_constants.AREA_METRIC: "Valores de area en pixeles",
+        algorithm_constants.AXIS_RATE_METRIC: "Valores de razones de ejes",
+        algorithm_constants.BORDER_FRACTAL_DIMENSION_METRIC: "Valores de dimension fractal en borde",
+        algorithm_constants.PERINUCLEAR_FRACTAL_DIMENSION_METRIC: "Valores de dimension fractal en perinucleo",
+        algorithm_constants.NUCLEAR_FRACTAL_DIMENSION_METRIC: "Valores de dimension fractal en nucleo",
+        algorithm_constants.BORDER_MOVEMENT_METRIC: "Valores de moveimiento en borde",
+        algorithm_constants.PERINUCLEAR_MOVEMENT_METRIC: "Valores de moveimiento en perinucleo",
+        algorithm_constants.NUCLEAR_MOVEMENT_METRIC: "Valores de moveimiento en nucleo",
+    }.get(metric_type, "Label no encontrado!")
+
+
+def get_distribution_y_label(metric_type):
+    return {
+        algorithm_constants.PERIMETER_METRIC: "Valores de perimetro en pixeles",
+        algorithm_constants.AREA_METRIC: "Valores de area en pixeles",
+        algorithm_constants.AXIS_RATE_METRIC: "Valores de razones de ejes",
+        algorithm_constants.BORDER_FRACTAL_DIMENSION_METRIC: "Valores de dimension fractal en borde",
+        algorithm_constants.PERINUCLEAR_FRACTAL_DIMENSION_METRIC: "Valores de dimension fractal en perinucleo",
+        algorithm_constants.NUCLEAR_FRACTAL_DIMENSION_METRIC: "Valores de dimension fractal en nucleo",
+        algorithm_constants.BORDER_MOVEMENT_METRIC: "Valores de moveimiento en borde",
+        algorithm_constants.PERINUCLEAR_MOVEMENT_METRIC: "Valores de moveimiento en perinucleo",
+        algorithm_constants.NUCLEAR_MOVEMENT_METRIC: "Valores de moveimiento en nucleo",
+    }.get(metric_type, "Label no encontrado!")
