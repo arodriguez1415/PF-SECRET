@@ -4,12 +4,13 @@ from PyQt5.QtGui import QPainter, QPen, QColor, QPixmap
 from PyQt5.QtWidgets import QLabel
 import math
 
-class QDrawable_label(QLabel):
 
+class QDrawable_label(QLabel):
     points_list = []
     paint_flag = False
     square_flag = False
     fixed_square_flag = False
+    diagonal_line_flag = False
     polygon_finalized = False
     actual_image_wrapper = None
 
@@ -27,6 +28,9 @@ class QDrawable_label(QLabel):
 
     def set_fixed_square_flag(self):
         self.fixed_square_flag = True
+
+    def set_diagonal_line_flag(self):
+        self.diagonal_line_flag = True
 
     def set_screen_image(self, image_wrapper):
         if image_wrapper is None:
@@ -54,6 +58,8 @@ class QDrawable_label(QLabel):
             self.finalize_square(event)
         elif self.fixed_square_flag:
             self.finalize_fixed_square(event)
+        elif self.diagonal_line_flag:
+            self.draw_line(event)
         else:
             if event.button() == Qt.LeftButton:
                 self.draw_line(event)
@@ -85,6 +91,9 @@ class QDrawable_label(QLabel):
         painter.drawLine(from_point, to_point)
         self.points_list.append(to_point)
         self.setPixmap(current_image)
+        if self.diagonal_line_flag:
+            self.paint_flag = False
+            self.diagonal_line_flag = False
         painter.end()
 
     def finalize_polygon(self):
@@ -158,5 +167,6 @@ class QDrawable_label(QLabel):
         self.paint_flag = False
         self.square_flag = False
         self.fixed_square_flag = False
+        self.diagonal_line_flag = False
         self.set_screen_image(self.actual_image_wrapper)
 

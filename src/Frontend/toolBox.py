@@ -7,6 +7,7 @@ def configure_toolBox_connections(main_window):
     main_window.polygon_region_button.clicked.connect(lambda: start_polygon(main_window))
     main_window.square_region_button.clicked.connect(lambda: start_square(main_window))
     main_window.fixed_square_region_button.clicked.connect(lambda: start_fixed_square(main_window))
+    main_window.diagonal_line_button.clicked.connect(lambda: start_diagonal_line(main_window))
     main_window.clear_region_button.clicked.connect(lambda: clear_region(main_window))
     main_window.undo_button.clicked.connect(lambda: undo(main_window))
     main_window.save_image_button.clicked.connect(lambda: save_image())
@@ -24,6 +25,11 @@ def start_square(main_window):
 def start_fixed_square(main_window):
     main_window.image_viewer.set_paint_flag()
     main_window.image_viewer.set_fixed_square_flag()
+
+
+def start_diagonal_line(main_window):
+    main_window.image_viewer.set_paint_flag()
+    main_window.image_viewer.set_diagonal_line_flag()
 
 
 def clear_region(main_window):

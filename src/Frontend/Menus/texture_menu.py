@@ -1,13 +1,16 @@
 import src.Backend.Image_processing_algorithms.Texture.lbp as texture_lbp
 from src.Backend.Image_processing_algorithms.Texture import fractal_dimention
+from src.Backend.Image_processing_algorithms.Texture import profile_texture
 from src.Classes.Image_wrapper import Image_wrapper
 from src.Classes.Project_mastermind import Project_mastermind
+from src.Classes.Region import Region
 from src.Frontend.Utils.message import show_message
 
 
 def configure_texture_menu_connections(main_window):
     main_window.lbp_menu_option.triggered.connect(lambda: lbp_options(main_window))
     main_window.fractal_dimension_menu_option.triggered.connect(lambda: fractal_dimension_options(main_window))
+    main_window.texture_profile_menu_option.triggered.connect(lambda: texture_profile_options(main_window))
 
     main_window.lbp_add_process_button.clicked.connect(lambda: add_process(main_window))
 
@@ -19,6 +22,8 @@ def configure_texture_menu_connections(main_window):
     main_window.lbp_method_information_button.clicked.connect(lambda: show_method_info())
 
     main_window.fractal_dimension_apply_button.clicked.connect(lambda: generate_fractal_dimension(main_window))
+
+    main_window.texture_profile_apply_button.clicked.connect(lambda: generate_profile_texture())
 
 
 def lbp_options(main_window):
@@ -35,6 +40,13 @@ def fractal_dimension_options(main_window):
     return
 
 
+def texture_profile_options(main_window):
+    page = main_window.texture_profile_options
+    stacked_feature_windows = main_window.stacked_feature_windows
+    stacked_feature_windows.setCurrentWidget(page)
+    return
+
+
 def generate_fractal_dimension(main_window):
     project_mastermind = Project_mastermind.get_instance()
     current_image_array = project_mastermind.get_last_image()
@@ -44,6 +56,14 @@ def generate_fractal_dimension(main_window):
     image_wrapper = Image_wrapper(fractal_dimension_image)
     main_window.image_viewer.set_screen_image(image_wrapper)
 
+
+def generate_profile_texture():
+    project_mastermind = Project_mastermind.get_instance()
+    current_image_array = project_mastermind.get_last_image()
+
+    line_region = Region()
+    profile_texture.fractal_dimension_line(current_image_array, line_region.get_region(),
+                                           current_image_array.shape[0], current_image_array.shape[1])
 
 def show_lbp(main_window):
     project_mastermind = Project_mastermind.get_instance()
