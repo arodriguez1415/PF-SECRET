@@ -1,5 +1,4 @@
 import numpy as np
-import math
 # https://stackoverflow.com/questions/50313114/what-is-the-entropy-of-an-image-and-how-is-it-calculated
 import skimage.measure
 import matplotlib.pylab as pl
@@ -9,13 +8,15 @@ from sklearn.preprocessing import normalize
 
 def fractal_dimension_static_wrapper(image, start_x, start_y, end_x, end_y, width, height):
     float_image = np.float32(image)
-    piece_width = end_x - start_x
-    piece_height = end_y - start_y
-    float_piece = np.zeros((piece_width, piece_height), dtype=float)
-    for y in range(0, height):
-        for x in range(0, width):
-            if (start_y <= y < end_y) and (start_x <= x < end_x):
-                float_piece[y - start_y, x - start_x] = float_image[y, x]
+    start_x = start_x if start_x >= 0 else 0
+    start_y = start_y if start_y >= 0 else 0
+    end_x = end_x if end_x < width else width - 1
+    end_y = end_y if end_y < height else height - 1
+    float_piece = np.zeros((end_y - start_y, end_x - start_x), dtype=float)
+
+    for y in range(start_y, end_y):
+        for x in range(start_x, end_x):
+            float_piece[y - start_y, x - start_x] = float_image[y, x]
 
     entropy = skimage.measure.shannon_entropy(float_piece)
     float_piece.shape += (1,)
@@ -23,17 +24,11 @@ def fractal_dimension_static_wrapper(image, start_x, start_y, end_x, end_y, widt
     return entropy, fractal_dimension
 
 
-def fractal_dimension_line(image, region, width, height):
-    diff_width = 7
-    diff_height = 7
-
-    start_point = region[0]
-    end_point = region[1]
-
-    start_x = start_point[0]
-    end_x = end_point[0]
-    start_y = start_point[1]
-    end_y = end_point[1]
+def fractal_dimension_line(image, region):
+    start_x = region[0][0]
+    end_x = region[1][0]
+    start_y = region[0][1]
+    end_y = region[1][1]
 
     all_points = get_line(start_x, start_y, end_x, end_y)
     all_points_size = len(all_points)
@@ -42,30 +37,38 @@ def fractal_dimension_line(image, region, width, height):
     y_coordinates = np.zeros(all_points_size)
     all_fractal_dimensions = np.zeros(all_points_size)
     all_entropy = np.zeros(all_points_size)
-    combinated_results = np.zeros(all_points_size)
+    combined_results = np.zeros(all_points_size)
+
+    calculate_texture_in_line(image, x_coordinates, y_coordinates, all_points, all_fractal_dimensions, all_entropy)
+
+    all_fractal_dimensions = normalize([all_fractal_dimensions])
+    all_entropy = normalize([all_entropy])
+    all_entropy = all_entropy[0]
+    all_fractal_dimensions = all_fractal_dimensions[0]
+    combined_results = all_entropy * 0.5 + 0.5 * all_fractal_dimensions
+    plot_profile_texture(combined_results, x_coordinates, y_coordinates, all_points_size, all_fractal_dimensions, all_entropy)
+
+
+def calculate_texture_in_line(image, x_coordinates, y_coordinates, all_points,
+                              all_fractal_dimensions, all_entropy):
     index = 0
+    diff = 3
+    width = image.shape[0]
+    height = image.shape[1]
 
     for point in all_points:
         x = point[0]
         y = point[1]
         x_coordinates[index] = x
         y_coordinates[index] = y
-        piece_start_x = math.ceil(x - diff_width)
-        piece_start_y = math.ceil(y - diff_height)
-        piece_end_x = math.ceil(x + diff_width)
-        piece_end_y = math.ceil(y + diff_height)
         entropy, fractal_dimension = \
-            fractal_dimension_static_wrapper(image, piece_start_x, piece_start_y, piece_end_x, piece_end_y, width, height)
+            fractal_dimension_static_wrapper(image, x - diff, y - diff, x + diff, y + diff, width, height)
         all_fractal_dimensions[index] = fractal_dimension
         all_entropy[index] = entropy
         index += 1
 
-    all_fractal_dimensions = normalize([all_fractal_dimensions])
-    all_entropy = normalize([all_entropy])
-    all_entropy = all_entropy[0]
-    all_fractal_dimensions = all_fractal_dimensions[0]
-    combinated_results = all_entropy * 0.5 + 0.5 * all_fractal_dimensions
 
+def plot_profile_texture(combined_results, x_coordinates, y_coordinates, all_points_size, all_fractal_dimensions, all_entropy):
     gs = gridspec.GridSpec(2, 2)
 
     if abs(x_coordinates[0] - x_coordinates[all_points_size - 1]) > abs(y_coordinates[0] - y_coordinates[all_points_size - 1]):
@@ -87,7 +90,7 @@ def fractal_dimension_line(image, region, width, height):
     pl.ylabel('Entropy')
 
     ax = pl.subplot(gs[1, :])
-    pl.plot(x_axis, combinated_results, color='blue', label='Combinated')
+    pl.plot(x_axis, combined_results, color='blue', label='Combinated')
     pl.xlabel(x_label)
     pl.ylabel('Texture')
     pl.show()
@@ -194,3 +197,47 @@ def fractal_dimension_github(array, max_box_size=None, min_box_size=1, n_samples
     #     ax.plot(np.log(1 / scales), fitted_y_vals, "k--", label=f"Fit: {np.round(coeffs[0], 3)}X+{coeffs[1]}")
     #     ax.legend();
     return [coeffs[0]]
+
+
+def fractal_dimension_stackoverflow(Z):
+    # Only for 2d image
+    assert (len(Z.shape) == 2)
+    threshold = np.mean(Z)
+
+    # From https://github.com/rougier/numpy-100 (#87)
+    # How to get the block-sum ?
+    # https://gist.github.com/viveksck/1110dfca01e4ec2c608515f0d5a5b1d1 explanation
+
+    def boxcount(Z, k):
+        x = np.arange(0, Z.shape[0], k)
+        y = np.arange(0, Z.shape[1], k)
+        first_reduce = np.add.reduceat(Z, x, axis=0)
+        S = np.add.reduceat(first_reduce, y, axis=1)
+
+        # We count non-empty (0) and non-full boxes (k*k)
+        return len(np.where((S > 0) & (S < k * k))[0])
+
+    # Transform Z into a binary array
+    Z = (Z < threshold)
+    # print(threshold)
+
+    # Minimal dimension of image
+    p = min(Z.shape)
+
+    # Greatest power of 2 less than or equal to p
+    n = 2 ** np.floor(np.log(p) / np.log(2))
+
+    # Extract the exponent
+    n = int(np.log(n) / np.log(2))
+
+    # Build successive box sizes (from 2**n down to 2**1)
+    sizes = 2 ** np.arange(n, 1, -1)
+
+    # Actual box counting with decreasing size
+    counts = []
+    for size in sizes:
+        counts.append(boxcount(Z, size))
+
+    # Fit the successive log(sizes) with log (counts)
+    coeffs = np.polyfit(np.log(sizes), np.log(counts), 1)
+    return [-coeffs[0], threshold]

@@ -1,6 +1,7 @@
 import src.Backend.Image_processing_algorithms.Texture.lbp as texture_lbp
 from src.Backend.Image_processing_algorithms.Texture import fractal_dimention
 from src.Backend.Image_processing_algorithms.Texture import profile_texture
+from src.Backend.Image_processing_algorithms.Texture import texture_heatmap
 from src.Classes.Image_wrapper import Image_wrapper
 from src.Classes.Project_mastermind import Project_mastermind
 from src.Classes.Region import Region
@@ -11,6 +12,7 @@ def configure_texture_menu_connections(main_window):
     main_window.lbp_menu_option.triggered.connect(lambda: lbp_options(main_window))
     main_window.fractal_dimension_menu_option.triggered.connect(lambda: fractal_dimension_options(main_window))
     main_window.texture_profile_menu_option.triggered.connect(lambda: texture_profile_options(main_window))
+    main_window.texture_heatmap_menu_option.triggered.connect(lambda: texture_heatmap_options(main_window))
 
     main_window.lbp_add_process_button.clicked.connect(lambda: add_process(main_window))
 
@@ -20,10 +22,9 @@ def configure_texture_menu_connections(main_window):
 
     main_window.lbp_symmetric_points_information_button.clicked.connect(lambda: show_symmetric_points_info())
     main_window.lbp_method_information_button.clicked.connect(lambda: show_method_info())
-
     main_window.fractal_dimension_apply_button.clicked.connect(lambda: generate_fractal_dimension(main_window))
-
     main_window.texture_profile_apply_button.clicked.connect(lambda: generate_profile_texture())
+    main_window.texture_heatmap_apply_button.clicked.connect(lambda: generate_heatmap())
 
 
 def lbp_options(main_window):
@@ -47,6 +48,13 @@ def texture_profile_options(main_window):
     return
 
 
+def texture_heatmap_options(main_window):
+    page = main_window.texture_heatmap_options
+    stacked_feature_windows = main_window.stacked_feature_windows
+    stacked_feature_windows.setCurrentWidget(page)
+    return
+
+
 def generate_fractal_dimension(main_window):
     project_mastermind = Project_mastermind.get_instance()
     current_image_array = project_mastermind.get_last_image()
@@ -62,8 +70,15 @@ def generate_profile_texture():
     current_image_array = project_mastermind.get_last_image()
 
     line_region = Region()
-    profile_texture.fractal_dimension_line(current_image_array, line_region.get_region(),
-                                           current_image_array.shape[0], current_image_array.shape[1])
+    profile_texture.fractal_dimension_line(current_image_array, line_region.get_region())
+
+
+def generate_heatmap():
+    project_mastermind = Project_mastermind.get_instance()
+    current_image_array = project_mastermind.get_last_image()
+
+    texture_heatmap.texture_heatmap(current_image_array)
+
 
 def show_lbp(main_window):
     project_mastermind = Project_mastermind.get_instance()

@@ -961,6 +961,39 @@
       </property>
      </widget>
     </widget>
+    <widget class="QWidget" name="texture_heatmap_options">
+     <widget class="QLabel" name="texture_heatmap_title">
+      <property name="geometry">
+       <rect>
+        <x>20</x>
+        <y>40</y>
+        <width>261</width>
+        <height>41</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>18</pointsize>
+       </font>
+      </property>
+      <property name="text">
+       <string>Mapa de calor:</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="texture_heatmap_apply_button">
+      <property name="geometry">
+       <rect>
+        <x>40</x>
+        <y>100</y>
+        <width>141</width>
+        <height>41</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Aplicar</string>
+      </property>
+     </widget>
+    </widget>
     <widget class="QWidget" name="adaptive_threshold_options">
      <widget class="QLabel" name="adaptive_threshold_title">
       <property name="geometry">
@@ -2052,6 +2085,7 @@
     <addaction name="lbp_menu_option"/>
     <addaction name="fractal_dimension_menu_option"/>
     <addaction name="texture_profile_menu_option"/>
+    <addaction name="texture_heatmap_menu_option"/>
    </widget>
    <widget class="QMenu" name="filters_menu">
     <property name="title">
