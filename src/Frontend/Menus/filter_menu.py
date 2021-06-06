@@ -1,6 +1,5 @@
 from src.Backend.Image_processing_algorithms.filters import anisotropic_filter as anisotropic_filter_functions
 from src.Backend.Image_processing_algorithms.filters import bilateral_filter as bilateral_filter_functions
-from src.Classes.Image_wrapper import Image_wrapper
 from src.Classes.Methods.Anisotropic_Filter import Anisotropic_Filter
 from src.Classes.Methods.Bilateral_Filter import Bilateral_Filter
 from src.Classes.Project_mastermind import Project_mastermind

@@ -8,6 +8,7 @@ from PIL import Image
 
 def configure_border_detection_menu_connections(main_window):
     main_window.mgac_border_detection_menu_option.triggered.connect(lambda: load_mgac_options(main_window))
+    main_window.mgac_border_detection_test_menu_option.triggered.connect(lambda : mgac_only_cell(main_window))
     main_window.apply_mgac_button.clicked.connect(lambda: mgac(main_window))
 
 
@@ -34,5 +35,14 @@ def mgac(main_window):
                                                 threshold, smoothing, balloon, alpha, sigma)
     mgac_method = Mgac(polygon_region.points, iterations, threshold, smoothing, balloon, alpha, sigma)
     image_wrapper = Image_wrapper(borders_image, mgac_method)
+    project_mastermind.add_image_process(image_wrapper)
+    main_window.image_viewer.set_screen_image(image_wrapper)
+
+
+def mgac_only_cell(main_window):
+    project_mastermind = Project_mastermind.get_instance()
+    image_array = project_mastermind.get_last_image()
+    cell_image = mgac_functions.mgac_only_cell(image_array)
+    image_wrapper = Image_wrapper(cell_image)
     project_mastermind.add_image_process(image_wrapper)
     main_window.image_viewer.set_screen_image(image_wrapper)
