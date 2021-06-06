@@ -3,7 +3,13 @@ from cv2 import cv2
 
 
 def normalize(array):
-    array2 = array - array.min()
+    array2 = array - 15
+    result = array2 * (255.0 / array2.max())
+    return result.astype(np.uint8)
+
+
+def normalize_with_min(array, min_value):
+    array2 = array - min_value
     result = array2 * (255.0 / array2.max())
     return result.astype(np.uint8)
 
@@ -15,7 +21,6 @@ def normalize_from_pil_image(pil_image):
     dst = np.zeros((image_height, image_width))
     dst = cv2.normalize(image_data, dst, 0, 255, cv2.NORM_MINMAX, cv2.CV_8UC1)
     return dst
-
 
 
 def is_RGB(image_array):

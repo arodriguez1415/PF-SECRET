@@ -52,7 +52,7 @@ def fractal_dimension_line(image, region):
 def calculate_texture_in_line(image, x_coordinates, y_coordinates, all_points,
                               all_fractal_dimensions, all_entropy):
     index = 0
-    diff = 7
+    diff = 3
     width = image.shape[0]
     height = image.shape[1]
 
