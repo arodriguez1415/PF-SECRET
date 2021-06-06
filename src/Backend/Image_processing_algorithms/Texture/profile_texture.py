@@ -20,7 +20,7 @@ def fractal_dimension_static_wrapper(image, start_x, start_y, end_x, end_y, widt
 
     entropy = skimage.measure.shannon_entropy(float_piece)
     float_piece.shape += (1,)
-    fractal_dimension = fractal_dimension_github(float_piece, n_offsets=10)[0]
+    fractal_dimension = fractal_dimension_github(float_piece, n_offsets=10)
     return entropy, fractal_dimension
 
 
@@ -52,7 +52,7 @@ def fractal_dimension_line(image, region):
 def calculate_texture_in_line(image, x_coordinates, y_coordinates, all_points,
                               all_fractal_dimensions, all_entropy):
     index = 0
-    diff = 3
+    diff = 7
     width = image.shape[0]
     height = image.shape[1]
 
@@ -186,58 +186,4 @@ def fractal_dimension_github(array, max_box_size=None, min_box_size=1, n_samples
     scales = scales[:len(Ns)]
     # perform fit
     coeffs = np.polyfit(np.log(1 / scales), np.log(Ns), 1)
-
-    # make plot
-    # if plot:
-    #     fig, ax = plt.subplots(figsize=(8, 6))
-    #     ax.scatter(np.log(1 / scales), np.log(np.unique(Ns)), c="teal", label="Measured ratios")
-    #     ax.set_ylabel("$\log N(\epsilon)$")
-    #     ax.set_xlabel("$\log 1/ \epsilon$")
-    #     fitted_y_vals = np.polyval(coeffs, np.log(1 / scales))
-    #     ax.plot(np.log(1 / scales), fitted_y_vals, "k--", label=f"Fit: {np.round(coeffs[0], 3)}X+{coeffs[1]}")
-    #     ax.legend();
-    return [coeffs[0]]
-
-
-def fractal_dimension_stackoverflow(Z):
-    # Only for 2d image
-    assert (len(Z.shape) == 2)
-    threshold = np.mean(Z)
-
-    # From https://github.com/rougier/numpy-100 (#87)
-    # How to get the block-sum ?
-    # https://gist.github.com/viveksck/1110dfca01e4ec2c608515f0d5a5b1d1 explanation
-
-    def boxcount(Z, k):
-        x = np.arange(0, Z.shape[0], k)
-        y = np.arange(0, Z.shape[1], k)
-        first_reduce = np.add.reduceat(Z, x, axis=0)
-        S = np.add.reduceat(first_reduce, y, axis=1)
-
-        # We count non-empty (0) and non-full boxes (k*k)
-        return len(np.where((S > 0) & (S < k * k))[0])
-
-    # Transform Z into a binary array
-    Z = (Z < threshold)
-    # print(threshold)
-
-    # Minimal dimension of image
-    p = min(Z.shape)
-
-    # Greatest power of 2 less than or equal to p
-    n = 2 ** np.floor(np.log(p) / np.log(2))
-
-    # Extract the exponent
-    n = int(np.log(n) / np.log(2))
-
-    # Build successive box sizes (from 2**n down to 2**1)
-    sizes = 2 ** np.arange(n, 1, -1)
-
-    # Actual box counting with decreasing size
-    counts = []
-    for size in sizes:
-        counts.append(boxcount(Z, size))
-
-    # Fit the successive log(sizes) with log (counts)
-    coeffs = np.polyfit(np.log(sizes), np.log(counts), 1)
-    return [-coeffs[0], threshold]
+    return coeffs[0]
