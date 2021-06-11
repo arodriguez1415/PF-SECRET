@@ -50,3 +50,16 @@ PERINUCLEAR_MOVEMENT_HEADER = "Perinúcleo - Movimiento"
 NUCLEAR_MOVEMENT_HEADER = "Núcleo - Movimiento"
 
 FRAMES_HEADER = "Frames"
+
+# --- Texture classification---
+
+# Methods
+
+MEAN_SHIFT = "Mean shift"
+
+# Descriptors
+
+GLCM_MEAN = "Mean"
+GLCM_ENTROPY = "Entropy"
+GLCM_HOMOGENEITY = "Homogeneity"
+GLCM_DISSIMILARITY = "Dissimilarity"

@@ -8,7 +8,6 @@ from PIL import Image
 
 def configure_border_detection_menu_connections(main_window):
     main_window.mgac_border_detection_menu_option.triggered.connect(lambda: load_mgac_options(main_window))
-    main_window.mgac_border_detection_test_menu_option.triggered.connect(lambda : mgac_only_cell(main_window))
     main_window.apply_mgac_button.clicked.connect(lambda: mgac(main_window))
 
 

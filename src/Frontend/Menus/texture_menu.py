@@ -1,10 +1,11 @@
 import src.Backend.Image_processing_algorithms.Texture.lbp as texture_lbp
-from src.Backend.Image_processing_algorithms.Texture import fractal_dimention
+from src.Backend.Image_processing_algorithms.Texture import fractal_dimention, glcm
 from src.Backend.Image_processing_algorithms.Texture import profile_texture
 from src.Backend.Image_processing_algorithms.Texture import texture_heatmap
 from src.Classes.Image_wrapper import Image_wrapper
 from src.Classes.Project_mastermind import Project_mastermind
 from src.Classes.Region import Region
+from src.Constants import algorithm_constants
 from src.Frontend.Utils.message import show_message
 
 
@@ -12,7 +13,9 @@ def configure_texture_menu_connections(main_window):
     main_window.lbp_menu_option.triggered.connect(lambda: lbp_options(main_window))
     main_window.fractal_dimension_menu_option.triggered.connect(lambda: fractal_dimension_options(main_window))
     main_window.texture_profile_menu_option.triggered.connect(lambda: texture_profile_options(main_window))
-    main_window.texture_heatmap_menu_option.triggered.connect(lambda: texture_heatmap_options(main_window))
+    # main_window.texture_heatmap_menu_option.triggered.connect(lambda: texture_heatmap_options(main_window))
+    main_window.texture_classification_menu_option.triggered.connect(
+        lambda: texture_classification_options(main_window))
 
     main_window.lbp_add_process_button.clicked.connect(lambda: add_process(main_window))
 
@@ -25,6 +28,7 @@ def configure_texture_menu_connections(main_window):
     main_window.fractal_dimension_apply_button.clicked.connect(lambda: generate_fractal_dimension(main_window))
     main_window.texture_profile_apply_button.clicked.connect(lambda: generate_profile_texture())
     main_window.texture_heatmap_apply_button.clicked.connect(lambda: generate_heatmap())
+    main_window.texture_classification_apply_button.clicked.connect(lambda: classify_texture(main_window))
 
 
 def lbp_options(main_window):
@@ -50,6 +54,13 @@ def texture_profile_options(main_window):
 
 def texture_heatmap_options(main_window):
     page = main_window.texture_heatmap_options
+    stacked_feature_windows = main_window.stacked_feature_windows
+    stacked_feature_windows.setCurrentWidget(page)
+    return
+
+
+def texture_classification_options(main_window):
+    page = main_window.texture_classification_options
     stacked_feature_windows = main_window.stacked_feature_windows
     stacked_feature_windows.setCurrentWidget(page)
     return
@@ -105,18 +116,48 @@ def add_process(main_window):
 def show_symmetric_points_info():
     show_message("Número de puntos de ajuste vecinos circularmente simétricos (cuantificación del espacio angular)")
 
+
 def show_method_info():
     default = "Predeterminado: patrón binario local original que es una escala de " + \
-    "grises pero no invariante de rotación.\n\n"
+              "grises pero no invariante de rotación.\n\n"
 
     ror = "Ror: extensión de la implementación predeterminada que es la escala de grises e " + \
-    "invariante de rotación.\n\n"
+          "invariante de rotación.\n\n"
 
     uniforme = "Uniforme: invariancia de rotación mejorada con patrones uniformes y " + \
-    "cuantificación más fina del espacio angular que es invariante en la escala de grises y la rotación.\n\n"
+               "cuantificación más fina del espacio angular que es invariante en la escala de grises y la rotación.\n\n"
 
     nri_uniform = "Nri_uniform: variante de patrones uniformes no invariantes en rotación " + \
-    "que es solo invariante en la escala de grises.\n"
+                  "que es solo invariante en la escala de grises.\n"
 
     show_message(default + ror + uniforme + nri_uniform)
 
+
+def classify_texture(main_window):
+    project_mastermind = Project_mastermind.get_instance()
+    current_image_array = project_mastermind.get_last_image()
+    method_box = main_window.texture_classification_method_combobox.currentText()
+    descriptors_labels = get_descriptors_checked(main_window)
+    matrix_array_descriptors = glcm.glcm_algorithm(current_image_array, descriptors_labels)
+
+
+def get_descriptors_checked(main_window):
+    descriptors_labels = []
+
+    # Mean descriptor
+    if main_window.texture_classification_mean_descriptor_checkbox.isChecked():
+        descriptors_labels.append(algorithm_constants.GLCM_MEAN)
+
+    # Entropy descriptor
+    if main_window.texture_classification_entropy_descriptor_checkbox.isChecked():
+        descriptors_labels.append(algorithm_constants.GLCM_ENTROPY)
+
+    # Homogeneity descriptor
+    if main_window.texture_classification_homogeneity_descriptor_checkbox.isChecked():
+        descriptors_labels.append(algorithm_constants.GLCM_HOMOGENEITY)
+
+    # Dissimilarity descriptor
+    if main_window.texture_classification_dissimilarity_descriptor_checkbox.isChecked():
+        descriptors_labels.append(algorithm_constants.GLCM_DISSIMILARITY)
+
+    return descriptors_labels
