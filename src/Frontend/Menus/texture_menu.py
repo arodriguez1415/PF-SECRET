@@ -2,6 +2,7 @@ import src.Backend.Image_processing_algorithms.Texture.lbp as texture_lbp
 from src.Backend.Image_processing_algorithms.Texture import fractal_dimention, glcm
 from src.Backend.Image_processing_algorithms.Texture import profile_texture
 from src.Backend.Image_processing_algorithms.Texture import texture_heatmap
+from src.Backend.Image_processing_algorithms.Texture.mean_shift import mean_shift
 from src.Classes.Image_wrapper import Image_wrapper
 from src.Classes.Project_mastermind import Project_mastermind
 from src.Classes.Region import Region
@@ -139,6 +140,7 @@ def classify_texture(main_window):
     method_box = main_window.texture_classification_method_combobox.currentText()
     descriptors_labels = get_descriptors_checked(main_window)
     matrix_array_descriptors = glcm.glcm_algorithm(current_image_array, descriptors_labels)
+    mean_shift(matrix_array_descriptors[1])
 
 
 def get_descriptors_checked(main_window):

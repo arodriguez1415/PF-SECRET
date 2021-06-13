@@ -2,6 +2,7 @@ import numpy as np
 import cv2
 import matplotlib.pyplot as plt
 
+from src.Backend.Image_processing_algorithms.Operations.common_operations import bgr_to_rgb
 from src.Constants import algorithm_constants
 
 
@@ -17,11 +18,11 @@ def glcm_algorithm(image, descriptors_labels):
         }.get(descriptor)
 
         normalized_descriptor_matrix = normalize(descriptor_matrix)
+        bgr_coloured_matrix = cv2.applyColorMap(normalized_descriptor_matrix, cv2.COLORMAP_HOT)
+        rgb_coloured_matrix = bgr_to_rgb(bgr_coloured_matrix)
+        matrix_array_descriptors.append(rgb_coloured_matrix)
 
-        fig = plt.figure(figsize=(5, 5))
-        plt.tick_params(labelbottom=False, labelleft=False)
-        plt.imshow(normalized_descriptor_matrix, cmap='viridis', vmin=0, vmax=255)
-        plt.show()
+    return matrix_array_descriptors
 
 
 def normalize(array):
