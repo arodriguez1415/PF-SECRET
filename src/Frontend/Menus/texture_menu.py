@@ -1,8 +1,9 @@
+from src.Backend.Image_processing_algorithms.Archive_manipulation import dataframe_file_manipulation
 import src.Backend.Image_processing_algorithms.Texture.lbp as texture_lbp
 from src.Backend.Image_processing_algorithms.Texture import fractal_dimention, glcm
 from src.Backend.Image_processing_algorithms.Texture import profile_texture
 from src.Backend.Image_processing_algorithms.Texture import texture_heatmap
-from src.Backend.Image_processing_algorithms.Texture.mean_shift import mean_shift
+from src.Backend.Image_processing_algorithms.Texture import unsupervised_learning_methods
 from src.Classes.Image_wrapper import Image_wrapper
 from src.Classes.Project_mastermind import Project_mastermind
 from src.Classes.Region import Region
@@ -139,8 +140,11 @@ def classify_texture(main_window):
     current_image_array = project_mastermind.get_last_image()
     method_box = main_window.texture_classification_method_combobox.currentText()
     descriptors_labels = get_descriptors_checked(main_window)
-    matrix_array_descriptors = glcm.glcm_algorithm(current_image_array, descriptors_labels)
-    mean_shift(matrix_array_descriptors[1])
+    list_descriptors_dict = glcm.glcm_algorithm(current_image_array, descriptors_labels)
+    dataframe = dataframe_file_manipulation.create_dataframe_from_descriptors(list_descriptors_dict)
+    classified_image = unsupervised_learning_methods.k_means(dataframe)
+    image_wrapper = Image_wrapper(classified_image)
+    main_window.image_viewer.set_screen_image(image_wrapper)
 
 
 def get_descriptors_checked(main_window):

@@ -1,6 +1,8 @@
 import numpy as np
 from sklearn.cluster import estimate_bandwidth, MeanShift
 import matplotlib.pyplot as plt
+from sklearn.datasets import make_blobs
+
 
 def mean_shift(image_array):
     flat_image = np.reshape(image_array, [-1, 3])
@@ -23,5 +25,3 @@ def mean_shift(image_array):
     plt.axis('off')
 
     plt.show()
-
-def mean_shift_scatter()

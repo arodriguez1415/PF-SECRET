@@ -7,22 +7,27 @@ from src.Constants import algorithm_constants
 
 
 def glcm_algorithm(image, descriptors_labels):
-    matrix_array_descriptors = []
+    list_descriptors_dict = []
 
-    for descriptor in descriptors_labels:
+    for descriptor_label in descriptors_labels:
+        descriptors_dict = {}
         descriptor_matrix = {
             algorithm_constants.GLCM_MEAN: fast_glcm_mean(image),
             algorithm_constants.GLCM_ENTROPY: fast_glcm_entropy(image),
             algorithm_constants.GLCM_HOMOGENEITY: fast_glcm_homogeneity(image),
             algorithm_constants.GLCM_DISSIMILARITY: fast_glcm_dissimilarity(image)
-        }.get(descriptor)
+        }.get(descriptor_label)
 
         normalized_descriptor_matrix = normalize(descriptor_matrix)
-        bgr_coloured_matrix = cv2.applyColorMap(normalized_descriptor_matrix, cv2.COLORMAP_HOT)
-        rgb_coloured_matrix = bgr_to_rgb(bgr_coloured_matrix)
-        matrix_array_descriptors.append(rgb_coloured_matrix)
+        descriptors_dict["data"] = normalized_descriptor_matrix
+        descriptors_dict["label"] = descriptor_label
+        list_descriptors_dict.append(descriptors_dict)
 
-    return matrix_array_descriptors
+        #show_histogram(normalized_descriptor_matrix)
+        #bgr_coloured_matrix = cv2.applyColorMap(normalized_descriptor_matrix, cv2.COLORMAP_HOT)
+        #show_coloured_image(bgr_coloured_matrix)
+
+    return list_descriptors_dict
 
 
 def normalize(array):
@@ -31,6 +36,19 @@ def normalize(array):
         return array.astype(np.uint8)
     result = array2 * (255.0 / array2.max())
     return result.astype(np.uint8)
+
+
+def show_coloured_image(bgr_coloured_matrix):
+    plt.imshow(bgr_coloured_matrix)
+    plt.show()
+
+
+def show_histogram(image_texture_descriptor):
+    dst = cv2.calcHist(image_texture_descriptor, [0], None, [256], [0, 256])
+
+    plt.hist(image_texture_descriptor.ravel(), 256, [0, 256])
+    plt.title('Histogram for gray scale image')
+    plt.show()
 
 
 def fast_glcm(img, vmin=0, vmax=255, nbit=8, kernel_size=5):
