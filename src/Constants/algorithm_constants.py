@@ -56,6 +56,8 @@ FRAMES_HEADER = "Frames"
 # Methods
 
 MEAN_SHIFT = "Mean shift"
+K_MEANS = "K means"
+KOHONEN = "Kohonen"
 
 # Descriptors
 

@@ -1056,6 +1056,16 @@
         <string>Mean shift</string>
        </property>
       </item>
+      <item>
+       <property name="text">
+        <string>Kohonen</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>K means</string>
+       </property>
+      </item>
      </widget>
      <widget class="QLabel" name="texture_classification_descriptors_title">
       <property name="geometry">

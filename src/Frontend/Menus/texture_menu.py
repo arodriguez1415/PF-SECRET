@@ -138,11 +138,13 @@ def show_method_info():
 def classify_texture(main_window):
     project_mastermind = Project_mastermind.get_instance()
     current_image_array = project_mastermind.get_last_image()
+    clusters_quantity = 2
     method_box = main_window.texture_classification_method_combobox.currentText()
     descriptors_labels = get_descriptors_checked(main_window)
     list_descriptors_dict = glcm.glcm_algorithm(current_image_array, descriptors_labels)
     dataframe = dataframe_file_manipulation.create_dataframe_from_descriptors(list_descriptors_dict)
-    classified_image = unsupervised_learning_methods.k_means(dataframe)
+    method = unsupervised_learning_methods.get_method(method_box)
+    classified_image = method(dataframe, clusters_quantity)
     image_wrapper = Image_wrapper(classified_image)
     main_window.image_viewer.set_screen_image(image_wrapper)
 
