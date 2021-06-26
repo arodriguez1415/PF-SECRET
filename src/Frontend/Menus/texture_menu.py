@@ -138,7 +138,7 @@ def show_method_info():
 def classify_texture(main_window):
     project_mastermind = Project_mastermind.get_instance()
     current_image_array = project_mastermind.get_last_image()
-    clusters_quantity = 2
+    clusters_quantity = 4
     method_box = main_window.texture_classification_method_combobox.currentText()
     descriptors_labels = get_descriptors_checked(main_window)
     list_descriptors_dict = glcm.glcm_algorithm(current_image_array, descriptors_labels)
