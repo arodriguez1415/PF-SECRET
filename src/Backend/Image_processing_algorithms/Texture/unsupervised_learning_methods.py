@@ -1,8 +1,9 @@
 from minisom import MiniSom
-from sklearn.cluster import KMeans, MeanShift
+from sklearn.cluster import KMeans, MeanShift, SpectralClustering, AgglomerativeClustering
 import hdbscan
 import numpy as np
 from sklearn.model_selection import train_test_split
+from sklearn.svm import LinearSVC
 
 from src.Backend.Image_processing_algorithms.Archive_manipulation.dataframe_file_manipulation import \
     normalize_dataframe_values
@@ -39,7 +40,7 @@ def get_method(method_string):
         algorithm_constants.MEAN_SHIFT: mean_shift,
         algorithm_constants.KOHONEN: self_organized_map,
         algorithm_constants.K_MEANS: k_means,
-        algorithm_constants.HDBSCAN: HDBScan
+        algorithm_constants.HDBSCAN: HDBScan,
     }
     return switcher.get(method_string, "nothing")
 
@@ -79,9 +80,9 @@ def self_organized_map(dataframe, clusters_quantity=2):
     data_to_use = normalize_dataframe_values(data_to_use,
                                              normalize_method=algorithm_constants.FROM_0_TO_1)
 
-    network_shape = (25, 25)
+    network_shape = (10, 10)
     columns_length = len(train_data_to_use.columns)
-    som = MiniSom(network_shape[0], network_shape[1], columns_length, sigma=0.05, learning_rate=0.2)
+    som = MiniSom(network_shape[0], network_shape[1], columns_length, sigma=0.3, learning_rate=0.5)
     som.train(train_data_to_use.to_numpy(), 5, random_order=True)  # iteration = 100
     winner_coordinates = np.array([som.winner(x) for x in data_to_use.to_numpy()]).T
 
@@ -101,6 +102,7 @@ def HDBScan(dataframe, clusters_quantity=2):
                                              normalize_method=algorithm_constants.FROM_0_TO_255)
     hsdbscan_clusterer = hdbscan.HDBSCAN(min_cluster_size=clusters_quantity)
     hsdbscan_clusterer.fit(data_to_use)
+
     dataframe["classification"] = hsdbscan_clusterer.labels_
 
     print(len(hsdbscan_clusterer.labels_))
@@ -108,3 +110,4 @@ def HDBScan(dataframe, clusters_quantity=2):
     print(dict(zip(unique, counts)))
 
     return build_classified_image(dataframe)
+
