@@ -1,5 +1,6 @@
 from minisom import MiniSom
 from sklearn.cluster import KMeans, MeanShift
+import hdbscan
 import numpy as np
 from sklearn.model_selection import train_test_split
 
@@ -37,7 +38,8 @@ def get_method(method_string):
     switcher = {
         algorithm_constants.MEAN_SHIFT: mean_shift,
         algorithm_constants.KOHONEN: self_organized_map,
-        algorithm_constants.K_MEANS: k_means
+        algorithm_constants.K_MEANS: k_means,
+        algorithm_constants.HDBSCAN: HDBScan
     }
     return switcher.get(method_string, "nothing")
 
@@ -52,7 +54,7 @@ def k_means(dataframe, clusters_quantity=3):
 
 
 def mean_shift(dataframe, clusters_quantity=2):
-    training_data, test_data = train_test_split(dataframe, train_size=0.01)
+    training_data, test_data = train_test_split(dataframe, train_size=0.05)
     train_data_to_use = drop_positions(training_data)
     train_data_to_use = normalize_dataframe_values(train_data_to_use,
                                                    normalize_method=algorithm_constants.FROM_0_TO_255)
@@ -72,10 +74,10 @@ def self_organized_map(dataframe, clusters_quantity=2):
     training_data, test_data = train_test_split(dataframe, train_size=1)
     train_data_to_use = drop_positions(training_data)
     train_data_to_use = normalize_dataframe_values(train_data_to_use,
-                                                   normalize_method=algorithm_constants.FROM_0_TO_255)
+                                                   normalize_method=algorithm_constants.FROM_0_TO_1)
     data_to_use = drop_positions(dataframe)
     data_to_use = normalize_dataframe_values(data_to_use,
-                                             normalize_method=algorithm_constants.FROM_0_TO_255)
+                                             normalize_method=algorithm_constants.FROM_0_TO_1)
 
     network_shape = (25, 25)
     columns_length = len(train_data_to_use.columns)
@@ -86,9 +88,23 @@ def self_organized_map(dataframe, clusters_quantity=2):
     clusters_class = np.ravel_multi_index(winner_coordinates, network_shape)
     dataframe["classification"] = clusters_class
 
+    print(len(clusters_class))
     unique, counts = np.unique(clusters_class, return_counts=True)
+    print(dict(zip(unique, counts)))
 
-    #print(len(clusters_class))
-    #print(dict(zip(unique, counts)))
+    return build_classified_image(dataframe)
+
+
+def HDBScan(dataframe, clusters_quantity=2):
+    data_to_use = drop_positions(dataframe)
+    data_to_use = normalize_dataframe_values(data_to_use,
+                                             normalize_method=algorithm_constants.FROM_0_TO_255)
+    hsdbscan_clusterer = hdbscan.HDBSCAN(min_cluster_size=clusters_quantity)
+    hsdbscan_clusterer.fit(data_to_use)
+    dataframe["classification"] = hsdbscan_clusterer.labels_
+
+    print(len(hsdbscan_clusterer.labels_))
+    unique, counts = np.unique(hsdbscan_clusterer.labels_, return_counts=True)
+    print(dict(zip(unique, counts)))
 
     return build_classified_image(dataframe)

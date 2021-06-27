@@ -1053,17 +1053,22 @@
       </property>
       <item>
        <property name="text">
+        <string>K means</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>HDBScan</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
         <string>Mean shift</string>
        </property>
       </item>
       <item>
        <property name="text">
         <string>Kohonen</string>
-       </property>
-      </item>
-      <item>
-       <property name="text">
-        <string>K means</string>
        </property>
       </item>
      </widget>

@@ -63,6 +63,7 @@ FRAMES_HEADER = "Frames"
 MEAN_SHIFT = "Mean shift"
 K_MEANS = "K means"
 KOHONEN = "Kohonen"
+HDBSCAN = "HDBScan"
 
 # Descriptors
 
