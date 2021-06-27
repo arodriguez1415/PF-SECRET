@@ -1,5 +1,10 @@
 import cv2 as cv
 
+# --- Normalize options ---
+
+FROM_0_TO_255 = 255
+FROM_0_TO_1 = 1
+
 # --- LBP methods ---
 
 # original local binary pattern which is gray scale but not rotation invariant.

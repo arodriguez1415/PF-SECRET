@@ -23,6 +23,14 @@ def normalize_from_pil_image(pil_image):
     return dst
 
 
+def normalize_to_range(array, max_value=255):
+    array2 = array - array.min()
+    if array2.min() == array2.max():
+        return array.astype(np.uint8)
+    result = array2 * (max_value / array2.max())
+    return result.astype(np.uint8)
+
+
 def is_RGB(image_array):
     dimensions = len(image_array.shape)
     if dimensions == 2:

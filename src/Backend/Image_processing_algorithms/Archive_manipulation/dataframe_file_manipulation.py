@@ -3,7 +3,10 @@ from tkinter import filedialog, Tk
 import pandas as pd
 import numpy as np
 
+from src.Backend.Image_processing_algorithms.Operations.common_operations import normalize_to_range
 from src.Constants import configuration_constants
+from src.Constants import algorithm_constants
+
 
 
 def get_dataframe_path():
@@ -56,6 +59,18 @@ def create_dataframe_from_descriptors(list_descriptors_dict):
     dataframe_dictionary["col"] = position_col_list
 
     dataframe = pd.DataFrame(dataframe_dictionary)
+
+    return dataframe
+
+
+def normalize_dataframe_values(dataframe, normalize_method=algorithm_constants.FROM_0_TO_255):
+    dataframe_column_names = list(dataframe.columns)
+
+    for col_index in range(0, len(dataframe_column_names)):
+        col_name = dataframe_column_names[col_index]
+        values = dataframe[col_name].to_numpy()
+        normalized_values = normalize_to_range(values, max_value=normalize_method)
+        dataframe[col_name] = normalized_values
 
     return dataframe
 

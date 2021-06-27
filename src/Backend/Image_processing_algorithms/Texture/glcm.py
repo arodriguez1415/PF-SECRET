@@ -2,7 +2,7 @@ import numpy as np
 import cv2
 import matplotlib.pyplot as plt
 
-from src.Backend.Image_processing_algorithms.Operations.common_operations import bgr_to_rgb
+from src.Backend.Image_processing_algorithms.Operations.common_operations import bgr_to_rgb, normalize_to_range
 from src.Constants import algorithm_constants
 
 
@@ -18,8 +18,7 @@ def glcm_algorithm(image, descriptors_labels):
             algorithm_constants.GLCM_DISSIMILARITY: fast_glcm_dissimilarity(image)
         }.get(descriptor_label)
 
-        normalized_descriptor_matrix = normalize(descriptor_matrix)
-        descriptors_dict["data"] = normalized_descriptor_matrix
+        descriptors_dict["data"] = descriptor_matrix
         descriptors_dict["label"] = descriptor_label
         list_descriptors_dict.append(descriptors_dict)
 
@@ -28,14 +27,6 @@ def glcm_algorithm(image, descriptors_labels):
         #show_coloured_image(bgr_coloured_matrix)
 
     return list_descriptors_dict
-
-
-def normalize(array):
-    array2 = array - array.min()
-    if array2.min() == array2.max():
-        return array.astype(np.uint8)
-    result = array2 * (255.0 / array2.max())
-    return result.astype(np.uint8)
 
 
 def show_coloured_image(bgr_coloured_matrix):
