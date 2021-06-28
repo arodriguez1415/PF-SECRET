@@ -140,15 +140,10 @@ def classify_texture(main_window):
     current_image_array = project_mastermind.get_last_image()
     clusters_quantity = 5
     method_box = main_window.texture_classification_method_combobox.currentText()
-    glcm_descriptors_labels = get_descriptors_checked(main_window)
-
-    # TODO REPLACE
-    # entropy_descriptors_labels = get_entropy_checked(main_window)
-    # entropy_descriptors_labels = ["Shannon", "Local_Entropy"]
-    # entropy_descriptors_labels = ["Shannon"]
-
-    list_descriptors_dict = glcm.glcm_algorithm(current_image_array, glcm_descriptors_labels)
-    # list_descriptors_dict = entropy.entropy_algorithm(current_image_array, list_descriptors_dict, entropy_descriptors_labels)
+    descriptors_labels = get_descriptors_checked(main_window)
+    list_descriptors_dict = []
+    list_descriptors_dict = unsupervised_learning_methods.get_descriptors(list_descriptors_dict, current_image_array,
+                                                                          descriptors_labels)
     dataframe = dataframe_file_manipulation.create_dataframe_from_descriptors(list_descriptors_dict)
 
     method = unsupervised_learning_methods.get_method(method_box)
@@ -175,5 +170,13 @@ def get_descriptors_checked(main_window):
     # Dissimilarity descriptor
     if main_window.texture_classification_dissimilarity_descriptor_checkbox.isChecked():
         descriptors_labels.append(algorithm_constants.GLCM_DISSIMILARITY)
+
+    # Shannon entropy descriptor
+    if main_window.texture_classification_shannon_entropy_descriptor_checkbox.isChecked():
+        descriptors_labels.append(algorithm_constants.SHANNON_ENTROPY)
+
+    # Local entropy descriptor
+    if main_window.texture_classification_local_entropy_descriptor_checkbox.isChecked():
+        descriptors_labels.append(algorithm_constants.LOCAL_ENTROPY)
 
     return descriptors_labels

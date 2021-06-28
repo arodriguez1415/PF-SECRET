@@ -3,12 +3,36 @@ from sklearn.cluster import KMeans, MeanShift, SpectralClustering, Agglomerative
 import hdbscan
 import numpy as np
 from sklearn.model_selection import train_test_split
-from sklearn.svm import LinearSVC
 
+from src.Backend.Image_processing_algorithms.Texture import glcm
+from src.Backend.Image_processing_algorithms.Texture import entropy
 from src.Backend.Image_processing_algorithms.Archive_manipulation.dataframe_file_manipulation import \
     normalize_dataframe_values
 from src.Backend.Image_processing_algorithms.Operations.common_operations import normalize_to_range
 from src.Constants import algorithm_constants
+
+
+def get_descriptors(list_descriptors_dict, image, descriptors_labels):
+    for descriptor_label in descriptors_labels:
+        print(descriptor_label)
+        descriptors_dict = {}
+        descriptor_matrix = {
+            algorithm_constants.GLCM_MEAN: glcm.fast_glcm_mean(image),
+            algorithm_constants.GLCM_ENTROPY: glcm.fast_glcm_entropy(image),
+            algorithm_constants.GLCM_HOMOGENEITY: glcm.fast_glcm_homogeneity(image),
+            algorithm_constants.GLCM_DISSIMILARITY: glcm.fast_glcm_dissimilarity(image),
+            # algorithm_constants.SHANNON_ENTROPY: entropy.calculate_shannon_entropy(image),
+            # algorithm_constants.LOCAL_ENTROPY: entropy.calculate_local_entropy(image),
+        }.get(descriptor_label)
+        descriptors_dict["data"] = descriptor_matrix
+        descriptors_dict["label"] = descriptor_label
+        list_descriptors_dict.append(descriptors_dict)
+
+        #show_histogram(normalized_descriptor_matrix)
+        #bgr_coloured_matrix = cv2.applyColorMap(normalized_descriptor_matrix, cv2.COLORMAP_HOT)
+        #show_coloured_image(bgr_coloured_matrix)
+
+    return list_descriptors_dict
 
 
 def drop_positions(data):
@@ -57,8 +81,9 @@ def k_means(dataframe, clusters_quantity=3):
 
 def reorganize_clusters(clusters_class):
     cluster_centers = []
-
+    np.set_printoptions(suppress=True)
     for centers in clusters_class.cluster_centers_:
+        print(centers)
         cluster_centers.append(np.sum(centers))
 
     index = np.argsort(cluster_centers)

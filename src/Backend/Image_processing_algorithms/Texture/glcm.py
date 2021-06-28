@@ -2,32 +2,6 @@ import numpy as np
 import cv2
 import matplotlib.pyplot as plt
 
-from src.Backend.Image_processing_algorithms.Operations.common_operations import bgr_to_rgb, normalize_to_range
-from src.Constants import algorithm_constants
-
-
-def glcm_algorithm(image, descriptors_labels):
-    list_descriptors_dict = []
-
-    for descriptor_label in descriptors_labels:
-        descriptors_dict = {}
-        descriptor_matrix = {
-            algorithm_constants.GLCM_MEAN: fast_glcm_mean(image),
-            algorithm_constants.GLCM_ENTROPY: fast_glcm_entropy(image),
-            algorithm_constants.GLCM_HOMOGENEITY: fast_glcm_homogeneity(image),
-            algorithm_constants.GLCM_DISSIMILARITY: fast_glcm_dissimilarity(image)
-        }.get(descriptor_label)
-
-        descriptors_dict["data"] = descriptor_matrix
-        descriptors_dict["label"] = descriptor_label
-        list_descriptors_dict.append(descriptors_dict)
-
-        #show_histogram(normalized_descriptor_matrix)
-        #bgr_coloured_matrix = cv2.applyColorMap(normalized_descriptor_matrix, cv2.COLORMAP_HOT)
-        #show_coloured_image(bgr_coloured_matrix)
-
-    return list_descriptors_dict
-
 
 def show_coloured_image(bgr_coloured_matrix):
     plt.imshow(bgr_coloured_matrix)

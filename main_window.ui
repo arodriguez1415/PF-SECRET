@@ -1129,7 +1129,7 @@
        </font>
       </property>
       <property name="text">
-       <string>Entropía</string>
+       <string>Entropía GLCM</string>
       </property>
       <property name="checked">
        <bool>true</bool>
@@ -1181,7 +1181,7 @@
       <property name="geometry">
        <rect>
         <x>120</x>
-        <y>480</y>
+        <y>610</y>
         <width>151</width>
         <height>51</height>
        </rect>
@@ -1193,6 +1193,45 @@
       </property>
       <property name="text">
        <string>Clasificar</string>
+      </property>
+     </widget>
+     <widget class="QCheckBox" name="texture_classification_shannon_entropy_descriptor_checkbox">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>430</y>
+        <width>251</width>
+        <height>31</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>16</pointsize>
+       </font>
+      </property>
+      <property name="text">
+       <string>Entropía Shannon</string>
+      </property>
+     </widget>
+     <widget class="QCheckBox" name="texture_classification_local_entropy_descriptor_checkbox">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>470</y>
+        <width>251</width>
+        <height>31</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>16</pointsize>
+       </font>
+      </property>
+      <property name="text">
+       <string>Entropía local</string>
+      </property>
+      <property name="checked">
+       <bool>true</bool>
       </property>
      </widget>
     </widget>
