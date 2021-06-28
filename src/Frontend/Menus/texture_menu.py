@@ -9,7 +9,7 @@ from src.Classes.Project_mastermind import Project_mastermind
 from src.Classes.Region import Region
 from src.Constants import algorithm_constants
 from src.Frontend.Utils.message import show_message
-
+from src.Backend.Image_processing_algorithms.Texture import entropy
 
 def configure_texture_menu_connections(main_window):
     main_window.lbp_menu_option.triggered.connect(lambda: lbp_options(main_window))
@@ -140,9 +140,17 @@ def classify_texture(main_window):
     current_image_array = project_mastermind.get_last_image()
     clusters_quantity = 5
     method_box = main_window.texture_classification_method_combobox.currentText()
-    descriptors_labels = get_descriptors_checked(main_window)
-    list_descriptors_dict = glcm.glcm_algorithm(current_image_array, descriptors_labels)
+    glcm_descriptors_labels = get_descriptors_checked(main_window)
+
+    # TODO REPLACE
+    # entropy_descriptors_labels = get_entropy_checked(main_window)
+    # entropy_descriptors_labels = ["Shannon", "Local_Entropy"]
+    # entropy_descriptors_labels = ["Shannon"]
+
+    list_descriptors_dict = glcm.glcm_algorithm(current_image_array, glcm_descriptors_labels)
+    # list_descriptors_dict = entropy.entropy_algorithm(current_image_array, list_descriptors_dict, entropy_descriptors_labels)
     dataframe = dataframe_file_manipulation.create_dataframe_from_descriptors(list_descriptors_dict)
+
     method = unsupervised_learning_methods.get_method(method_box)
     classified_image = method(dataframe, clusters_quantity)
     image_wrapper = Image_wrapper(classified_image)
