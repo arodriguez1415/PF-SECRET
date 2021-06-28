@@ -59,10 +59,7 @@ def reorganize_clusters(clusters_class):
     cluster_centers = []
 
     for centers in clusters_class.cluster_centers_:
-        total = 0
-        for i in centers:
-            total += i
-        cluster_centers.append(total)
+        cluster_centers.append(np.sum(centers))
 
     index = np.argsort(cluster_centers)
 

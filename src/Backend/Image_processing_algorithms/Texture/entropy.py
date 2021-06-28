@@ -38,7 +38,6 @@ def calculate_shannon_entropy(image):
 def calculate_local_entropy(image):
     image = img_as_ubyte(image)
     entropy_result = entropy(image, disk(5))
-    print(entropy_result)
     return entropy_result
 
 
@@ -50,12 +49,7 @@ def entropy_algorithm(image, dict, entropy_descriptors_labels):
             algorithm_constants.LOCAL_ENTROPY: calculate_local_entropy(image),
         }.get(descriptor_label)
 
-        print(descriptor_matrix)
-
         descriptors_dict["data"] = descriptor_matrix
         descriptors_dict["label"] = descriptor_label
         dict.append(descriptors_dict)
-
-    print(dict)
-
     return dict
