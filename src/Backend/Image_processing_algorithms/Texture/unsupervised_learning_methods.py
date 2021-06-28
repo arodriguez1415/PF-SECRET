@@ -50,8 +50,27 @@ def k_means(dataframe, clusters_quantity=3):
     data_to_use = normalize_dataframe_values(data_to_use,
                                              normalize_method=algorithm_constants.FROM_0_TO_255)
     clusters_class = KMeans(n_clusters=clusters_quantity, random_state=0).fit(data_to_use)
-    dataframe["classification"] = clusters_class.labels_
+    dataframe["classification"] = reorganize_clusters(clusters_class)
+    # dataframe["classification"] = clusters_class.labels_
     return build_classified_image(dataframe)
+
+
+def reorganize_clusters(clusters_class):
+    cluster_centers = []
+
+    for centers in clusters_class.cluster_centers_:
+        total = 0
+        for i in centers:
+            total += i
+        cluster_centers.append(total)
+
+    index = np.argsort(cluster_centers)
+
+    new_labels = []
+    for i in range(0, len(clusters_class.labels_)):
+        new_labels.append(index[clusters_class.labels_[i]])
+
+    return new_labels
 
 
 def mean_shift(dataframe, clusters_quantity=2):
