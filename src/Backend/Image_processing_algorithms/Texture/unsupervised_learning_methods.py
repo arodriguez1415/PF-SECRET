@@ -91,10 +91,9 @@ def reorganize_clusters(clusters_class):
         cluster_centers.append(np.sum(centers))
 
     index = np.argsort(cluster_centers)
-
     new_labels = []
     for i in range(0, len(clusters_class.labels_)):
-        new_labels.append(index[clusters_class.labels_[i]])
+        new_labels.append(list(index).index([clusters_class.labels_[i]]))
 
     return new_labels
 
