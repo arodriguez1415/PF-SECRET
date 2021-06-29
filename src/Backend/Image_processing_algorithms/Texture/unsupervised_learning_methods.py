@@ -78,22 +78,20 @@ def k_means(dataframe, clusters_quantity=3):
     data_to_use = normalize_dataframe_values(data_to_use,
                                              normalize_method=algorithm_constants.FROM_0_TO_255)
     clusters_class = KMeans(n_clusters=clusters_quantity, random_state=0).fit(data_to_use)
-    dataframe["classification"] = reorganize_clusters(clusters_class)
+    dataframe["classification"] = reorganize_clusters(clusters_class.cluster_centers_, clusters_class.labels_)
     # dataframe["classification"] = clusters_class.labels_
     return build_classified_image(dataframe)
 
 
-def reorganize_clusters(clusters_class):
-    cluster_centers = []
-    np.set_printoptions(suppress=True)
-    for centers in clusters_class.cluster_centers_:
-        print(centers)
-        cluster_centers.append(np.sum(centers))
+def reorganize_clusters(cluster_centers, labels):
+    centers = []
+    for attribute_centers in cluster_centers:
+        centers.append(np.sum(attribute_centers))
 
-    index = np.argsort(cluster_centers)
+    index = np.argsort(centers)
     new_labels = []
-    for i in range(0, len(clusters_class.labels_)):
-        new_labels.append(list(index).index([clusters_class.labels_[i]]))
+    for i in range(0, len(labels)):
+        new_labels.append(list(index).index([labels[i]]))
 
     return new_labels
 
@@ -110,8 +108,8 @@ def mean_shift(dataframe, clusters_quantity=2):
     clusters_class_train = MeanShift().fit(train_data_to_use)  # predice el bandwidth, hay que mirarlo eso
     clusters_class = clusters_class_train.predict(data_to_use)
 
-    dataframe["classification"] = clusters_class
-
+    dataframe["classification"] = reorganize_clusters(clusters_class_train.cluster_centers_, clusters_class)
+    # dataframe["classification"] = clusters_class
     return build_classified_image(dataframe)
 
 
