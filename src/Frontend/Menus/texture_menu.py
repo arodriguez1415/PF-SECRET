@@ -1,5 +1,7 @@
 from src.Backend.Image_processing_algorithms.Archive_manipulation import dataframe_file_manipulation
 import src.Backend.Image_processing_algorithms.Texture.lbp as texture_lbp
+from src.Backend.Image_processing_algorithms.Border_detection.mgac import mgac_only_cell
+from src.Backend.Image_processing_algorithms.Operations.common_operations import generate_coloured_heatmap
 from src.Backend.Image_processing_algorithms.Texture import fractal_dimention, glcm
 from src.Backend.Image_processing_algorithms.Texture import profile_texture
 from src.Backend.Image_processing_algorithms.Texture import texture_heatmap
@@ -148,6 +150,7 @@ def classify_texture(main_window):
 
     method = unsupervised_learning_methods.get_method(method_box)
     classified_image = method(dataframe, clusters_quantity)
+    generate_coloured_heatmap(classified_image)
     image_wrapper = Image_wrapper(classified_image)
     main_window.image_viewer.set_screen_image(image_wrapper)
 

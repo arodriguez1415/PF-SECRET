@@ -12,25 +12,29 @@ from src.Backend.Image_processing_algorithms.Operations.common_operations import
 from src.Constants import algorithm_constants
 
 
-def get_descriptors(list_descriptors_dict, image, descriptors_labels):
+def get_descriptor_matrix(image_array, descriptor_label):
+    if descriptor_label == algorithm_constants.GLCM_MEAN:
+        return glcm.fast_glcm_mean(image_array)
+    if descriptor_label == algorithm_constants.GLCM_ENTROPY:
+        return glcm.fast_glcm_entropy(image_array)
+    if descriptor_label == algorithm_constants.GLCM_HOMOGENEITY:
+        return glcm.fast_glcm_homogeneity(image_array)
+    if descriptor_label == algorithm_constants.GLCM_DISSIMILARITY:
+        return glcm.fast_glcm_dissimilarity(image_array)
+    if descriptor_label == algorithm_constants.SHANNON_ENTROPY:
+        return entropy.calculate_shannon_entropy(image_array)
+    if descriptor_label == algorithm_constants.LOCAL_ENTROPY:
+        return entropy.calculate_local_entropy(image_array)
+    return None
+
+
+def get_descriptors(list_descriptors_dict, image_array, descriptors_labels):
     for descriptor_label in descriptors_labels:
-        print(descriptor_label)
         descriptors_dict = {}
-        descriptor_matrix = {
-            algorithm_constants.GLCM_MEAN: glcm.fast_glcm_mean(image),
-            algorithm_constants.GLCM_ENTROPY: glcm.fast_glcm_entropy(image),
-            algorithm_constants.GLCM_HOMOGENEITY: glcm.fast_glcm_homogeneity(image),
-            algorithm_constants.GLCM_DISSIMILARITY: glcm.fast_glcm_dissimilarity(image),
-            # algorithm_constants.SHANNON_ENTROPY: entropy.calculate_shannon_entropy(image),
-            # algorithm_constants.LOCAL_ENTROPY: entropy.calculate_local_entropy(image),
-        }.get(descriptor_label)
+        descriptor_matrix = get_descriptor_matrix(image_array, descriptor_label)
         descriptors_dict["data"] = descriptor_matrix
         descriptors_dict["label"] = descriptor_label
         list_descriptors_dict.append(descriptors_dict)
-
-        #show_histogram(normalized_descriptor_matrix)
-        #bgr_coloured_matrix = cv2.applyColorMap(normalized_descriptor_matrix, cv2.COLORMAP_HOT)
-        #show_coloured_image(bgr_coloured_matrix)
 
     return list_descriptors_dict
 

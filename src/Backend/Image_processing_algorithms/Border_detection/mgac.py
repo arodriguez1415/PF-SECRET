@@ -7,6 +7,7 @@ from matplotlib import pyplot as plt
 from matplotlib.path import Path
 from scipy import ndimage as ndi
 from src.Backend.Image_processing_algorithms.Border_detection import mgac_library_functions as mgac_library
+from src.Backend.Image_processing_algorithms.Operations.common_operations import normalize_to_range
 from src.Backend.Image_processing_algorithms.filters import anisotropic_filter as anisotropic_filter_functions
 from src.Classes.Region import Region
 from src.Constants import configuration_constants
@@ -39,7 +40,7 @@ def mgac_only_cell(image):
     sigma = 2
     mask_image = mgac_mask(polygon_region.points, filtered_image, iterations, threshold, smoothing, ballon, alpha, sigma)
     shape = (mask_image.shape[0], mask_image.shape[1])
-    filtered_image = np.array(filtered_image, dtype='uint8')
+    filtered_image = np.array(filtered_image, dtype=np.uint8)
     resized_original_image = cv2.resize(filtered_image, shape, cv2.INTER_NEAREST)
     only_cell_image = map_mask(mask_image, resized_original_image)
     return only_cell_image

@@ -2,7 +2,6 @@ from skimage.measure import shannon_entropy
 from skimage.util import img_as_ubyte
 from skimage.filters.rank import entropy
 from skimage.morphology import disk
-from src.Constants import algorithm_constants
 import numpy as np
 
 

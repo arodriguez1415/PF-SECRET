@@ -1,5 +1,6 @@
 import numpy as np
 from cv2 import cv2
+import matplotlib.pyplot as plt
 
 
 def normalize(array):
@@ -54,3 +55,23 @@ def threshold(image_array, threshold_value):
     image_array[image_array < threshold_value] = 0
     image_array[image_array >= threshold_value] = 255
     return image_array
+
+
+def generate_coloured_heatmap(matrix):
+    show_histogram(matrix)
+    bgr_coloured_matrix = cv2.applyColorMap(matrix, cv2.COLORMAP_HOT)
+    rgb_coloured_matrix = cv2.cvtColor(bgr_coloured_matrix, cv2.COLOR_BGR2RGB)
+    show_coloured_image(rgb_coloured_matrix)
+
+
+def show_coloured_image(rgb_coloured_matrix):
+    plt.imshow(rgb_coloured_matrix)
+    plt.show()
+
+
+def show_histogram(image_texture_descriptor):
+    dst = cv2.calcHist(image_texture_descriptor, [0], None, [256], [0, 256])
+
+    plt.hist(image_texture_descriptor.ravel(), 256, [0, 256])
+    plt.title('Histogram for gray scale image')
+    plt.show()

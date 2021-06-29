@@ -1,19 +1,5 @@
 import numpy as np
 import cv2
-import matplotlib.pyplot as plt
-
-
-def show_coloured_image(bgr_coloured_matrix):
-    plt.imshow(bgr_coloured_matrix)
-    plt.show()
-
-
-def show_histogram(image_texture_descriptor):
-    dst = cv2.calcHist(image_texture_descriptor, [0], None, [256], [0, 256])
-
-    plt.hist(image_texture_descriptor.ravel(), 256, [0, 256])
-    plt.title('Histogram for gray scale image')
-    plt.show()
 
 
 def fast_glcm(img, vmin=0, vmax=255, nbit=8, kernel_size=5):
