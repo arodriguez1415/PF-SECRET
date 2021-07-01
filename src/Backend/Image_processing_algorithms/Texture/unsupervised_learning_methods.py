@@ -96,8 +96,8 @@ def reorganize_clusters(cluster_centers, labels):
     return new_labels
 
 
-def mean_shift(dataframe, clusters_quantity=2):
-    training_data, test_data = train_test_split(dataframe, train_size=0.05)
+def mean_shift(dataframe, clusters_quantity=2, training_percentage=0.05):
+    training_data, test_data = train_test_split(dataframe, train_size=training_percentage)
     train_data_to_use = drop_positions(training_data)
     train_data_to_use = normalize_dataframe_values(train_data_to_use,
                                                    normalize_method=algorithm_constants.FROM_0_TO_255)
@@ -113,7 +113,8 @@ def mean_shift(dataframe, clusters_quantity=2):
     return build_classified_image(dataframe)
 
 
-def self_organized_map(dataframe, clusters_quantity=2):
+def self_organized_map(dataframe, clusters_quantity=2, network_shape=(5, 5),
+                       learning_rate=0.5, sigma=0.3, iterations=5):
     training_data, test_data = train_test_split(dataframe, train_size=1)
     train_data_to_use = drop_positions(training_data)
     train_data_to_use = normalize_dataframe_values(train_data_to_use,
@@ -122,10 +123,9 @@ def self_organized_map(dataframe, clusters_quantity=2):
     data_to_use = normalize_dataframe_values(data_to_use,
                                              normalize_method=algorithm_constants.FROM_0_TO_1)
 
-    network_shape = (10, 10)
     columns_length = len(train_data_to_use.columns)
-    som = MiniSom(network_shape[0], network_shape[1], columns_length, sigma=0.3, learning_rate=0.5)
-    som.train(train_data_to_use.to_numpy(), 5, random_order=True)  # iteration = 100
+    som = MiniSom(network_shape[0], network_shape[1], columns_length, sigma=sigma, learning_rate=learning_rate)
+    som.train(train_data_to_use.to_numpy(), iterations, random_order=True)  # iteration = 100
     winner_coordinates = np.array([som.winner(x) for x in data_to_use.to_numpy()]).T
 
     clusters_class = np.ravel_multi_index(winner_coordinates, network_shape)
@@ -138,18 +138,23 @@ def self_organized_map(dataframe, clusters_quantity=2):
     return build_classified_image(dataframe)
 
 
-def HDBScan(dataframe, clusters_quantity=2):
+def HDBScan(dataframe, clusters_quantity=2, min_cluster_size=1250, min_samples=1):
     data_to_use = drop_positions(dataframe)
     data_to_use = normalize_dataframe_values(data_to_use,
                                              normalize_method=algorithm_constants.FROM_0_TO_255)
-    hsdbscan_clusterer = hdbscan.HDBSCAN(min_cluster_size=clusters_quantity)
+    hsdbscan_clusterer = hdbscan.HDBSCAN(min_cluster_size=min_cluster_size, min_samples=min_samples)
     hsdbscan_clusterer.fit(data_to_use)
 
-    dataframe["classification"] = hsdbscan_clusterer.labels_
+    clusters_class = hsdbscan_clusterer.labels_
+    max_label = clusters_class.max()
 
-    print(len(hsdbscan_clusterer.labels_))
-    unique, counts = np.unique(hsdbscan_clusterer.labels_, return_counts=True)
+    for i in range(0, len(clusters_class)):
+        if clusters_class[i] == -1:
+            clusters_class[i] = max_label + 1
+
+    dataframe["classification"] = clusters_class
+
+    unique, counts = np.unique(clusters_class, return_counts=True)
     print(dict(zip(unique, counts)))
 
     return build_classified_image(dataframe)
-

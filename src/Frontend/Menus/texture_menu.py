@@ -1,17 +1,16 @@
 from src.Backend.Image_processing_algorithms.Archive_manipulation import dataframe_file_manipulation
 import src.Backend.Image_processing_algorithms.Texture.lbp as texture_lbp
-from src.Backend.Image_processing_algorithms.Border_detection.mgac import mgac_only_cell
 from src.Backend.Image_processing_algorithms.Operations.common_operations import generate_coloured_heatmap
-from src.Backend.Image_processing_algorithms.Texture import fractal_dimention, glcm
+from src.Backend.Image_processing_algorithms.Texture import fractal_dimention
 from src.Backend.Image_processing_algorithms.Texture import profile_texture
 from src.Backend.Image_processing_algorithms.Texture import texture_heatmap
 from src.Backend.Image_processing_algorithms.Texture import unsupervised_learning_methods
+from src.Backend.Image_processing_algorithms.Texture import texture_test_generator
 from src.Classes.Image_wrapper import Image_wrapper
 from src.Classes.Project_mastermind import Project_mastermind
 from src.Classes.Region import Region
 from src.Constants import algorithm_constants
 from src.Frontend.Utils.message import show_message
-from src.Backend.Image_processing_algorithms.Texture import entropy
 
 def configure_texture_menu_connections(main_window):
     main_window.lbp_menu_option.triggered.connect(lambda: lbp_options(main_window))
@@ -20,6 +19,10 @@ def configure_texture_menu_connections(main_window):
     # main_window.texture_heatmap_menu_option.triggered.connect(lambda: texture_heatmap_options(main_window))
     main_window.texture_classification_menu_option.triggered.connect(
         lambda: texture_classification_options(main_window))
+
+    # Borrar para entrega
+    main_window.texture_generate_test_menu_option.triggered.connect(
+        lambda: generate_tests())
 
     main_window.lbp_add_process_button.clicked.connect(lambda: add_process(main_window))
 
@@ -149,7 +152,7 @@ def classify_texture(main_window):
     dataframe = dataframe_file_manipulation.create_dataframe_from_descriptors(list_descriptors_dict)
 
     method = unsupervised_learning_methods.get_method(method_box)
-    classified_image = method(dataframe, clusters_quantity)
+    classified_image = method(dataframe, clusters_quantity=clusters_quantity)
     generate_coloured_heatmap(classified_image)
     image_wrapper = Image_wrapper(classified_image)
     main_window.image_viewer.set_screen_image(image_wrapper)
@@ -183,3 +186,7 @@ def get_descriptors_checked(main_window):
         descriptors_labels.append(algorithm_constants.LOCAL_ENTROPY)
 
     return descriptors_labels
+
+
+def generate_tests():
+    texture_test_generator.generate_tests()

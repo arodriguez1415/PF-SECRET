@@ -2327,6 +2327,7 @@
     <addaction name="fractal_dimension_menu_option"/>
     <addaction name="texture_profile_menu_option"/>
     <addaction name="texture_classification_menu_option"/>
+    <addaction name="texture_generate_test_menu_option"/>
    </widget>
    <widget class="QMenu" name="filters_menu">
     <property name="title">
@@ -2649,6 +2650,11 @@
   <action name="texture_classification_menu_option">
    <property name="text">
     <string>Clasificar textura</string>
+   </property>
+  </action>
+  <action name="texture_generate_test_menu_option">
+   <property name="text">
+    <string>Generar pruebas</string>
    </property>
   </action>
  </widget>

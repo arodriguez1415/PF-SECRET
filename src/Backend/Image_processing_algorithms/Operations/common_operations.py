@@ -65,7 +65,8 @@ def generate_coloured_heatmap(matrix):
 
 
 def show_coloured_image(rgb_coloured_matrix):
-    plt.imshow(rgb_coloured_matrix)
+    plt.imshow(rgb_coloured_matrix, cmap="hot")
+    plt.colorbar(label="Texture", orientation="vertical")
     plt.show()
 
 

@@ -20,6 +20,22 @@ def get_image_path():
     return file_path
 
 
+def get_multiple_images_path():
+    root = Tk()
+    root.withdraw()
+    initial_absolute_directory_path = os.path.abspath(TEST_IMAGES_DIR)
+    file_path_list = filedialog.askopenfilenames(initialdir=initial_absolute_directory_path,
+                                                 title='Elegir imagenes a testear',
+                                                 filetypes=[("Image files", "*.tif;;*.pgm;;*.ppm;;*.jpg;;*.raw"),
+                                                      ("ppm", "*.PPM"),
+                                                      ("jpg", "*.JPG"),
+                                                      ("raw", "*.RAW"),
+                                                      ("tif", "*.TIF"),
+                                                      ("All files", "*")])
+    root.destroy()
+    return file_path_list
+
+
 def get_directory_path():
     root = Tk()
     root.withdraw()
