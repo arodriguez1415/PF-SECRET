@@ -1,11 +1,10 @@
-import numpy as np
 import matplotlib
 
-matplotlib.use("TkAgg")  # Do this before importing pyplot!
+matplotlib.use("Agg")  # Do this before importing pyplot!
 import matplotlib.pyplot as plt
 
 
-def plot_metric_over_time(metric_values, frame_values, plot_title, x_label, y_label, show_flag=False):
+def plot_metric_over_time(metric_values, frame_values, plot_title, y_label, x_label, show_flag=False):
     plt.figure(plot_title)
     plt.plot(frame_values, metric_values)
     plt.title(plot_title)

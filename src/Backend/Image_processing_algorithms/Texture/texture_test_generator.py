@@ -30,9 +30,9 @@ def generate_tests():
         images_arrays.append(read_image(images_paths[i]))
 
     #generate_k_means_tests(images_arrays, combinations)
-    #generate_kohonen_tests(images_arrays, combinations)
+    generate_kohonen_tests(images_arrays, combinations)
     #generate_mean_shift_tests(images_arrays, combinations)
-    generate_HDBScan_tests(images_arrays, combinations)
+    #generate_HDBScan_tests(images_arrays, combinations)
 
 
 def get_dataframe_for_test(images_array, combination):
@@ -71,7 +71,7 @@ def generate_mean_shift_tests(images_arrays, combinations):
 
 
 def generate_kohonen_tests(images_arrays, combinations):
-    network_shape_list = [(3, 3), (5, 5)]
+    network_shape_list = [(15, 15), (9, 9)]
     learning_rate_list = [0.05, 0.1, 0.25]
     sigma_rate_list = [0.001, 0.05, 0.1]
     iterations_list = [5, 10, 25]

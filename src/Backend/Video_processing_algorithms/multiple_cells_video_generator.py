@@ -17,6 +17,7 @@ def generate_mask_video_of_all_cells():
     images_list_of_lists = get_images_from_directories()
     progress_bar.start_progress_bar(string_constants.GENERATE_MASK_VIDEOS_TITLE,
                                     string_constants.GENERATE_MASK_VIDEOS_DESCRIPTION, len(images_list_of_lists))
+    print("Video to generate: " + str(len(images_list_of_lists)))
     for images_list_paths in images_list_of_lists:
         if progress_bar.is_progress_bar_cancelled():
             return None
@@ -33,6 +34,7 @@ def get_images_from_directories():
     for directory_wrapper in directories_list:
         directory_path = directory_wrapper[0]
         images_list_of_lists.append(video_generator.get_files_from_directory(directory_path))
+        # Aca hay que remover la ultima imagen
     for images_list in images_list_of_lists:
         if images_list:
             filtered_list_of_lists.append(images_list)
@@ -42,11 +44,13 @@ def get_images_from_directories():
 def set_methods_to_apply(image_path):
     methods_to_apply = []
     anisotropic_method = Anisotropic_Filter()
-    adaptive_threshold_method = Adaptive_threshold(7, 6, algorithm_constants.ADAPTIVE_THRESHOLD_GAUSSIAN)
+    adaptive_threshold_method = Adaptive_threshold(21, 5, algorithm_constants.ADAPTIVE_THRESHOLD_GAUSSIAN)
     image = Image.open(image_path)
     image_array = np.uint8(image)
     polygon_region = Region.get_all_image_as_region(image_array)
     mgac_method = Mgac(polygon_region, 250, 0.35, 0, -1, 200, 2, True)
+    methods_to_apply.append(anisotropic_method)
+    methods_to_apply.append(anisotropic_method)
     methods_to_apply.append(anisotropic_method)
     methods_to_apply.append(adaptive_threshold_method)
     methods_to_apply.append(mgac_method)
