@@ -48,7 +48,7 @@ def set_methods_to_apply(image_path):
     image = Image.open(image_path)
     image_array = np.uint8(image)
     polygon_region = Region.get_all_image_as_region(image_array)
-    mgac_method = Mgac(polygon_region, 250, 0.35, 0, -1, 200, 2, True)
+    mgac_method = Mgac(polygon_region, 250, 0.35, 0, -1, 200, 2, False)
     methods_to_apply.append(anisotropic_method)
     methods_to_apply.append(anisotropic_method)
     methods_to_apply.append(anisotropic_method)

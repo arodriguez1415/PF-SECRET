@@ -213,8 +213,7 @@ def plot_distribution_metrics(main_window):
     metrics_data_paths = dataframe_file_manipulation.get_multiple_dataframes_path()
     metrics_data_list = metrics_file.read_multiple_metrics_data(metrics_data_paths)
     distribution_metrics_dictionary = get_plotting_distribution_metrics_dictionary(main_window)
-
-    metric_keys_list = list(distribution_metrics_dictionary.keys())
+    metric_keys_list = filter_keys(distribution_metrics_dictionary)
 
     for i in range(0, len(metric_keys_list)):
         metric_key = metric_keys_list[i]
@@ -287,6 +286,7 @@ def get_distribution_title(metric_type):
 
 
 def get_distribution_x_label(metric_type):
+    print(metric_type)
     return {
         algorithm_constants.PERIMETER_METRIC: "Valores de perimetro en pixeles",
         algorithm_constants.AREA_METRIC: "Valores de area en pixeles",
@@ -294,9 +294,9 @@ def get_distribution_x_label(metric_type):
         algorithm_constants.BORDER_FRACTAL_DIMENSION_METRIC: "Valores de dimension fractal en borde",
         algorithm_constants.PERINUCLEAR_FRACTAL_DIMENSION_METRIC: "Valores de dimension fractal en perinucleo",
         algorithm_constants.NUCLEAR_FRACTAL_DIMENSION_METRIC: "Valores de dimension fractal en nucleo",
-        algorithm_constants.BORDER_MOVEMENT_METRIC: "Valores de moveimiento en borde",
-        algorithm_constants.PERINUCLEAR_MOVEMENT_METRIC: "Valores de moveimiento en perinucleo",
-        algorithm_constants.NUCLEAR_MOVEMENT_METRIC: "Valores de moveimiento en nucleo",
+        algorithm_constants.BORDER_MOVEMENT_METRIC: "Valores de movimiento en borde",
+        algorithm_constants.PERINUCLEAR_MOVEMENT_METRIC: "Valores de movimiento en perinucleo",
+        algorithm_constants.NUCLEAR_MOVEMENT_METRIC: "Valores de movimiento en nucleo",
     }.get(metric_type, "Label no encontrado!")
 
 
@@ -312,3 +312,13 @@ def get_distribution_y_label(metric_type):
         algorithm_constants.PERINUCLEAR_MOVEMENT_METRIC: "Valores de moveimiento en perinucleo",
         algorithm_constants.NUCLEAR_MOVEMENT_METRIC: "Valores de moveimiento en nucleo",
     }.get(metric_type, "Label no encontrado!")
+
+
+def filter_keys(metrics_keys_dictionary):
+    metric_keys_list = []
+
+    for key in metrics_keys_dictionary.keys():
+        if metrics_keys_dictionary[key]:
+            metric_keys_list.append(key)
+    
+    return metric_keys_list

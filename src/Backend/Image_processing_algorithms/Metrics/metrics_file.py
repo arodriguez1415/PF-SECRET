@@ -1,8 +1,6 @@
 import os
 import pandas as pd
 
-from src.Backend.Video_processing_algorithms.video_generator import get_files_from_directory
-from src.Classes.Project_mastermind import Project_mastermind
 from src.Constants import configuration_constants
 from src.Constants import algorithm_constants
 
@@ -51,22 +49,22 @@ def setup_metrics_data(file_path):
         metrics_data = pd.read_excel(file_path)
     else:
         metrics_data = pd.DataFrame()
-        set_frames(metrics_data)
     return metrics_data
 
 
 def save_mask_metric(video_file_path, metric_values_list, metric_type):
     generate_metrics_dir()
     metrics_file_path = set_metrics_save_name_from_video(video_file_path)
-    frames_values_list = range(0, len(metric_values_list))
     metrics_data = setup_metrics_data(metrics_file_path)
 
     if metric_type == algorithm_constants.PERIMETER_METRIC:
-        metrics_data = save_perimeter(metrics_data, metric_values_list, frames_values_list)
+        metrics_data = save_perimeter(metrics_data, metric_values_list)
     elif metric_type == algorithm_constants.AREA_METRIC:
-        metrics_data = save_area(metrics_data, metric_values_list, frames_values_list)
+        metrics_data = save_area(metrics_data, metric_values_list)
     elif metric_type == algorithm_constants.AXIS_RATE_METRIC:
-        metrics_data = save_axis_rate(metrics_data, metric_values_list, frames_values_list)
+        metrics_data = save_axis_rate(metrics_data, metric_values_list)
+
+    set_frames(metrics_data, metric_values_list)
 
     metrics_data = metrics_data[metrics_data.filter(regex='^(?!Unnamed)').columns]
     metrics_data.to_excel(metrics_file_path)
@@ -110,17 +108,17 @@ def save_motion_metric(image_file_path, motion_value, metric_type):
     metrics_data.to_excel(metrics_file_path)
 
 
-def save_perimeter(metrics_data, perimeter_values_list, frames_values_list):
+def save_perimeter(metrics_data, perimeter_values_list):
     metrics_data[algorithm_constants.PERIMETER_HEADER] = perimeter_values_list
     return metrics_data
 
 
-def save_area(metrics_data, area_values_list, frames_values_list):
+def save_area(metrics_data, area_values_list):
     metrics_data[algorithm_constants.AREA_HEADER] = area_values_list
     return metrics_data
 
 
-def save_axis_rate(metrics_data, axis_rate_values_list, frames_values_list):
+def save_axis_rate(metrics_data, axis_rate_values_list):
     metrics_data[algorithm_constants.AXIS_RATE_HEADER] = axis_rate_values_list
     return metrics_data
 
@@ -129,13 +127,10 @@ def get_frames(metrics_data):
     return metrics_data[algorithm_constants.FRAMES_HEADER].values.tolist()
 
 
-def set_frames(metrics_data):
-    project_mastermind = Project_mastermind.get_instance()
-    images_dir = project_mastermind.get_original_image_dir()
-    images_list = get_files_from_directory(images_dir)
+def set_frames(metrics_data, metric_values_list):
     frames_values_list = []
 
-    for i in range(0, len(images_list)):
+    for i in range(0, len(metric_values_list)):
         frames_values_list.append(i)
 
     metrics_data[algorithm_constants.FRAMES_HEADER] = frames_values_list
