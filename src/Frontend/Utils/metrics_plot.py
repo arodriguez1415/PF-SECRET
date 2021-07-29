@@ -37,10 +37,22 @@ def save_plot_metrics(metric_values_lists, frame_values_lists, plot_title_list, 
         axis_to_plot.set_title(plot_title_list[i])
         axis_to_plot.set_xlabel(x_label_list[i])
         axis_to_plot.set_ylabel(y_label_list[i])
+
     plt.show()
 
 
+def save_plot_distribution_metrics(metrics_avg_lists, plot_title_list, x_label_list, y_label_list):
+    fig, ax = plt.subplots(figsize=(15, 4), nrows=1, ncols=3)
+    fig.suptitle("Distribucion de area, perímetro y razón de ejes")
 
+    for i in range(0, 3):
+        axis_to_plot = ax[i]
+        axis_to_plot.hist(metrics_avg_lists[i])
+        axis_to_plot.set_title(plot_title_list[i])
+        axis_to_plot.set_xlabel(x_label_list[i])
+        axis_to_plot.set_ylabel(y_label_list[i])
+
+    plt.show()
 
 
 def show_plot(show_flag):

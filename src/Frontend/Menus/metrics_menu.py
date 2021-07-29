@@ -119,7 +119,8 @@ def generate_movement_metrics(main_window):
 def plot_metrics(main_window):
     metrics_data_path = main_window.plot_metrics_dataframe_input.text()
     metrics_dictionary = get_plotting_metrics_dictionary(main_window)
-    metrics_plotter.plot_metrics(metrics_data_path, metrics_dictionary)
+    metrics_values_lists, frames_values_lists, titles_list, x_label_list, y_label_list = metrics_plotter.load_metrics(metrics_data_path, metrics_dictionary)
+    metrics_plotter.plot_metrics(metrics_values_lists, frames_values_lists, titles_list, x_label_list, y_label_list)
 
 
 def get_plotting_metrics_dictionary(main_window):
@@ -140,7 +141,8 @@ def get_plotting_metrics_dictionary(main_window):
 def plot_distribution_metrics(main_window):
     metrics_data_paths = dataframe_file_manipulation.get_multiple_dataframes_path()
     distribution_metrics_dictionary = get_plotting_distribution_metrics_dictionary(main_window)
-    metrics_plotter.plot_distribution_metrics(metrics_data_paths, distribution_metrics_dictionary)
+    metrics_avg_lists, titles_list, x_label_list, y_label_list = metrics_plotter.load_distribution_metrics(metrics_data_paths, distribution_metrics_dictionary)
+    metrics_plotter.plot_distribution_metrics(metrics_avg_lists, titles_list, x_label_list, y_label_list)
 
 
 def get_plotting_distribution_metrics_dictionary(main_window):
