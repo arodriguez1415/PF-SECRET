@@ -3,7 +3,7 @@ from src.Constants import algorithm_constants
 from src.Frontend.Utils import metrics_plot
 
 
-def plot_metrics(metrics_data_path, metrics_dictionary, save_flag=False):
+def plot_metrics(metrics_data_path, metrics_dictionary):
     metrics_data = metrics_file.read_metrics_data(metrics_data_path)
     metric_keys_list = filter_keys(metrics_dictionary)
 
@@ -11,42 +11,63 @@ def plot_metrics(metrics_data_path, metrics_dictionary, save_flag=False):
         metric_key = metric_keys_list[i]
         frames_values_list = metrics_file.get_frames(metrics_data)
         metric_values_list = metrics_file.get_metric(metrics_data, metric_key)
-        show_flag = set_show_flag(save_flag, metric_keys_list, i)
-        plot_metric(metric_key, metric_values_list, frames_values_list, show_flag=show_flag, save_flag=save_flag)
+        show_flag = set_show_flag(metric_keys_list, i)
+        plot_metric(metric_key, metric_values_list, frames_values_list, show_flag=show_flag)
 
 
-def plot_metric(metric_key, metric_values_list, frames_values_list, show_flag, save_flag):
+def plot_metric(metric_key, metric_values_list, frames_values_list, show_flag):
     labels_dictionary = get_metric_plot_labels(metric_key)
     metrics_plot.plot_metric_over_time(metric_values_list, frames_values_list,
                                        labels_dictionary["title"],
                                        labels_dictionary["x_label"],
                                        labels_dictionary["y_label"],
-                                       show_flag=show_flag,
-                                       save_flag=save_flag)
+                                       show_flag=show_flag)
 
 
-def plot_distribution_metrics(metrics_data_paths, distribution_metrics_dictionary, save_flag=False):
+def save_metrics(metrics_data_path, metrics_dictionary):
+    metrics_data = metrics_file.read_metrics_data(metrics_data_path)
+    metric_keys_list = filter_keys(metrics_dictionary)
+    metrics_values_lists = []
+    frames_values_lists = []
+    titles_list = []
+    x_label_list = []
+    y_label_list = []
+
+    for i in range(0, len(metric_keys_list)):
+        metric_key = metric_keys_list[i]
+        labels_dictionary = get_distribution_plot_labels(metric_key)
+        frames_values_list = metrics_file.get_frames(metrics_data)
+        metric_values_list = metrics_file.get_metric(metrics_data, metric_key)
+        frames_values_lists.append(frames_values_list)
+        metrics_values_lists.append(metric_values_list)
+        titles_list.append(labels_dictionary["title"])
+        x_label_list.append(labels_dictionary["x_label"])
+        y_label_list.append(labels_dictionary["y_label"])
+    metrics_plot.save_plot_metrics(metrics_values_lists, frames_values_lists, titles_list,
+                                   x_label_list, y_label_list)
+
+
+def plot_distribution_metrics(metrics_data_paths, distribution_metrics_dictionary):
     metrics_data_list = metrics_file.read_multiple_metrics_data(metrics_data_paths)
     metric_keys_list = filter_keys(distribution_metrics_dictionary)
 
     for i in range(0, len(metric_keys_list)):
         metric_key = metric_keys_list[i]
         metrics_avg_list = []
-        show_flag = set_show_flag(save_flag, metric_keys_list, i)
+        show_flag = set_show_flag(metric_keys_list, i)
         for metrics_data in metrics_data_list:
             metric_avg = metrics_file.get_metric_avg(metrics_data, metric_key)
             metrics_avg_list.append(metric_avg)
-        plot_distribution_metric(metric_key, metrics_avg_list, show_flag=show_flag, save_flag=save_flag)
+        plot_distribution_metric(metric_key, metrics_avg_list, show_flag=show_flag)
 
 
-def plot_distribution_metric(metric_key, metrics_avg_list, show_flag, save_flag):
+def plot_distribution_metric(metric_key, metrics_avg_list, show_flag):
     labels_dictionary = get_distribution_plot_labels(metric_key)
     metrics_plot.plot_metric_histogram(metrics_avg_list,
                                        plot_title=labels_dictionary["title"],
                                        x_label=labels_dictionary["x_label"],
                                        y_label=labels_dictionary["y_label"],
-                                       show_flag=show_flag,
-                                       save_flag = save_flag)
+                                       show_flag=show_flag)
 
 
 def filter_keys(metrics_keys_dictionary):
@@ -59,8 +80,8 @@ def filter_keys(metrics_keys_dictionary):
     return metric_keys_list
 
 
-def set_show_flag(save_flag, metric_keys_list, metric_index):
-    if save_flag is False and metric_index == len(metric_keys_list) - 1:
+def set_show_flag(metric_keys_list, metric_index):
+    if metric_index == len(metric_keys_list) - 1:
         return True
     return False
 
