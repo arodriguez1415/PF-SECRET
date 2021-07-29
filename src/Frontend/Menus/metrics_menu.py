@@ -320,5 +320,5 @@ def filter_keys(metrics_keys_dictionary):
     for key in metrics_keys_dictionary.keys():
         if metrics_keys_dictionary[key]:
             metric_keys_list.append(key)
-    
+
     return metric_keys_list

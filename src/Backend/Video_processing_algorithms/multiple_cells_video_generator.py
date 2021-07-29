@@ -17,14 +17,17 @@ def generate_mask_video_of_all_cells():
     images_list_of_lists = get_images_from_directories()
     progress_bar.start_progress_bar(string_constants.GENERATE_MASK_VIDEOS_TITLE,
                                     string_constants.GENERATE_MASK_VIDEOS_DESCRIPTION, len(images_list_of_lists))
-    print("Video to generate: " + str(len(images_list_of_lists)))
+    # print("Video to generate: " + str(len(images_list_of_lists)))
+    masked_videos_paths_list = []
     for images_list_paths in images_list_of_lists:
         if progress_bar.is_progress_bar_cancelled():
             return None
         specified_methods_to_apply = set_methods_to_apply(images_list_paths[0])
-        video_generator.generate_video(images_list=images_list_paths,
-                                       specified_methods_to_apply=specified_methods_to_apply)
+        video_path = video_generator.generate_video(images_list=images_list_paths,
+                                                    specified_methods_to_apply=specified_methods_to_apply)
+        masked_videos_paths_list.append(video_path)
         progress_bar.increment_value_progress_bar()
+    return masked_videos_paths_list
 
 
 def get_images_from_directories():
@@ -64,6 +67,7 @@ def get_images(images_list_of_lists):
     return total_length
 
 
+# Posible para borrar
 def set_save_name(image_path_sample):
     image_path_sample = image_path_sample.replace("\\", "/")
     save_path = image_path_sample.split('/')[-5] + " - " + image_path_sample.split('/')[-4] + " - " + \

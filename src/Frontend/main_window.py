@@ -13,7 +13,7 @@ import src.Frontend.Menus.border_detection_menu as border_detection_menu
 import src.Frontend.Menus.movement_menu as movement_menu
 import src.Frontend.Menus.metrics_menu as metrics_menu
 import src.Frontend.Menus.video_menu as video_menu
-
+import src.Frontend.Menus.routines_menu as routines_menu
 
 
 def set_style(main_window):
@@ -49,6 +49,7 @@ def configure_main_window_connections(main_window):
     video_menu.configure_video_menu_connections(main_window)
     toolBox.configure_toolBox_connections(main_window)
     preprocessing_menu.configure_preprocessing_menu_connections(main_window)
+    routines_menu.configure_routines_menu_connections(main_window)
 
 
 def replace_image_viewer(image_viewer):

@@ -1,11 +1,7 @@
-import os
-
 from PyQt5.QtWidgets import QProgressDialog
 
 import src.Frontend.Utils.message as messages
 from src.Constants import string_constants
-
-partial_save_path = "./generated/"
 
 
 class Project_mastermind:
@@ -102,8 +98,3 @@ class Project_mastermind:
 
     def set_heat_map_image_array(self, heat_map_image_array):
         self.heat_map_image_array = heat_map_image_array
-
-    def create_video_path_name(self, video_name):
-        file_extension = ".avi"
-        video_save_path = partial_save_path + video_name + file_extension
-        return video_save_path
