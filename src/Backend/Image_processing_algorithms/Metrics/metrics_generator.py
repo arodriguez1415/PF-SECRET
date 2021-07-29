@@ -17,6 +17,8 @@ def generate_metrics(mask_video_path, metrics_dictionary):
                                     string_constants.CALCULATE_METRICS_DESCRIPTION,
                                     len(array_images_list) * checked_metrics_count)
 
+    metrics_excel_path = ""
+    print(metric_keys_list)
     for i in range(0, len(metric_keys_list)):
         metric_key = metric_keys_list[i]
         metric_values_list = generate_metric(metric_key, array_images_list)

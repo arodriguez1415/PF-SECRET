@@ -34,9 +34,9 @@ def save_plot_metrics(metric_values_lists, frame_values_lists, plot_title_list, 
     for i in range(0, 3):
         axis_to_plot = metrics_axis[i]
         axis_to_plot.plot(frame_values_lists[i], metric_values_lists[i])
-        axis_to_plot.title(plot_title_list[i])
-        axis_to_plot.xlabel(x_label_list[i])
-        axis_to_plot.ylabel(y_label_list[i])
+        axis_to_plot.set_title(plot_title_list[i])
+        axis_to_plot.set_xlabel(x_label_list[i])
+        axis_to_plot.set_ylabel(y_label_list[i])
     plt.show()
 
 

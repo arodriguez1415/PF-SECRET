@@ -70,7 +70,7 @@ def apply_methods_specified(image_array, specified_methods_to_apply):
 
 def save_video(frames_paths_list, save_name="asd"):
     height, width, layers = cv.imread(frames_paths_list[0]).shape
-    video_path = Project_mastermind.get_instance().create_video_path_name(save_name)
+    video_path = create_video_path_name(save_name)
     video = cv.VideoWriter(video_path, 0, 1, (width, height))
     for frame_path in frames_paths_list:
         frame_array = cv.imread(frame_path)
@@ -82,14 +82,14 @@ def save_video(frames_paths_list, save_name="asd"):
 def get_files_from_directory(directory):
     directory_files_paths_list = os.listdir(directory)
     correct_directory_files_paths_list = []
-    # i = 0
+    i = 0
     for file in directory_files_paths_list:
         if file.endswith(".tif"):
-            # i += 1
+            i += 1
             file_path = os.path.join(directory, file)
             correct_directory_files_paths_list.append(file_path)
-            # if i == 10:
-            #   break
+            if i == 10:
+                break
     if correct_directory_files_paths_list:
         correct_directory_files_paths_list.pop()
     return correct_directory_files_paths_list

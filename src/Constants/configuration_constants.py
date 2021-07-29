@@ -7,8 +7,8 @@ GENERAL_DIRECTORY = r"./Resources"
 
 # Videos directories
 
-MASK_VIDEOS = r"./generated/masked_contour_videos"
-CONTOUR_VIDEOS = r"./generated/contour_videos"
+MASK_VIDEOS = r"./generated/masked_contour_videos/"
+CONTOUR_VIDEOS = r"./generated/contour_videos/"
 
 # Texture directories
 

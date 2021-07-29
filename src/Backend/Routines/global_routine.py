@@ -9,8 +9,8 @@ def routine():
 
     # Generate metrics stage
     metrics_excel_paths_list = []
-    metrics_dictionary = {algorithm_constants.AXIS_RATE_METRIC: "", algorithm_constants.PERIMETER_METRIC: "",
-                          algorithm_constants.AREA_METRIC: ""}
+    metrics_dictionary = {algorithm_constants.AXIS_RATE_METRIC: True, algorithm_constants.PERIMETER_METRIC: True,
+                          algorithm_constants.AREA_METRIC: True}
     for masked_video_path in masked_videos_paths_list:
         metrics_excel_path = metrics_generator.generate_metrics(masked_video_path, metrics_dictionary)
         metrics_excel_paths_list.append(metrics_excel_path)
