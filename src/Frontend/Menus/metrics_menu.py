@@ -6,7 +6,6 @@ from src.Backend.Video_processing_algorithms.movement_from_frames import get_avg
 from src.Classes.Project_mastermind import Project_mastermind
 from src.Classes.Region import Region
 from src.Constants import algorithm_constants
-from src.Frontend.Utils import metrics_plot
 
 
 def configure_metrics_menu_connections(main_window):
