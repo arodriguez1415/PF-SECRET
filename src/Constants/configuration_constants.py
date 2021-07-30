@@ -10,6 +10,12 @@ GENERAL_DIRECTORY = r"./Resources"
 MASK_VIDEOS = r"./generated/masked_contour_videos/"
 CONTOUR_VIDEOS = r"./generated/contour_videos/"
 
+# Graphs folders
+
+GRAPHS_FOLDER = r"./generated/Graficos/"
+METRICS_GRAPH_FOLDER = r"./generated/Graficos/Metricas/"
+DISTRIBUTION_METRICS_GRAPH_FOLDER = r"./generated/Graficos/Distribucion/"
+
 # Texture directories
 
 TESTS_TEXTURE_DIRECTORY = r"./generated/tests"

@@ -26,7 +26,7 @@ def plot_metric_histogram(metric_values, plot_title=None, x_label=None,
     show_plot(show_flag)
 
 
-def save_plot_metrics(metric_values_lists, frame_values_lists, plot_title_list, y_label_list, x_label_list):
+def save_plot_metrics(metric_values_lists, frame_values_lists, plot_title_list, y_label_list, x_label_list, save_path):
     fig, ((ax1, ax2), (ax3, ax4)) = plt.subplots(2, 2)
     metrics_axis = [ax2, ax3, ax4]
     fig.suptitle("Area, perímetro y razón de ejes en el tiempo")
@@ -38,10 +38,10 @@ def save_plot_metrics(metric_values_lists, frame_values_lists, plot_title_list, 
         axis_to_plot.set_xlabel(x_label_list[i])
         axis_to_plot.set_ylabel(y_label_list[i])
 
-    plt.show()
+    plt.savefig(save_path)
 
 
-def save_plot_distribution_metrics(metrics_avg_lists, plot_title_list, x_label_list, y_label_list):
+def save_plot_distribution_metrics(metrics_avg_lists, plot_title_list, x_label_list, y_label_list, save_path):
     fig, ax = plt.subplots(figsize=(15, 4), nrows=1, ncols=3)
     fig.suptitle("Distribucion de area, perímetro y razón de ejes")
 
@@ -52,7 +52,7 @@ def save_plot_distribution_metrics(metrics_avg_lists, plot_title_list, x_label_l
         axis_to_plot.set_xlabel(x_label_list[i])
         axis_to_plot.set_ylabel(y_label_list[i])
 
-    plt.show()
+    plt.savefig(save_path)
 
 
 def show_plot(show_flag):

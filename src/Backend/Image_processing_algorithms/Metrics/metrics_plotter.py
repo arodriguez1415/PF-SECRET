@@ -61,9 +61,10 @@ def plot_metric(metric_values_list, frames_values_list, title, x_label, y_label,
                                        title, x_label, y_label, show_flag=show_flag)
 
 
-def save_metrics(metrics_values_lists, frames_values_lists, titles_list, x_label_list, y_label_list):
+def save_metrics(metrics_values_lists, frames_values_lists, titles_list,
+                 x_label_list, y_label_list, save_path):
     metrics_plot.save_plot_metrics(metrics_values_lists, frames_values_lists, titles_list,
-                                   x_label_list, y_label_list)
+                                   x_label_list, y_label_list, save_path)
 
 
 def plot_distribution_metrics(metrics_avg_lists, titles_list, x_label_list, y_label_list):
@@ -81,8 +82,8 @@ def plot_distribution_metric(metrics_avg_list, title, x_label, y_label, show_fla
                                        show_flag=show_flag)
 
 
-def save_distribution_metrics(metrics_avg_lists, titles_list, x_label_list, y_label_list):
-    metrics_plot.save_plot_distribution_metrics(metrics_avg_lists, titles_list, x_label_list, y_label_list)
+def save_distribution_metrics(metrics_avg_lists, titles_list, x_label_list, y_label_list, save_path):
+    metrics_plot.save_plot_distribution_metrics(metrics_avg_lists, titles_list, x_label_list, y_label_list, save_path)
 
 
 def filter_keys(metrics_keys_dictionary):
