@@ -10,14 +10,13 @@ from src.Classes.Methods.Anisotropic_Filter import Anisotropic_Filter
 from src.Frontend.Utils import progress_bar
 from src.Classes.Methods.Mgac import Mgac
 from src.Classes.Region import Region
-from src.Constants import algorithm_constants, string_constants
+from src.Constants import algorithm_constants, string_constants, configuration_constants
 
 
-def generate_mask_video_of_all_cells():
-    images_list_of_lists = get_images_from_directories()
+def generate_mask_video_of_all_cells(source_directory):
+    images_list_of_lists = get_images_from_directories(source_directory)
     progress_bar.start_progress_bar(string_constants.GENERATE_MASK_VIDEOS_TITLE,
                                     string_constants.GENERATE_MASK_VIDEOS_DESCRIPTION, len(images_list_of_lists))
-    # print("Video to generate: " + str(len(images_list_of_lists)))
     masked_videos_paths_list = []
     for images_list_paths in images_list_of_lists:
         if progress_bar.is_progress_bar_cancelled():
@@ -30,18 +29,34 @@ def generate_mask_video_of_all_cells():
     return masked_videos_paths_list
 
 
-def get_images_from_directories():
-    directories_list = os.walk(image_file_manipulation.get_directory_path())
+def generate_video_of_all_cells(source_directory):
+    images_list_of_lists = get_images_from_directories(source_directory)
+    cells_videos_paths_list = []
+    # print("Video to generate: " + str(len(images_list_of_lists)))
+    for images_list_paths in images_list_of_lists:
+        video_path = video_generator.generate_video(images_list=images_list_paths,
+                                                    save_directory=configuration_constants.CELLS_VIDEOS)
+        cells_videos_paths_list.append(video_path)
+    return cells_videos_paths_list
+
+
+def get_images_from_directories(source_directory):
+    directories_list = os.walk(get_source_directory(source_directory))
     images_list_of_lists = []
     filtered_list_of_lists = []
     for directory_wrapper in directories_list:
         directory_path = directory_wrapper[0]
         images_list_of_lists.append(video_generator.get_files_from_directory(directory_path))
-        # Aca hay que remover la ultima imagen
     for images_list in images_list_of_lists:
         if images_list:
             filtered_list_of_lists.append(images_list)
     return filtered_list_of_lists
+
+
+def get_source_directory(source_directory=None):
+    if source_directory is None:
+        source_directory = image_file_manipulation.get_directory_path()
+    return source_directory
 
 
 def set_methods_to_apply(image_path):

@@ -7,14 +7,16 @@ import numpy as np
 import os
 
 
-def generate_video(images_list=None, specified_methods_to_apply=None):
+def generate_video(images_list=None, specified_methods_to_apply=None,
+                   save_directory=configuration_constants.MASK_VIDEOS):
     setup_directories()
     images_paths_list = images_list
     if images_list is None:
         images_paths_list = get_original_images()
     frames_paths_list = generate_frames(images_paths_list, specified_methods_to_apply)
-    save_name = set_save_name(images_paths_list[0])
-    video_path = save_video(frames_paths_list, save_name)
+    save_video_path = set_save_name(images_paths_list[0], save_directory)
+    print(save_video_path)
+    video_path = save_video(frames_paths_list, save_video_path)
     delete_frames(frames_paths_list)
     os.rmdir(configuration_constants.TEMPORARY_VIDEO_DIRECTORY_PATH)
     return video_path
@@ -68,9 +70,8 @@ def apply_methods_specified(image_array, specified_methods_to_apply):
     return image_array
 
 
-def save_video(frames_paths_list, save_name="asd"):
+def save_video(frames_paths_list, video_path):
     height, width, layers = cv.imread(frames_paths_list[0]).shape
-    video_path = create_video_path_name(save_name)
     video = cv.VideoWriter(video_path, 0, 1, (width, height))
     for frame_path in frames_paths_list:
         frame_array = cv.imread(frame_path)
@@ -100,14 +101,11 @@ def delete_frames(frames_paths_list):
         os.remove(frame_path)
 
 
-def set_save_name(image_path_sample):
+def set_save_name(image_path_sample, save_directory):
     image_path_sample = image_path_sample.replace("\\", "/")
-    save_path = image_path_sample.split('/')[-5] + " - " + image_path_sample.split('/')[-4] + " - " + \
+    initial_path = save_directory
+    filename = image_path_sample.split('/')[-5] + " - " + image_path_sample.split('/')[-4] + " - " + \
                 image_path_sample.split('/')[-3] + " - " + image_path_sample.split('/')[-2]
+    extension = ".avi"
+    save_path = initial_path + filename + extension
     return save_path
-
-
-def create_video_path_name(video_name):
-    file_extension = ".avi"
-    video_save_path = configuration_constants.MASK_VIDEOS + video_name + file_extension
-    return video_save_path

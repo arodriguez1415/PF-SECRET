@@ -62,9 +62,9 @@ def plot_metric(metric_values_list, frames_values_list, title, x_label, y_label,
 
 
 def save_metrics(metrics_values_lists, frames_values_lists, titles_list,
-                 x_label_list, y_label_list, save_path):
+                 x_label_list, y_label_list, cell_image_array, save_path):
     metrics_plot.save_plot_metrics(metrics_values_lists, frames_values_lists, titles_list,
-                                   x_label_list, y_label_list, save_path)
+                                   x_label_list, y_label_list, cell_image_array, save_path)
 
 
 def plot_distribution_metrics(metrics_avg_lists, titles_list, x_label_list, y_label_list):

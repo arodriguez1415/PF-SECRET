@@ -7,6 +7,7 @@ GENERAL_DIRECTORY = r"./Resources"
 
 # Videos directories
 
+CELLS_VIDEOS = r"./generated/Videos_de_Celulas/"
 MASK_VIDEOS = r"./generated/masked_contour_videos/"
 CONTOUR_VIDEOS = r"./generated/contour_videos/"
 
