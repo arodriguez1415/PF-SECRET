@@ -7,6 +7,7 @@ from PIL import Image
 
 from src.Backend.Image_processing_algorithms.Metrics import metrics_generator, metrics_plotter
 from src.Backend.Video_processing_algorithms import multiple_cells_video_generator
+from src.Backend.Video_processing_algorithms import movement_from_frames
 from src.Constants import algorithm_constants, configuration_constants
 
 
@@ -50,6 +51,10 @@ def routine():
     distribution_save_path = generate_distribution_path(len(metrics_excel_paths_list))
     metrics_plotter.save_distribution_metrics(metrics_avg_lists, titles_list, x_label_list,
                                               y_label_list, distribution_save_path)
+
+    # Movement heat map stage
+    threshold = 30
+    movement_from_frames.create_multiple_motion_images(threshold, source_directory)
 
 
 def routine_setup():

@@ -11,7 +11,11 @@ CELLS_VIDEOS = r"./generated/Videos_de_Celulas/"
 MASK_VIDEOS = r"./generated/masked_contour_videos/"
 CONTOUR_VIDEOS = r"./generated/contour_videos/"
 
-# Graphs folders
+# Movement heat map directory
+
+MOVEMENT_HEATMAP_IMAGES_DIRECTORY = r"./generated/Mapa de movimiento/"
+
+# Graphs directories
 
 GRAPHS_FOLDER = r"./generated/Graficos/"
 METRICS_GRAPH_FOLDER = r"./generated/Graficos/Metricas/"

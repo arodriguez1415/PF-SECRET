@@ -1,32 +1,65 @@
 import os
+from PIL import Image
 
 import numpy as np
 import cv2
 
+from src.Backend.Image_processing_algorithms.Operations.common_operations import bgr_to_rgb
 from src.Backend.Video_processing_algorithms import video_generator
+from src.Backend.Video_processing_algorithms.multiple_cells_video_generator import get_images_from_directories
 from src.Constants import configuration_constants
 
 
-def create_motion_image(threshold):
-    frames_path_list = generate_frames()
+def create_multiple_motion_images(threshold, source_directory):
+    images_list_of_lists = get_images_from_directories(source_directory)
+    coloured_motion_images_list = []
+    coloured_motion_images_save_path_list = []
+    for i in range(0, len(images_list_of_lists)):
+        unc_motion_image, c_motion_image, save_motion_path = create_motion_image(threshold, images_list_of_lists[i])
+        coloured_motion_images_list.append(c_motion_image)
+        coloured_motion_images_save_path_list.append(save_motion_path)
+
+    return coloured_motion_images_list, coloured_motion_images_save_path_list
+
+
+def create_motion_image(threshold, images_path_for_motion_list=None):
+    setup_directories()
+    images_path_for_motion_list = get_images(images_path_for_motion_list)
+    frames_path_list = generate_frames(images_path_for_motion_list)
     uncolored_motion_image_array = get_motion(frames_path_list, threshold)
-    coloured_motion_image_array = cv2.applyColorMap(uncolored_motion_image_array, cv2.COLORMAP_HOT)
-
-    # save_path = partial_save_path + "motion-heatmap.jpg"
-    # cv2.imwrite(save_path, color_image)
-
+    coloured_motion_image_array = bgr_to_rgb(cv2.applyColorMap(uncolored_motion_image_array, cv2.COLORMAP_HOT))
+    save_directory = configuration_constants.MOVEMENT_HEATMAP_IMAGES_DIRECTORY
+    save_motion_path = video_generator.set_save_name(images_path_for_motion_list[0], save_directory, extension=".png")
+    save_motion_image(coloured_motion_image_array, save_motion_path)
     video_generator.delete_frames(frames_path_list)
     os.rmdir(configuration_constants.TEMPORARY_VIDEO_DIRECTORY_PATH)
-    return uncolored_motion_image_array, coloured_motion_image_array
+    return uncolored_motion_image_array, coloured_motion_image_array, save_motion_path
 
 
-def generate_frames():
-    if not os.path.isdir(configuration_constants.TEMPORARY_VIDEO_DIRECTORY_PATH):
-        os.mkdir(configuration_constants.TEMPORARY_VIDEO_DIRECTORY_PATH)
+def get_images(images_path_for_motion_list):
+    if images_path_for_motion_list is None:
+        images_path_for_motion_list = video_generator.get_original_images()
+    return images_path_for_motion_list
 
-    images_paths_list = video_generator.get_original_images()
-    frames_paths_list = video_generator.generate_frames(images_paths_list, specified_methods_to_apply=None)
+
+def generate_frames(images_path_for_motion_list):
+    frames_paths_list = video_generator.generate_frames(images_path_for_motion_list, specified_methods_to_apply=None)
     return frames_paths_list
+
+
+def setup_directories():
+    create_directory_if_not_exists(configuration_constants.TEMPORARY_VIDEO_DIRECTORY_PATH)
+    create_directory_if_not_exists(configuration_constants.MOVEMENT_HEATMAP_IMAGES_DIRECTORY)
+
+
+def create_directory_if_not_exists(directory_path):
+    if not os.path.isdir(directory_path):
+        os.mkdir(directory_path)
+
+
+def save_motion_image(coloured_motion_image_array, save_motion_path):
+    im = Image.fromarray(coloured_motion_image_array)
+    im.save(save_motion_path)
 
 
 def get_grayscale(frame_path):
