@@ -68,6 +68,7 @@ def save_mask_metric(video_file_path, metric_values_list, metric_type):
 
     metrics_data = metrics_data[metrics_data.filter(regex='^(?!Unnamed)').columns]
     metrics_data.to_excel(metrics_file_path)
+    return metrics_file_path
 
 
 def save_fractal_dimension_metric(image_file_path, fractal_dimension_value, metric_type):

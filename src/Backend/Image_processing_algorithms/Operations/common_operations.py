@@ -58,10 +58,9 @@ def threshold(image_array, threshold_value):
 
 
 def generate_coloured_heatmap(matrix):
-    show_histogram(matrix)
     bgr_coloured_matrix = cv2.applyColorMap(matrix, cv2.COLORMAP_HOT)
     rgb_coloured_matrix = cv2.cvtColor(bgr_coloured_matrix, cv2.COLOR_BGR2RGB)
-    show_coloured_image(rgb_coloured_matrix)
+    return rgb_coloured_matrix
 
 
 def show_coloured_image(rgb_coloured_matrix):

@@ -2,11 +2,10 @@ from src.Backend.Image_processing_algorithms.Archive_manipulation import datafra
 from src.Backend.Image_processing_algorithms.Archive_manipulation import video_file_manipulation
 from src.Backend.Image_processing_algorithms.Texture import fractal_dimention
 from src.Backend.Image_processing_algorithms.Metrics import metrics_file, metrics_generator, metrics_plotter
-from src.Backend.Video_processing_algorithms.movement_from_frames import get_avg_motion_in_region
+from src.Backend.Video_processing_algorithms.movement_image_generator import get_avg_motion_in_region
 from src.Classes.Project_mastermind import Project_mastermind
 from src.Classes.Region import Region
 from src.Constants import algorithm_constants
-from src.Frontend.Utils import metrics_plot
 
 
 def configure_metrics_menu_connections(main_window):
@@ -120,7 +119,8 @@ def generate_movement_metrics(main_window):
 def plot_metrics(main_window):
     metrics_data_path = main_window.plot_metrics_dataframe_input.text()
     metrics_dictionary = get_plotting_metrics_dictionary(main_window)
-    metrics_plotter.plot_metrics(metrics_data_path, metrics_dictionary)
+    metrics_values_lists, frames_values_lists, titles_list, x_label_list, y_label_list = metrics_plotter.load_metrics(metrics_data_path, metrics_dictionary)
+    metrics_plotter.plot_metrics(metrics_values_lists, frames_values_lists, titles_list, x_label_list, y_label_list)
 
 
 def get_plotting_metrics_dictionary(main_window):
@@ -141,7 +141,8 @@ def get_plotting_metrics_dictionary(main_window):
 def plot_distribution_metrics(main_window):
     metrics_data_paths = dataframe_file_manipulation.get_multiple_dataframes_path()
     distribution_metrics_dictionary = get_plotting_distribution_metrics_dictionary(main_window)
-    metrics_plotter.plot_distribution_metrics(metrics_data_paths, distribution_metrics_dictionary)
+    metrics_avg_lists, titles_list, x_label_list, y_label_list = metrics_plotter.load_distribution_metrics(metrics_data_paths, distribution_metrics_dictionary)
+    metrics_plotter.plot_distribution_metrics(metrics_avg_lists, titles_list, x_label_list, y_label_list)
 
 
 def get_plotting_distribution_metrics_dictionary(main_window):

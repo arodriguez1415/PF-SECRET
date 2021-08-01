@@ -7,8 +7,23 @@ GENERAL_DIRECTORY = r"./Resources"
 
 # Videos directories
 
-MASK_VIDEOS = r"./generated/masked_contour_videos"
-CONTOUR_VIDEOS = r"./generated/contour_videos"
+CELLS_VIDEOS = r"./generated/Celulas en video/"
+MASK_VIDEOS = r"./generated/Mascaras de contorno/"
+CONTOUR_VIDEOS = r"./generated/Celulas contorneadas/"
+
+# Movement heat map directory
+
+MOVEMENT_HEATMAP_IMAGES_DIRECTORY = r"./generated/Mapas de movimiento/"
+
+# Texture heat map directory
+
+TEXTURE_HEATMAP_IMAGES_DIRECTORY = r"./generated/Mapas de textura/"
+
+# Graphs directories
+
+GRAPHS_FOLDER = r"./generated/Graficos/"
+METRICS_GRAPH_FOLDER = r"./generated/Graficos/Metricas/"
+DISTRIBUTION_METRICS_GRAPH_FOLDER = r"./generated/Graficos/Distribucion/"
 
 # Texture directories
 

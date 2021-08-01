@@ -1016,13 +1016,13 @@
        <string>Clasificación de textura</string>
       </property>
      </widget>
-     <widget class="QLabel" name="texture_classification_method_title">
+     <widget class="QGroupBox" name="texture_classification_image_group">
       <property name="geometry">
        <rect>
         <x>10</x>
-        <y>80</y>
-        <width>261</width>
-        <height>41</height>
+        <y>110</y>
+        <width>271</width>
+        <height>221</height>
        </rect>
       </property>
       <property name="font">
@@ -1030,20 +1030,77 @@
         <pointsize>14</pointsize>
        </font>
       </property>
-      <property name="layoutDirection">
-       <enum>Qt::LeftToRight</enum>
+      <property name="title">
+       <string>Clasificar imagen</string>
       </property>
-      <property name="text">
-       <string>Método de clasificación:</string>
-      </property>
+      <widget class="QPushButton" name="texture_classification_image_button">
+       <property name="geometry">
+        <rect>
+         <x>80</x>
+         <y>160</y>
+         <width>171</width>
+         <height>41</height>
+        </rect>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>12</pointsize>
+        </font>
+       </property>
+       <property name="text">
+        <string>Clasificar</string>
+       </property>
+      </widget>
+      <widget class="QLabel" name="texture_classification_image_clusters_label">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>40</y>
+         <width>231</width>
+         <height>31</height>
+        </rect>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>14</pointsize>
+        </font>
+       </property>
+       <property name="text">
+        <string>Clusters:</string>
+       </property>
+      </widget>
+      <widget class="QSpinBox" name="texture_classification_image_clusters_input">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>90</y>
+         <width>241</width>
+         <height>41</height>
+        </rect>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>12</pointsize>
+        </font>
+       </property>
+       <property name="minimum">
+        <number>1</number>
+       </property>
+       <property name="maximum">
+        <number>255</number>
+       </property>
+       <property name="value">
+        <number>10</number>
+       </property>
+      </widget>
      </widget>
-     <widget class="QComboBox" name="texture_classification_method_combobox">
+     <widget class="QGroupBox" name="texture_classification_video_group">
       <property name="geometry">
        <rect>
         <x>10</x>
-        <y>140</y>
-        <width>261</width>
-        <height>41</height>
+        <y>360</y>
+        <width>271</width>
+        <height>351</height>
        </rect>
       </property>
       <property name="font">
@@ -1051,188 +1108,111 @@
         <pointsize>14</pointsize>
        </font>
       </property>
-      <item>
-       <property name="text">
-        <string>K means</string>
+      <property name="title">
+       <string>Clasificar video</string>
+      </property>
+      <widget class="QPushButton" name="texture_classification_video_button">
+       <property name="geometry">
+        <rect>
+         <x>80</x>
+         <y>290</y>
+         <width>171</width>
+         <height>41</height>
+        </rect>
        </property>
-      </item>
-      <item>
-       <property name="text">
-        <string>HDBScan</string>
+       <property name="font">
+        <font>
+         <pointsize>12</pointsize>
+        </font>
        </property>
-      </item>
-      <item>
        <property name="text">
-        <string>Mean shift</string>
+        <string>Clasificar</string>
        </property>
-      </item>
-      <item>
+      </widget>
+      <widget class="QLabel" name="texture_classification_video_threshold_label">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>40</y>
+         <width>231</width>
+         <height>31</height>
+        </rect>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>14</pointsize>
+        </font>
+       </property>
        <property name="text">
-        <string>Kohonen</string>
+        <string>Umbral:</string>
        </property>
-      </item>
-     </widget>
-     <widget class="QLabel" name="texture_classification_descriptors_title">
-      <property name="geometry">
-       <rect>
-        <x>10</x>
-        <y>210</y>
-        <width>261</width>
-        <height>41</height>
-       </rect>
-      </property>
-      <property name="font">
-       <font>
-        <pointsize>14</pointsize>
-       </font>
-      </property>
-      <property name="layoutDirection">
-       <enum>Qt::LeftToRight</enum>
-      </property>
-      <property name="text">
-       <string>Descriptos a usar:</string>
-      </property>
-     </widget>
-     <widget class="QCheckBox" name="texture_classification_homogeneity_descriptor_checkbox">
-      <property name="geometry">
-       <rect>
-        <x>10</x>
-        <y>350</y>
-        <width>251</width>
-        <height>31</height>
-       </rect>
-      </property>
-      <property name="font">
-       <font>
-        <pointsize>16</pointsize>
-       </font>
-      </property>
-      <property name="text">
-       <string>Homogeneidad</string>
-      </property>
-      <property name="checked">
-       <bool>true</bool>
-      </property>
-     </widget>
-     <widget class="QCheckBox" name="texture_classification_entropy_descriptor_checkbox">
-      <property name="geometry">
-       <rect>
-        <x>10</x>
-        <y>310</y>
-        <width>251</width>
-        <height>31</height>
-       </rect>
-      </property>
-      <property name="font">
-       <font>
-        <pointsize>16</pointsize>
-       </font>
-      </property>
-      <property name="text">
-       <string>Entropía GLCM</string>
-      </property>
-      <property name="checked">
-       <bool>true</bool>
-      </property>
-     </widget>
-     <widget class="QCheckBox" name="texture_classification_mean_descriptor_checkbox">
-      <property name="geometry">
-       <rect>
-        <x>10</x>
-        <y>270</y>
-        <width>251</width>
-        <height>31</height>
-       </rect>
-      </property>
-      <property name="font">
-       <font>
-        <pointsize>16</pointsize>
-       </font>
-      </property>
-      <property name="text">
-       <string>Media</string>
-      </property>
-      <property name="checked">
-       <bool>true</bool>
-      </property>
-     </widget>
-     <widget class="QCheckBox" name="texture_classification_dissimilarity_descriptor_checkbox">
-      <property name="geometry">
-       <rect>
-        <x>10</x>
-        <y>390</y>
-        <width>251</width>
-        <height>31</height>
-       </rect>
-      </property>
-      <property name="font">
-       <font>
-        <pointsize>16</pointsize>
-       </font>
-      </property>
-      <property name="text">
-       <string>Disimilitud</string>
-      </property>
-      <property name="checked">
-       <bool>true</bool>
-      </property>
-     </widget>
-     <widget class="QPushButton" name="texture_classification_apply_button">
-      <property name="geometry">
-       <rect>
-        <x>120</x>
-        <y>610</y>
-        <width>151</width>
-        <height>51</height>
-       </rect>
-      </property>
-      <property name="font">
-       <font>
-        <pointsize>16</pointsize>
-       </font>
-      </property>
-      <property name="text">
-       <string>Clasificar</string>
-      </property>
-     </widget>
-     <widget class="QCheckBox" name="texture_classification_shannon_entropy_descriptor_checkbox">
-      <property name="geometry">
-       <rect>
-        <x>10</x>
-        <y>430</y>
-        <width>251</width>
-        <height>31</height>
-       </rect>
-      </property>
-      <property name="font">
-       <font>
-        <pointsize>16</pointsize>
-       </font>
-      </property>
-      <property name="text">
-       <string>Entropía Shannon</string>
-      </property>
-     </widget>
-     <widget class="QCheckBox" name="texture_classification_local_entropy_descriptor_checkbox">
-      <property name="geometry">
-       <rect>
-        <x>10</x>
-        <y>470</y>
-        <width>251</width>
-        <height>31</height>
-       </rect>
-      </property>
-      <property name="font">
-       <font>
-        <pointsize>16</pointsize>
-       </font>
-      </property>
-      <property name="text">
-       <string>Entropía local</string>
-      </property>
-      <property name="checked">
-       <bool>true</bool>
-      </property>
+      </widget>
+      <widget class="QSpinBox" name="texture_classification_video_threshold_input">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>90</y>
+         <width>241</width>
+         <height>41</height>
+        </rect>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>12</pointsize>
+        </font>
+       </property>
+       <property name="minimum">
+        <number>1</number>
+       </property>
+       <property name="maximum">
+        <number>255</number>
+       </property>
+       <property name="value">
+        <number>30</number>
+       </property>
+      </widget>
+      <widget class="QSpinBox" name="texture_classification_video_clusters_input">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>200</y>
+         <width>241</width>
+         <height>41</height>
+        </rect>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>12</pointsize>
+        </font>
+       </property>
+       <property name="minimum">
+        <number>1</number>
+       </property>
+       <property name="maximum">
+        <number>255</number>
+       </property>
+       <property name="value">
+        <number>10</number>
+       </property>
+      </widget>
+      <widget class="QLabel" name="texture_classification_video_clusters_label">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>150</y>
+         <width>231</width>
+         <height>31</height>
+        </rect>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>14</pointsize>
+        </font>
+       </property>
+       <property name="text">
+        <string>Clusters:</string>
+       </property>
+      </widget>
      </widget>
     </widget>
     <widget class="QWidget" name="global_routine_options">
@@ -1274,6 +1254,108 @@
       <property name="text">
        <string>Iniciar</string>
       </property>
+     </widget>
+     <widget class="QGroupBox" name="global_routine_subroutines_label">
+      <property name="geometry">
+       <rect>
+        <x>20</x>
+        <y>120</y>
+        <width>261</width>
+        <height>221</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>12</pointsize>
+       </font>
+      </property>
+      <property name="title">
+       <string>Sub - Rutinas</string>
+      </property>
+      <widget class="QCheckBox" name="global_routine_subroutines_contour_checkbox">
+       <property name="geometry">
+        <rect>
+         <x>20</x>
+         <y>40</y>
+         <width>221</width>
+         <height>31</height>
+        </rect>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>16</pointsize>
+        </font>
+       </property>
+       <property name="text">
+        <string>Contornos de celulas</string>
+       </property>
+       <property name="checked">
+        <bool>true</bool>
+       </property>
+      </widget>
+      <widget class="QCheckBox" name="global_routine_subroutines_contour_metrics">
+       <property name="geometry">
+        <rect>
+         <x>50</x>
+         <y>80</y>
+         <width>121</width>
+         <height>31</height>
+        </rect>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>16</pointsize>
+        </font>
+       </property>
+       <property name="text">
+        <string>Metricas</string>
+       </property>
+       <property name="checked">
+        <bool>true</bool>
+       </property>
+      </widget>
+      <widget class="QCheckBox" name="global_routine_subroutines_contour_movement_map_checkbox">
+       <property name="geometry">
+        <rect>
+         <x>20</x>
+         <y>120</y>
+         <width>221</width>
+         <height>31</height>
+        </rect>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>16</pointsize>
+        </font>
+       </property>
+       <property name="text">
+        <string>Mapa de calor</string>
+       </property>
+       <property name="checked">
+        <bool>true</bool>
+       </property>
+      </widget>
+      <widget class="QCheckBox" name="global_routine_subroutines_contour_checkbox_texture_map_checkbox">
+       <property name="geometry">
+        <rect>
+         <x>20</x>
+         <y>160</y>
+         <width>221</width>
+         <height>31</height>
+        </rect>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>16</pointsize>
+        </font>
+       </property>
+       <property name="text">
+        <string>Mapa de textura</string>
+       </property>
+       <property name="checked">
+        <bool>true</bool>
+       </property>
+      </widget>
      </widget>
     </widget>
     <widget class="QWidget" name="adaptive_threshold_options">

@@ -11,15 +11,19 @@ from src.Frontend.Utils import progress_bar
 def generate_metrics(mask_video_path, metrics_dictionary):
     array_images_list = video_file_manipulation.get_video_as_array(mask_video_path)
     checked_metrics_count = get_checked_metrics_count(metrics_dictionary)
+    metric_keys_list = filter_keys(metrics_dictionary)
 
     progress_bar.start_progress_bar(string_constants.CALCULATE_METRICS_TITLE,
                                     string_constants.CALCULATE_METRICS_DESCRIPTION,
                                     len(array_images_list) * checked_metrics_count)
 
-    for metric_key in metrics_dictionary.keys():
-        if metrics_dictionary[metric_key]:
-            metric_values_list = generate_metric(metric_key, array_images_list)
-            metrics_file.save_mask_metric(mask_video_path, metric_values_list, metric_key)
+    metrics_excel_path = ""
+    for i in range(0, len(metric_keys_list)):
+        metric_key = metric_keys_list[i]
+        metric_values_list = generate_metric(metric_key, array_images_list)
+        metrics_excel_path = metrics_file.save_mask_metric(mask_video_path, metric_values_list, metric_key)
+
+    return metrics_excel_path
 
 
 def generate_metric(metric_type, array_images_list):
@@ -43,3 +47,13 @@ def get_checked_metrics_count(metrics_dictionary):
             checked_values = checked_values + 1
 
     return checked_values
+
+
+def filter_keys(metrics_keys_dictionary):
+    metric_keys_list = []
+
+    for key in metrics_keys_dictionary.keys():
+        if metrics_keys_dictionary[key]:
+            metric_keys_list.append(key)
+
+    return metric_keys_list

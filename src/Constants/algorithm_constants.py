@@ -73,3 +73,11 @@ GLCM_HOMOGENEITY = "Homogeneity"
 GLCM_DISSIMILARITY = "Dissimilarity"
 LOCAL_ENTROPY = "Local_Entropy"
 SHANNON_ENTROPY = "Shannon"
+
+
+# Global routine -- Sub Routines
+
+CONTOUR_SUBROUTINE = "Contour sub routine"
+METRICS_SUBROUTINE = "Metrics sub routine"
+MOVEMENT_SUBROUTINE = "Movement sub routine"
+TEXTURE_SUBROUTINE = "Texture sub routine"
