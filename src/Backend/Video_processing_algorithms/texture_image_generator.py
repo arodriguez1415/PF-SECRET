@@ -6,6 +6,7 @@ import numpy as np
 
 from src.Backend.Image_processing_algorithms.Archive_manipulation.dataframe_file_manipulation import \
     create_dataframe_from_descriptors
+from src.Backend.Image_processing_algorithms.Operations.common_operations import bgr_to_rgb
 from src.Backend.Image_processing_algorithms.Texture.unsupervised_learning_methods import get_descriptors, k_means
 from src.Backend.Video_processing_algorithms import video_generator
 from src.Backend.Video_processing_algorithms.multiple_cells_video_generator import get_images_from_directories
@@ -20,7 +21,8 @@ def classify_single_image(image_array, clusters_quantity=20):
     list_descriptors_dict = get_descriptors(list_descriptors_dict, image_array, descriptors_labels)
     dataframe = create_dataframe_from_descriptors(list_descriptors_dict)
     classified_image = k_means(dataframe, clusters_quantity=clusters_quantity)
-    return classified_image
+    coloured_texture_image_array = bgr_to_rgb(cv2.applyColorMap(classified_image, cv2.COLORMAP_HOT))
+    return coloured_texture_image_array
 
 
 def create_multiple_texture_images(threshold, clusters_quantity, source_directory):
@@ -94,7 +96,8 @@ def get_texture_image(images_path_list, clusters_quantity, threshold):
     list_descriptors_dict = get_descriptors(list_descriptors_dict, accumulated_motion, descriptors_labels)
     dataframe = create_dataframe_from_descriptors(list_descriptors_dict)
     classified_image = k_means(dataframe, clusters_quantity=clusters_quantity)
-    return classified_image
+    coloured_texture_image_array = bgr_to_rgb(cv2.applyColorMap(classified_image, cv2.COLORMAP_HOT))
+    return coloured_texture_image_array
 
 
 def normalize_values(accumulated_motion):
