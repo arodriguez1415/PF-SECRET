@@ -15,6 +15,10 @@ CONTOUR_VIDEOS = r"./generated/contour_videos/"
 
 MOVEMENT_HEATMAP_IMAGES_DIRECTORY = r"./generated/Mapa de movimiento/"
 
+# Texture heat map directory
+
+TEXTURE_HEATMAP_IMAGES_DIRECTORY = r"./generated/Mapa de texture/"
+
 # Graphs directories
 
 GRAPHS_FOLDER = r"./generated/Graficos/"

@@ -2,7 +2,7 @@ from src.Backend.Image_processing_algorithms.Archive_manipulation import datafra
 from src.Backend.Image_processing_algorithms.Archive_manipulation import video_file_manipulation
 from src.Backend.Image_processing_algorithms.Texture import fractal_dimention
 from src.Backend.Image_processing_algorithms.Metrics import metrics_file, metrics_generator, metrics_plotter
-from src.Backend.Video_processing_algorithms.movement_from_frames import get_avg_motion_in_region
+from src.Backend.Video_processing_algorithms.movement_image_generator import get_avg_motion_in_region
 from src.Classes.Project_mastermind import Project_mastermind
 from src.Classes.Region import Region
 from src.Constants import algorithm_constants

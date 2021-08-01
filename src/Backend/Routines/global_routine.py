@@ -7,7 +7,8 @@ from PIL import Image
 
 from src.Backend.Image_processing_algorithms.Metrics import metrics_generator, metrics_plotter
 from src.Backend.Video_processing_algorithms import multiple_cells_video_generator
-from src.Backend.Video_processing_algorithms import movement_from_frames
+from src.Backend.Video_processing_algorithms.movement_image_generator import create_multiple_motion_images
+from src.Backend.Video_processing_algorithms.texture_image_generator import create_multiple_texture_images
 from src.Constants import algorithm_constants, configuration_constants
 
 
@@ -53,8 +54,14 @@ def routine():
                                               y_label_list, distribution_save_path)
 
     # Movement heat map stage
-    threshold = 30
-    movement_from_frames.create_multiple_motion_images(threshold, source_directory)
+    threshold = 15
+    create_multiple_motion_images(threshold, source_directory)
+
+    # Texture heat map stage
+    threshold = 15
+    clusters_quantity = 10
+    create_multiple_texture_images(threshold, clusters_quantity, source_directory)
+
 
 
 def routine_setup():

@@ -84,14 +84,10 @@ def save_video(frames_paths_list, video_path):
 def get_files_from_directory(directory):
     directory_files_paths_list = os.listdir(directory)
     correct_directory_files_paths_list = []
-    i = 0
     for file in directory_files_paths_list:
         if file.endswith(".tif"):
-            i += 1
             file_path = os.path.join(directory, file)
             correct_directory_files_paths_list.append(file_path)
-            if i == 50:
-                break
     if correct_directory_files_paths_list:
         correct_directory_files_paths_list.pop()
     return correct_directory_files_paths_list
