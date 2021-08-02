@@ -301,7 +301,7 @@
      </rect>
     </property>
     <property name="currentIndex">
-     <number>9</number>
+     <number>1</number>
     </property>
     <widget class="QWidget" name="blank_page"/>
     <widget class="QWidget" name="anisotropic_filter_options">
@@ -1273,7 +1273,7 @@
         <number>255</number>
        </property>
        <property name="value">
-        <number>30</number>
+        <number>20</number>
        </property>
       </widget>
       <widget class="QSpinBox" name="texture_classification_video_clusters_input">
@@ -1881,94 +1881,6 @@
       </property>
      </widget>
     </widget>
-    <widget class="QWidget" name="generate_fractal_dimension_metrics_options">
-     <widget class="QLabel" name="generate_fractal_dimension_metrics_title">
-      <property name="geometry">
-       <rect>
-        <x>20</x>
-        <y>30</y>
-        <width>261</width>
-        <height>51</height>
-       </rect>
-      </property>
-      <property name="font">
-       <font>
-        <pointsize>16</pointsize>
-       </font>
-      </property>
-      <property name="text">
-       <string>Generar dimensión Fractal:</string>
-      </property>
-     </widget>
-     <widget class="QLabel" name="generate_fractal_dimension_metrics_region_label">
-      <property name="geometry">
-       <rect>
-        <x>20</x>
-        <y>90</y>
-        <width>261</width>
-        <height>51</height>
-       </rect>
-      </property>
-      <property name="font">
-       <font>
-        <pointsize>12</pointsize>
-       </font>
-      </property>
-      <property name="text">
-       <string>Seleccionar tipo de región:</string>
-      </property>
-     </widget>
-     <widget class="QComboBox" name="generate_fractal_dimension_metrics_region_combobox">
-      <property name="geometry">
-       <rect>
-        <x>20</x>
-        <y>160</y>
-        <width>251</width>
-        <height>41</height>
-       </rect>
-      </property>
-      <property name="font">
-       <font>
-        <pointsize>10</pointsize>
-       </font>
-      </property>
-      <item>
-       <property name="text">
-        <string>Borde - Dimension Fractal</string>
-       </property>
-      </item>
-      <item>
-       <property name="text">
-        <string>Perinúcleo - Dimension Fractal</string>
-       </property>
-      </item>
-      <item>
-       <property name="text">
-        <string>Núcleo - Dimension Fractal</string>
-       </property>
-      </item>
-     </widget>
-     <widget class="QPushButton" name="generate_fractal_dimension_metrics_apply_button">
-      <property name="geometry">
-       <rect>
-        <x>80</x>
-        <y>240</y>
-        <width>191</width>
-        <height>51</height>
-       </rect>
-      </property>
-      <property name="font">
-       <font>
-        <pointsize>10</pointsize>
-        <weight>75</weight>
-        <bold>true</bold>
-       </font>
-      </property>
-      <property name="text">
-       <string>Generar y guardar métrica</string>
-      </property>
-     </widget>
-    </widget>
     <widget class="QWidget" name="heat_map_options">
      <widget class="QLabel" name="generate_heat_map_title">
       <property name="geometry">
@@ -2046,94 +1958,9 @@
       <property name="maximum">
        <number>255</number>
       </property>
-     </widget>
-    </widget>
-    <widget class="QWidget" name="generate_movement_metrics_options">
-     <widget class="QLabel" name="generate_movement_metrics_region_label">
-      <property name="geometry">
-       <rect>
-        <x>20</x>
-        <y>90</y>
-        <width>261</width>
-        <height>51</height>
-       </rect>
+      <property name="value">
+       <number>20</number>
       </property>
-      <property name="font">
-       <font>
-        <pointsize>12</pointsize>
-       </font>
-      </property>
-      <property name="text">
-       <string>Seleccionar tipo de región:</string>
-      </property>
-     </widget>
-     <widget class="QPushButton" name="generate_movement_metrics_apply_button">
-      <property name="geometry">
-       <rect>
-        <x>80</x>
-        <y>240</y>
-        <width>191</width>
-        <height>51</height>
-       </rect>
-      </property>
-      <property name="font">
-       <font>
-        <pointsize>10</pointsize>
-        <weight>75</weight>
-        <bold>true</bold>
-       </font>
-      </property>
-      <property name="text">
-       <string>Generar y guardar métrica</string>
-      </property>
-     </widget>
-     <widget class="QLabel" name="generate_movement_metrics_title">
-      <property name="geometry">
-       <rect>
-        <x>20</x>
-        <y>30</y>
-        <width>261</width>
-        <height>51</height>
-       </rect>
-      </property>
-      <property name="font">
-       <font>
-        <pointsize>16</pointsize>
-       </font>
-      </property>
-      <property name="text">
-       <string>Métricas de movimiento</string>
-      </property>
-     </widget>
-     <widget class="QComboBox" name="generate_movement_metrics_region_combobox">
-      <property name="geometry">
-       <rect>
-        <x>20</x>
-        <y>160</y>
-        <width>251</width>
-        <height>41</height>
-       </rect>
-      </property>
-      <property name="font">
-       <font>
-        <pointsize>10</pointsize>
-       </font>
-      </property>
-      <item>
-       <property name="text">
-        <string>Borde - Movimiento</string>
-       </property>
-      </item>
-      <item>
-       <property name="text">
-        <string>Perinúcleo - Movimiento</string>
-       </property>
-      </item>
-      <item>
-       <property name="text">
-        <string>Núcleo - Movimiento</string>
-       </property>
-      </item>
      </widget>
     </widget>
     <widget class="QWidget" name="plot_metrics_options">
@@ -2393,114 +2220,6 @@
        <string>Razón de ejes</string>
       </property>
      </widget>
-     <widget class="QCheckBox" name="plot_metrics_distribution_fractal_border_checkbox">
-      <property name="geometry">
-       <rect>
-        <x>20</x>
-        <y>280</y>
-        <width>251</width>
-        <height>31</height>
-       </rect>
-      </property>
-      <property name="font">
-       <font>
-        <pointsize>14</pointsize>
-       </font>
-      </property>
-      <property name="text">
-       <string>Borde - Dimensión fractal</string>
-      </property>
-     </widget>
-     <widget class="QCheckBox" name="plot_metrics_distribution_fractal_perinuclear_checkbox">
-      <property name="geometry">
-       <rect>
-        <x>20</x>
-        <y>320</y>
-        <width>281</width>
-        <height>31</height>
-       </rect>
-      </property>
-      <property name="font">
-       <font>
-        <pointsize>14</pointsize>
-       </font>
-      </property>
-      <property name="text">
-       <string>Perinucleo - Dimensión fractal</string>
-      </property>
-     </widget>
-     <widget class="QCheckBox" name="plot_metrics_distribution_fractal_nuclear_checkbox">
-      <property name="geometry">
-       <rect>
-        <x>20</x>
-        <y>360</y>
-        <width>251</width>
-        <height>31</height>
-       </rect>
-      </property>
-      <property name="font">
-       <font>
-        <pointsize>14</pointsize>
-       </font>
-      </property>
-      <property name="text">
-       <string>Nucleo - Dimensión fractal</string>
-      </property>
-     </widget>
-     <widget class="QCheckBox" name="plot_metrics_distribution_movement_nuclear_checkbox">
-      <property name="geometry">
-       <rect>
-        <x>20</x>
-        <y>480</y>
-        <width>251</width>
-        <height>31</height>
-       </rect>
-      </property>
-      <property name="font">
-       <font>
-        <pointsize>14</pointsize>
-       </font>
-      </property>
-      <property name="text">
-       <string>Nucleo - Movimiento</string>
-      </property>
-     </widget>
-     <widget class="QCheckBox" name="plot_metrics_distribution_movement_border_checkbox">
-      <property name="geometry">
-       <rect>
-        <x>20</x>
-        <y>400</y>
-        <width>251</width>
-        <height>31</height>
-       </rect>
-      </property>
-      <property name="font">
-       <font>
-        <pointsize>14</pointsize>
-       </font>
-      </property>
-      <property name="text">
-       <string>Borde - Movimiento</string>
-      </property>
-     </widget>
-     <widget class="QCheckBox" name="plot_metrics_distribution_movement_perinuclear_checkbox">
-      <property name="geometry">
-       <rect>
-        <x>20</x>
-        <y>440</y>
-        <width>281</width>
-        <height>31</height>
-       </rect>
-      </property>
-      <property name="font">
-       <font>
-        <pointsize>14</pointsize>
-       </font>
-      </property>
-      <property name="text">
-       <string>Perinucleo - Movimiento</string>
-      </property>
-     </widget>
      <widget class="QPushButton" name="plot_metrics_distribution_button">
       <property name="geometry">
        <rect>
@@ -2582,8 +2301,6 @@
      <string>Metricas</string>
     </property>
     <addaction name="generate_metrics_menu_option"/>
-    <addaction name="generate_movement_metrics_menu_option"/>
-    <addaction name="generate_fractal_dimention_metrics_menu_option"/>
     <addaction name="separator"/>
     <addaction name="plot_metrics_menu_option"/>
     <addaction name="plot_distribution_metric_menu_option"/>
@@ -2901,34 +2618,18 @@
  <resources/>
  <connections>
   <connection>
-   <sender>lbp_radius_box</sender>
+   <sender>adaptive_threshold_window_size_spinner</sender>
    <signal>valueChanged(int)</signal>
-   <receiver>lbp_radius_slider</receiver>
+   <receiver>adaptive_threshold_window_size_box</receiver>
    <slot>setValue(int)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>861</x>
-     <y>298</y>
+     <x>858</x>
+     <y>210</y>
     </hint>
     <hint type="destinationlabel">
-     <x>867</x>
-     <y>334</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>lbp_radius_slider</sender>
-   <signal>valueChanged(int)</signal>
-   <receiver>lbp_radius_box</receiver>
-   <slot>setValue(int)</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>945</x>
-     <y>335</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>941</x>
-     <y>295</y>
+     <x>852</x>
+     <y>174</y>
     </hint>
    </hints>
   </connection>
@@ -2949,34 +2650,34 @@
    </hints>
   </connection>
   <connection>
-   <sender>lbp_symmetric_points_slider</sender>
+   <sender>lbp_radius_slider</sender>
    <signal>valueChanged(int)</signal>
-   <receiver>lbp_symmetric_points_box</receiver>
+   <receiver>lbp_radius_box</receiver>
    <slot>setValue(int)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>959</x>
-     <y>204</y>
+     <x>945</x>
+     <y>335</y>
     </hint>
     <hint type="destinationlabel">
-     <x>958</x>
-     <y>156</y>
+     <x>941</x>
+     <y>295</y>
     </hint>
    </hints>
   </connection>
   <connection>
-   <sender>adaptive_threshold_window_size_spinner</sender>
+   <sender>adaptive_threshold_c_constant_spinner</sender>
    <signal>valueChanged(int)</signal>
-   <receiver>adaptive_threshold_window_size_box</receiver>
+   <receiver>adaptive_threshold_c_constant_box</receiver>
    <slot>setValue(int)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>858</x>
-     <y>210</y>
+     <x>963</x>
+     <y>377</y>
     </hint>
     <hint type="destinationlabel">
-     <x>852</x>
-     <y>174</y>
+     <x>958</x>
+     <y>343</y>
     </hint>
    </hints>
   </connection>
@@ -3013,18 +2714,34 @@
    </hints>
   </connection>
   <connection>
-   <sender>adaptive_threshold_c_constant_spinner</sender>
+   <sender>lbp_radius_box</sender>
    <signal>valueChanged(int)</signal>
-   <receiver>adaptive_threshold_c_constant_box</receiver>
+   <receiver>lbp_radius_slider</receiver>
    <slot>setValue(int)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>963</x>
-     <y>377</y>
+     <x>861</x>
+     <y>298</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>867</x>
+     <y>334</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>lbp_symmetric_points_slider</sender>
+   <signal>valueChanged(int)</signal>
+   <receiver>lbp_symmetric_points_box</receiver>
+   <slot>setValue(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>959</x>
+     <y>204</y>
     </hint>
     <hint type="destinationlabel">
      <x>958</x>
-     <y>343</y>
+     <y>156</y>
     </hint>
    </hints>
   </connection>

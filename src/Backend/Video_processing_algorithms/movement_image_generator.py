@@ -7,6 +7,7 @@ import cv2
 from src.Backend.Image_processing_algorithms.Operations.common_operations import bgr_to_rgb
 from src.Backend.Video_processing_algorithms import video_generator
 from src.Backend.Video_processing_algorithms.multiple_cells_video_generator import get_images_from_directories
+from src.Classes.Methods.Anisotropic_Filter import Anisotropic_Filter
 from src.Constants import configuration_constants
 
 
@@ -43,8 +44,18 @@ def get_images(images_path_for_motion_list):
 
 
 def generate_frames(images_path_for_motion_list):
-    frames_paths_list = video_generator.generate_frames(images_path_for_motion_list, specified_methods_to_apply=None)
+    specified_methods_to_apply = set_methods_to_apply()
+    frames_paths_list = video_generator.generate_frames(images_path_for_motion_list,
+                                                        specified_methods_to_apply=specified_methods_to_apply)
     return frames_paths_list
+
+def set_methods_to_apply():
+    methods_to_apply = []
+    anisotropic_method = Anisotropic_Filter()
+    methods_to_apply.append(anisotropic_method)
+    methods_to_apply.append(anisotropic_method)
+    methods_to_apply.append(anisotropic_method)
+    return methods_to_apply
 
 
 def setup_directories():

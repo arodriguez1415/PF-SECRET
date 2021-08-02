@@ -3,6 +3,7 @@ import os
 from PIL import Image
 import cv2
 import numpy as np
+import matplotlib.pyplot as plt
 
 from src.Backend.Image_processing_algorithms.Archive_manipulation.dataframe_file_manipulation import \
     create_dataframe_from_descriptors
@@ -89,7 +90,6 @@ def get_texture_image(images_path_list, clusters_quantity, threshold):
     accumulated_texture = np.zeros((rows, cols), np.uint8)
     descriptors_labels = [algorithm_constants.GLCM_MEAN, algorithm_constants.GLCM_ENTROPY,
                           algorithm_constants.GLCM_HOMOGENEITY, algorithm_constants.GLCM_DISSIMILARITY]
-
     for i in range(0, len(images_path_list)):
         current_image_array = get_grayscale(images_path_list[i])
         ret, current_image_array = cv2.threshold(current_image_array, threshold, 255, cv2.THRESH_BINARY)

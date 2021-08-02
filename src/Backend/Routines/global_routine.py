@@ -117,14 +117,14 @@ def movement_and_texture_heat_map_sub_routine(sub_routines, source_directory):
 
 def movement_heat_map_sub_routine(source_directory):
     # Movement heat map stage
-    threshold = 30
+    threshold = 20
     motion_images_array_list, motion_images_path = create_multiple_motion_images(threshold, source_directory)
     return motion_images_array_list
 
 
 def texture_heat_map_sub_routine(source_directory):
     # Texture heat map stage
-    threshold = 30
+    threshold = 20
     clusters_quantity = 10
     texture_images_array_list, texture_images_path = create_multiple_texture_images(threshold, clusters_quantity,
                                                                                     source_directory)

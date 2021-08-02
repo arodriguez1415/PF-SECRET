@@ -48,10 +48,10 @@ def mgac_only_cell(image):
 
 def get_borders(polygon_region, image, iterations, threshold, smoothing, ballon, alpha, sigma):
     gimg = inverse_gaussian_gradient(image, alpha=alpha, sigma=sigma)
-    callback = mgac_library.visual_callback_2d(image)
+    # callback = mgac_library.visual_callback_2d(image)
     init_ls = polygon_level_set(polygon_region, gimg.shape[0], gimg.shape[1])
     borders = mgac_library.morphological_geodesic_active_contour(gimg, iterations=iterations,
-                                                                 iter_callback=callback,
+                                                                 # iter_callback=callback,
                                                                  init_level_set=init_ls,
                                                                  smoothing=smoothing, threshold=threshold,
                                                                  balloon=ballon)

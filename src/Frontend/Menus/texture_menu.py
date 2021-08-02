@@ -109,7 +109,7 @@ def classify_image_texture(main_window):
 
 def classify_video_texture(main_window):
     project_mastermind = Project_mastermind.get_instance()
-    clusters_quantity = main_window.texture_classification_image_clusters_input.value()
+    clusters_quantity = main_window.texture_classification_video_clusters_input.value()
     threshold = main_window.texture_classification_video_threshold_input.value()
     uncoloured_classified_image, coloured_classified_image = create_texture_image_from_video(clusters_quantity=clusters_quantity,
                                                                                              threshold=threshold)
