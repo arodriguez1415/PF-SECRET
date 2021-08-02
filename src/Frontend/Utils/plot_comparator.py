@@ -15,7 +15,7 @@ def plot_original_vs_actual(images, title, sub_titles):
     plt.show()
 
 
-def plot_comparison(images, title, sub_titles):
+def plot_comparison(images, title, sub_titles, save_path=None):
     fig = plt.figure(figsize=(9.75, 3))
     fig.suptitle(title)
     image = None
@@ -40,6 +40,9 @@ def plot_comparison(images, title, sub_titles):
     grid[1].cax.colorbar(image)
     grid[1].cax.toggle_label(True)
 
-    # plt.tight_layout()    # Works, but may still require rect paramater to keep colorbar labels visible
-    plt.show()
+    if save_path is not None:
+        plt.savefig(save_path)
+    else:
+        plt.show()
+
 

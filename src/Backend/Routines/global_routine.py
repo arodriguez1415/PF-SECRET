@@ -8,8 +8,11 @@ from PIL import Image
 from src.Backend.Image_processing_algorithms.Metrics import metrics_generator, metrics_plotter
 from src.Backend.Video_processing_algorithms import multiple_cells_video_generator
 from src.Backend.Video_processing_algorithms.movement_image_generator import create_multiple_motion_images
+from src.Backend.Video_processing_algorithms.multiple_cells_video_generator import get_images_from_directories
 from src.Backend.Video_processing_algorithms.texture_image_generator import create_multiple_texture_images
-from src.Constants import algorithm_constants, configuration_constants
+from src.Backend.Video_processing_algorithms.video_generator import set_save_name
+from src.Constants import algorithm_constants, configuration_constants, string_constants
+from src.Frontend.Utils import plot_comparator
 
 
 def routine(sub_routines):
@@ -19,11 +22,7 @@ def routine(sub_routines):
     if algorithm_constants.CONTOUR_SUBROUTINE in sub_routines:
         contour_and_metrics_sub_routine(sub_routines, source_directory)
 
-    if algorithm_constants.MOVEMENT_SUBROUTINE in sub_routines:
-        movement_heat_map_sub_routine(source_directory)
-
-    if algorithm_constants.TEXTURE_SUBROUTINE in sub_routines:
-        texture_heat_map_sub_routine(source_directory)
+    movement_and_texture_heat_map_sub_routine(sub_routines, source_directory)
 
 
 def routine_setup():
@@ -31,6 +30,7 @@ def routine_setup():
     create_directory_if_not_exists(configuration_constants.GRAPHS_FOLDER)
     create_directory_if_not_exists(configuration_constants.METRICS_GRAPH_FOLDER)
     create_directory_if_not_exists(configuration_constants.DISTRIBUTION_METRICS_GRAPH_FOLDER)
+    create_directory_if_not_exists(configuration_constants.MOVEMENT_VS_TEXTURE_COMPARISON_DIRECTORY)
 
 
 def create_directory_if_not_exists(directory_path):
@@ -100,17 +100,49 @@ def plot_distribution_metrics_sub_routine(metrics_excel_paths_list, distribution
                                               y_label_list, distribution_save_path)
 
 
+def movement_and_texture_heat_map_sub_routine(sub_routines, source_directory):
+    motion_images_array_list = []
+    texture_images_array_list = []
+
+    if algorithm_constants.MOVEMENT_SUBROUTINE in sub_routines:
+        motion_images_array_list = movement_heat_map_sub_routine(source_directory)
+
+    if algorithm_constants.TEXTURE_SUBROUTINE in sub_routines:
+        texture_images_array_list = texture_heat_map_sub_routine(source_directory)
+
+    if algorithm_constants.MOVEMENT_SUBROUTINE and algorithm_constants.TEXTURE_SUBROUTINE in sub_routines:
+        movement_and_texture_comparison_sub_routine(source_directory, motion_images_array_list,
+                                                    texture_images_array_list)
+
+
 def movement_heat_map_sub_routine(source_directory):
     # Movement heat map stage
     threshold = 30
-    create_multiple_motion_images(threshold, source_directory)
+    motion_images_array_list, motion_images_path = create_multiple_motion_images(threshold, source_directory)
+    return motion_images_array_list
 
 
 def texture_heat_map_sub_routine(source_directory):
     # Texture heat map stage
     threshold = 30
     clusters_quantity = 10
-    create_multiple_texture_images(threshold, clusters_quantity, source_directory)
+    texture_images_array_list, texture_images_path = create_multiple_texture_images(threshold, clusters_quantity,
+                                                                                    source_directory)
+    return texture_images_array_list
+
+
+def movement_and_texture_comparison_sub_routine(source_directory, motion_images_array_list, texture_images_array_list):
+    images_list_of_lists = get_images_from_directories(source_directory)
+    save_directory = configuration_constants.MOVEMENT_VS_TEXTURE_COMPARISON_DIRECTORY
+
+    for i in range(0, len(motion_images_array_list)):
+        movement_image_array = motion_images_array_list[i]
+        texture_image_array = texture_images_array_list[i]
+        save_comparison_path = set_save_name(images_list_of_lists[i][0], save_directory, extension=".png")
+        images_array_list = [movement_image_array, texture_image_array]
+        title = string_constants.MOVEMENT_VS_TEXTURE_VIDEO_TITLE
+        sub_titles_list = [string_constants.MOVEMENT_TITLE, string_constants.TEXTURE_VIDEO_TITLE]
+        plot_comparator.plot_comparison(images_array_list, title, sub_titles_list, save_path=save_comparison_path)
 
 
 def generate_metric_path(filename):

@@ -1,3 +1,8 @@
+# Image viewer dimension
+
+IMAGE_VIEWER_WIDTH = 600
+IMAGE_VIEWER_HEIGHT = 600
+
 DOCTOR_DIRECTORY = r""
 TEMPORARY_VIDEO_DIRECTORY_PATH = r"./generated/video_frames/"
 METRICS_DIRECTORY_PATH = r"./generated/metrics/"
@@ -18,6 +23,10 @@ MOVEMENT_HEATMAP_IMAGES_DIRECTORY = r"./generated/Mapas de movimiento/"
 # Texture heat map directory
 
 TEXTURE_HEATMAP_IMAGES_DIRECTORY = r"./generated/Mapas de textura/"
+
+# Movement vs Texture heat map comparison directory
+
+MOVEMENT_VS_TEXTURE_COMPARISON_DIRECTORY = r"./generated/Comparacion Movimiento vs Textura/"
 
 # Graphs directories
 

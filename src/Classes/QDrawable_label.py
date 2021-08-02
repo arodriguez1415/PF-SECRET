@@ -5,11 +5,10 @@ from PyQt5.QtWidgets import QLabel
 import math
 
 from src.Backend.Image_processing_algorithms.Operations.common_operations import resize_image
+from src.Constants import configuration_constants
 
 
 class QDrawable_label(QLabel):
-    IMAGE_VIEWER_WIDTH = 600
-    IMAGE_VIEWER_HEIGHT = 600
     points_list = []
     paint_flag = False
     square_flag = False
@@ -42,8 +41,8 @@ class QDrawable_label(QLabel):
         self.points_list.clear()
         self.polygon_finalized = False
         self.actual_image_wrapper = image_wrapper
-        width = self.IMAGE_VIEWER_WIDTH
-        height = self.IMAGE_VIEWER_HEIGHT
+        width = configuration_constants.IMAGE_VIEWER_WIDTH
+        height = configuration_constants.IMAGE_VIEWER_HEIGHT
         image_array = B = image_wrapper.image_array.astype("uint8")
         image_resized = resize_image(image_array, width, height)
         qimage_size = QSize(width, height)
