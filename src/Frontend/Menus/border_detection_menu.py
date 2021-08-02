@@ -1,9 +1,12 @@
+from src.Backend.Image_processing_algorithms.Operations.common_operations import resize_image
 from src.Classes.Image_wrapper import Image_wrapper
 from src.Classes.Methods.Mgac import Mgac
 from src.Classes.Region import Region
 from src.Classes.Project_mastermind import Project_mastermind
 from src.Backend.Image_processing_algorithms.Border_detection import mgac as mgac_functions
 from PIL import Image
+
+from src.Constants import configuration_constants
 
 
 def configure_border_detection_menu_connections(main_window):
@@ -23,7 +26,9 @@ def mgac(main_window):
     polygon_region = Region()
     polygon_region.get_region()
     image_array = project_mastermind.get_last_image()
-    image = Image.fromarray(image_array)
+    width, height = configuration_constants.IMAGE_VIEWER_WIDTH, configuration_constants.IMAGE_VIEWER_HEIGHT
+    resized_image_array = resize_image(image_array, width, height)
+    image = Image.fromarray(resized_image_array)
     iterations = int(main_window.iterations_mgac_input.text())
     threshold = float(main_window.threshold_mgac_input.text())
     smoothing = int(main_window.smoothing_mgac_input.text())

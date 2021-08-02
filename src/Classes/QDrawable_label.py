@@ -43,7 +43,7 @@ class QDrawable_label(QLabel):
         self.actual_image_wrapper = image_wrapper
         width = configuration_constants.IMAGE_VIEWER_WIDTH
         height = configuration_constants.IMAGE_VIEWER_HEIGHT
-        image_array = B = image_wrapper.image_array.astype("uint8")
+        image_array = image_wrapper.image_array
         image_resized = resize_image(image_array, width, height)
         qimage_size = QSize(width, height)
         qimage_starting_point = QPoint(0, 0)
@@ -131,9 +131,9 @@ class QDrawable_label(QLabel):
         painter.drawLine(self.points_list[0], top_right_point)
         painter.drawLine(bottom_left_point, bottom_right_point)
         painter.drawLine(top_right_point, bottom_right_point)
-        self.points_list.append(top_right_point)
         self.points_list.append(bottom_left_point)
         self.points_list.append(bottom_right_point)
+        self.points_list.append(top_right_point)
         self.setPixmap(current_image)
         self.paint_flag = False
         self.square_flag = False
@@ -157,9 +157,9 @@ class QDrawable_label(QLabel):
         painter.drawLine(bottom_left_point, top_left_point)
         self.points_list = []
         self.points_list.append(top_left_point)
-        self.points_list.append(top_right_point)
         self.points_list.append(bottom_left_point)
         self.points_list.append(bottom_right_point)
+        self.points_list.append(top_right_point)
         self.setPixmap(current_image)
         self.paint_flag = False
         self.fixed_square_flag = False

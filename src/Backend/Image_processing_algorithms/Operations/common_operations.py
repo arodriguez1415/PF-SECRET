@@ -65,7 +65,7 @@ def generate_coloured_heatmap(matrix):
 
 def resize_image(image_array, width, height):
     new_dimension = (width, height)
-    resized_image = cv2.resize(image_array, new_dimension)
+    resized_image = cv2.resize(image_array.astype("uint8"), new_dimension)
     return resized_image
 
 
