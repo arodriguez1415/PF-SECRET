@@ -20,9 +20,9 @@ def classify_single_image(image_array, clusters_quantity=20):
     list_descriptors_dict = []
     list_descriptors_dict = get_descriptors(list_descriptors_dict, image_array, descriptors_labels)
     dataframe = create_dataframe_from_descriptors(list_descriptors_dict)
-    classified_image = k_means(dataframe, clusters_quantity=clusters_quantity)
-    coloured_texture_image_array = bgr_to_rgb(cv2.applyColorMap(classified_image, cv2.COLORMAP_HOT))
-    return coloured_texture_image_array
+    uncoloured_classified_image = k_means(dataframe, clusters_quantity=clusters_quantity)
+    coloured_classified_image = bgr_to_rgb(cv2.applyColorMap(uncoloured_classified_image, cv2.COLORMAP_HOT))
+    return uncoloured_classified_image, coloured_classified_image
 
 
 def create_multiple_texture_images(threshold, clusters_quantity, source_directory):
@@ -30,12 +30,14 @@ def create_multiple_texture_images(threshold, clusters_quantity, source_director
     texture_images_array_list = []
     texture_images_path = []
     for i in range(0, len(images_list_of_lists)):
-        texture_image = create_texture_image_from_video(images_list_of_lists[i], clusters_quantity, threshold)
-        texture_images_array_list.append(texture_image)
+        uncoloured_classified_image, coloured_classified_image = create_texture_image_from_video(images_list_of_lists[i],
+                                                                                                 clusters_quantity,
+                                                                                                 threshold)
+        texture_images_array_list.append(coloured_classified_image)
         save_directory = configuration_constants.TEXTURE_HEATMAP_IMAGES_DIRECTORY
         save_texture_path = video_generator.set_save_name(images_list_of_lists[i][0], save_directory,
                                                           extension=".png")
-        save_texture_image(texture_image, save_texture_path)
+        save_texture_image(coloured_classified_image, save_texture_path)
         texture_images_path.append(save_texture_path)
     return texture_images_array_list, texture_images_path
 
@@ -44,10 +46,11 @@ def create_texture_image_from_video(images_path_for_texture_list=None, clusters_
     setup_directories()
     images_path_for_texture_list = get_images(images_path_for_texture_list)
     frames_path_list = generate_frames(images_path_for_texture_list)
-    texture_image_array = get_texture_image(frames_path_list, clusters_quantity, threshold)
+    uncoloured_classified_image, coloured_classified_image = get_texture_image(frames_path_list,
+                                                                               clusters_quantity, threshold)
     video_generator.delete_frames(frames_path_list)
     os.rmdir(configuration_constants.TEMPORARY_VIDEO_DIRECTORY_PATH)
-    return texture_image_array
+    return uncoloured_classified_image, coloured_classified_image
 
 
 def setup_directories():
@@ -95,9 +98,9 @@ def get_texture_image(images_path_list, clusters_quantity, threshold):
     list_descriptors_dict = []
     list_descriptors_dict = get_descriptors(list_descriptors_dict, accumulated_motion, descriptors_labels)
     dataframe = create_dataframe_from_descriptors(list_descriptors_dict)
-    classified_image = k_means(dataframe, clusters_quantity=clusters_quantity)
-    coloured_texture_image_array = bgr_to_rgb(cv2.applyColorMap(classified_image, cv2.COLORMAP_HOT))
-    return coloured_texture_image_array
+    uncoloured_classified_image = k_means(dataframe, clusters_quantity=clusters_quantity)
+    coloured_classified_image = bgr_to_rgb(cv2.applyColorMap(uncoloured_classified_image, cv2.COLORMAP_HOT))
+    return uncoloured_classified_image, coloured_classified_image
 
 
 def normalize_values(accumulated_motion):

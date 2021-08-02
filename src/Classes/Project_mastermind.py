@@ -12,7 +12,12 @@ class Project_mastermind:
     current_progress_bar = None
     main_window = None
     app = None
-    heat_map_image_array = None
+    movement_image_wrapper = None
+    movement_heat_map_image_wrapper = None
+    texture_image_wrapper = None
+    texture_heat_map_image_wrapper = None
+    texture_image_video_wrapper = None
+    texture_heat_map_image_video_wrapper = None
 
     def __init__(self, app, main_window):
         if Project_mastermind.__instance is not None:
@@ -25,9 +30,6 @@ class Project_mastermind:
     @staticmethod
     def get_instance():
         return Project_mastermind.__instance
-
-    def set_current_progress_bar(self, progress_bar):
-        self.current_progress_bar = progress_bar
 
     def get_current_progress_bar(self):
         return self.current_progress_bar
@@ -68,8 +70,23 @@ class Project_mastermind:
             return
         return self.image_processing_list[0]
 
-    def get_heat_map_image_array(self):
-        return self.heat_map_image_array
+    def get_movement_heat_map_image(self):
+        return self.movement_heat_map_image_wrapper
+
+    def get_movement_image(self):
+        return self.movement_image_wrapper
+
+    def get_texture_heat_map_image(self):
+        return self.texture_heat_map_image_wrapper
+
+    def get_texture_image(self):
+        return self.texture_image_wrapper
+
+    def get_texture_heat_map_image_video(self):
+        return self.texture_heat_map_image_video_wrapper
+
+    def get_texture_image_video(self):
+        return self.texture_image_video_wrapper
 
     def clear_processing(self):
         self.image_processing_list = []
@@ -77,12 +94,6 @@ class Project_mastermind:
     def remove_last_processing(self):
         if len(self.image_processing_list) > 1:
             del(self.image_processing_list[-1])
-
-    def set_original_image_path(self, original_image_path):
-        self.original_image_path = original_image_path
-
-    def set_original_image_dir(self, original_image_dir):
-        self.original_image_dir = original_image_dir
 
     def get_original_image_path(self):
         return self.original_image_path
@@ -93,8 +104,32 @@ class Project_mastermind:
     def get_image_processing_list(self):
         return self.image_processing_list
 
+    def set_current_progress_bar(self, progress_bar):
+        self.current_progress_bar = progress_bar
+
+    def set_original_image_path(self, original_image_path):
+        self.original_image_path = original_image_path
+
+    def set_original_image_dir(self, original_image_dir):
+        self.original_image_dir = original_image_dir
+
     def set_image_processing_list(self, image_processing_list):
         self.image_processing_list = image_processing_list
 
-    def set_heat_map_image_array(self, heat_map_image_array):
-        self.heat_map_image_array = heat_map_image_array
+    def set_movement_heat_map_image(self, movement_heat_map_image):
+        self.movement_heat_map_image_wrapper = movement_heat_map_image
+
+    def set_movement_image(self, movement_image):
+        self.movement_image_wrapper = movement_image
+
+    def set_texture_heat_map_image(self, texture_heat_map_image):
+        self.texture_heat_map_image_wrapper = texture_heat_map_image
+
+    def set_texture_image(self, texture_image):
+        self.texture_image_wrapper = texture_image
+
+    def set_texture_heat_map_image_video(self, texture_heat_map_image_video):
+        self.texture_heat_map_image_video_wrapper = texture_heat_map_image_video
+
+    def set_texture_image_video(self, texture_image_video):
+        self.texture_image_video_wrapper = texture_image_video

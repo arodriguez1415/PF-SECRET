@@ -63,6 +63,12 @@ def generate_coloured_heatmap(matrix):
     return rgb_coloured_matrix
 
 
+def resize_image(image_array, width, height):
+    new_dimension = (width, height)
+    resized_image = cv2.resize(image_array, new_dimension)
+    return resized_image
+
+
 def show_coloured_image(rgb_coloured_matrix):
     plt.imshow(rgb_coloured_matrix, cmap="hot")
     plt.colorbar(label="Texture", orientation="vertical")

@@ -44,3 +44,18 @@ AREA_Y_LABEL = "Tiempo en frames"
 AXIS_RATIO_PLOT_TITLE = "Razón de ejes en el tiempo"
 AXIS_RATIO_X_LABEL = "Razón de ejes"
 AXIS_RATIO_Y_LABEL = "Tiempo en frames"
+
+# Comparison plot
+
+ORIGINAL_VS_ACTUAL_TITLE = "Original vs Actual"
+ORIGINAL_TITLE = "Imagen Original"
+ACTUAL_TITLE = "Imagen Actual"
+
+MOVEMENT_VS_TEXTURE_IMAGE_TITLE = "Movimiento vs Textura-Imagen"
+MOVEMENT_TITLE = "Imagen de Movimiento"
+TEXTURE_IMAGE_TITLE = "Imagen de Textura-Image"
+
+MOVEMENT_VS_TEXTURE_VIDEO_TITLE = "Movimiento vs Textura-Video"
+TEXTURE_VIDEO_TITLE = "Imagen de Textura-Video"
+
+TEXTURE_IMAGE_VS_TEXTURE_VIDEO = "Textura-Imagen vs Textura-Video"

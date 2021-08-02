@@ -97,16 +97,25 @@ def classify_image_texture(main_window):
     project_mastermind = Project_mastermind.get_instance()
     current_image_array = project_mastermind.get_last_image()
     clusters_quantity = main_window.texture_classification_image_clusters_input.value()
-    texture_image_array = classify_single_image(current_image_array, clusters_quantity=clusters_quantity)
-    show_coloured_image(texture_image_array)
-    image_wrapper = Image_wrapper(texture_image_array)
-    main_window.image_viewer.set_screen_image(image_wrapper)
+    uncoloured_classified_image, coloured_classified_image = classify_single_image(current_image_array,
+                                                                                   clusters_quantity=clusters_quantity)
+    show_coloured_image(coloured_classified_image)
+    texture_image_wrapper = Image_wrapper(uncoloured_classified_image)
+    texture_heat_map_image_wrapper = Image_wrapper(coloured_classified_image)
+    project_mastermind.set_texture_image(texture_image_wrapper)
+    project_mastermind.set_texture_heat_map_image(texture_heat_map_image_wrapper)
+    main_window.image_viewer.set_screen_image(texture_heat_map_image_wrapper)
 
 
 def classify_video_texture(main_window):
+    project_mastermind = Project_mastermind.get_instance()
     clusters_quantity = main_window.texture_classification_image_clusters_input.value()
     threshold = main_window.texture_classification_video_threshold_input.value()
-    texture_image_array = create_texture_image_from_video(clusters_quantity=clusters_quantity, threshold=threshold)
-    show_coloured_image(texture_image_array)
-    image_wrapper = Image_wrapper(texture_image_array)
-    main_window.image_viewer.set_screen_image(image_wrapper)
+    uncoloured_classified_image, coloured_classified_image = create_texture_image_from_video(clusters_quantity=clusters_quantity,
+                                                                                             threshold=threshold)
+    show_coloured_image(coloured_classified_image)
+    texture_image_wrapper = Image_wrapper(uncoloured_classified_image)
+    texture_heat_map_image_wrapper = Image_wrapper(coloured_classified_image)
+    project_mastermind.set_texture_image_video(texture_image_wrapper)
+    project_mastermind.set_texture_heat_map_image_video(texture_heat_map_image_wrapper)
+    main_window.image_viewer.set_screen_image(texture_heat_map_image_wrapper)
