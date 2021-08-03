@@ -25,7 +25,6 @@ class Region:
             y_axis = qpoint.y()
             point = (x_axis, y_axis)
             self.points.append(point)
-        print(self.points)
         return self.points
 
     def get_all_image_region(self):

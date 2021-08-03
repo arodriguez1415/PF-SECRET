@@ -1,10 +1,11 @@
+import cv2
 import qimage2ndarray as qimage2ndarray
 from PyQt5.QtCore import QPoint, QSize, QRect, Qt
 from PyQt5.QtGui import QPainter, QPen, QColor, QPixmap
 from PyQt5.QtWidgets import QLabel
 import math
 
-from src.Backend.Image_processing_algorithms.Operations.common_operations import resize_image
+from src.Backend.Image_processing_algorithms.Operations.common_operations import resize_image, gray_to_rgb
 from src.Constants import configuration_constants
 
 
@@ -176,4 +177,22 @@ class QDrawable_label(QLabel):
         self.fixed_square_flag = False
         self.diagonal_line_flag = False
         self.set_screen_image(self.actual_image_wrapper)
+
+    @staticmethod
+    def draw_region_in_image(image_array, points):
+        line_thickness = 3
+        from_points = points.copy()
+        to_points = points.copy()
+
+        to_points.append(from_points[0])
+        to_points.pop(0)
+
+        width, height = configuration_constants.IMAGE_VIEWER_WIDTH, configuration_constants.IMAGE_VIEWER_HEIGHT
+        image_array = resize_image(image_array, width, height)
+        image_array = gray_to_rgb(image_array)
+
+        for i in range(0, len(points)):
+            image_array = cv2.line(image_array, from_points[i], to_points[i], (0, 0, 255), thickness=line_thickness)
+
+        return image_array
 

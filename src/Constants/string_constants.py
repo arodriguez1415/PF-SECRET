@@ -59,3 +59,5 @@ MOVEMENT_VS_TEXTURE_VIDEO_TITLE = "Movimiento vs Textura-Video"
 TEXTURE_VIDEO_TITLE = "Imagen de Textura-Video"
 
 TEXTURE_IMAGE_VS_TEXTURE_VIDEO = "Textura-Imagen vs Textura-Video"
+
+FOUR_GRID_COMPARISON = "Valor del area en las 4 vistas"

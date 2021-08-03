@@ -40,6 +40,12 @@ def is_RGB(image_array):
         return True
 
 
+def gray_to_rgb(image_array):
+    if not is_RGB(image_array):
+        return cv2.cvtColor(image_array, cv2.COLOR_GRAY2RGB)
+    return image_array
+
+
 def rgb_to_gray(image_array):
     if is_RGB(image_array):
         return cv2.cvtColor(image_array, cv2.COLOR_BGR2GRAY)

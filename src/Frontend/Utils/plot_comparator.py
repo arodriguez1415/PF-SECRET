@@ -46,3 +46,36 @@ def plot_comparison(images, title, sub_titles, save_path=None):
         plt.show()
 
 
+def plot_four_comparison(images, title, sub_titles, save_path=None):
+    fig = plt.figure(figsize=(12, 8))
+    fig.suptitle(title)
+    image = None
+
+    grid = ImageGrid(fig, 111,
+                     nrows_ncols=(2, 2),
+                     axes_pad=0.35,
+                     share_all=True,
+                     cbar_location="right",
+                     cbar_mode="edge",
+                     cbar_size="7%",
+                     cbar_pad=0.15,
+                     )
+
+    color_map_array = [plt.get_cmap("gray"), plt.get_cmap("hot")]
+    for i in range(0, len(images)):
+        im = grid[i].imshow(images[i], cmap=color_map_array[i//2])
+        grid[i].set_title(sub_titles[i], fontdict=None, loc='center', color="k")
+        grid[i].axis('off')
+        if i % 2:
+            grid.cbar_axes[i//2].colorbar(im)
+
+    grid[0].text(-15, 30, 'Practice on GFG', style='italic', bbox={
+        'facecolor': 'green', 'alpha': 0.5, 'pad': 10})
+
+
+    if save_path is not None:
+        plt.savefig(save_path)
+    else:
+        plt.show()
+
+
