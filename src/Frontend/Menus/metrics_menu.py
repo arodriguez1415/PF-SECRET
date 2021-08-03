@@ -1,10 +1,11 @@
 from src.Backend.Image_processing_algorithms.Archive_manipulation import dataframe_file_manipulation
 from src.Backend.Image_processing_algorithms.Archive_manipulation import video_file_manipulation
 from src.Backend.Image_processing_algorithms.Metrics import metrics_generator, metrics_plotter
+from src.Backend.Image_processing_algorithms.Operations.common_operations import resize_image
 from src.Classes.Project_mastermind import Project_mastermind
 from src.Classes.QDrawable_label import QDrawable_label
 from src.Classes.Region import Region
-from src.Constants import algorithm_constants
+from src.Constants import algorithm_constants, configuration_constants
 from src.Constants.string_constants import ORIGINAL_TITLE, MOVEMENT_TITLE, TEXTURE_VIDEO_TITLE, TEXTURE_IMAGE_TITLE, \
     FOUR_GRID_COMPARISON
 from src.Frontend.Utils.plot_comparator import plot_four_comparison
@@ -143,17 +144,20 @@ def analyze_texture_and_movement_metrics():
     # movement_array = project_mastermind.get_movement_image().image_array
     # texture_image_array = project_mastermind.get_texture_image().image_array
     # texture_video_array = project_mastermind.get_texture_image_video().image_array
+    width, height = configuration_constants.IMAGE_VIEWER_WIDTH, configuration_constants.IMAGE_VIEWER_HEIGHT
+    image_arrays = [original_array, movement_array, texture_image_array, texture_video_array]
+    pixels_in_regions = []
 
-    square_region = Region().get_region()
+    region = Region()
+    square_region = region.get_region()
+    for i in range(0, len(image_arrays)):
+        image_array = resize_image(image_arrays[i], width, height)
+        pixels_in_region = region.get_pixels_in_region(image_array)
+        pixels_in_regions.append(pixels_in_region)
+        image_arrays[i] = QDrawable_label.draw_region_in_image(image_arrays[i], square_region)
 
-    original_array = QDrawable_label.draw_region_in_image(original_array, square_region)
-    movement_array = QDrawable_label.draw_region_in_image(movement_array, square_region)
-    texture_image_array = QDrawable_label.draw_region_in_image(texture_image_array, square_region)
-    texture_video_array = QDrawable_label.draw_region_in_image(texture_video_array, square_region)
-
-    images_array = [original_array, movement_array, texture_image_array, texture_video_array]
     title = FOUR_GRID_COMPARISON
     sub_titles = [ORIGINAL_TITLE,MOVEMENT_TITLE,TEXTURE_IMAGE_TITLE,TEXTURE_VIDEO_TITLE]
-    plot_four_comparison(images_array, title, sub_titles)
+    plot_four_comparison(image_arrays, title, sub_titles, "ASD")
 
 

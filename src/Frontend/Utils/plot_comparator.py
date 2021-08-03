@@ -46,7 +46,7 @@ def plot_comparison(images, title, sub_titles, save_path=None):
         plt.show()
 
 
-def plot_four_comparison(images, title, sub_titles, save_path=None):
+def plot_four_comparison(images, title, sub_titles, avg_results):
     fig = plt.figure(figsize=(12, 8))
     fig.suptitle(title)
     image = None
@@ -69,13 +69,11 @@ def plot_four_comparison(images, title, sub_titles, save_path=None):
         if i % 2:
             grid.cbar_axes[i//2].colorbar(im)
 
-    grid[0].text(-15, 30, 'Practice on GFG', style='italic', bbox={
-        'facecolor': 'green', 'alpha': 0.5, 'pad': 10})
+    avg_results = "resultado 1\nresultado 2\nresultado 3\n"
 
+    fig.text(0.10, 0.5, avg_results, fontsize=18, horizontalalignment='center', verticalalignment='center',
+             style='italic', bbox={'facecolor': 'gray', 'alpha': 0.85, 'pad': 10})
 
-    if save_path is not None:
-        plt.savefig(save_path)
-    else:
-        plt.show()
+    plt.show()
 
 

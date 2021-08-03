@@ -157,10 +157,11 @@ class QDrawable_label(QLabel):
         painter.drawLine(bottom_right_point, bottom_left_point)
         painter.drawLine(bottom_left_point, top_left_point)
         self.points_list = []
+        self.points_list.append(top_right_point)
         self.points_list.append(top_left_point)
         self.points_list.append(bottom_left_point)
         self.points_list.append(bottom_right_point)
-        self.points_list.append(top_right_point)
+
         self.setPixmap(current_image)
         self.paint_flag = False
         self.fixed_square_flag = False
@@ -183,15 +184,15 @@ class QDrawable_label(QLabel):
         line_thickness = 3
         from_points = points.copy()
         to_points = points.copy()
+        print(points)
 
         to_points.append(from_points[0])
         to_points.pop(0)
 
-        width, height = configuration_constants.IMAGE_VIEWER_WIDTH, configuration_constants.IMAGE_VIEWER_HEIGHT
-        image_array = resize_image(image_array, width, height)
         image_array = gray_to_rgb(image_array)
 
         for i in range(0, len(points)):
+            print(str(from_points[i]) + " to " + str(to_points[i]))
             image_array = cv2.line(image_array, from_points[i], to_points[i], (0, 0, 255), thickness=line_thickness)
 
         return image_array
