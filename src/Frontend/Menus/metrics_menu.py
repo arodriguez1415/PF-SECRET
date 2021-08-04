@@ -1,7 +1,7 @@
 from src.Backend.Image_processing_algorithms.Archive_manipulation import dataframe_file_manipulation
 from src.Backend.Image_processing_algorithms.Archive_manipulation import video_file_manipulation
 from src.Backend.Image_processing_algorithms.Metrics import metrics_generator, metrics_plotter
-from src.Backend.Image_processing_algorithms.Operations.common_operations import resize_image
+from src.Backend.Image_processing_algorithms.Operations.common_operations import resize_image, normalize_to_range
 from src.Classes.Project_mastermind import Project_mastermind
 from src.Classes.QDrawable_label import QDrawable_label
 from src.Classes.Region import Region
@@ -136,28 +136,33 @@ def get_plotting_distribution_metrics_dictionary(main_window):
 
 def analyze_texture_and_movement_metrics():
     project_mastermind = Project_mastermind.get_instance()
-    original_array = project_mastermind.get_original_image()
-    movement_array = project_mastermind.get_original_image()
-    texture_image_array = project_mastermind.get_original_image()
-    texture_video_array = project_mastermind.get_original_image()
 
-    # movement_array = project_mastermind.get_movement_image().image_array
-    # texture_image_array = project_mastermind.get_texture_image().image_array
-    # texture_video_array = project_mastermind.get_texture_image_video().image_array
+    original_array = project_mastermind.get_original_image()
+    movement_array = project_mastermind.get_movement_image().image_array
+
+    show_movement_array = project_mastermind.get_movement_heat_map_image().image_array
+    show_texture_image_array = project_mastermind.get_texture_heat_map_image().image_array
+    show_texture_video_array = project_mastermind.get_texture_heat_map_image_video().image_array
+
     width, height = configuration_constants.IMAGE_VIEWER_WIDTH, configuration_constants.IMAGE_VIEWER_HEIGHT
-    image_arrays = [original_array, movement_array, texture_image_array, texture_video_array]
-    pixels_in_regions = []
+    weight_image_array = [original_array, movement_array, show_texture_image_array, show_texture_video_array]
+    show_images_array = [original_array, show_movement_array, show_texture_image_array, show_texture_video_array]
+    avg_values_array = []
 
     region = Region()
     square_region = region.get_region()
-    for i in range(0, len(image_arrays)):
-        image_array = resize_image(image_arrays[i], width, height)
-        pixels_in_region = region.get_pixels_in_region(image_array)
-        pixels_in_regions.append(pixels_in_region)
-        image_arrays[i] = QDrawable_label.draw_region_in_image(image_arrays[i], square_region)
+    for i in range(0, len(weight_image_array)):
+        show_image_array = resize_image(show_images_array[i], width, height)
+        wight_image_array = resize_image(weight_image_array[i], width, height)
+        pixels_in_region = region.get_pixels_in_region(wight_image_array)
+        normalized_pixels_in_region = normalize_to_range(pixels_in_region, max_value=255)
+        show_images_array[i] = QDrawable_label.draw_region_in_image(show_image_array, square_region)
+        avg_values_array.append(normalized_pixels_in_region.mean())
 
+    avg_results = "Promedio de valor de pixel escala grises: " + str(round(avg_values_array[0], 2)) + "\n"
+    avg_results += "Promedio de valor de pixel de movimiento: " + str(round(avg_values_array[1], 2)) + "\n"
+    avg_results += "Promedio de valor de pixel de textura de imagen: " + str(round(avg_values_array[2], 2)) + "\n"
+    avg_results += "Promedio de valor de pixel de textura de video: " + str(round(avg_values_array[3], 2))
     title = FOUR_GRID_COMPARISON
-    sub_titles = [ORIGINAL_TITLE,MOVEMENT_TITLE,TEXTURE_IMAGE_TITLE,TEXTURE_VIDEO_TITLE]
-    plot_four_comparison(image_arrays, title, sub_titles, "ASD")
-
-
+    sub_titles = [ORIGINAL_TITLE, MOVEMENT_TITLE, TEXTURE_IMAGE_TITLE, TEXTURE_VIDEO_TITLE]
+    plot_four_comparison(show_images_array, title, sub_titles, avg_results)

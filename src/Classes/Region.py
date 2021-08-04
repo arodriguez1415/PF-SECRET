@@ -51,7 +51,8 @@ class Region:
         max_y = max(self.points, key=lambda t: t[1])[1]
 
         pixels_in_region = image_array[min_x:max_x, min_y:max_y]
-        # print(pixels_in_region)
+        print(pixels_in_region)
+        return pixels_in_region
 
 
     @staticmethod

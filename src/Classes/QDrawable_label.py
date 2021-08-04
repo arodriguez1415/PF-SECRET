@@ -5,7 +5,7 @@ from PyQt5.QtGui import QPainter, QPen, QColor, QPixmap
 from PyQt5.QtWidgets import QLabel
 import math
 
-from src.Backend.Image_processing_algorithms.Operations.common_operations import resize_image, gray_to_rgb
+from src.Backend.Image_processing_algorithms.Operations.common_operations import resize_image, gray_to_rgb, is_RGB
 from src.Constants import configuration_constants
 
 
@@ -184,7 +184,6 @@ class QDrawable_label(QLabel):
         line_thickness = 3
         from_points = points.copy()
         to_points = points.copy()
-        print(points)
 
         to_points.append(from_points[0])
         to_points.pop(0)
@@ -192,7 +191,6 @@ class QDrawable_label(QLabel):
         image_array = gray_to_rgb(image_array)
 
         for i in range(0, len(points)):
-            print(str(from_points[i]) + " to " + str(to_points[i]))
             image_array = cv2.line(image_array, from_points[i], to_points[i], (0, 0, 255), thickness=line_thickness)
 
         return image_array
