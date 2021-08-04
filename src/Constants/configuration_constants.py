@@ -9,6 +9,7 @@ METRICS_DIRECTORY_PATH = r"./generated/metrics/"
 GENERATED_IMAGES_DIR = r"./generated/"
 TEST_IMAGES_DIR = r"./Resources/Mediciones"
 GENERAL_DIRECTORY = r"./Resources"
+SAMPLE_ESTIMATOR_DIRECTORY = r"./Resources/Sample"
 
 # Videos directories
 

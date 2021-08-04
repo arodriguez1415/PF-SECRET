@@ -1,11 +1,9 @@
 from PyQt5.QtCore import Qt
-from PyQt5.QtWidgets import QProgressDialog
 
 from src.Classes.Project_mastermind import Project_mastermind
-from src.Constants import string_constants
 
 
-def start_progress_bar(process_title, process_description, progress_steps = 100):
+def start_progress_bar(process_title, process_description, progress_steps=100):
     project_mastermind = Project_mastermind.get_instance()
     project_mastermind.reset_current_progress_bar()
     progress_bar = project_mastermind.get_current_progress_bar()
@@ -39,4 +37,3 @@ def is_progress_bar_cancelled():
         progress_bar.close()
         return True
     return False
-

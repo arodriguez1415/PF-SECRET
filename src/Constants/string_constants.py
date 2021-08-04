@@ -12,6 +12,12 @@ MGAC_METHOD_NAME = "Mgac"
 NO_PATH_SELECTION = "No se selecciono ningun path"
 NO_MGAC_METHOD_ERROR = "No se aplico el metodo mgac en la imagen aun"
 
+# Confirmation messages
+
+GLOBAL_ROUTINE_ESTIMATION_TITLE = "Estimación de resultados"
+GLOBAL_ROUTINE_TIME_ESTIMATION = "Estimacion de tiempo requerido: "
+GLOBAL_ROUTINE_MEMORY_ESTIMATION = "Estimación de memoria requerida: "
+
 # Progress Bar
 
 CANCEL_BUTTON_TEXT = "Cancelar"

@@ -6,6 +6,7 @@ import numpy as np
 from PIL import Image
 
 from src.Backend.Image_processing_algorithms.Metrics import metrics_generator, metrics_plotter
+from src.Backend.Routines.estimator import estimate_time_and_space, prepare_estimation_message_and_title
 from src.Backend.Video_processing_algorithms import multiple_cells_video_generator
 from src.Backend.Video_processing_algorithms.movement_image_generator import create_multiple_motion_images
 from src.Backend.Video_processing_algorithms.multiple_cells_video_generator import get_images_from_directories
@@ -13,11 +14,19 @@ from src.Backend.Video_processing_algorithms.texture_image_generator import crea
 from src.Backend.Video_processing_algorithms.video_generator import set_save_name
 from src.Constants import algorithm_constants, configuration_constants, string_constants
 from src.Frontend.Utils import plot_comparator
+from src.Frontend.Utils.message import show_confirmation_message
 
 
 def routine(sub_routines):
     routine_setup()
     source_directory = multiple_cells_video_generator.get_source_directory()
+
+    total_time_in_seconds, total_memory_in_kb = estimate_time_and_space(source_directory, sub_routines)
+    title_message, description_message = prepare_estimation_message_and_title(total_time_in_seconds, total_memory_in_kb)
+    continue_flag = show_confirmation_message(title_message,description_message)
+
+    if not continue_flag:
+        return
 
     if algorithm_constants.CONTOUR_SUBROUTINE in sub_routines:
         contour_and_metrics_sub_routine(sub_routines, source_directory)
