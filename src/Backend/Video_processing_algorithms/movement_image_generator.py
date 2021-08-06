@@ -65,7 +65,7 @@ def set_methods_to_apply():
 def setup(images_path_for_motion_list):
     progress_bar.start_progress_bar(string_constants.GENERATE_MOTION_HEAT_MAP_TITLE,
                                     string_constants.GENERATE_MOTION_HEAT_MAP_DESCRIPTION,
-                                    len(images_path_for_motion_list))
+                                    len(images_path_for_motion_list) * 2 + 1)
     create_directory_if_not_exists(configuration_constants.TEMPORARY_VIDEO_DIRECTORY_PATH)
     create_directory_if_not_exists(configuration_constants.MOVEMENT_HEATMAP_IMAGES_DIRECTORY)
 
@@ -95,7 +95,7 @@ def get_motion(frames_path_list, threshold):
     ret, previous_grayscale_frame = cv2.threshold(previous_grayscale_frame, threshold, 255, cv2.THRESH_BINARY)
     rows, cols = previous_grayscale_frame.shape
     accumulated_motion = np.zeros((rows, cols), np.uint8)
-
+    progress_bar.increment_value_progress_bar()
     for i in range(0, len(frames_path_list) - 1):
         current_grayscale_frame = get_grayscale(frames_path_list[i])
         ret, current_grayscale_frame = cv2.threshold(current_grayscale_frame, threshold, 255, cv2.THRESH_BINARY)
@@ -104,6 +104,7 @@ def get_motion(frames_path_list, threshold):
         previous_grayscale_frame = current_grayscale_frame
         progress_bar.increment_value_progress_bar()
     accumulated_motion = normalize_values(accumulated_motion)
+    progress_bar.increment_value_progress_bar()
     return accumulated_motion
 
 

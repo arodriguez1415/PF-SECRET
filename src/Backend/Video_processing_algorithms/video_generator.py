@@ -41,6 +41,7 @@ def get_original_images():
     project_mastermind = Project_mastermind.get_instance()
     original_directory = project_mastermind.get_original_image_dir()
     images_list_paths = get_files_from_directory(original_directory)
+    images_list_paths.pop() # Last one is odd
     return images_list_paths
 
 
