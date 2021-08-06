@@ -6,32 +6,46 @@ import numpy as np
 from PIL import Image
 
 from src.Backend.Image_processing_algorithms.Metrics import metrics_generator, metrics_plotter
-from src.Backend.Routines.estimator import estimate_time_and_space, prepare_estimation_message_and_title
+from src.Backend.Routines.estimator import estimate_time_and_space, prepare_estimation_message_and_title, estimate_steps
 from src.Backend.Video_processing_algorithms import multiple_cells_video_generator
 from src.Backend.Video_processing_algorithms.movement_image_generator import create_multiple_motion_images
 from src.Backend.Video_processing_algorithms.multiple_cells_video_generator import get_images_from_directories
 from src.Backend.Video_processing_algorithms.texture_image_generator import create_multiple_texture_images
 from src.Backend.Video_processing_algorithms.video_generator import set_save_name
 from src.Constants import algorithm_constants, configuration_constants, string_constants
-from src.Frontend.Utils import plot_comparator
-from src.Frontend.Utils.message import show_confirmation_message
+from src.Frontend.Utils import plot_comparator, progress_bar
+from src.Frontend.Utils.message import show_confirmation_message, show_wait_message
 
 
 def routine(sub_routines):
     routine_setup()
     source_directory = multiple_cells_video_generator.get_source_directory()
 
-    total_time_in_seconds, total_memory_in_kb = estimate_time_and_space(source_directory, sub_routines)
-    title_message, description_message = prepare_estimation_message_and_title(total_time_in_seconds, total_memory_in_kb)
-    continue_flag = show_confirmation_message(title_message,description_message)
-
+    continue_flag = estimate_time_and_space_sub_routine(sub_routines, source_directory)
     if not continue_flag:
         return
+
+    total_steps = estimate_steps(sub_routines, source_directory)
+    progress_bar.start_progress_bar(string_constants.GLOBAL_ROUTINE_PROGRESS_BAR_TITLE,
+                                    string_constants.GLOBAL_ROUTINE_PROGRESS_BAR_TITLE,
+                                    total_steps, is_global=True)
 
     if algorithm_constants.CONTOUR_SUBROUTINE in sub_routines:
         contour_and_metrics_sub_routine(sub_routines, source_directory)
 
     movement_and_texture_heat_map_sub_routine(sub_routines, source_directory)
+
+
+def estimate_time_and_space_sub_routine(sub_routines, source_directory):
+    progress_bar.set_global_progress_bar_active(True)
+    message_box = show_wait_message(string_constants.WAIT_ESTIMATION_MESSAGE_TITLE,
+                                    string_constants.WAIT_ESTIMATION_MESSAGE_DESC)
+    total_time_in_seconds, total_memory_in_kb = estimate_time_and_space(sub_routines, source_directory)
+    message_box.done(0)
+    title_message, description_message = prepare_estimation_message_and_title(total_time_in_seconds, total_memory_in_kb)
+    continue_flag = show_confirmation_message(title_message, description_message)
+    progress_bar.set_global_progress_bar_active(False)
+    return continue_flag
 
 
 def routine_setup():

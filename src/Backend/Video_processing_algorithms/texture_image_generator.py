@@ -1,9 +1,9 @@
 import os
+import shutil
 
 from PIL import Image
 import cv2
 import numpy as np
-import matplotlib.pyplot as plt
 
 from src.Backend.Image_processing_algorithms.Archive_manipulation.dataframe_file_manipulation import \
     create_dataframe_from_descriptors
@@ -12,7 +12,8 @@ from src.Backend.Image_processing_algorithms.Texture.unsupervised_learning_metho
 from src.Backend.Video_processing_algorithms import video_generator
 from src.Backend.Video_processing_algorithms.multiple_cells_video_generator import get_images_from_directories
 from src.Classes.Methods.Anisotropic_Filter import Anisotropic_Filter
-from src.Constants import configuration_constants, algorithm_constants
+from src.Constants import configuration_constants, algorithm_constants, string_constants
+from src.Frontend.Utils import progress_bar
 
 
 def classify_single_image(image_array, clusters_quantity=20):
@@ -44,17 +45,21 @@ def create_multiple_texture_images(threshold, clusters_quantity, source_director
 
 
 def create_texture_image_from_video(images_path_for_texture_list=None, clusters_quantity=20, threshold=15):
-    setup_directories()
     images_path_for_texture_list = get_images(images_path_for_texture_list)
+    setup(images_path_for_texture_list)
     frames_path_list = generate_frames(images_path_for_texture_list)
     uncoloured_classified_image, coloured_classified_image = get_texture_image(frames_path_list,
                                                                                clusters_quantity, threshold)
     video_generator.delete_frames(frames_path_list)
-    os.rmdir(configuration_constants.TEMPORARY_VIDEO_DIRECTORY_PATH)
+    shutil.rmtree(configuration_constants.TEMPORARY_VIDEO_DIRECTORY_PATH, ignore_errors=True)
     return uncoloured_classified_image, coloured_classified_image
 
 
-def setup_directories():
+def setup(images_path_for_texture_list):
+    progress_bar.start_progress_bar(string_constants.GENERATE_TEXTURE_HEAT_MAP_TITLE,
+                                    string_constants.GENERATE_TEXTURE_HEAT_MAP_DESCRIPTION,
+                                    len(images_path_for_texture_list))
+    print("ASD")
     create_directory_if_not_exists(configuration_constants.TEMPORARY_VIDEO_DIRECTORY_PATH)
     create_directory_if_not_exists(configuration_constants.TEXTURE_HEATMAP_IMAGES_DIRECTORY)
 
@@ -94,11 +99,13 @@ def get_texture_image(images_path_list, clusters_quantity, threshold):
         current_image_array = get_grayscale(images_path_list[i])
         ret, current_image_array = cv2.threshold(current_image_array, threshold, 255, cv2.THRESH_BINARY)
         accumulated_texture += current_image_array
+        progress_bar.increment_value_progress_bar()
     accumulated_motion = normalize_values(accumulated_texture)
     list_descriptors_dict = []
     list_descriptors_dict = get_descriptors(list_descriptors_dict, accumulated_motion, descriptors_labels)
     dataframe = create_dataframe_from_descriptors(list_descriptors_dict)
     uncoloured_classified_image = k_means(dataframe, clusters_quantity=clusters_quantity)
+    progress_bar.increment_value_progress_bar()
     coloured_classified_image = bgr_to_rgb(cv2.applyColorMap(uncoloured_classified_image, cv2.COLORMAP_HOT))
     return uncoloured_classified_image, coloured_classified_image
 

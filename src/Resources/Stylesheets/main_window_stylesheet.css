@@ -113,3 +113,21 @@
 #image_viewer{
  border: 1px solid #DDD;
 }
+
+QPushButton {
+  border: 1px solid #bababa;
+  background-color: #bababa;
+  color: #ffffff;
+}
+
+QPushButton:hover {
+  border: 1px solid #0099cc;
+  background-color: #00aacc;
+  color: #ffffff;
+}
+
+QPushButton:disabled{
+  border: 1px solid #999999;
+  background-color: #cccccc;
+  color: #666666;
+}

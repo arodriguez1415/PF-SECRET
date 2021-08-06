@@ -6,12 +6,22 @@ from src.Constants import string_constants
 
 class Project_mastermind:
     __instance = None
+
+    # Image processing attributes
     image_processing_list = []
     original_image_path = None
     original_image_dir = None
-    current_progress_bar = None
+
+    # Progress Bar attributes
+    normal_progress_bar = None
+    global_progress_bar = None
+    is_global_progress_bar_active_flag = None
+
+    # Application attributes
     main_window = None
     app = None
+
+    # Movement and Texture processing attributes
     movement_image_wrapper = None
     movement_heat_map_image_wrapper = None
     texture_image_wrapper = None
@@ -23,19 +33,29 @@ class Project_mastermind:
         if Project_mastermind.__instance is not None:
             raise Exception("This class is a singleton!")
         else:
-            self.main_window = main_window
-            self.app = app
             Project_mastermind.__instance = self
+            self.app = app
+            self.main_window = main_window
+            self.is_global_progress_bar_active_flag = False
 
     @staticmethod
     def get_instance():
         return Project_mastermind.__instance
 
-    def get_current_progress_bar(self):
-        return self.current_progress_bar
+    def get_normal_progress_bar(self):
+        return self.normal_progress_bar
 
-    def reset_current_progress_bar(self):
-        self.current_progress_bar = QProgressDialog("", string_constants.CANCEL_BUTTON_TEXT, 0, 0)
+    def get_global_progress_bar(self):
+        return self.global_progress_bar
+
+    def is_global_progress_bar_active(self):
+        return self.is_global_progress_bar_active_flag
+
+    def reset_normal_progress_bar(self):
+        self.normal_progress_bar = QProgressDialog("", string_constants.CANCEL_BUTTON_TEXT, 0, 0)
+
+    def reset_global_progress_bar(self):
+        self.global_progress_bar = QProgressDialog("", string_constants.CANCEL_BUTTON_TEXT, 0, 0)
 
     def add_image_process(self, image_wrapper):
         self.image_processing_list.append(image_wrapper)
@@ -104,8 +124,14 @@ class Project_mastermind:
     def get_image_processing_list(self):
         return self.image_processing_list
 
-    def set_current_progress_bar(self, progress_bar):
-        self.current_progress_bar = progress_bar
+    def set_normal_progress_bar(self, progress_bar):
+        self.normal_progress_bar = progress_bar
+
+    def set_global_progress_bar(self, progress_bar):
+        self.global_progress_bar = progress_bar
+
+    def set_global_progress_bar_active(self, flag):
+        self.is_global_progress_bar_active_flag = flag
 
     def set_original_image_path(self, original_image_path):
         self.original_image_path = original_image_path

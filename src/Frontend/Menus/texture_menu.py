@@ -6,18 +6,16 @@ from src.Backend.Video_processing_algorithms.texture_image_generator import crea
 from src.Classes.Image_wrapper import Image_wrapper
 from src.Classes.Project_mastermind import Project_mastermind
 from src.Classes.Region import Region
+from src.Constants import string_constants
+from src.Frontend.Utils.message import show_wait_message
+
 
 def configure_texture_menu_connections(main_window):
     main_window.lbp_menu_option.triggered.connect(lambda: lbp_options(main_window))
     main_window.fractal_dimension_menu_option.triggered.connect(lambda: fractal_dimension_options(main_window))
     main_window.texture_profile_menu_option.triggered.connect(lambda: texture_profile_options(main_window))
-    # main_window.texture_heatmap_menu_option.triggered.connect(lambda: texture_heatmap_options(main_window))
     main_window.texture_classification_menu_option.triggered.connect(
         lambda: texture_classification_options(main_window))
-
-    # Borrar para entrega
-
-    main_window.lbp_add_process_button.clicked.connect(lambda: add_process(main_window))
 
     main_window.fractal_dimension_apply_button.clicked.connect(lambda: generate_fractal_dimension(main_window))
     main_window.texture_profile_apply_button.clicked.connect(lambda: generate_profile_texture())
@@ -87,24 +85,23 @@ def generate_heatmap():
     texture_heatmap.texture_heatmap(current_image_array)
 
 
-def add_process(main_window):
-    actual_image_wrapper = main_window.image_viewer.actual_image_wrapper
-    project_mastermind = Project_mastermind.get_instance()
-    project_mastermind.add_image_process(actual_image_wrapper)
-
-
 def classify_image_texture(main_window):
+    main_window.texture_classification_image_button.setDisabled(True)
     project_mastermind = Project_mastermind.get_instance()
     current_image_array = project_mastermind.get_last_image()
     clusters_quantity = main_window.texture_classification_image_clusters_input.value()
+    message_box = show_wait_message(string_constants.WAIT_TEXTURE_IMAGE_MESSAGE_TITLE,
+                                    string_constants.WAIT_TEXTURE_IMAGE_MESSAGE_DESC)
     uncoloured_classified_image, coloured_classified_image = classify_single_image(current_image_array,
                                                                                    clusters_quantity=clusters_quantity)
+    message_box.done(0)
     show_coloured_image(coloured_classified_image)
     texture_image_wrapper = Image_wrapper(uncoloured_classified_image)
     texture_heat_map_image_wrapper = Image_wrapper(coloured_classified_image)
     project_mastermind.set_texture_image(texture_image_wrapper)
     project_mastermind.set_texture_heat_map_image(texture_heat_map_image_wrapper)
     main_window.image_viewer.set_screen_image(texture_heat_map_image_wrapper)
+    main_window.texture_classification_image_button.setDisabled(False)
 
 
 def classify_video_texture(main_window):

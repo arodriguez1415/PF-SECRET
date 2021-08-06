@@ -4,7 +4,37 @@ from src.Constants import algorithm_constants, configuration_constants, string_c
 import time
 
 
-def estimate_time_and_space(source_directory, sub_routines):
+def estimate_steps(sub_routines, source_directory):
+    images_amount, directories_of_images = get_amount_of_images(source_directory)
+    type_of_videos = 2
+    type_of_metrics = 3
+    texture_calculation_step = 1
+
+    total_steps = 0
+
+    # Masked videos and simple videos
+    if algorithm_constants.CONTOUR_SUBROUTINE in sub_routines:
+        total_steps += images_amount * type_of_videos
+
+    # Metrics: Area, Perimeter and Axis Rate
+    if algorithm_constants.METRICS_SUBROUTINE in sub_routines:
+        total_steps += images_amount * type_of_metrics
+
+    if algorithm_constants.METRICS_SUBROUTINE in sub_routines:
+        total_steps += images_amount * type_of_metrics
+
+    # Generates movement heat map with all the images
+    if algorithm_constants.MOVEMENT_SUBROUTINE in sub_routines:
+        total_steps += images_amount
+
+    # Generates texture video heat map with all the images + calculation step
+    if algorithm_constants.TEXTURE_SUBROUTINE in sub_routines:
+        total_steps += images_amount + texture_calculation_step
+
+    return total_steps
+
+
+def estimate_time_and_space(sub_routines, source_directory):
     images_amount, directories_of_images = get_amount_of_images(source_directory)
     total_time_in_seconds = estimate_time(images_amount, sub_routines)
     total_memory_in_kb = estimate_memory(images_amount, directories_of_images, sub_routines)

@@ -1,4 +1,6 @@
 import os
+import shutil
+
 from PIL import Image
 
 import numpy as np
@@ -8,7 +10,8 @@ from src.Backend.Image_processing_algorithms.Operations.common_operations import
 from src.Backend.Video_processing_algorithms import video_generator
 from src.Backend.Video_processing_algorithms.multiple_cells_video_generator import get_images_from_directories
 from src.Classes.Methods.Anisotropic_Filter import Anisotropic_Filter
-from src.Constants import configuration_constants
+from src.Constants import configuration_constants, string_constants
+from src.Frontend.Utils import progress_bar
 
 
 def create_multiple_motion_images(threshold, source_directory):
@@ -27,13 +30,13 @@ def create_multiple_motion_images(threshold, source_directory):
 
 
 def create_motion_image(threshold, images_path_for_motion_list=None):
-    setup_directories()
     images_path_for_motion_list = get_images(images_path_for_motion_list)
+    setup(images_path_for_motion_list)
     frames_path_list = generate_frames(images_path_for_motion_list)
     uncolored_motion_image_array = get_motion(frames_path_list, threshold)
     coloured_motion_image_array = bgr_to_rgb(cv2.applyColorMap(uncolored_motion_image_array, cv2.COLORMAP_HOT))
     video_generator.delete_frames(frames_path_list)
-    os.rmdir(configuration_constants.TEMPORARY_VIDEO_DIRECTORY_PATH)
+    shutil.rmtree(configuration_constants.TEMPORARY_VIDEO_DIRECTORY_PATH, ignore_errors=True)
     return uncolored_motion_image_array, coloured_motion_image_array
 
 
@@ -49,6 +52,7 @@ def generate_frames(images_path_for_motion_list):
                                                         specified_methods_to_apply=specified_methods_to_apply)
     return frames_paths_list
 
+
 def set_methods_to_apply():
     methods_to_apply = []
     anisotropic_method = Anisotropic_Filter()
@@ -58,7 +62,10 @@ def set_methods_to_apply():
     return methods_to_apply
 
 
-def setup_directories():
+def setup(images_path_for_motion_list):
+    progress_bar.start_progress_bar(string_constants.GENERATE_MOTION_HEAT_MAP_TITLE,
+                                    string_constants.GENERATE_MOTION_HEAT_MAP_DESCRIPTION,
+                                    len(images_path_for_motion_list))
     create_directory_if_not_exists(configuration_constants.TEMPORARY_VIDEO_DIRECTORY_PATH)
     create_directory_if_not_exists(configuration_constants.MOVEMENT_HEATMAP_IMAGES_DIRECTORY)
 
@@ -95,6 +102,7 @@ def get_motion(frames_path_list, threshold):
         accumulated_motion = get_frame_motion(current_grayscale_frame, previous_grayscale_frame,
                                               accumulated_motion)
         previous_grayscale_frame = current_grayscale_frame
+        progress_bar.increment_value_progress_bar()
     accumulated_motion = normalize_values(accumulated_motion)
     return accumulated_motion
 

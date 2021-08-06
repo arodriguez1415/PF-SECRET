@@ -1,27 +1,33 @@
 from src.Backend.Image_processing_algorithms.Operations import common_operations
-from src.Constants import configuration_constants as configuration_constants
+from src.Constants import configuration_constants as configuration_constants, string_constants
 from src.Classes.Project_mastermind import Project_mastermind
 from PIL import Image
+import shutil
 import cv2 as cv
 import numpy as np
 import os
 
+from src.Frontend.Utils import progress_bar
+
 
 def generate_video(images_list=None, specified_methods_to_apply=None,
                    save_directory=configuration_constants.MASK_VIDEOS):
-    setup_directories()
     images_paths_list = images_list
     if images_list is None:
         images_paths_list = get_original_images()
+
+    setup(images_paths_list)
     frames_paths_list = generate_frames(images_paths_list, specified_methods_to_apply)
     save_video_path = set_save_name(images_paths_list[0], save_directory)
     save_video(frames_paths_list, save_video_path)
     delete_frames(frames_paths_list)
-    os.rmdir(configuration_constants.TEMPORARY_VIDEO_DIRECTORY_PATH)
+    shutil.rmtree(configuration_constants.TEMPORARY_VIDEO_DIRECTORY_PATH, ignore_errors=True)
     return save_video_path
 
 
-def setup_directories():
+def setup(images_paths_list):
+    progress_bar.start_progress_bar(string_constants.GENERATE_VIDEO_TITLE,
+                                    string_constants.GENERATE_VIDEO_DESCRIPTION, len(images_paths_list))
     create_directory_if_not_exists(configuration_constants.TEMPORARY_VIDEO_DIRECTORY_PATH)
     create_directory_if_not_exists(configuration_constants.MASK_VIDEOS)
 
@@ -52,6 +58,7 @@ def generate_frames(images_path, specified_methods_to_apply, apply_methods_flag=
                 image_array = apply_methods_specified(image_array, specified_methods_to_apply)
         cv.imwrite(frame_path, np.uint8(image_array))
         frames_paths_list.append(frame_path)
+        progress_bar.increment_value_progress_bar()
         index = index + 1
     return frames_paths_list
 

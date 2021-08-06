@@ -12,6 +12,14 @@ MGAC_METHOD_NAME = "Mgac"
 NO_PATH_SELECTION = "No se selecciono ningun path"
 NO_MGAC_METHOD_ERROR = "No se aplico el metodo mgac en la imagen aun"
 
+# Wait message
+
+WAIT_ESTIMATION_MESSAGE_TITLE = "Estimacion"
+WAIT_ESTIMATION_MESSAGE_DESC = "Se esta estimando el costo de tiempo y espacio de la rutina. Espere unos segundos... "
+
+WAIT_TEXTURE_IMAGE_MESSAGE_TITLE = "Textura de imagen"
+WAIT_TEXTURE_IMAGE_MESSAGE_DESC = "Se esta generando el mapa de textura de la imagen. Espere unos segundos... "
+
 # Confirmation messages
 
 GLOBAL_ROUTINE_ESTIMATION_TITLE = "Estimación de resultados"
@@ -21,6 +29,7 @@ GLOBAL_ROUTINE_MEMORY_ESTIMATION = "Estimación de memoria requerida: "
 # Progress Bar
 
 CANCEL_BUTTON_TEXT = "Cancelar"
+CONTINUE_BUTTON_TEXT = "Continuar"
 
 CALCULATE_PERIMETERS_TITLE = "Calculo de perimetro"
 CALCULATE_PERIMETERS_DESCRIPTION = "Calculando perimetros"
@@ -34,8 +43,16 @@ CALCULATE_AXIS_RATIO_DESCRIPTION = "Calculando razón de ejes"
 CALCULATE_METRICS_TITLE = "Calculo de métricas"
 CALCULATE_METRICS_DESCRIPTION = "Calculando métricas"
 
-GENERATE_MASK_VIDEOS_TITLE = "Generación de máscaras de células"
-GENERATE_MASK_VIDEOS_DESCRIPTION = "Calculando máscaras de células"
+GENERATE_VIDEO_TITLE = "Generación video de célula"
+GENERATE_VIDEO_DESCRIPTION = "Generando frames"
+
+GENERATE_MOTION_HEAT_MAP_TITLE = "Mapa de calor de movimiento"
+GENERATE_MOTION_HEAT_MAP_DESCRIPTION = "Generando mapa de calor de movimiento"
+
+GENERATE_TEXTURE_HEAT_MAP_TITLE = "Mapa de calor de textura"
+GENERATE_TEXTURE_HEAT_MAP_DESCRIPTION = "Generando mapa de calor de textura"
+
+GLOBAL_ROUTINE_PROGRESS_BAR_TITLE = "Rutina Global"
 
 # Metrics plot
 

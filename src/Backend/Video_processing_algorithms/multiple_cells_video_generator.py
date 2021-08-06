@@ -10,13 +10,11 @@ from src.Classes.Methods.Anisotropic_Filter import Anisotropic_Filter
 from src.Frontend.Utils import progress_bar
 from src.Classes.Methods.Mgac import Mgac
 from src.Classes.Region import Region
-from src.Constants import algorithm_constants, string_constants, configuration_constants
+from src.Constants import algorithm_constants, configuration_constants
 
 
 def generate_mask_video_of_all_cells(source_directory):
     images_list_of_lists = get_images_from_directories(source_directory)
-    progress_bar.start_progress_bar(string_constants.GENERATE_MASK_VIDEOS_TITLE,
-                                    string_constants.GENERATE_MASK_VIDEOS_DESCRIPTION, len(images_list_of_lists))
     masked_videos_paths_list = []
     for images_list_paths in images_list_of_lists:
         if progress_bar.is_progress_bar_cancelled():
@@ -25,7 +23,6 @@ def generate_mask_video_of_all_cells(source_directory):
         video_path = video_generator.generate_video(images_list=images_list_paths,
                                                     specified_methods_to_apply=specified_methods_to_apply)
         masked_videos_paths_list.append(video_path)
-        progress_bar.increment_value_progress_bar()
     return masked_videos_paths_list
 
 
