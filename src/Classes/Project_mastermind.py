@@ -108,8 +108,19 @@ class Project_mastermind:
     def get_texture_image_video(self):
         return self.texture_image_video_wrapper
 
-    def clear_processing(self):
+    def clear_all(self):
         self.image_processing_list = []
+        self.original_image_path = None
+        self.original_image_dir = None
+        self.normal_progress_bar = None
+        self.global_progress_bar = None
+        self.is_global_progress_bar_active_flag = False
+        self.movement_image_wrapper = None
+        self.movement_heat_map_image_wrapper = None
+        self.texture_image_wrapper = None
+        self.texture_heat_map_image_wrapper = None
+        self.texture_image_video_wrapper = None
+        self.texture_heat_map_image_video_wrapper = None
 
     def remove_last_processing(self):
         if len(self.image_processing_list) > 1:

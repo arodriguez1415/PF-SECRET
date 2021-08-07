@@ -1,3 +1,5 @@
+from PyQt5.QtCore import QCoreApplication
+
 from src.Backend.Image_processing_algorithms.Operations.common_operations import resize_image
 from src.Classes.Image_wrapper import Image_wrapper
 from src.Classes.Methods.Mgac import Mgac
@@ -7,6 +9,7 @@ from src.Backend.Image_processing_algorithms.Border_detection import mgac as mga
 from PIL import Image
 
 from src.Constants import configuration_constants
+from src.Frontend.Utils.button_controller import disable_button, enable_button
 
 
 def configure_border_detection_menu_connections(main_window):
@@ -22,6 +25,7 @@ def load_mgac_options(main_window):
 
 
 def mgac(main_window):
+    disable_button(main_window.apply_mgac_button)
     project_mastermind = Project_mastermind.get_instance()
     polygon_region = Region()
     polygon_region.get_region()
@@ -41,6 +45,7 @@ def mgac(main_window):
     image_wrapper = Image_wrapper(borders_image, mgac_method)
     project_mastermind.add_image_process(image_wrapper)
     main_window.image_viewer.set_screen_image(image_wrapper)
+    enable_button(main_window.apply_mgac_button)
 
 
 def mgac_only_cell(main_window):

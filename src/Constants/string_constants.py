@@ -1,6 +1,12 @@
 MGAC_BORDER_IMAGE_SAVE_NAME = "border_image.tiff"
 ANISOTROPIC_IMAGE_SAVE_NAME = "anisotropic_image.tiff"
 
+# view names
+
+MOVEMENT_VIEW = "Movement"
+TEXTURE_IMAGE_VIEW = "Texture Image"
+TEXTURE_VIDEO_VIEW = "Texture video"
+
 # Methods
 
 ORIGINAL_METHOD_NAME = "Original"

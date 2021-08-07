@@ -4,6 +4,7 @@ from src.Classes.Methods.Original import Original
 from src.Classes.Project_mastermind import Project_mastermind
 from src.Classes.Image_loader import Image_loader
 from src.Constants import string_constants
+from src.Frontend.Utils.viewer_buttons import disable_extra_views
 
 
 def configure_archive_menu_connections(main_window):
@@ -19,7 +20,8 @@ def load_image(image_viewer, method):
     else:
         messages.show_error(string_constants.NO_PATH_SELECTION)
         return
-    project_mastermind.clear_processing()
+    project_mastermind.clear_all()
+    disable_extra_views(project_mastermind.main_window)
     project_mastermind.set_original_image_path(image_path)
     project_mastermind.set_original_image_dir(image_file_manipulation.get_image_dir(image_path))
     project_mastermind.add_image_process(image_wrapper)
@@ -28,6 +30,3 @@ def load_image(image_viewer, method):
 
 def set_image_on_screen(image_wrapper, image_viewer):
     image_viewer.set_screen_image(image_wrapper)
-
-
-

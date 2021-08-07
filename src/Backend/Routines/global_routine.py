@@ -21,6 +21,9 @@ def routine(sub_routines):
     routine_setup()
     source_directory = multiple_cells_video_generator.get_source_directory()
 
+    if source_directory is None or source_directory == "":
+        return
+
     continue_flag = estimate_time_and_space_sub_routine(sub_routines, source_directory)
     if not continue_flag:
         return

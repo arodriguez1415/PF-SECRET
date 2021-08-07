@@ -8,6 +8,7 @@ from src.Classes.Region import Region
 from src.Constants import algorithm_constants, configuration_constants
 from src.Constants.string_constants import ORIGINAL_TITLE, MOVEMENT_TITLE, TEXTURE_VIDEO_TITLE, TEXTURE_IMAGE_TITLE, \
     FOUR_GRID_COMPARISON
+from src.Frontend.Utils.button_controller import disable_button, enable_button
 from src.Frontend.Utils.plot_comparator import plot_four_comparison
 
 
@@ -24,11 +25,11 @@ def configure_metrics_menu_connections(main_window):
 
     main_window.generate_metrics_load_mask_video_button.clicked.connect(lambda: load_mask_video_path(main_window))
     main_window.plot_metrics_load_dataframe_button.clicked.connect(lambda: load_metrics_data_path(main_window))
-
     main_window.generate_metrics_generate_button.clicked.connect(lambda: generate_metrics(main_window))
-    main_window.analyze_movement_and_texture_button.clicked.connect(lambda: analyze_texture_and_movement_metrics())
     main_window.plot_metrics_generate_button.clicked.connect(lambda: plot_metrics(main_window))
     main_window.plot_metrics_distribution_button.clicked.connect(lambda: plot_distribution_metrics(main_window))
+    main_window.analyze_movement_and_texture_button.clicked.connect(lambda:
+                                                                    analyze_texture_and_movement_metrics(main_window))
 
 
 def load_generate_metrics_options(main_window):
@@ -60,19 +61,25 @@ def load_analyze_texture_and_movement_options(main_window):
 
 
 def load_mask_video_path(main_window):
+    disable_button(main_window.generate_metrics_load_mask_video_button)
     mask_video_path = video_file_manipulation.get_video_path()
     main_window.generate_metrics_mask_video_input.setText(mask_video_path)
+    enable_button(main_window.generate_metrics_load_mask_video_button)
 
 
 def load_metrics_data_path(main_window):
+    disable_button(main_window.plot_metrics_load_dataframe_button)
     dataframe_path = dataframe_file_manipulation.get_dataframe_path()
     main_window.plot_metrics_dataframe_input.setText(dataframe_path)
+    enable_button(main_window.plot_metrics_load_dataframe_button)
 
 
 def generate_metrics(main_window):
+    disable_button(main_window.generate_metrics_generate_button)
     mask_video_path = main_window.generate_metrics_mask_video_input.text()
     metrics_dictionary = get_generation_metrics_dictionary(main_window)
     metrics_generator.generate_metrics(mask_video_path, metrics_dictionary)
+    enable_button(main_window.generate_metrics_generate_button)
 
 
 def get_generation_metrics_dictionary(main_window):
@@ -91,10 +98,13 @@ def get_generation_metrics_dictionary(main_window):
 
 
 def plot_metrics(main_window):
+    disable_button(main_window.plot_metrics_generate_button)
     metrics_data_path = main_window.plot_metrics_dataframe_input.text()
     metrics_dictionary = get_plotting_metrics_dictionary(main_window)
-    metrics_values_lists, frames_values_lists, titles_list, x_label_list, y_label_list = metrics_plotter.load_metrics(metrics_data_path, metrics_dictionary)
+    metrics_values_lists, frames_values_lists, titles_list, x_label_list, y_label_list = metrics_plotter.load_metrics(
+        metrics_data_path, metrics_dictionary)
     metrics_plotter.plot_metrics(metrics_values_lists, frames_values_lists, titles_list, x_label_list, y_label_list)
+    enable_button(main_window.plot_metrics_generate_button)
 
 
 def get_plotting_metrics_dictionary(main_window):
@@ -113,10 +123,13 @@ def get_plotting_metrics_dictionary(main_window):
 
 
 def plot_distribution_metrics(main_window):
+    disable_button(main_window.plot_metrics_distribution_button)
     metrics_data_paths = dataframe_file_manipulation.get_multiple_dataframes_path()
     distribution_metrics_dictionary = get_plotting_distribution_metrics_dictionary(main_window)
-    metrics_avg_lists, titles_list, x_label_list, y_label_list = metrics_plotter.load_distribution_metrics(metrics_data_paths, distribution_metrics_dictionary)
+    metrics_avg_lists, titles_list, x_label_list, y_label_list = metrics_plotter.load_distribution_metrics(
+        metrics_data_paths, distribution_metrics_dictionary)
     metrics_plotter.plot_distribution_metrics(metrics_avg_lists, titles_list, x_label_list, y_label_list)
+    enable_button(main_window.plot_metrics_distribution_button)
 
 
 def get_plotting_distribution_metrics_dictionary(main_window):
@@ -134,7 +147,8 @@ def get_plotting_distribution_metrics_dictionary(main_window):
     return metrics_dictionary
 
 
-def analyze_texture_and_movement_metrics():
+def analyze_texture_and_movement_metrics(main_window):
+    disable_button(main_window.analyze_movement_and_texture_button)
     project_mastermind = Project_mastermind.get_instance()
 
     original_array = project_mastermind.get_original_image()
@@ -166,3 +180,4 @@ def analyze_texture_and_movement_metrics():
     title = FOUR_GRID_COMPARISON
     sub_titles = [ORIGINAL_TITLE, MOVEMENT_TITLE, TEXTURE_IMAGE_TITLE, TEXTURE_VIDEO_TITLE]
     plot_four_comparison(show_images_array, title, sub_titles, avg_results)
+    enable_button(main_window.analyze_movement_and_texture_button)

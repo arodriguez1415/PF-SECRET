@@ -1,6 +1,8 @@
-from src.Classes.Project_mastermind import Project_mastermind
 import src.Frontend.Utils.plot_comparator as plot_comparator
+
 from src.Constants import string_constants
+from src.Frontend.Utils.button_controller import disable_button, enable_button, is_enabled
+from src.Classes.Project_mastermind import Project_mastermind
 
 
 def configure_viewer_buttons_connections(main_window):
@@ -13,6 +15,40 @@ def configure_viewer_buttons_connections(main_window):
     main_window.movement_compare_to_texture_image.clicked.connect(lambda: compare_movement_vs_texture_image())
     main_window.movement_compare_to_texture_video.clicked.connect(lambda: compare_movement_vs_texture_video())
     main_window.texture_image_compare_to_texture_video.clicked.connect(lambda: compare_texture_image_vs_texture_video())
+
+
+def disable_extra_views(main_window):
+    disable_button(main_window.movement_image)
+    disable_button(main_window.texture_image)
+    disable_button(main_window.texture_image_from_video)
+    disable_button(main_window.movement_compare_to_texture_image)
+    disable_button(main_window.movement_compare_to_texture_video)
+    disable_button(main_window.texture_image_compare_to_texture_video)
+
+
+def enable_view_button(view_name):
+    project_mastermind = Project_mastermind.get_instance()
+    main_window = project_mastermind.main_window
+
+    if view_name == string_constants.MOVEMENT_VIEW:
+        enable_button(main_window.movement_image)
+        enable_related_button(main_window.texture_image, main_window.movement_compare_to_texture_image)
+        enable_related_button(main_window.texture_image_from_video, main_window.movement_compare_to_texture_video)
+    elif view_name == string_constants.TEXTURE_IMAGE_VIEW:
+        enable_button(main_window.texture_image)
+        enable_related_button(main_window.movement_image, main_window.movement_compare_to_texture_image)
+        enable_related_button(main_window.texture_image_from_video, main_window.texture_image_compare_to_texture_video)
+    elif view_name == string_constants.TEXTURE_VIDEO_VIEW:
+        enable_button(main_window.texture_image_from_video)
+        enable_related_button(main_window.movement_image, main_window.movement_compare_to_texture_video)
+        enable_related_button(main_window.texture_image, main_window.texture_image_compare_to_texture_video)
+
+
+def enable_related_button(view_button, comparison_view_button):
+    enable_flag = is_enabled(view_button)
+
+    if enable_flag:
+        enable_button(comparison_view_button)
 
 
 def show_main_image(image_viewer):

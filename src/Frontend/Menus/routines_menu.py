@@ -1,5 +1,6 @@
 from src.Backend.Routines import global_routine
 from src.Constants import algorithm_constants
+from src.Frontend.Utils.button_controller import disable_button, enable_button
 
 
 def configure_routines_menu_connections(main_window):
@@ -19,8 +20,10 @@ def load_global_routine_options(main_window):
 
 
 def initiate_global_routine(main_window):
+    disable_button(main_window.global_routine_initiate_button)
     sub_routines_list = get_sub_routines(main_window)
     global_routine.routine(sub_routines_list)
+    enable_button(main_window.global_routine_initiate_button)
 
 
 def get_sub_routines(main_window):
