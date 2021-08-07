@@ -14,7 +14,7 @@ import src.Frontend.Menus.metrics_menu as metrics_menu
 import src.Frontend.Menus.video_menu as video_menu
 import src.Frontend.Menus.routines_menu as routines_menu
 from src.Frontend.Utils import viewer_buttons
-from src.Frontend.Utils.viewer_buttons import disable_extra_views
+from src.Frontend.Utils.viewer_buttons import disable_extra_views, disable_main_view
 
 
 def set_style(main_window):
@@ -35,6 +35,7 @@ def configure_windows(main_window, app):
 def set_initial_configuration(main_window):
     main_window.image_viewer = replace_image_viewer(main_window.image_viewer)
     main_window.stacked_feature_windows.setCurrentIndex(0)
+    disable_main_view(main_window)
     disable_extra_views(main_window)
     return
 

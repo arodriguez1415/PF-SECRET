@@ -15,9 +15,6 @@
   background-color: black;
 }
 
-#polygon_region_button:focus{
-  background-color: #99AAFF;
-}
 
 #square_region_button{
  background-position: center;

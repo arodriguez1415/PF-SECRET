@@ -3,6 +3,7 @@ ANISOTROPIC_IMAGE_SAVE_NAME = "anisotropic_image.tiff"
 
 # view names
 
+MAIN_VIEW = "Main View"
 MOVEMENT_VIEW = "Movement"
 TEXTURE_IMAGE_VIEW = "Texture Image"
 TEXTURE_VIDEO_VIEW = "Texture video"
@@ -17,6 +18,8 @@ MGAC_METHOD_NAME = "Mgac"
 
 NO_PATH_SELECTION = "No se selecciono ningun path"
 NO_MGAC_METHOD_ERROR = "No se aplico el metodo mgac en la imagen aun"
+NO_ALL_IMAGES_READY_FOR_ANALYZE_METRIC_DESCRIPTION = "Para la comparación de la métrica es necesario haber calculado " \
+                                                     "el mapa de movimiento y el mapa de textura de imagen y video"
 
 # Wait message
 
@@ -31,6 +34,9 @@ WAIT_TEXTURE_IMAGE_MESSAGE_DESC = "Se esta generando el mapa de textura de la im
 GLOBAL_ROUTINE_ESTIMATION_TITLE = "Estimación de resultados"
 GLOBAL_ROUTINE_TIME_ESTIMATION = "Estimacion de tiempo requerido: "
 GLOBAL_ROUTINE_MEMORY_ESTIMATION = "Estimación de memoria requerida: "
+
+NO_REGION_FOUND_TITLE = "Confirmación de región"
+NO_REGION_FOUND_DESCRIPTION = "No se seleccionó ninguna región. Se tomará como región toda la imagen"
 
 # Progress Bar
 

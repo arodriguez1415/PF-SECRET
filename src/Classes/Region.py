@@ -18,9 +18,15 @@ class Region:
         drawable_label = project_mastermind.main_window.image_viewer
         self.drawable_label = drawable_label
 
+    def has_region(self):
+        region_qpoints = self.drawable_label.get_polygon()
+        if len(region_qpoints) < 2:
+            return False
+        return True
+
     def get_region(self):
         region_qpoints = self.drawable_label.get_polygon()
-        if len(region_qpoints) == 0:
+        if len(region_qpoints) < 2:
             return self.get_all_image_region()
         for qpoint in region_qpoints:
             x_axis = qpoint.x()

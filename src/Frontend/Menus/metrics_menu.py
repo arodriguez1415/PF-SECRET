@@ -5,10 +5,11 @@ from src.Backend.Image_processing_algorithms.Operations.common_operations import
 from src.Classes.Project_mastermind import Project_mastermind
 from src.Classes.QDrawable_label import QDrawable_label
 from src.Classes.Region import Region
-from src.Constants import algorithm_constants, configuration_constants
+from src.Constants import algorithm_constants, configuration_constants, string_constants
 from src.Constants.string_constants import ORIGINAL_TITLE, MOVEMENT_TITLE, TEXTURE_VIDEO_TITLE, TEXTURE_IMAGE_TITLE, \
     FOUR_GRID_COMPARISON
 from src.Frontend.Utils.button_controller import disable_button, enable_button
+from src.Frontend.Utils.message import show_confirmation_message, show_error
 from src.Frontend.Utils.plot_comparator import plot_four_comparison
 
 
@@ -150,6 +151,19 @@ def get_plotting_distribution_metrics_dictionary(main_window):
 def analyze_texture_and_movement_metrics(main_window):
     disable_button(main_window.analyze_movement_and_texture_button)
     project_mastermind = Project_mastermind.get_instance()
+    region = Region()
+
+    if not region.has_region():
+        continue_flag = show_confirmation_message(string_constants.NO_REGION_FOUND_TITLE,
+                                  string_constants.NO_REGION_FOUND_DESCRIPTION)
+        if not continue_flag:
+            enable_button(main_window.analyze_movement_and_texture_button)
+            return
+
+    if not all_images_ready():
+        show_error(string_constants.NO_ALL_IMAGES_READY_FOR_ANALYZE_METRIC_DESCRIPTION)
+        enable_button(main_window.analyze_movement_and_texture_button)
+        return
 
     original_array = project_mastermind.get_original_image()
     movement_array = project_mastermind.get_movement_image().image_array
@@ -163,7 +177,6 @@ def analyze_texture_and_movement_metrics(main_window):
     show_images_array = [original_array, show_movement_array, show_texture_image_array, show_texture_video_array]
     avg_values_array = []
 
-    region = Region()
     square_region = region.get_region()
     for i in range(0, len(weight_image_array)):
         show_image_array = resize_image(show_images_array[i], width, height)
@@ -181,3 +194,10 @@ def analyze_texture_and_movement_metrics(main_window):
     sub_titles = [ORIGINAL_TITLE, MOVEMENT_TITLE, TEXTURE_IMAGE_TITLE, TEXTURE_VIDEO_TITLE]
     plot_four_comparison(show_images_array, title, sub_titles, avg_results)
     enable_button(main_window.analyze_movement_and_texture_button)
+
+
+def all_images_ready():
+    pm = Project_mastermind.get_instance()
+    if pm.get_original_image() is None or pm.get_movement_image() is None or pm.get_texture_heat_map_image() is None or pm.get_texture_heat_map_image_video() is None:
+        return False
+    return True

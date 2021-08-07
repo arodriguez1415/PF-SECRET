@@ -17,6 +17,11 @@ def configure_viewer_buttons_connections(main_window):
     main_window.texture_image_compare_to_texture_video.clicked.connect(lambda: compare_texture_image_vs_texture_video())
 
 
+def disable_main_view(main_window):
+    disable_button(main_window.main_image_button)
+    disable_button(main_window.actual_compare_to_original)
+
+
 def disable_extra_views(main_window):
     disable_button(main_window.movement_image)
     disable_button(main_window.texture_image)
@@ -30,7 +35,10 @@ def enable_view_button(view_name):
     project_mastermind = Project_mastermind.get_instance()
     main_window = project_mastermind.main_window
 
-    if view_name == string_constants.MOVEMENT_VIEW:
+    if view_name == string_constants.MAIN_VIEW:
+        enable_button(main_window.main_image_button)
+        enable_button(main_window.actual_compare_to_original)
+    elif view_name == string_constants.MOVEMENT_VIEW:
         enable_button(main_window.movement_image)
         enable_related_button(main_window.texture_image, main_window.movement_compare_to_texture_image)
         enable_related_button(main_window.texture_image_from_video, main_window.movement_compare_to_texture_video)

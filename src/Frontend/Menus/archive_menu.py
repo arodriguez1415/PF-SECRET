@@ -4,7 +4,7 @@ from src.Classes.Methods.Original import Original
 from src.Classes.Project_mastermind import Project_mastermind
 from src.Classes.Image_loader import Image_loader
 from src.Constants import string_constants
-from src.Frontend.Utils.viewer_buttons import disable_extra_views
+from src.Frontend.Utils.viewer_buttons import disable_extra_views, enable_view_button
 
 
 def configure_archive_menu_connections(main_window):
@@ -26,6 +26,7 @@ def load_image(image_viewer, method):
     project_mastermind.set_original_image_dir(image_file_manipulation.get_image_dir(image_path))
     project_mastermind.add_image_process(image_wrapper)
     set_image_on_screen(image_wrapper, image_viewer)
+    enable_view_button(string_constants.MAIN_VIEW)
 
 
 def set_image_on_screen(image_wrapper, image_viewer):
