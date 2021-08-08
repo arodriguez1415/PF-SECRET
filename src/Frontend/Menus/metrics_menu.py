@@ -1,6 +1,7 @@
 from src.Backend.Image_processing_algorithms.Archive_manipulation import dataframe_file_manipulation
 from src.Backend.Image_processing_algorithms.Archive_manipulation import video_file_manipulation
 from src.Backend.Image_processing_algorithms.Metrics import metrics_generator, metrics_plotter
+from src.Backend.Image_processing_algorithms.Metrics.metrics_plotter import filter_keys
 from src.Backend.Image_processing_algorithms.Operations.common_operations import resize_image, normalize_to_range
 from src.Classes.Project_mastermind import Project_mastermind
 from src.Classes.QDrawable_label import QDrawable_label
@@ -8,6 +9,7 @@ from src.Classes.Region import Region
 from src.Constants import algorithm_constants, configuration_constants, string_constants
 from src.Constants.string_constants import ORIGINAL_TITLE, MOVEMENT_TITLE, TEXTURE_VIDEO_TITLE, TEXTURE_IMAGE_TITLE, \
     FOUR_GRID_COMPARISON
+from src.Frontend.Utils import progress_bar
 from src.Frontend.Utils.button_controller import disable_button, enable_button
 from src.Frontend.Utils.message import show_confirmation_message, show_error
 from src.Frontend.Utils.plot_comparator import plot_four_comparison
@@ -15,6 +17,8 @@ from src.Frontend.Utils.plot_comparator import plot_four_comparison
 
 def configure_metrics_menu_connections(main_window):
     main_window.generate_metrics_menu_option.triggered.connect(lambda: load_generate_metrics_options(main_window))
+    main_window.generate_multiple_cells_metrics_menu_option.triggered.connect(lambda:
+                                                                              load_generate_multiple_cells_metrics_options(main_window))
     main_window.plot_metrics_menu_option.triggered.connect(lambda: load_plot_metrics_options(main_window))
     main_window.plot_distribution_metric_menu_option.triggered.connect(lambda:
                                                                        load_plot_distribution_metrics_option
@@ -25,6 +29,7 @@ def configure_metrics_menu_connections(main_window):
                                                                                    (main_window))
 
     main_window.generate_metrics_load_mask_video_button.clicked.connect(lambda: load_mask_video_path(main_window))
+    main_window.generate_multiple_cells_metrics_generate_button.clicked.connect(lambda: generate_multiple_cells_metrics(main_window))
     main_window.plot_metrics_load_dataframe_button.clicked.connect(lambda: load_metrics_data_path(main_window))
     main_window.generate_metrics_generate_button.clicked.connect(lambda: generate_metrics(main_window))
     main_window.plot_metrics_generate_button.clicked.connect(lambda: plot_metrics(main_window))
@@ -40,6 +45,13 @@ def load_generate_metrics_options(main_window):
     return
 
 
+def load_generate_multiple_cells_metrics_options(main_window):
+    page = main_window.generate_multiple_cells_metrics_options
+    stacked_feature_windows = main_window.stacked_feature_windows
+    stacked_feature_windows.setCurrentWidget(page)
+    return
+
+
 def load_plot_metrics_options(main_window):
     page = main_window.plot_metrics_options
     stacked_feature_windows = main_window.stacked_feature_windows
@@ -48,7 +60,7 @@ def load_plot_metrics_options(main_window):
 
 
 def load_plot_distribution_metrics_option(main_window):
-    page = main_window.plot_distribution_metrics_option
+    page = main_window.plot_distribution_metrics_options
     stacked_feature_windows = main_window.stacked_feature_windows
     stacked_feature_windows.setCurrentWidget(page)
     return
@@ -79,7 +91,13 @@ def generate_metrics(main_window):
     disable_button(main_window.generate_metrics_generate_button)
     mask_video_path = main_window.generate_metrics_mask_video_input.text()
     metrics_dictionary = get_generation_metrics_dictionary(main_window)
+
+    if len(filter_keys(metrics_dictionary)) == 0:
+        enable_button(main_window.generate_metrics_generate_button)
+        return
+
     metrics_generator.generate_metrics(mask_video_path, metrics_dictionary)
+    progress_bar.force_to_close()
     enable_button(main_window.generate_metrics_generate_button)
 
 
@@ -98,10 +116,44 @@ def get_generation_metrics_dictionary(main_window):
     return metrics_dictionary
 
 
+def generate_multiple_cells_metrics(main_window):
+    disable_button(main_window.generate_multiple_cells_metrics_generate_button)
+    mask_videos_path_list = video_file_manipulation.get_multiple_videos_path()
+    metrics_dictionary = get_generation_multiple_cells_metrics_dictionary(main_window)
+
+    if len(filter_keys(metrics_dictionary)) == 0:
+        enable_button(main_window.generate_metrics_generate_button)
+        return
+
+    metrics_generator.generate_multiple_cells_metrics(mask_videos_path_list, metrics_dictionary)
+    progress_bar.force_to_close()
+    enable_button(main_window.generate_multiple_cells_metrics_generate_button)
+
+
+def get_generation_multiple_cells_metrics_dictionary(main_window):
+    metrics_dictionary = {}
+
+    is_perimeter_checked = main_window.generate_multiple_cells_metrics_perimeter_checkbox.isChecked()
+    metrics_dictionary[algorithm_constants.PERIMETER_METRIC] = is_perimeter_checked
+
+    is_area_checked = main_window.generate_multiple_cells_metrics_area_checkbox.isChecked()
+    metrics_dictionary[algorithm_constants.AREA_METRIC] = is_area_checked
+
+    is_axis_rate_checked = main_window.generate_multiple_cells_metrics_axis_rate_checkbox.isChecked()
+    metrics_dictionary[algorithm_constants.AXIS_RATE_METRIC] = is_axis_rate_checked
+
+    return metrics_dictionary
+
+
 def plot_metrics(main_window):
     disable_button(main_window.plot_metrics_generate_button)
     metrics_data_path = main_window.plot_metrics_dataframe_input.text()
     metrics_dictionary = get_plotting_metrics_dictionary(main_window)
+
+    if len(filter_keys(metrics_dictionary)) == 0:
+        enable_button(main_window.plot_metrics_generate_button)
+        return
+
     metrics_values_lists, frames_values_lists, titles_list, x_label_list, y_label_list = metrics_plotter.load_metrics(
         metrics_data_path, metrics_dictionary)
     metrics_plotter.plot_metrics(metrics_values_lists, frames_values_lists, titles_list, x_label_list, y_label_list)
@@ -127,6 +179,11 @@ def plot_distribution_metrics(main_window):
     disable_button(main_window.plot_metrics_distribution_button)
     metrics_data_paths = dataframe_file_manipulation.get_multiple_dataframes_path()
     distribution_metrics_dictionary = get_plotting_distribution_metrics_dictionary(main_window)
+
+    if len(filter_keys(distribution_metrics_dictionary)) == 0:
+        enable_button(main_window.plot_metrics_distribution_button)
+        return
+
     metrics_avg_lists, titles_list, x_label_list, y_label_list = metrics_plotter.load_distribution_metrics(
         metrics_data_paths, distribution_metrics_dictionary)
     metrics_plotter.plot_distribution_metrics(metrics_avg_lists, titles_list, x_label_list, y_label_list)

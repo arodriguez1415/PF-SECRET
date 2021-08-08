@@ -8,6 +8,7 @@ from src.Classes.Image_wrapper import Image_wrapper
 from src.Classes.Project_mastermind import Project_mastermind
 from src.Classes.Region import Region
 from src.Constants import string_constants
+from src.Frontend.Utils import progress_bar
 from src.Frontend.Utils.button_controller import disable_button, enable_button
 from src.Frontend.Utils.message import show_wait_message
 from src.Frontend.Utils.viewer_buttons import enable_view_button
@@ -84,6 +85,7 @@ def classify_image_texture(main_window):
     project_mastermind.set_texture_image(texture_image_wrapper)
     project_mastermind.set_texture_heat_map_image(texture_heat_map_image_wrapper)
     main_window.image_viewer.set_screen_image(texture_heat_map_image_wrapper)
+    progress_bar.force_to_close()
     enable_button(main_window.texture_classification_image_button)
     enable_view_button(string_constants.TEXTURE_IMAGE_VIEW)
 
@@ -102,5 +104,6 @@ def classify_video_texture(main_window):
     project_mastermind.set_texture_image_video(texture_image_wrapper)
     project_mastermind.set_texture_heat_map_image_video(texture_heat_map_image_wrapper)
     main_window.image_viewer.set_screen_image(texture_heat_map_image_wrapper)
+    progress_bar.force_to_close()
     enable_button(main_window.texture_classification_video_button)
     enable_view_button(string_constants.TEXTURE_VIDEO_VIEW)

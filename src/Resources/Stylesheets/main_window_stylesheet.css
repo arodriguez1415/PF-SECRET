@@ -15,6 +15,10 @@
   background-color: black;
 }
 
+#polygon_region_button:disabled{
+  background-color: #cccccc;
+}
+
 
 #square_region_button{
  background-position: center;
@@ -29,9 +33,10 @@
 	background-color: #99BBF5;
 }
 
-#square_region_button:focus{
-  background-color: #99AAFF;
+#square_region_button:disabled{
+  background-color: #cccccc;
 }
+
 
 #fixed_square_region_button{
  background-position: center;
@@ -46,9 +51,10 @@
 	background-color: #99BBF5;
 }
 
-#fixed_square_region_button:focus{
-  background-color: #99AAFF;
+#fixed_square_region_button:disabled{
+  background-color: #cccccc;
 }
+
 
 #diagonal_line_button{
  background-position: center;
@@ -63,9 +69,10 @@
 	background-color: #99BBF5;
 }
 
-#diagonal_line_button:focus{
-  background-color: #99AAFF;
+#diagonal_line_button:disabled{
+  background-color: #cccccc;
 }
+
 
 #clear_region_button{
  background-position: center;
@@ -78,6 +85,10 @@
 
 #clear_region_button:hover{
 	background-color: #99BBF5;
+}
+
+#clear_region_button:disabled{
+  background-color: #cccccc;
 }
 
 #undo_button{
@@ -93,6 +104,10 @@
 	background-color: #99BBF5;
 }
 
+#undo_button:disabled{
+  background-color: #cccccc;
+}
+
 #save_image_button{
  background-position: center;
  background-repeat: no-repeat;
@@ -104,6 +119,10 @@
 
 #save_image_button:hover{
 	background-color: #99BBF5;
+}
+
+#save_image_button:disabled{
+  background-color: #cccccc;
 }
 
 

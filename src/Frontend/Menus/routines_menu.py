@@ -1,5 +1,7 @@
+import matplotlib.pyplot as plt
 from src.Backend.Routines import global_routine
 from src.Constants import algorithm_constants
+from src.Frontend.Utils import progress_bar
 from src.Frontend.Utils.button_controller import disable_button, enable_button
 
 
@@ -23,6 +25,8 @@ def initiate_global_routine(main_window):
     disable_button(main_window.global_routine_initiate_button)
     sub_routines_list = get_sub_routines(main_window)
     global_routine.routine(sub_routines_list)
+    progress_bar.force_to_close()
+    plt.close('all')
     enable_button(main_window.global_routine_initiate_button)
 
 

@@ -301,7 +301,7 @@
      </rect>
     </property>
     <property name="currentIndex">
-     <number>7</number>
+     <number>14</number>
     </property>
     <widget class="QWidget" name="blank_page"/>
     <widget class="QWidget" name="anisotropic_filter_options">
@@ -2199,7 +2199,125 @@
       </property>
      </widget>
     </widget>
-    <widget class="QWidget" name="plot_distribution_metrics_option">
+    <widget class="QWidget" name="generate_multiple_cells_metrics_options">
+     <widget class="QLabel" name="generate_multiple_cells_metrics_title">
+      <property name="geometry">
+       <rect>
+        <x>20</x>
+        <y>30</y>
+        <width>281</width>
+        <height>91</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>16</pointsize>
+       </font>
+      </property>
+      <property name="text">
+       <string>Métricas a partir de máscara de múltiples celulas</string>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignCenter</set>
+      </property>
+      <property name="wordWrap">
+       <bool>true</bool>
+      </property>
+     </widget>
+     <widget class="QCheckBox" name="generate_multiple_cells_metrics_area_checkbox">
+      <property name="geometry">
+       <rect>
+        <x>30</x>
+        <y>250</y>
+        <width>151</width>
+        <height>31</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>14</pointsize>
+       </font>
+      </property>
+      <property name="text">
+       <string>Area</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="generate_multiple_cells_metrics_generate_button">
+      <property name="geometry">
+       <rect>
+        <x>140</x>
+        <y>560</y>
+        <width>151</width>
+        <height>41</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>10</pointsize>
+        <weight>75</weight>
+        <bold>true</bold>
+       </font>
+      </property>
+      <property name="text">
+       <string>Generar métricas</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="generate_multiple_cells_metrics_label">
+      <property name="geometry">
+       <rect>
+        <x>20</x>
+        <y>160</y>
+        <width>271</width>
+        <height>41</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>14</pointsize>
+       </font>
+      </property>
+      <property name="text">
+       <string>Métricas a graficar</string>
+      </property>
+     </widget>
+     <widget class="QCheckBox" name="generate_multiple_cells_metrics_axis_rate_checkbox">
+      <property name="geometry">
+       <rect>
+        <x>30</x>
+        <y>290</y>
+        <width>151</width>
+        <height>31</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>14</pointsize>
+       </font>
+      </property>
+      <property name="text">
+       <string>Razón de ejes</string>
+      </property>
+     </widget>
+     <widget class="QCheckBox" name="generate_multiple_cells_metrics_perimeter_checkbox">
+      <property name="geometry">
+       <rect>
+        <x>30</x>
+        <y>210</y>
+        <width>151</width>
+        <height>31</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>14</pointsize>
+       </font>
+      </property>
+      <property name="text">
+       <string>Perímetro</string>
+      </property>
+     </widget>
+    </widget>
+    <widget class="QWidget" name="plot_distribution_metrics_options">
      <widget class="QLabel" name="plot_metrics_distribution_title">
       <property name="geometry">
        <rect>
@@ -2371,6 +2489,7 @@
      <string>Metricas</string>
     </property>
     <addaction name="generate_metrics_menu_option"/>
+    <addaction name="generate_multiple_cells_metrics_menu_option"/>
     <addaction name="analize_texture_and_movement_metrics_menu_option"/>
     <addaction name="separator"/>
     <addaction name="plot_metrics_menu_option"/>
@@ -2688,6 +2807,11 @@
   <action name="analize_texture_and_movement_metrics_menu_option">
    <property name="text">
     <string>Analizar metricas de textura y movimiento</string>
+   </property>
+  </action>
+  <action name="generate_multiple_cells_metrics_menu_option">
+   <property name="text">
+    <string>Generar métricas de máscara de múltiples células</string>
    </property>
   </action>
  </widget>

@@ -3,6 +3,7 @@ from src.Backend.Video_processing_algorithms.movement_image_generator import cre
 from src.Classes.Image_wrapper import Image_wrapper
 from src.Classes.Project_mastermind import Project_mastermind
 from src.Constants import string_constants
+from src.Frontend.Utils import progress_bar
 from src.Frontend.Utils.button_controller import disable_button, enable_button
 from src.Frontend.Utils.viewer_buttons import enable_view_button
 
@@ -33,5 +34,6 @@ def generate_heat_map(main_window):
     project_mastermind.set_movement_image(movement_image_wrapper)
     show_coloured_image(coloured_motion_image_array)
     main_window.image_viewer.set_screen_image(movement_heat_map_image_wrapper)
+    progress_bar.force_to_close()
     enable_button(main_window.generate_heat_map_button)
     enable_view_button(string_constants.MOVEMENT_VIEW)

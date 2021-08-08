@@ -37,6 +37,7 @@ def set_initial_configuration(main_window):
     main_window.stacked_feature_windows.setCurrentIndex(0)
     disable_main_view(main_window)
     disable_extra_views(main_window)
+    toolBox.disable_toolbox(main_window)
     return
 
 
