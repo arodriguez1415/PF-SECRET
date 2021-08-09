@@ -18,6 +18,12 @@ def show_message(message_description):
     messageBox.exec()
 
 
+def show_information_message(information_description):
+    messageBox = QMessageBox()
+    messageBox.setText(information_description)
+    messageBox.exec()
+
+
 def show_error(error_description):
     messageBox = QMessageBox()
     messageBox.setText(error_description)

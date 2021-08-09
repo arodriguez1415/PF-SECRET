@@ -83,8 +83,10 @@ def set_global_progress_bar_active(flag=True):
 def force_to_close():
     project_mastermind = Project_mastermind.get_instance()
     progress_bar = get_progress_bar()
-    project_mastermind.set_global_progress_bar_active(False)
-    progress_bar.done(0)
+    if progress_bar is not None:
+        project_mastermind.set_global_progress_bar_active(False)
+        progress_bar.done(0)
+
 
 
 

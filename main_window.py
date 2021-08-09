@@ -1021,7 +1021,7 @@ class Ui_MainWindow(object):
         self.menubar.addAction(self.routines_menu.menuAction())
 
         self.retranslateUi(MainWindow)
-        self.stacked_feature_windows.setCurrentIndex(14)
+        self.stacked_feature_windows.setCurrentIndex(9)
         self.adaptive_threshold_window_size_spinner.valueChanged['int'].connect(self.adaptive_threshold_window_size_box.setValue)
         self.lbp_symmetric_points_box.valueChanged['int'].connect(self.lbp_symmetric_points_slider.setValue)
         self.lbp_radius_slider.valueChanged['int'].connect(self.lbp_radius_box.setValue)

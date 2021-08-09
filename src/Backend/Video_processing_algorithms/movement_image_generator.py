@@ -6,7 +6,7 @@ from PIL import Image
 import numpy as np
 import cv2
 
-from src.Backend.Image_processing_algorithms.Operations.common_operations import bgr_to_rgb
+from src.Backend.Image_processing_algorithms.Operations.common_operations import bgr_to_rgb, resize_image
 from src.Backend.Video_processing_algorithms import video_generator
 from src.Backend.Video_processing_algorithms.multiple_cells_video_generator import get_images_from_directories
 from src.Classes.Methods.Anisotropic_Filter import Anisotropic_Filter
@@ -93,11 +93,12 @@ def get_grayscale(frame_path):
 def get_motion(frames_path_list, threshold):
     previous_grayscale_frame = get_grayscale(frames_path_list[0])
     ret, previous_grayscale_frame = cv2.threshold(previous_grayscale_frame, threshold, 255, cv2.THRESH_BINARY)
-    rows, cols = previous_grayscale_frame.shape
-    accumulated_motion = np.zeros((rows, cols), np.uint8)
+    width, height = previous_grayscale_frame.shape
+    accumulated_motion = np.zeros((width, height), np.uint8)
     progress_bar.increment_value_progress_bar()
     for i in range(0, len(frames_path_list) - 1):
         current_grayscale_frame = get_grayscale(frames_path_list[i])
+        current_grayscale_frame = resize_image(current_grayscale_frame, width, height)
         ret, current_grayscale_frame = cv2.threshold(current_grayscale_frame, threshold, 255, cv2.THRESH_BINARY)
         accumulated_motion = get_frame_motion(current_grayscale_frame, previous_grayscale_frame,
                                               accumulated_motion)

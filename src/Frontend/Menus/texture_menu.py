@@ -1,4 +1,4 @@
-from src.Backend.Image_processing_algorithms.Operations.common_operations import show_coloured_image
+from src.Backend.Image_processing_algorithms.Operations.common_operations import show_coloured_image, resize_image
 from src.Backend.Image_processing_algorithms.Texture import fractal_dimention
 from src.Backend.Image_processing_algorithms.Texture import profile_texture
 from src.Backend.Image_processing_algorithms.Texture import texture_heatmap
@@ -7,7 +7,7 @@ from src.Backend.Video_processing_algorithms.texture_image_generator import crea
 from src.Classes.Image_wrapper import Image_wrapper
 from src.Classes.Project_mastermind import Project_mastermind
 from src.Classes.Region import Region
-from src.Constants import string_constants
+from src.Constants import string_constants, configuration_constants
 from src.Frontend.Utils import progress_bar
 from src.Frontend.Utils.button_controller import disable_button, enable_button
 from src.Frontend.Utils.message import show_wait_message
@@ -62,10 +62,11 @@ def generate_fractal_dimension(main_window):
 def generate_profile_texture(main_window):
     disable_button(main_window.texture_profile_apply_button)
     project_mastermind = Project_mastermind.get_instance()
+    width, height = configuration_constants.IMAGE_VIEWER_WIDTH, configuration_constants.IMAGE_VIEWER_HEIGHT
     current_image_array = project_mastermind.get_last_image()
-
+    current_image_array = resize_image(current_image_array, width, height)
     line_region = Region()
-    profile_texture.fractal_dimension_line(current_image_array, line_region.get_region())
+    profile_texture.fractal_dimension_line(current_image_array, line_region.get_line())
     enable_button(main_window.texture_profile_apply_button)
 
 

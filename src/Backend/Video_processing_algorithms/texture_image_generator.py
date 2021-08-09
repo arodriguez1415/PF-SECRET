@@ -7,7 +7,7 @@ import numpy as np
 
 from src.Backend.Image_processing_algorithms.Archive_manipulation.dataframe_file_manipulation import \
     create_dataframe_from_descriptors
-from src.Backend.Image_processing_algorithms.Operations.common_operations import bgr_to_rgb
+from src.Backend.Image_processing_algorithms.Operations.common_operations import bgr_to_rgb, resize_image
 from src.Backend.Image_processing_algorithms.Texture.unsupervised_learning_methods import get_descriptors, k_means
 from src.Backend.Video_processing_algorithms import video_generator
 from src.Backend.Video_processing_algorithms.multiple_cells_video_generator import get_images_from_directories
@@ -77,7 +77,8 @@ def get_images(images_path_for_texture_list):
 
 def generate_frames(images_path_for_texture_list):
     specified_methods_to_apply = set_methods_to_apply()
-    frames_paths_list = video_generator.generate_frames(images_path_for_texture_list, specified_methods_to_apply)
+    frames_paths_list = video_generator.generate_frames(images_path_for_texture_list,
+                                                        specified_methods_to_apply=specified_methods_to_apply)
     return frames_paths_list
 
 
@@ -91,12 +92,13 @@ def set_methods_to_apply():
 
 
 def get_texture_image(images_path_list, clusters_quantity, threshold):
-    rows, cols = get_grayscale(images_path_list[0]).shape
-    accumulated_texture = np.zeros((rows, cols), np.uint8)
+    width, height = get_grayscale(images_path_list[0]).shape
+    accumulated_texture = np.zeros((width, height), np.uint8)
     descriptors_labels = [algorithm_constants.GLCM_MEAN, algorithm_constants.GLCM_ENTROPY,
                           algorithm_constants.GLCM_HOMOGENEITY, algorithm_constants.GLCM_DISSIMILARITY]
     for i in range(0, len(images_path_list)):
         current_image_array = get_grayscale(images_path_list[i])
+        current_image_array = resize_image(current_image_array, width, height)
         ret, current_image_array = cv2.threshold(current_image_array, threshold, 255, cv2.THRESH_BINARY)
         accumulated_texture += current_image_array
         progress_bar.increment_value_progress_bar()

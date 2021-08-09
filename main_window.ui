@@ -301,7 +301,7 @@
      </rect>
     </property>
     <property name="currentIndex">
-     <number>14</number>
+     <number>9</number>
     </property>
     <widget class="QWidget" name="blank_page"/>
     <widget class="QWidget" name="anisotropic_filter_options">

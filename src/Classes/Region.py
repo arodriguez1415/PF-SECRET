@@ -24,9 +24,20 @@ class Region:
             return False
         return True
 
+    def get_line(self):
+        region_qpoints = self.drawable_label.get_polygon()
+        if len(region_qpoints) != 2:
+            raise ValueError('Need at least two points')
+        for qpoint in region_qpoints:
+            x_axis = qpoint.x()
+            y_axis = qpoint.y()
+            point = (x_axis, y_axis)
+            self.points.append(point)
+        return self.points
+
     def get_region(self):
         region_qpoints = self.drawable_label.get_polygon()
-        if len(region_qpoints) < 2:
+        if len(region_qpoints) < 3:
             return self.get_all_image_region()
         for qpoint in region_qpoints:
             x_axis = qpoint.x()
@@ -56,8 +67,7 @@ class Region:
         min_y = min(self.points, key=lambda t: t[1])[1]
         max_y = max(self.points, key=lambda t: t[1])[1]
 
-        pixels_in_region = image_array[min_x:max_x, min_y:max_y]
-        print(pixels_in_region)
+        pixels_in_region = image_array[min_y:max_y, min_x:max_x]
         return pixels_in_region
 
 
