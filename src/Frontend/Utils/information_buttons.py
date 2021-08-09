@@ -26,6 +26,31 @@ def configure_information_buttons(main_window):
     main_window.texture_classification_video_clusters_help.clicked.connect(lambda: show_information(string_constants.TEXTURE_CLASSIFICATION_VIDEO_CLUSTERS_HELP))
     main_window.texture_classification_video_algorithm_help.clicked.connect(lambda: show_information(string_constants.TEXTURE_CLASSIFICATION_VIDEO_ALGORITHM_HELP))
 
+    main_window.analyze_movement_and_texture_algorithm_help.clicked.connect(lambda: show_information(string_constants.ANALYZE_MOVEMENT_AND_TEXTURE_ALGORITHM_HELP))
+
+    main_window.generate_heat_map_threshold_help.clicked.connect(lambda: show_information(string_constants.GENERATE_MOVEMENT_HEAT_MAP_THRESHOLD_HELP))
+    main_window.generate_heat_map_algorithm_help.clicked.connect(lambda: show_information(string_constants.GENERATE_MOVEMENT_HEAT_MAP_ALGORITHM_HELP))
+
+    main_window.generate_metrics_load_metrics_help.clicked.connect(lambda: show_information(string_constants.GENERATE_METRICS_LOAD_HELP))
+    main_window.generate_metrics_algoritm_help.clicked.connect(lambda: show_information(string_constants.GENERATE_METRICS_ALGORITHM_HELP))
+
+    main_window.generate_multiple_cells_metrics_algorithm_help.clicked.connect(lambda: show_information(string_constants.GENERATE_MULTIPLE_CELLS_METRICS_ALGORITHM_HELP))
+
+    main_window.plot_metrics_load_metrics_help.clicked.connect(lambda: show_information(string_constants.PLOT_METRICS_LOAD_HELP))
+    main_window.plot_metrics_algorithm_help.clicked.connect(lambda: show_information(string_constants.PLOT_METRICS_ALGORITHM_HELP))
+
+    main_window.plot_metrics_distribution_algorithm_metrics.clicked.connect(lambda: show_information(string_constants.PLOT_METRICS_DISTRIBUTION_ALGORITHM_HELP))
+
+
+
+
+
+
+
+
+
+
+
 def show_information(message_id):
     show_information_message(message_id)
     return

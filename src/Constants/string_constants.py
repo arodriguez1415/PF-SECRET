@@ -64,7 +64,18 @@ TEXTURE_CLASSIFICATION_VIDEO_THRESHOLD_HELP = "Mensaje de prueba para mostrar un
 TEXTURE_CLASSIFICATION_VIDEO_CLUSTERS_HELP = "Mensaje de prueba para mostrar una informacion"
 TEXTURE_CLASSIFICATION_VIDEO_ALGORITHM_HELP = "Mensaje de prueba para mostrar una informacion"
 
+GENERATE_MOVEMENT_HEAT_MAP_THRESHOLD_HELP = "Mensaje de prueba para mostrar una informacion"
+GENERATE_MOVEMENT_HEAT_MAP_ALGORITHM_HELP = "Mensaje de prueba para mostrar una informacion"
 
+ANALYZE_MOVEMENT_AND_TEXTURE_ALGORITHM_HELP = "Mensaje de prueba para mostrar una informacion"
+
+GENERATE_METRICS_LOAD_HELP = "Mensaje de prueba para mostrar una informacion"
+GENERATE_METRICS_ALGORITHM_HELP = "Mensaje de prueba para mostrar una informacion"
+
+PLOT_METRICS_LOAD_HELP = "Mensaje de prueba para mostrar una informacion"
+PLOT_METRICS_ALGORITHM_HELP = "Mensaje de prueba para mostrar una informacion"
+
+PLOT_METRICS_DISTRIBUTION_ALGORITHM_HELP = "Mensaje de prueba para mostrar una informacion"
 
 # Progress Bar
 

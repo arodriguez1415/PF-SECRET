@@ -2100,7 +2100,7 @@
      <widget class="QPushButton" name="generate_metrics_generate_button">
       <property name="geometry">
        <rect>
-        <x>130</x>
+        <x>100</x>
         <y>570</y>
         <width>151</width>
         <height>41</height>
@@ -2117,12 +2117,48 @@
        <string>Generar métricas</string>
       </property>
      </widget>
+     <widget class="QPushButton" name="generate_metrics_load_metrics_help">
+      <property name="geometry">
+       <rect>
+        <x>180</x>
+        <y>210</y>
+        <width>41</width>
+        <height>41</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>14</pointsize>
+       </font>
+      </property>
+      <property name="text">
+       <string>?</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="generate_metrics_algoritm_help">
+      <property name="geometry">
+       <rect>
+        <x>260</x>
+        <y>570</y>
+        <width>41</width>
+        <height>41</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>14</pointsize>
+       </font>
+      </property>
+      <property name="text">
+       <string>?</string>
+      </property>
+     </widget>
     </widget>
     <widget class="QWidget" name="movement_and_texture_metrics_options">
      <widget class="QPushButton" name="analyze_movement_and_texture_button">
       <property name="geometry">
        <rect>
-        <x>130</x>
+        <x>100</x>
         <y>590</y>
         <width>151</width>
         <height>41</height>
@@ -2220,6 +2256,24 @@
        <bool>true</bool>
       </property>
      </widget>
+     <widget class="QPushButton" name="analyze_movement_and_texture_algorithm_help">
+      <property name="geometry">
+       <rect>
+        <x>260</x>
+        <y>590</y>
+        <width>41</width>
+        <height>41</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>14</pointsize>
+       </font>
+      </property>
+      <property name="text">
+       <string>?</string>
+      </property>
+     </widget>
     </widget>
     <widget class="QWidget" name="heat_map_options">
      <widget class="QLabel" name="generate_heat_map_title">
@@ -2243,10 +2297,10 @@
      <widget class="QPushButton" name="generate_heat_map_button">
       <property name="geometry">
        <rect>
-        <x>100</x>
-        <y>270</y>
+        <x>40</x>
+        <y>240</y>
         <width>191</width>
-        <height>51</height>
+        <height>41</height>
        </rect>
       </property>
       <property name="font">
@@ -2264,7 +2318,7 @@
       <property name="geometry">
        <rect>
         <x>20</x>
-        <y>100</y>
+        <y>120</y>
         <width>271</width>
         <height>31</height>
        </rect>
@@ -2282,8 +2336,8 @@
       <property name="geometry">
        <rect>
         <x>20</x>
-        <y>150</y>
-        <width>261</width>
+        <y>170</y>
+        <width>211</width>
         <height>41</height>
        </rect>
       </property>
@@ -2302,12 +2356,48 @@
        <number>20</number>
       </property>
      </widget>
+     <widget class="QPushButton" name="generate_heat_map_algorithm_help">
+      <property name="geometry">
+       <rect>
+        <x>240</x>
+        <y>240</y>
+        <width>41</width>
+        <height>41</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>14</pointsize>
+       </font>
+      </property>
+      <property name="text">
+       <string>?</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="generate_heat_map_threshold_help">
+      <property name="geometry">
+       <rect>
+        <x>240</x>
+        <y>170</y>
+        <width>41</width>
+        <height>41</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>14</pointsize>
+       </font>
+      </property>
+      <property name="text">
+       <string>?</string>
+      </property>
+     </widget>
     </widget>
     <widget class="QWidget" name="plot_metrics_options">
      <widget class="QPushButton" name="plot_metrics_generate_button">
       <property name="geometry">
        <rect>
-        <x>130</x>
+        <x>100</x>
         <y>570</y>
         <width>151</width>
         <height>41</height>
@@ -2468,6 +2558,42 @@
        <string>Métricas a partir de máscara</string>
       </property>
      </widget>
+     <widget class="QPushButton" name="plot_metrics_load_metrics_help">
+      <property name="geometry">
+       <rect>
+        <x>180</x>
+        <y>210</y>
+        <width>41</width>
+        <height>41</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>14</pointsize>
+       </font>
+      </property>
+      <property name="text">
+       <string>?</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="plot_metrics_algorithm_help">
+      <property name="geometry">
+       <rect>
+        <x>260</x>
+        <y>570</y>
+        <width>41</width>
+        <height>41</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>14</pointsize>
+       </font>
+      </property>
+      <property name="text">
+       <string>?</string>
+      </property>
+     </widget>
     </widget>
     <widget class="QWidget" name="generate_multiple_cells_metrics_options">
      <widget class="QLabel" name="generate_multiple_cells_metrics_title">
@@ -2515,7 +2641,7 @@
      <widget class="QPushButton" name="generate_multiple_cells_metrics_generate_button">
       <property name="geometry">
        <rect>
-        <x>140</x>
+        <x>100</x>
         <y>560</y>
         <width>151</width>
         <height>41</height>
@@ -2584,6 +2710,24 @@
       </property>
       <property name="text">
        <string>Perímetro</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="generate_multiple_cells_metrics_algorithm_help">
+      <property name="geometry">
+       <rect>
+        <x>260</x>
+        <y>560</y>
+        <width>41</width>
+        <height>41</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>14</pointsize>
+       </font>
+      </property>
+      <property name="text">
+       <string>?</string>
       </property>
      </widget>
     </widget>
@@ -2681,7 +2825,7 @@
      <widget class="QPushButton" name="plot_metrics_distribution_button">
       <property name="geometry">
        <rect>
-        <x>130</x>
+        <x>100</x>
         <y>550</y>
         <width>151</width>
         <height>41</height>
@@ -2696,6 +2840,24 @@
       </property>
       <property name="text">
        <string>Graficar distribución</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="plot_metrics_distribution_algorithm_metrics">
+      <property name="geometry">
+       <rect>
+        <x>260</x>
+        <y>550</y>
+        <width>41</width>
+        <height>41</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>14</pointsize>
+       </font>
+      </property>
+      <property name="text">
+       <string>?</string>
       </property>
      </widget>
     </widget>
