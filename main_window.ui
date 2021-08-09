@@ -301,7 +301,7 @@
      </rect>
     </property>
     <property name="currentIndex">
-     <number>8</number>
+     <number>9</number>
     </property>
     <widget class="QWidget" name="blank_page"/>
     <widget class="QWidget" name="anisotropic_filter_options">
@@ -1967,6 +1967,31 @@
       </property>
       <property name="text">
        <string>?</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="adaptive_threshold_highlight">
+      <property name="geometry">
+       <rect>
+        <x>90</x>
+        <y>650</y>
+        <width>161</width>
+        <height>41</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string/>
+      </property>
+      <property name="textFormat">
+       <enum>Qt::RichText</enum>
+      </property>
+      <property name="pixmap">
+       <pixmap>C:/Users/Ariel/.designer/asd.gif</pixmap>
+      </property>
+      <property name="scaledContents">
+       <bool>false</bool>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignCenter</set>
       </property>
      </widget>
     </widget>
