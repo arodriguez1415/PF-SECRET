@@ -13,7 +13,7 @@ import src.Frontend.Menus.movement_menu as movement_menu
 import src.Frontend.Menus.metrics_menu as metrics_menu
 import src.Frontend.Menus.video_menu as video_menu
 import src.Frontend.Menus.routines_menu as routines_menu
-from src.Frontend.Utils import viewer_buttons
+from src.Frontend.Utils import viewer_buttons, information_buttons
 from src.Frontend.Utils.viewer_buttons import disable_extra_views, disable_main_view
 
 
@@ -43,6 +43,7 @@ def set_initial_configuration(main_window):
 
 def configure_main_window_connections(main_window):
     viewer_buttons.configure_viewer_buttons_connections(main_window)
+    information_buttons.configure_information_buttons(main_window)
     archive_menu.configure_archive_menu_connections(main_window)
     texture_menu.configure_texture_menu_connections(main_window)
     filter_menu.configure_filter_menu_connections(main_window)

@@ -326,8 +326,8 @@
      <widget class="QPushButton" name="apply_anisotropic_filter_button">
       <property name="geometry">
        <rect>
-        <x>140</x>
-        <y>670</y>
+        <x>80</x>
+        <y>140</y>
         <width>161</width>
         <height>41</height>
        </rect>
@@ -339,6 +339,24 @@
       </property>
       <property name="text">
        <string>Aplicar</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="anisotropic_filter_algoritm_help">
+      <property name="geometry">
+       <rect>
+        <x>250</x>
+        <y>140</y>
+        <width>41</width>
+        <height>41</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>14</pointsize>
+       </font>
+      </property>
+      <property name="text">
+       <string>?</string>
       </property>
      </widget>
     </widget>
@@ -634,7 +652,7 @@
        <rect>
         <x>10</x>
         <y>520</y>
-        <width>221</width>
+        <width>231</width>
         <height>31</height>
        </rect>
       </property>
@@ -665,7 +683,7 @@
        <rect>
         <x>10</x>
         <y>610</y>
-        <width>221</width>
+        <width>231</width>
         <height>31</height>
        </rect>
       </property>
@@ -712,8 +730,8 @@
      <widget class="QPushButton" name="apply_mgac_button">
       <property name="geometry">
        <rect>
-        <x>140</x>
-        <y>670</y>
+        <x>90</x>
+        <y>690</y>
         <width>161</width>
         <height>41</height>
        </rect>
@@ -725,6 +743,132 @@
       </property>
       <property name="text">
        <string>Aplicar</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="mgac_iterations_help">
+      <property name="geometry">
+       <rect>
+        <x>250</x>
+        <y>100</y>
+        <width>31</width>
+        <height>31</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>14</pointsize>
+       </font>
+      </property>
+      <property name="text">
+       <string>?</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="mgac_threshold_help">
+      <property name="geometry">
+       <rect>
+        <x>250</x>
+        <y>180</y>
+        <width>31</width>
+        <height>31</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>14</pointsize>
+       </font>
+      </property>
+      <property name="text">
+       <string>?</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="mgac_smoothing_help">
+      <property name="geometry">
+       <rect>
+        <x>250</x>
+        <y>260</y>
+        <width>31</width>
+        <height>31</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>14</pointsize>
+       </font>
+      </property>
+      <property name="text">
+       <string>?</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="mgac_balloon_help">
+      <property name="geometry">
+       <rect>
+        <x>250</x>
+        <y>350</y>
+        <width>31</width>
+        <height>31</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>14</pointsize>
+       </font>
+      </property>
+      <property name="text">
+       <string>?</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="mgac_alpha_help">
+      <property name="geometry">
+       <rect>
+        <x>250</x>
+        <y>520</y>
+        <width>31</width>
+        <height>31</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>14</pointsize>
+       </font>
+      </property>
+      <property name="text">
+       <string>?</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="mgac_sigma_help">
+      <property name="geometry">
+       <rect>
+        <x>250</x>
+        <y>610</y>
+        <width>31</width>
+        <height>31</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>14</pointsize>
+       </font>
+      </property>
+      <property name="text">
+       <string>?</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="mgac_algorithm_help">
+      <property name="geometry">
+       <rect>
+        <x>260</x>
+        <y>690</y>
+        <width>41</width>
+        <height>41</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>14</pointsize>
+       </font>
+      </property>
+      <property name="text">
+       <string>?</string>
       </property>
      </widget>
     </widget>
@@ -1065,6 +1209,24 @@
        <string>Aplicar</string>
       </property>
      </widget>
+     <widget class="QPushButton" name="texture_profile_algorithm_help">
+      <property name="geometry">
+       <rect>
+        <x>190</x>
+        <y>100</y>
+        <width>41</width>
+        <height>41</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>14</pointsize>
+       </font>
+      </property>
+      <property name="text">
+       <string>?</string>
+      </property>
+     </widget>
     </widget>
     <widget class="QWidget" name="texture_classification_options">
      <widget class="QLabel" name="texture_classification_title">
@@ -1108,9 +1270,9 @@
       <widget class="QPushButton" name="texture_classification_image_button">
        <property name="geometry">
         <rect>
-         <x>80</x>
+         <x>30</x>
          <y>160</y>
-         <width>171</width>
+         <width>161</width>
          <height>41</height>
         </rect>
        </property>
@@ -1146,7 +1308,7 @@
         <rect>
          <x>10</x>
          <y>90</y>
-         <width>241</width>
+         <width>181</width>
          <height>41</height>
         </rect>
        </property>
@@ -1165,6 +1327,42 @@
         <number>10</number>
        </property>
       </widget>
+      <widget class="QPushButton" name="texture_classification_image_clusters_help">
+       <property name="geometry">
+        <rect>
+         <x>200</x>
+         <y>90</y>
+         <width>41</width>
+         <height>41</height>
+        </rect>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>14</pointsize>
+        </font>
+       </property>
+       <property name="text">
+        <string>?</string>
+       </property>
+      </widget>
+      <widget class="QPushButton" name="texture_classification_image_algorithm_help">
+       <property name="geometry">
+        <rect>
+         <x>200</x>
+         <y>160</y>
+         <width>41</width>
+         <height>41</height>
+        </rect>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>14</pointsize>
+        </font>
+       </property>
+       <property name="text">
+        <string>?</string>
+       </property>
+      </widget>
      </widget>
      <widget class="QGroupBox" name="texture_classification_video_group">
       <property name="geometry">
@@ -1172,7 +1370,7 @@
         <x>10</x>
         <y>360</y>
         <width>271</width>
-        <height>351</height>
+        <height>331</height>
        </rect>
       </property>
       <property name="font">
@@ -1186,9 +1384,9 @@
       <widget class="QPushButton" name="texture_classification_video_button">
        <property name="geometry">
         <rect>
-         <x>80</x>
-         <y>290</y>
-         <width>171</width>
+         <x>30</x>
+         <y>270</y>
+         <width>161</width>
          <height>41</height>
         </rect>
        </property>
@@ -1224,7 +1422,7 @@
         <rect>
          <x>10</x>
          <y>90</y>
-         <width>241</width>
+         <width>181</width>
          <height>41</height>
         </rect>
        </property>
@@ -1248,7 +1446,7 @@
         <rect>
          <x>10</x>
          <y>200</y>
-         <width>241</width>
+         <width>181</width>
          <height>41</height>
         </rect>
        </property>
@@ -1283,6 +1481,60 @@
        </property>
        <property name="text">
         <string>Clusters:</string>
+       </property>
+      </widget>
+      <widget class="QPushButton" name="texture_classification_video_threshold_help">
+       <property name="geometry">
+        <rect>
+         <x>200</x>
+         <y>90</y>
+         <width>41</width>
+         <height>41</height>
+        </rect>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>14</pointsize>
+        </font>
+       </property>
+       <property name="text">
+        <string>?</string>
+       </property>
+      </widget>
+      <widget class="QPushButton" name="texture_classification_video_clusters_help">
+       <property name="geometry">
+        <rect>
+         <x>200</x>
+         <y>200</y>
+         <width>41</width>
+         <height>41</height>
+        </rect>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>14</pointsize>
+        </font>
+       </property>
+       <property name="text">
+        <string>?</string>
+       </property>
+      </widget>
+      <widget class="QPushButton" name="texture_classification_video_algorithm_help">
+       <property name="geometry">
+        <rect>
+         <x>200</x>
+         <y>270</y>
+         <width>41</width>
+         <height>41</height>
+        </rect>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>14</pointsize>
+        </font>
+       </property>
+       <property name="text">
+        <string>?</string>
        </property>
       </widget>
      </widget>
@@ -1616,7 +1868,7 @@
      <widget class="QPushButton" name="adaptive_threshold_add_process_button">
       <property name="geometry">
        <rect>
-        <x>120</x>
+        <x>90</x>
         <y>610</y>
         <width>161</width>
         <height>41</height>
@@ -1670,6 +1922,24 @@
         <y>300</y>
         <width>31</width>
         <height>31</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>14</pointsize>
+       </font>
+      </property>
+      <property name="text">
+       <string>?</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="adaptive_threshold_algoritm_help">
+      <property name="geometry">
+       <rect>
+        <x>260</x>
+        <y>610</y>
+        <width>41</width>
+        <height>41</height>
        </rect>
       </property>
       <property name="font">

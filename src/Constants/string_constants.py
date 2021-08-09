@@ -39,9 +39,30 @@ NO_REGION_FOUND_DESCRIPTION = "No se seleccionó ninguna región. Se tomará com
 
 # Information messages
 
-ADAPTIVE_THRESHOLD_SIZE_HELP = "ASD"
-ADAPTIVE_THRESHOLD_SIZE_CONSTANT = "ASD"
-ADAPTIVE_THRESHOLD_SIZE_METHOD = "ASD"
+INFORMATION_TITLE = "Information"
+
+ADAPTIVE_THRESHOLD_SIZE_HELP = "Mensaje de prueba para mostrar una informacion"
+ADAPTIVE_THRESHOLD_SIZE_CONSTANT_HELP = "Mensaje de prueba para mostrar una informacion"
+ADAPTIVE_THRESHOLD_METHOD_HELP = "Mensaje de prueba para mostrar una informacion"
+ADAPTIVE_THRESHOLD_ALGORITHM_HELP = "Mensaje de prueba para mostrar una informacion"
+
+ANISOTROPIC_FILTER_ALGORITHM_HELP = "Mensaje de prueba para mostrar una informacion"
+
+MGAC_ITERATIONS_HELP = "Mensaje de prueba para mostrar una informacion"
+MGAC_THRESHOLD_HELP = "Mensaje de prueba para mostrar una informacion"
+MGAC_SMOOTHING_HELP = "Mensaje de prueba para mostrar una informacion"
+MGAC_BALLOON_HELP = "Mensaje de prueba para mostrar una informacion"
+MGAC_ALPHA_HELP = "Mensaje de prueba para mostrar una informacion"
+MGAC_SIGMA_HELP = "Mensaje de prueba para mostrar una informacion"
+MGAC_ALGORITHM_HELP = "Mensaje de prueba para mostrar una informacion"
+
+TEXTURE_PROFILE_ALGORITHM_HELP = "Mensaje de prueba para mostrar una informacion"
+
+TEXTURE_CLASSIFICATION_IMAGE_CLUSTERS_HELP = "Mensaje de prueba para mostrar una informacion"
+TEXTURE_CLASSIFICATION_IMAGE_ALGORITHM_HELP = "Mensaje de prueba para mostrar una informacion"
+TEXTURE_CLASSIFICATION_VIDEO_THRESHOLD_HELP = "Mensaje de prueba para mostrar una informacion"
+TEXTURE_CLASSIFICATION_VIDEO_CLUSTERS_HELP = "Mensaje de prueba para mostrar una informacion"
+TEXTURE_CLASSIFICATION_VIDEO_ALGORITHM_HELP = "Mensaje de prueba para mostrar una informacion"
 
 
 

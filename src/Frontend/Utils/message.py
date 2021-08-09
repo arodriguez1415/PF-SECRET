@@ -20,6 +20,7 @@ def show_message(message_description):
 
 def show_information_message(information_description):
     messageBox = QMessageBox()
+    messageBox.setWindowTitle(string_constants.INFORMATION_TITLE)
     messageBox.setText(information_description)
     messageBox.exec()
 
