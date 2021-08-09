@@ -71,44 +71,6 @@ def save_mask_metric(video_file_path, metric_values_list, metric_type):
     return metrics_file_path
 
 
-def save_fractal_dimension_metric(image_file_path, fractal_dimension_value, metric_type):
-    generate_metrics_dir()
-    metrics_file_path = set_metrics_save_name_from_image(image_file_path)
-    metrics_data = setup_metrics_data(metrics_file_path)
-
-    print(fractal_dimension_value)
-    if metric_type == algorithm_constants.BORDER_FRACTAL_DIMENSION_METRIC:
-        metrics_data[algorithm_constants.BORDER_FRACTAL_DIMENSION_HEADER] = fractal_dimension_value[0]
-    elif metric_type == algorithm_constants.PERINUCLEAR_FRACTAL_DIMENSION_METRIC:
-        metrics_data[algorithm_constants.PERINUCLEAR_FRACTAL_DIMENSION_HEADER] = fractal_dimension_value[0]
-    elif metric_type == algorithm_constants.NUCLEAR_FRACTAL_DIMENSION_METRIC:
-        metrics_data[algorithm_constants.NUCLEAR_FRACTAL_DIMENSION_HEADER] = fractal_dimension_value[0]
-
-    metrics_data = metrics_data[metrics_data.filter(regex='^(?!Unnamed)').columns]
-    metrics_data.to_excel(metrics_file_path)
-
-
-def save_motion_metric(image_file_path, motion_value, metric_type):
-    generate_metrics_dir()
-    metrics_file_path = set_metrics_save_name_from_image(image_file_path)
-    metrics_data = setup_metrics_data(metrics_file_path)
-
-    print(metric_type)
-
-    if metric_type == algorithm_constants.BORDER_MOVEMENT_METRIC:
-        metrics_data[algorithm_constants.BORDER_MOVEMENT_HEADER] = motion_value
-        print("Era borde")
-    elif metric_type == algorithm_constants.PERINUCLEAR_MOVEMENT_METRIC:
-        metrics_data[algorithm_constants.PERINUCLEAR_MOVEMENT_HEADER] = motion_value
-        print("Era peri")
-    elif metric_type == algorithm_constants.NUCLEAR_MOVEMENT_METRIC:
-        metrics_data[algorithm_constants.NUCLEAR_MOVEMENT_HEADER] = motion_value
-        print("Era nucleo")
-
-    metrics_data = metrics_data[metrics_data.filter(regex='^(?!Unnamed)').columns]
-    metrics_data.to_excel(metrics_file_path)
-
-
 def save_perimeter(metrics_data, perimeter_values_list):
     metrics_data[algorithm_constants.PERIMETER_HEADER] = perimeter_values_list
     return metrics_data
@@ -139,10 +101,6 @@ def set_frames(metrics_data, metric_values_list):
 
 def get_metric(metrics_data, metric_type):
     return metrics_data[metric_type].values.tolist()
-
-
-def get_fractal_dimension(metrics_data, metric_type):
-    return metrics_data[metric_type].values.tolist()[0]
 
 
 def get_metric_avg(metrics_data, metric_type):

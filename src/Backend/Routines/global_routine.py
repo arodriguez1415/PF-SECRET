@@ -1,29 +1,66 @@
 import os
 import random
 import string
+import time
+
 import numpy as np
 
 from PIL import Image
 
 from src.Backend.Image_processing_algorithms.Metrics import metrics_generator, metrics_plotter
+from src.Backend.Routines.estimator import estimate_time_and_space, prepare_estimation_message_and_title, \
+    estimate_steps, get_time_message
 from src.Backend.Video_processing_algorithms import multiple_cells_video_generator
 from src.Backend.Video_processing_algorithms.movement_image_generator import create_multiple_motion_images
+from src.Backend.Video_processing_algorithms.multiple_cells_video_generator import get_images_from_directories
 from src.Backend.Video_processing_algorithms.texture_image_generator import create_multiple_texture_images
-from src.Constants import algorithm_constants, configuration_constants
+from src.Backend.Video_processing_algorithms.video_generator import set_save_name
+from src.Constants import algorithm_constants, configuration_constants, string_constants
+from src.Frontend.Utils import plot_comparator, progress_bar
+from src.Frontend.Utils.message import show_confirmation_message, show_wait_message
 
 
 def routine(sub_routines):
     routine_setup()
     source_directory = multiple_cells_video_generator.get_source_directory()
 
+    if source_directory is None or source_directory == "":
+        return
+
+    continue_flag = estimate_time_and_space_sub_routine(sub_routines, source_directory)
+    if not continue_flag:
+        return
+
+    total_steps = estimate_steps(sub_routines, source_directory)
+    progress_bar.start_progress_bar(string_constants.GLOBAL_ROUTINE_PROGRESS_BAR_TITLE,
+                                    string_constants.GLOBAL_ROUTINE_PROGRESS_BAR_TITLE,
+                                    total_steps, is_global=True)
+
+    init_time = time.time()
+
+
+
     if algorithm_constants.CONTOUR_SUBROUTINE in sub_routines:
         contour_and_metrics_sub_routine(sub_routines, source_directory)
 
-    if algorithm_constants.MOVEMENT_SUBROUTINE in sub_routines:
-        movement_heat_map_sub_routine(source_directory)
+    movement_and_texture_heat_map_sub_routine(sub_routines, source_directory)
 
-    if algorithm_constants.TEXTURE_SUBROUTINE in sub_routines:
-        texture_heat_map_sub_routine(source_directory)
+
+
+    total_time = time.time() - init_time
+    print(get_time_message(total_time))
+
+
+def estimate_time_and_space_sub_routine(sub_routines, source_directory):
+    progress_bar.set_global_progress_bar_active(True)
+    message_box = show_wait_message(string_constants.WAIT_ESTIMATION_MESSAGE_TITLE,
+                                    string_constants.WAIT_ESTIMATION_MESSAGE_DESC)
+    total_time_in_seconds, total_memory_in_kb = estimate_time_and_space(sub_routines, source_directory)
+    message_box.done(0)
+    title_message, description_message = prepare_estimation_message_and_title(total_time_in_seconds, total_memory_in_kb)
+    continue_flag = show_confirmation_message(title_message, description_message)
+    progress_bar.set_global_progress_bar_active(False)
+    return continue_flag
 
 
 def routine_setup():
@@ -31,6 +68,7 @@ def routine_setup():
     create_directory_if_not_exists(configuration_constants.GRAPHS_FOLDER)
     create_directory_if_not_exists(configuration_constants.METRICS_GRAPH_FOLDER)
     create_directory_if_not_exists(configuration_constants.DISTRIBUTION_METRICS_GRAPH_FOLDER)
+    create_directory_if_not_exists(configuration_constants.MOVEMENT_VS_TEXTURE_COMPARISON_DIRECTORY)
 
 
 def create_directory_if_not_exists(directory_path):
@@ -39,10 +77,14 @@ def create_directory_if_not_exists(directory_path):
 
 
 def contour_and_metrics_sub_routine(sub_routines, source_directory):
-    masked_videos_paths_list, videos_filename_list = contour_sub_routine(source_directory)
+    masked_videos_paths_list, videos_filename_list, generated_files = contour_sub_routine(source_directory)
+    metrics_generated_files = []
 
     if algorithm_constants.METRICS_SUBROUTINE in sub_routines:
-        metrics_sub_routine(source_directory, masked_videos_paths_list, videos_filename_list)
+        metrics_generated_files = metrics_sub_routine(source_directory, masked_videos_paths_list, videos_filename_list)
+
+    generated_files.extend(metrics_generated_files)
+    return generated_files
 
 
 def contour_sub_routine(source_directory):
@@ -53,7 +95,11 @@ def contour_sub_routine(source_directory):
     masked_videos_paths_list = multiple_cells_video_generator.generate_mask_video_of_all_cells(source_directory)
     videos_filename_list = get_videos_files_names(masked_videos_paths_list)
 
-    return masked_videos_paths_list, videos_filename_list
+    generated_files = []
+    generated_files.extend(cells_videos_paths_list)
+    generated_files.extend(masked_videos_paths_list)
+
+    return masked_videos_paths_list, videos_filename_list, generated_files
 
 
 def metrics_sub_routine(source_directory, masked_videos_paths_list, videos_filename_list):
@@ -61,9 +107,16 @@ def metrics_sub_routine(source_directory, masked_videos_paths_list, videos_filen
                           algorithm_constants.AREA_METRIC: True}
     distribution_metrics_dictionary = metrics_dictionary
     metrics_excel_paths_list = generate_metrics_sub_routine(masked_videos_paths_list, metrics_dictionary)
-    plot_simple_metrics_sub_routine(source_directory, metrics_excel_paths_list, videos_filename_list,
-                                    metrics_dictionary)
-    plot_distribution_metrics_sub_routine(metrics_excel_paths_list, distribution_metrics_dictionary)
+    simple_metrics_path_list = plot_simple_metrics_sub_routine(source_directory, metrics_excel_paths_list,
+                                                               videos_filename_list, metrics_dictionary)
+    distribution_metrics_path_list = plot_distribution_metrics_sub_routine(metrics_excel_paths_list,
+                                                                           distribution_metrics_dictionary)
+
+    generated_files = []
+    generated_files.extend(metrics_excel_paths_list)
+    generated_files.extend(simple_metrics_path_list)
+    generated_files.extend(distribution_metrics_path_list)
+    return generated_files
 
 
 def generate_metrics_sub_routine(masked_videos_paths_list, metrics_dictionary):
@@ -80,6 +133,7 @@ def plot_simple_metrics_sub_routine(source_directory, metrics_excel_paths_list, 
                                     metrics_dictionary):
     # Save simple metrics stage
     first_cell_image_as_array_list = get_first_cell_image_list(source_directory)
+    generated_plot_files_list = []
     for i in range(0, len(metrics_excel_paths_list)):
         metrics_excel_path = metrics_excel_paths_list[i]
         cell_image_array = first_cell_image_as_array_list[i]
@@ -89,28 +143,78 @@ def plot_simple_metrics_sub_routine(source_directory, metrics_excel_paths_list, 
             metrics_excel_path, metrics_dictionary)
         metrics_plotter.save_metrics(metrics_values_lists, frames_values_lists, titles_list,
                                      x_label_list, y_label_list, cell_image_array, graph_save_path)
+        generated_plot_files_list.append(graph_save_path)
+    return generated_plot_files_list
 
 
 def plot_distribution_metrics_sub_routine(metrics_excel_paths_list, distribution_metrics_dictionary):
     # Save distribution metrics stage
     metrics_avg_lists, titles_list, x_label_list, y_label_list = metrics_plotter.load_distribution_metrics(
         metrics_excel_paths_list, distribution_metrics_dictionary)
+    generated_plot_files_list = []
     distribution_save_path = generate_distribution_path(len(metrics_excel_paths_list))
     metrics_plotter.save_distribution_metrics(metrics_avg_lists, titles_list, x_label_list,
                                               y_label_list, distribution_save_path)
+    generated_plot_files_list.append(distribution_save_path)
+    return generated_plot_files_list
+
+
+def movement_and_texture_heat_map_sub_routine(sub_routines, source_directory):
+    motion_images_array_list = []
+    texture_images_array_list = []
+    generated_files = []
+    motion_images_path_list = []
+    texture_images_path_list = []
+    generated_plot_files_list = []
+
+    if algorithm_constants.MOVEMENT_SUBROUTINE in sub_routines:
+        motion_images_array_list, motion_images_path_list = movement_heat_map_sub_routine(source_directory)
+
+    if algorithm_constants.TEXTURE_SUBROUTINE in sub_routines:
+        texture_images_array_list, texture_images_path_list = texture_heat_map_sub_routine(source_directory)
+
+    if algorithm_constants.MOVEMENT_SUBROUTINE and algorithm_constants.TEXTURE_SUBROUTINE in sub_routines:
+        generated_plot_files_list = movement_and_texture_comparison_sub_routine(source_directory,
+                                                                                motion_images_array_list,
+                                                                                texture_images_array_list)
+
+    generated_files.extend(motion_images_path_list)
+    generated_files.extend(texture_images_path_list)
+    generated_files.extend(generated_plot_files_list)
+    return generated_files
 
 
 def movement_heat_map_sub_routine(source_directory):
     # Movement heat map stage
-    threshold = 30
-    create_multiple_motion_images(threshold, source_directory)
+    threshold = 20
+    motion_images_array_list, motion_images_path_list = create_multiple_motion_images(threshold, source_directory)
+    return motion_images_array_list, motion_images_path_list
 
 
 def texture_heat_map_sub_routine(source_directory):
     # Texture heat map stage
-    threshold = 30
+    threshold = 20
     clusters_quantity = 10
-    create_multiple_texture_images(threshold, clusters_quantity, source_directory)
+    texture_images_array_list, texture_images_path_list = create_multiple_texture_images(threshold, clusters_quantity,
+                                                                                         source_directory)
+    return texture_images_array_list, texture_images_path_list
+
+
+def movement_and_texture_comparison_sub_routine(source_directory, motion_images_array_list, texture_images_array_list):
+    images_list_of_lists = get_images_from_directories(source_directory)
+    save_directory = configuration_constants.MOVEMENT_VS_TEXTURE_COMPARISON_DIRECTORY
+    generated_plot_files_list = []
+
+    for i in range(0, len(motion_images_array_list)):
+        movement_image_array = motion_images_array_list[i]
+        texture_image_array = texture_images_array_list[i]
+        save_comparison_path = set_save_name(images_list_of_lists[i][0], save_directory, extension=".png")
+        images_array_list = [movement_image_array, texture_image_array]
+        title = string_constants.MOVEMENT_VS_TEXTURE_VIDEO_TITLE
+        sub_titles_list = [string_constants.MOVEMENT_TITLE, string_constants.TEXTURE_VIDEO_TITLE]
+        plot_comparator.plot_comparison(images_array_list, title, sub_titles_list, save_path=save_comparison_path)
+        generated_plot_files_list.append(save_comparison_path)
+    return generated_plot_files_list
 
 
 def generate_metric_path(filename):

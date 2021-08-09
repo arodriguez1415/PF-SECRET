@@ -8,6 +8,11 @@ from src.Constants import string_constants
 from src.Frontend.Utils import progress_bar
 
 
+def generate_multiple_cells_metrics(mask_videos_path_list, metrics_dictionary):
+    for mask_video_path in mask_videos_path_list:
+        generate_metrics(mask_video_path, metrics_dictionary)
+
+
 def generate_metrics(mask_video_path, metrics_dictionary):
     array_images_list = video_file_manipulation.get_video_as_array(mask_video_path)
     checked_metrics_count = get_checked_metrics_count(metrics_dictionary)

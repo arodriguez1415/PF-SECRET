@@ -7,7 +7,7 @@ from matplotlib import pyplot as plt
 from matplotlib.path import Path
 from scipy import ndimage as ndi
 from src.Backend.Image_processing_algorithms.Border_detection import mgac_library_functions as mgac_library
-from src.Backend.Image_processing_algorithms.Operations.common_operations import normalize_to_range
+from src.Backend.Image_processing_algorithms.Operations.common_operations import resize_image
 from src.Backend.Image_processing_algorithms.filters import anisotropic_filter as anisotropic_filter_functions
 from src.Classes.Region import Region
 from src.Constants import configuration_constants

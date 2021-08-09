@@ -1,13 +1,11 @@
-import sys
+import numpy as np
 
-import numpy
-import src.Frontend.Utils.message as messages
 from src.Classes.Project_mastermind import Project_mastermind
+from src.Constants import configuration_constants
 
 
 class Region:
     drawable_label = None
-    image_array_in_region = None
     points = []
 
     def __init__(self):
@@ -18,12 +16,28 @@ class Region:
     def set_drawable_label(self):
         project_mastermind = Project_mastermind.get_instance()
         drawable_label = project_mastermind.main_window.image_viewer
-        self.image_array_in_region = project_mastermind.get_last_image()
         self.drawable_label = drawable_label
+
+    def has_region(self):
+        region_qpoints = self.drawable_label.get_polygon()
+        if len(region_qpoints) < 2:
+            return False
+        return True
+
+    def get_line(self):
+        region_qpoints = self.drawable_label.get_polygon()
+        if len(region_qpoints) != 2:
+            raise ValueError('Need at least two points')
+        for qpoint in region_qpoints:
+            x_axis = qpoint.x()
+            y_axis = qpoint.y()
+            point = (x_axis, y_axis)
+            self.points.append(point)
+        return self.points
 
     def get_region(self):
         region_qpoints = self.drawable_label.get_polygon()
-        if len(region_qpoints) == 0:
+        if len(region_qpoints) < 3:
             return self.get_all_image_region()
         for qpoint in region_qpoints:
             x_axis = qpoint.x()
@@ -32,15 +46,9 @@ class Region:
             self.points.append(point)
         return self.points
 
-
-    def get_all_image_region(self, image_array=None):
+    def get_all_image_region(self):
         self.points = []
-        if image_array is None:
-            image_process_wrapper = Project_mastermind.get_instance().get_last_image_process()
-            height = image_process_wrapper.height
-            width = image_process_wrapper.width
-        else:
-            width, height = image_array.shape
+        width, height = configuration_constants.IMAGE_VIEWER_WIDTH, configuration_constants.IMAGE_VIEWER_HEIGHT
         top_left_point = (0, 0)
         bottom_left_point = (0, height - 1)
         bottom_right_point = (width - 1, height - 1)
@@ -51,6 +59,17 @@ class Region:
         self.points.append(top_right_point)
         self.points.append(top_left_point)
         return self.points
+
+
+    def get_pixels_in_region(self, image_array):
+        min_x = min(self.points)[0]
+        max_x = max(self.points)[0]
+        min_y = min(self.points, key=lambda t: t[1])[1]
+        max_y = max(self.points, key=lambda t: t[1])[1]
+
+        pixels_in_region = image_array[min_y:max_y, min_x:max_x]
+        return pixels_in_region
+
 
     @staticmethod
     def get_all_image_as_region(image_array):
@@ -66,3 +85,5 @@ class Region:
         points.append(top_right_point)
         points.append(top_left_point)
         return points
+
+

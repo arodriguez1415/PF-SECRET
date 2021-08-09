@@ -122,13 +122,7 @@ def get_distribution_plot_labels(metric_type):
         algorithm_constants.AREA_METRIC: {"title": "Distribucion de areas",
                                           "x_label": "Valores de areas en pixeles"},
         algorithm_constants.AXIS_RATE_METRIC: {"title": "Distribucion de razon de ejes",
-                                               "x_label": "Valores de razon de ejes"},
-        # algorithm_constants.BORDER_FRACTAL_DIMENSION_METRIC: "Fractal dimension - borde distribucion",
-        # algorithm_constants.PERINUCLEAR_FRACTAL_DIMENSION_METRIC: "Fractal dimension - perinucleo distribucion",
-        # algorithm_constants.NUCLEAR_FRACTAL_DIMENSION_METRIC: "Fractal dimension - nucleo distribution",
-        # algorithm_constants.BORDER_MOVEMENT_METRIC: "Movimiento - borde distribucion",
-        # algorithm_constants.PERINUCLEAR_MOVEMENT_METRIC: "Movimiento - perinucleo distribucion",
-        # algorithm_constants.NUCLEAR_MOVEMENT_METRIC: "Movimiento - nucleo distribution",
+                                               "x_label": "Valores de razon de ejes"}
     }.get(metric_type, {"title": "None", "x_label": "None"})
     labels_dictionary["y_label"] = "Cantidad de celulas"
     return labels_dictionary

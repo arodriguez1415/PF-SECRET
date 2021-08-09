@@ -40,6 +40,12 @@ def is_RGB(image_array):
         return True
 
 
+def gray_to_rgb(image_array):
+    if not is_RGB(image_array):
+        return cv2.cvtColor(image_array, cv2.COLOR_GRAY2RGB)
+    return image_array
+
+
 def rgb_to_gray(image_array):
     if is_RGB(image_array):
         return cv2.cvtColor(image_array, cv2.COLOR_BGR2GRAY)
@@ -61,6 +67,12 @@ def generate_coloured_heatmap(matrix):
     bgr_coloured_matrix = cv2.applyColorMap(matrix, cv2.COLORMAP_HOT)
     rgb_coloured_matrix = cv2.cvtColor(bgr_coloured_matrix, cv2.COLOR_BGR2RGB)
     return rgb_coloured_matrix
+
+
+def resize_image(image_array, width, height):
+    new_dimension = (width, height)
+    resized_image = cv2.resize(image_array.astype("uint8"), new_dimension)
+    return resized_image
 
 
 def show_coloured_image(rgb_coloured_matrix):
