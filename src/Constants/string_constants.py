@@ -72,10 +72,14 @@ ANALYZE_MOVEMENT_AND_TEXTURE_ALGORITHM_HELP = "Mensaje de prueba para mostrar un
 GENERATE_METRICS_LOAD_HELP = "Mensaje de prueba para mostrar una informacion"
 GENERATE_METRICS_ALGORITHM_HELP = "Mensaje de prueba para mostrar una informacion"
 
+GENERATE_MULTIPLE_CELLS_METRICS_ALGORITHM_HELP = "Mensaje de prueba para mostrar una informacion"
+
 PLOT_METRICS_LOAD_HELP = "Mensaje de prueba para mostrar una informacion"
 PLOT_METRICS_ALGORITHM_HELP = "Mensaje de prueba para mostrar una informacion"
 
 PLOT_METRICS_DISTRIBUTION_ALGORITHM_HELP = "Mensaje de prueba para mostrar una informacion"
+
+GLOBAL_ROUTINE_ALGORITHM_HELP = "Mensaje de prueba para mostrar una informacion"
 
 # Progress Bar
 

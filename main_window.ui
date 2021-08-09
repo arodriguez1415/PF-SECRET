@@ -301,7 +301,7 @@
      </rect>
     </property>
     <property name="currentIndex">
-     <number>9</number>
+     <number>8</number>
     </property>
     <widget class="QWidget" name="blank_page"/>
     <widget class="QWidget" name="anisotropic_filter_options">
@@ -1564,7 +1564,7 @@
      <widget class="QPushButton" name="global_routine_initiate_button">
       <property name="geometry">
        <rect>
-        <x>80</x>
+        <x>60</x>
         <y>630</y>
         <width>161</width>
         <height>51</height>
@@ -1680,6 +1680,24 @@
         <bool>true</bool>
        </property>
       </widget>
+     </widget>
+     <widget class="QPushButton" name="global_routine_algorithm_help">
+      <property name="geometry">
+       <rect>
+        <x>230</x>
+        <y>630</y>
+        <width>51</width>
+        <height>51</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>14</pointsize>
+       </font>
+      </property>
+      <property name="text">
+       <string>?</string>
+      </property>
      </widget>
     </widget>
     <widget class="QWidget" name="adaptive_threshold_options">
