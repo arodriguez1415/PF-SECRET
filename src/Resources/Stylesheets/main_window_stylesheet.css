@@ -1,3 +1,7 @@
+ /* ------ Toolbox ------ */
+
+ /* ------ Region tools ------ */
+
 #polygon_region_button:hover{
 	background-color: #99BBF5;
 }
@@ -125,6 +129,25 @@
   background-color: #cccccc;
 }
 
+ /* ------ Image and process tools ------ */
+
+ #process_information_button{
+ background-position: center;
+ background-repeat: no-repeat;
+ /* background-size: cover; */
+ background-color: transparent;
+ background-image: url("./Resources/Icons/process_information_icon.png");
+ border: 2px solid #AAA;
+}
+
+#process_information_button:hover{
+	background-color: #99BBF5;
+}
+
+#process_information_button:disabled{
+  background-color: #cccccc;
+}
+
 #undo_button{
  background-position: center;
  background-repeat: no-repeat;
@@ -158,6 +181,43 @@
 #save_image_button:disabled{
   background-color: #cccccc;
 }
+
+#next_image_button{
+ background-position: center;
+ background-repeat: no-repeat;
+ /* background-size: cover; */
+ background-color: transparent;
+ background-image: url("./Resources/Icons/next_image_icon.png");
+ border: 2px solid #AAA;
+}
+
+#next_image_button:hover{
+	background-color: #99BBF5;
+}
+
+#next_image_button:disabled{
+  background-color: #cccccc;
+}
+
+#previous_image_button{
+ background-position: center;
+ background-repeat: no-repeat;
+ /* background-size: cover; */
+ background-color: transparent;
+ background-image: url("./Resources/Icons/previous_image_icon.png");
+ border: 2px solid #AAA;
+}
+
+#previous_image_button:hover{
+	background-color: #99BBF5;
+}
+
+#previous_image_button:disabled{
+  background-color: #cccccc;
+}
+
+
+ /* ------------ */
 
 
 #image_viewer{

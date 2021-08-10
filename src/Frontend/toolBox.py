@@ -13,8 +13,11 @@ def configure_toolBox_connections(main_window):
     main_window.horizontal_line_button.clicked.connect(lambda: start_line(main_window, line_type=HORIZONTAL_LINE_TYPE))
     main_window.vertical_line_button.clicked.connect(lambda: start_line(main_window, line_type=VERTICAL_LINE_TYPE))
     main_window.clear_region_button.clicked.connect(lambda: clear_region(main_window))
+    main_window.process_information_button.clicked.connect(lambda: show_process_list(main_window))
     main_window.undo_button.clicked.connect(lambda: undo(main_window))
     main_window.save_image_button.clicked.connect(lambda: save_image())
+    main_window.next_image_button.clicked.connect(lambda: get_next_image(main_window))
+    main_window.previous_image_button.clicked.connect(lambda: get_previous_image(main_window))
 
 
 def enable_toolbox(main_window):
@@ -25,8 +28,11 @@ def enable_toolbox(main_window):
     enable_button(main_window.horizontal_line_button)
     enable_button(main_window.vertical_line_button)
     enable_button(main_window.clear_region_button)
+    enable_button(main_window.process_information_button)
     enable_button(main_window.undo_button)
     enable_button(main_window.save_image_button)
+    enable_button(main_window.next_image_button)
+    enable_button(main_window.previous_image_button)
 
 
 def disable_toolbox(main_window):
@@ -37,8 +43,11 @@ def disable_toolbox(main_window):
     disable_button(main_window.horizontal_line_button)
     disable_button(main_window.vertical_line_button)
     disable_button(main_window.clear_region_button)
+    disable_button(main_window.process_information_button)
     disable_button(main_window.undo_button)
     disable_button(main_window.save_image_button)
+    disable_button(main_window.next_image_button)
+    disable_button(main_window.previous_image_button)
 
 
 def start_polygon(main_window):
@@ -57,11 +66,18 @@ def start_fixed_square(main_window):
 
 def start_line(main_window, line_type=DIAGONAL_LINE_TYPE):
     main_window.image_viewer.set_paint_flag()
-    main_window.image_viewer.set_diagonal_line_flag()
+    if line_type == HORIZONTAL_LINE_TYPE or line_type == VERTICAL_LINE_TYPE:
+        print("Falta funcionalidad")
+    else:
+        main_window.image_viewer.set_diagonal_line_flag()
 
 
 def clear_region(main_window):
     main_window.image_viewer.clear_region()
+
+
+def show_process_list(main_window):
+    print("Show process list functionality")
 
 
 def undo(main_window):
@@ -79,6 +95,12 @@ def save_image():
     image_saver.save_image(current_image_array, image_save_path)
 
 
+def get_next_image(main_window):
+    print("Next functionality")
+
+
+def get_previous_image(main_window):
+    print("Previous functionality")
 
 
 
