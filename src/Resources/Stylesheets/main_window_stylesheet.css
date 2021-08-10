@@ -73,6 +73,40 @@
   background-color: #cccccc;
 }
 
+#horizontal_line_button{
+ background-position: center;
+ background-repeat: no-repeat;
+ /* background-size: cover; */
+ background-color: transparent;
+ background-image: url("./Resources/Icons/horizontal_line_icon.png");
+ border: 2px solid #AAA;
+}
+
+#horizontal_line_button:hover{
+	background-color: #99BBF5;
+}
+
+#horizontal_line_button:disabled{
+  background-color: #cccccc;
+}
+
+#vertical_line_button{
+ background-position: center;
+ background-repeat: no-repeat;
+ /* background-size: cover; */
+ background-color: transparent;
+ background-image: url("./Resources/Icons/vertical_line_icon.png");
+ border: 2px solid #AAA;
+}
+
+#vertical_line_button:hover{
+	background-color: #99BBF5;
+}
+
+#vertical_line_button:disabled{
+  background-color: #cccccc;
+}
+
 
 #clear_region_button{
  background-position: center;

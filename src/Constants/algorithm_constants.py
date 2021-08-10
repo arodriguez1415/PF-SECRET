@@ -20,6 +20,13 @@ LBP_UNIFORM = "uniform"
 # non rotation-invariant uniform patterns variant which is only gray scale invariant
 LBP_NRI_UNIFORM = "nri_uniform"
 
+
+# --- Line Texture Profile
+
+HORIZONTAL_LINE_TYPE = "Horizontal"
+VERTICAL_LINE_TYPE = "Vertical"
+DIAGONAL_LINE_TYPE = "Diagonal"
+
 # --- Adaptative threshold mathods ---
 
 ADAPTIVE_THRESHOLD_MEAN = cv.ADAPTIVE_THRESH_MEAN_C
