@@ -5,8 +5,9 @@ from PyQt5.QtGui import QPainter, QPen, QColor, QPixmap
 from PyQt5.QtWidgets import QLabel
 import math
 
-from src.Backend.Image_processing_algorithms.Operations.common_operations import resize_image, gray_to_rgb, is_RGB
+from src.Backend.Image_processing_algorithms.Operations.common_operations import resize_image, gray_to_rgb
 from src.Constants import configuration_constants
+from src.Constants.algorithm_constants import HORIZONTAL_LINE_TYPE
 
 
 class QDrawable_label(QLabel):
@@ -17,6 +18,7 @@ class QDrawable_label(QLabel):
     diagonal_line_flag = False
     polygon_finalized = False
     actual_image_wrapper = None
+    fixed_line_type = None
 
     def _init__(self, *args):
         QLabel.__init__(self, *args)
@@ -35,6 +37,9 @@ class QDrawable_label(QLabel):
 
     def set_diagonal_line_flag(self):
         self.diagonal_line_flag = True
+
+    def set_fixed_line_type(self, line_type):
+        self.fixed_line_type = line_type
 
     def set_screen_image(self, image_wrapper):
         if image_wrapper is None:
@@ -61,16 +66,19 @@ class QDrawable_label(QLabel):
         if self.polygon_finalized or not self.paint_flag:
             return
         if len(self.points_list) == 0 and not self.fixed_square_flag:
-            self.draw_point(event)
+            if self.fixed_line_type is None:
+                self.draw_point(event)
+            else:
+                self.draw_fixed_line(event, self.fixed_line_type)
         elif self.square_flag:
             self.finalize_square(event)
         elif self.fixed_square_flag:
             self.finalize_fixed_square(event)
         elif self.diagonal_line_flag:
-            self.draw_line(event)
+            self.draw_diagonal_line(event)
         else:
             if event.button() == Qt.LeftButton:
-                self.draw_line(event)
+                self.draw_diagonal_line(event)
             else:
                 self.finalize_polygon()
 
@@ -88,7 +96,30 @@ class QDrawable_label(QLabel):
         self.setPixmap(current_image)
         painter.end()
 
-    def draw_line(self, event):
+    def draw_fixed_line(self, event, line_type):
+        current_image = self.pixmap()
+        painter = QPainter(current_image)
+
+        if line_type == HORIZONTAL_LINE_TYPE:
+            from_point = QPoint(0, event.y())
+            to_point = QPoint(current_image.width(), event.y())
+        else:
+            from_point = QPoint(event.x(), 0)
+            to_point = QPoint(event.x(), current_image.height())
+
+        line_pen = QPen(QColor("blue"))
+        line_pen.setWidth(3)
+        painter.setPen(line_pen)
+        painter.drawLine(from_point, to_point)
+        self.points_list.append(from_point)
+        self.points_list.append(to_point)
+        self.setPixmap(current_image)
+        if self.fixed_line_type:
+            self.paint_flag = False
+            self.fixed_line_type = None
+        painter.end()
+
+    def draw_diagonal_line(self, event):
         current_image = self.pixmap()
         painter = QPainter(current_image)
         to_point = QPoint(event.x(), event.y())

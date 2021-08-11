@@ -46,7 +46,8 @@ def fractal_dimension_line(image, region):
     all_entropy = all_entropy[0]
     all_fractal_dimensions = all_fractal_dimensions[0]
     combined_results = all_entropy * 0.5 + 0.5 * all_fractal_dimensions
-    plot_profile_texture(combined_results, x_coordinates, y_coordinates, all_points_size, all_fractal_dimensions, all_entropy)
+    plot_profile_texture(combined_results, x_coordinates, y_coordinates, all_points_size, all_fractal_dimensions,
+                         all_entropy)
 
 
 def calculate_texture_in_line(image, x_coordinates, y_coordinates, all_points,
@@ -59,6 +60,7 @@ def calculate_texture_in_line(image, x_coordinates, y_coordinates, all_points,
     for point in all_points:
         x = point[0]
         y = point[1]
+        # print("Point: " + str(x) + "," + str(y))
         x_coordinates[index] = x
         y_coordinates[index] = y
         entropy, fractal_dimension = \
@@ -68,10 +70,12 @@ def calculate_texture_in_line(image, x_coordinates, y_coordinates, all_points,
         index += 1
 
 
-def plot_profile_texture(combined_results, x_coordinates, y_coordinates, all_points_size, all_fractal_dimensions, all_entropy):
+def plot_profile_texture(combined_results, x_coordinates, y_coordinates, all_points_size, all_fractal_dimensions,
+                         all_entropy):
     gs = gridspec.GridSpec(2, 2)
 
-    if abs(x_coordinates[0] - x_coordinates[all_points_size - 1]) > abs(y_coordinates[0] - y_coordinates[all_points_size - 1]):
+    if abs(x_coordinates[0] - x_coordinates[all_points_size - 1]) > abs(
+            y_coordinates[0] - y_coordinates[all_points_size - 1]):
         x_axis = x_coordinates
         x_label = "X Point"
     else:
@@ -98,7 +102,7 @@ def plot_profile_texture(combined_results, x_coordinates, y_coordinates, all_poi
 
 def get_line(x1, y1, x2, y2):
     points = []
-    issteep = abs(y2-y1) > abs(x2-x1)
+    issteep = abs(y2 - y1) > abs(x2 - x1)
     if issteep:
         x1, y1 = y1, x1
         x2, y2 = y2, x2
@@ -108,7 +112,7 @@ def get_line(x1, y1, x2, y2):
         y1, y2 = y2, y1
         rev = True
     deltax = x2 - x1
-    deltay = abs(y2-y1)
+    deltay = abs(y2 - y1)
     error = int(deltax / 2)
     y = y1
     ystep = None
@@ -130,6 +134,7 @@ def get_line(x1, y1, x2, y2):
         points.reverse()
     return points
 
+
 # https://github.com/ChatzigeorgiouGroup/FractalDimension
 def fractal_dimension_github(array, max_box_size=None, min_box_size=1, n_samples=20, n_offsets=0):
     """Calculates the fractal dimension of a 3D numpy array.
@@ -146,6 +151,7 @@ def fractal_dimension_github(array, max_box_size=None, min_box_size=1, n_samples
         plot (bool): set to true to see the analytical plot of a calculation.
     """
     # determine the scales to measure on
+
     if max_box_size == None:
         # default max size is the largest power of 2 that fits in the smallest dimension of the array:
         max_box_size = int(np.floor(np.log2(np.min(array.shape))))
@@ -183,6 +189,7 @@ def fractal_dimension_github(array, max_box_size=None, min_box_size=1, n_samples
 
     Ns = np.unique(Ns)
     Ns = Ns[Ns > 0]
+
     scales = scales[:len(Ns)]
     # perform fit
     coeffs = np.polyfit(np.log(1 / scales), np.log(Ns), 1)
