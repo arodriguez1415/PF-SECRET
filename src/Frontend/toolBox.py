@@ -67,7 +67,7 @@ def start_fixed_square(main_window):
 def start_line(main_window, line_type=DIAGONAL_LINE_TYPE):
     main_window.image_viewer.set_paint_flag()
     if line_type == HORIZONTAL_LINE_TYPE or line_type == VERTICAL_LINE_TYPE:
-        print("Falta funcionalidad")
+        main_window.image_viewer.set_fixed_line_type(line_type)
     else:
         main_window.image_viewer.set_diagonal_line_flag()
 
