@@ -1,9 +1,12 @@
+from PyQt5.QtCore import Qt
+
 from src.Classes.Image_loader import Image_loader
 from src.Classes.Image_wrapper import Image_wrapper
 from src.Classes.Methods.Original import Original
 from src.Classes.Project_mastermind import Project_mastermind
 import src.Backend.Image_processing_algorithms.Operations.image_save as image_saver
 from src.Constants.algorithm_constants import DIAGONAL_LINE_TYPE, HORIZONTAL_LINE_TYPE, VERTICAL_LINE_TYPE
+from src.Constants.string_constants import PROCESS_LIST_WIDGET_TITLE
 from src.Frontend.Utils.button_controller import enable_button, disable_button
 
 
@@ -15,7 +18,7 @@ def configure_toolBox_connections(main_window):
     main_window.horizontal_line_button.clicked.connect(lambda: start_line(main_window, line_type=HORIZONTAL_LINE_TYPE))
     main_window.vertical_line_button.clicked.connect(lambda: start_line(main_window, line_type=VERTICAL_LINE_TYPE))
     main_window.clear_region_button.clicked.connect(lambda: clear_region(main_window))
-    main_window.process_information_button.clicked.connect(lambda: show_process_list(main_window))
+    main_window.process_information_button.clicked.connect(lambda: show_process_list())
     main_window.undo_button.clicked.connect(lambda: undo(main_window))
     main_window.save_image_button.clicked.connect(lambda: save_image())
     main_window.next_image_button.clicked.connect(lambda: get_next_image(main_window))
@@ -78,8 +81,13 @@ def clear_region(main_window):
     main_window.image_viewer.clear_region()
 
 
-def show_process_list(main_window):
-    print("Show process list functionality")
+def show_process_list():
+    project_mastermind = Project_mastermind.get_instance()
+    process_list_widget = project_mastermind.process_list_widget
+    process_list_widget.setWindowTitle(PROCESS_LIST_WIDGET_TITLE)
+    process_list_widget.setWindowModality(Qt.WindowModal)
+    process_list_widget.setWindowFlags(Qt.CustomizeWindowHint | Qt.WindowTitleHint)
+    process_list_widget.exec()
 
 
 def undo(main_window):

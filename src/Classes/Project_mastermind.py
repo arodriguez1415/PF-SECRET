@@ -25,6 +25,8 @@ class Project_mastermind:
 
     # Application attributes
     main_window = None
+    process_list_widget = None
+    process_list = None
     app = None
 
     # Movement and Texture processing attributes
@@ -35,13 +37,15 @@ class Project_mastermind:
     texture_image_video_wrapper = None
     texture_heat_map_image_video_wrapper = None
 
-    def __init__(self, app, main_window):
+    def __init__(self, app, main_window, process_list, process_list_widget):
         if Project_mastermind.__instance is not None:
             raise Exception("This class is a singleton!")
         else:
             Project_mastermind.__instance = self
             self.app = app
             self.main_window = main_window
+            self.process_list = process_list
+            self.process_list_widget = process_list_widget
             self.is_global_progress_bar_active_flag = False
 
     @staticmethod
