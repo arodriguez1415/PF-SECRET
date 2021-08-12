@@ -8,6 +8,7 @@ import src.Backend.Image_processing_algorithms.Operations.image_save as image_sa
 from src.Constants.algorithm_constants import DIAGONAL_LINE_TYPE, HORIZONTAL_LINE_TYPE, VERTICAL_LINE_TYPE
 from src.Constants.string_constants import PROCESS_LIST_WIDGET_TITLE
 from src.Frontend.Utils.button_controller import enable_button, disable_button
+from src.Frontend.process_list import populate_process_list
 
 
 def configure_toolBox_connections(main_window):
@@ -87,6 +88,7 @@ def show_process_list():
     process_list_widget.setWindowTitle(PROCESS_LIST_WIDGET_TITLE)
     process_list_widget.setWindowModality(Qt.WindowModal)
     process_list_widget.setWindowFlags(Qt.CustomizeWindowHint | Qt.WindowTitleHint)
+    populate_process_list()
     process_list_widget.exec()
 
 

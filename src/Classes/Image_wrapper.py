@@ -12,3 +12,6 @@ class Image_wrapper:
         self.method = method
         self.width = image_array.shape[1]
         self.height = image_array.shape[0]
+
+    def get_method(self):
+        return self.method

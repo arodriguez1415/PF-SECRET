@@ -1,5 +1,6 @@
 import src.Frontend.Utils.message as messages
 from src.Backend.Image_processing_algorithms.Archive_manipulation import image_file_manipulation
+from src.Classes.Image_wrapper import Image_wrapper
 from src.Classes.Methods.Original import Original
 from src.Classes.Project_mastermind import Project_mastermind
 from src.Classes.Image_loader import Image_loader
@@ -18,7 +19,8 @@ def load_image(image_viewer, method):
     image_path = image_file_manipulation.get_image_path()
     image_dir = image_file_manipulation.get_image_dir(image_path)
     if image_path:
-        image_wrapper = Image_loader(image_path, method=method)
+        image_loader = Image_loader(image_path, method=method)
+        image_wrapper = Image_wrapper(image_loader.image_array, method=method)
     else:
         messages.show_error(string_constants.NO_PATH_SELECTION)
         return
@@ -29,7 +31,7 @@ def load_image(image_viewer, method):
     project_mastermind.set_original_images_from_dir_path(image_dir)
     project_mastermind.set_original_image_dir(image_dir)
     project_mastermind.add_image_process(image_wrapper)
-    set_image_on_screen(image_wrapper, image_viewer)
+    set_image_on_screen(image_loader, image_viewer)
     enable_view_button(string_constants.MAIN_VIEW)
 
 

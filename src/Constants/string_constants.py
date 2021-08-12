@@ -8,12 +8,6 @@ MOVEMENT_VIEW = "Movement"
 TEXTURE_IMAGE_VIEW = "Texture Image"
 TEXTURE_VIDEO_VIEW = "Texture video"
 
-# Methods
-
-ORIGINAL_METHOD_NAME = "Original"
-ANISOTROPIC_METHOD_NAME = "Anisotropic"
-MGAC_METHOD_NAME = "Mgac"
-
 # Error messages
 
 NO_PATH_SELECTION = "No se selecciono ningun path"
