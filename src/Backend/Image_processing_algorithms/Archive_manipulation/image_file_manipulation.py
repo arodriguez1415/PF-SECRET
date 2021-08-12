@@ -59,3 +59,15 @@ def get_information_path():
                                                       ("All files", "*")])
     root.destroy()
     return file_path
+
+
+def get_files_from_directory(directory):
+    directory_files_paths_list = os.listdir(directory)
+    correct_directory_files_paths_list = []
+    for file in directory_files_paths_list:
+        if file.endswith(".tif"):
+            file_path = os.path.join(directory, file)
+            correct_directory_files_paths_list.append(file_path)
+    if correct_directory_files_paths_list:
+        correct_directory_files_paths_list.pop()
+    return correct_directory_files_paths_list

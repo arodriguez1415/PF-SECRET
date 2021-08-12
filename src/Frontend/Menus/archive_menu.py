@@ -16,6 +16,7 @@ def configure_archive_menu_connections(main_window):
 def load_image(image_viewer, method):
     project_mastermind = Project_mastermind.get_instance()
     image_path = image_file_manipulation.get_image_path()
+    image_dir = image_file_manipulation.get_image_dir(image_path)
     if image_path:
         image_wrapper = Image_loader(image_path, method=method)
     else:
@@ -25,7 +26,8 @@ def load_image(image_viewer, method):
     disable_extra_views(project_mastermind.main_window)
     enable_toolbox(project_mastermind.main_window)
     project_mastermind.set_original_image_path(image_path)
-    project_mastermind.set_original_image_dir(image_file_manipulation.get_image_dir(image_path))
+    project_mastermind.set_original_images_from_dir_path(image_dir)
+    project_mastermind.set_original_image_dir(image_dir)
     project_mastermind.add_image_process(image_wrapper)
     set_image_on_screen(image_wrapper, image_viewer)
     enable_view_button(string_constants.MAIN_VIEW)

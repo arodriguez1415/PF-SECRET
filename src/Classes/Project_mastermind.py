@@ -1,6 +1,10 @@
+import os
+
 from PyQt5.QtWidgets import QProgressDialog
 
 import src.Frontend.Utils.message as messages
+from src.Backend.Image_processing_algorithms.Archive_manipulation.image_file_manipulation import \
+    get_files_from_directory
 from src.Constants import string_constants
 
 
@@ -9,6 +13,8 @@ class Project_mastermind:
 
     # Image processing attributes
     image_processing_list = []
+    original_images_in_dir_path = []
+    current_original_image_index = None
     original_image_path = None
     original_image_dir = None
 
@@ -110,6 +116,8 @@ class Project_mastermind:
 
     def clear_all(self):
         self.image_processing_list = []
+        self.original_images_in_dir_path = []
+        self.current_original_image_index = None
         self.original_image_path = None
         self.original_image_dir = None
         self.normal_progress_bar = None
@@ -121,6 +129,14 @@ class Project_mastermind:
         self.texture_heat_map_image_wrapper = None
         self.texture_image_video_wrapper = None
         self.texture_heat_map_image_video_wrapper = None
+
+    def clear_on_original_image_change(self):
+        self.image_processing_list = []
+        self.normal_progress_bar = None
+        self.global_progress_bar = None
+        self.is_global_progress_bar_active_flag = False
+        self.texture_image_wrapper = None
+        self.texture_heat_map_image_wrapper = None
 
     def remove_last_processing(self):
         if len(self.image_processing_list) > 1:
@@ -134,6 +150,30 @@ class Project_mastermind:
 
     def get_image_processing_list(self):
         return self.image_processing_list
+
+    def get_original_images_from_dir_path(self):
+        return self.original_images_in_dir_path
+
+    def get_current_original_image_index(self):
+        return self.current_original_image_index
+
+    def get_next_original_image(self):
+        index = self.current_original_image_index + 1
+        list_of_images = self.get_original_images_from_dir_path()
+        if len(list_of_images) == index or index < 0:
+            return None
+        self.clear_on_original_image_change()
+        self.current_original_image_index += 1
+        return list_of_images[index]
+
+    def get_previous_original_image(self):
+        index = self.current_original_image_index - 1
+        list_of_images = self.get_original_images_from_dir_path()
+        if len(list_of_images) == index or index < 0:
+            return None
+        self.clear_on_original_image_change()
+        self.current_original_image_index -= 1
+        return list_of_images[index]
 
     def set_normal_progress_bar(self, progress_bar):
         self.normal_progress_bar = progress_bar
@@ -149,6 +189,20 @@ class Project_mastermind:
 
     def set_original_image_dir(self, original_image_dir):
         self.original_image_dir = original_image_dir
+
+    def set_original_images_from_dir_path(self, image_dir):
+        self.original_images_in_dir_path = get_files_from_directory(image_dir)
+        self.find_current_original_image_index()
+
+    def find_current_original_image_index(self):
+        original_path = os.path.realpath(self.original_image_path)
+        for i in range(0, len(self.original_images_in_dir_path)):
+            current_path = os.path.realpath(self.original_images_in_dir_path[i])
+            if current_path == original_path:
+                self.current_original_image_index = i
+                return
+        else:
+            raise Exception("Not found")
 
     def set_image_processing_list(self, image_processing_list):
         self.image_processing_list = image_processing_list

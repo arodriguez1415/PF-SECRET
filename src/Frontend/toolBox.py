@@ -1,4 +1,6 @@
+from src.Classes.Image_loader import Image_loader
 from src.Classes.Image_wrapper import Image_wrapper
+from src.Classes.Methods.Original import Original
 from src.Classes.Project_mastermind import Project_mastermind
 import src.Backend.Image_processing_algorithms.Operations.image_save as image_saver
 from src.Constants.algorithm_constants import DIAGONAL_LINE_TYPE, HORIZONTAL_LINE_TYPE, VERTICAL_LINE_TYPE
@@ -96,11 +98,50 @@ def save_image():
 
 
 def get_next_image(main_window):
-    print("Next functionality")
+    project_mastermind = Project_mastermind.get_instance()
+    image_path = project_mastermind.get_next_original_image()
+    project_mastermind = Project_mastermind.get_instance()
+
+    if image_path is None:
+        disable_button(main_window.next_image_button)
+        return
+
+    current_index = project_mastermind.get_current_original_image_index()
+    original_list_length = len(project_mastermind.get_original_images_from_dir_path())
+
+    if current_index == original_list_length:
+        disable_button(main_window.next_image_button)
+
+    enable_button(main_window.previous_image_button)
+    image_wrapper = Image_loader(image_path, method=Original())
+    project_mastermind.add_image_process(image_wrapper)
+    disable_button(main_window.texture_image)
+    disable_button(main_window.movement_compare_to_texture_image)
+    disable_button(main_window.texture_image_compare_to_texture_video)
+    main_window.image_viewer.set_screen_image(image_wrapper)
 
 
 def get_previous_image(main_window):
-    print("Previous functionality")
+    project_mastermind = Project_mastermind.get_instance()
+    image_path = project_mastermind.get_previous_original_image()
+    project_mastermind = Project_mastermind.get_instance()
+
+    if image_path is None:
+        disable_button(main_window.previous_image_button)
+        return
+
+    current_index = project_mastermind.get_current_original_image_index()
+
+    if current_index == 0:
+        disable_button(main_window.previous_image_button)
+
+    enable_button(main_window.next_image_button)
+    image_wrapper = Image_loader(image_path, method=Original())
+    project_mastermind.add_image_process(image_wrapper)
+    disable_button(main_window.texture_image)
+    disable_button(main_window.movement_compare_to_texture_image)
+    disable_button(main_window.texture_image_compare_to_texture_video)
+    main_window.image_viewer.set_screen_image(image_wrapper)
 
 
 
