@@ -7,7 +7,7 @@ from src.Classes.Project_mastermind import Project_mastermind
 import src.Backend.Image_processing_algorithms.Operations.image_save as image_saver
 from src.Constants.algorithm_constants import DIAGONAL_LINE_TYPE, HORIZONTAL_LINE_TYPE, VERTICAL_LINE_TYPE
 from src.Constants.string_constants import PROCESS_LIST_WIDGET_TITLE
-from src.Frontend.Utils.button_controller import enable_button, disable_button
+from src.Frontend.Utils.button_controller import enable_button, disable_button, set_pushed_button
 from src.Frontend.process_list import populate_process_list
 
 
@@ -76,6 +76,7 @@ def start_line(main_window, line_type=DIAGONAL_LINE_TYPE):
         main_window.image_viewer.set_fixed_line_type(line_type)
     else:
         main_window.image_viewer.set_diagonal_line_flag()
+    set_pushed_button(main_window.vertical_line_button)
 
 
 def clear_region(main_window):
@@ -122,6 +123,8 @@ def get_next_image(main_window):
     if current_index == original_list_length:
         disable_button(main_window.next_image_button)
 
+    label_text = str(current_index + 1) + "/" + str(original_list_length)
+    main_window.images_index_label.setText(label_text)
     enable_button(main_window.previous_image_button)
     image_wrapper = Image_loader(image_path, method=Original())
     project_mastermind.add_image_process(image_wrapper)
@@ -140,11 +143,14 @@ def get_previous_image(main_window):
         disable_button(main_window.previous_image_button)
         return
 
+    original_list_length = len(project_mastermind.get_original_images_from_dir_path())
     current_index = project_mastermind.get_current_original_image_index()
 
     if current_index == 0:
         disable_button(main_window.previous_image_button)
 
+    label_text = str(current_index + 1) + "/" + str(original_list_length)
+    main_window.images_index_label.setText(label_text)
     enable_button(main_window.next_image_button)
     image_wrapper = Image_loader(image_path, method=Original())
     project_mastermind.add_image_process(image_wrapper)

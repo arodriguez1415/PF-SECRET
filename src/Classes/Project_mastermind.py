@@ -204,6 +204,8 @@ class Project_mastermind:
             current_path = os.path.realpath(self.original_images_in_dir_path[i])
             if current_path == original_path:
                 self.current_original_image_index = i
+                label_text = str(i + 1) + "/" + str(len(self.original_images_in_dir_path))
+                self.main_window.images_index_label.setText(label_text)
                 return
         else:
             raise Exception("Not found")
