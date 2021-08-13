@@ -1,11 +1,12 @@
-from src.Constants import string_constants
 from src.Backend.Image_processing_algorithms.Border_detection import mgac as mgac_functions
+from src.Constants.algorithm_constants import MGAC_ITERATIONS, MGAC_THRESHOLD, MGAC_SMOOTHING, MGAC_BALLOON, MGAC_ALPHA, \
+    MGAC_SIGMA, MGAC_NAME
 
 
 class Mgac:
 
     def __init__(self, region_point, iterations, threshold, smoothing, balloon, alpha, sigma, mask_flag=False):
-        self.name = string_constants.MGAC_METHOD_NAME
+        self.name = MGAC_NAME
         self.iterations = iterations
         self.threshold = threshold
         self.smoothing = smoothing
@@ -28,3 +29,12 @@ class Mgac:
 
     def set_mask_flag(self, mask_flag):
         self.mask_flag = mask_flag
+
+    def get_method_name(self):
+        return self.name
+
+    def get_attributes_dict(self):
+        mgac_attributes_dict = {MGAC_ITERATIONS: self.iterations, MGAC_THRESHOLD: self.threshold,
+                                MGAC_SMOOTHING: self.smoothing, MGAC_BALLOON: self.balloon, MGAC_ALPHA: self.alpha,
+                                MGAC_SIGMA: self.sigma}
+        return mgac_attributes_dict

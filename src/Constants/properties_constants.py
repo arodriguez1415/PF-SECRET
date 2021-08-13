@@ -1,0 +1,1 @@
+IMAGES_SOURCE_FOLDER = "images_source_folder"

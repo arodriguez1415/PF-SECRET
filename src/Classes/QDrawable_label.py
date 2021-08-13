@@ -6,8 +6,10 @@ from PyQt5.QtWidgets import QLabel
 import math
 
 from src.Backend.Image_processing_algorithms.Operations.common_operations import resize_image, gray_to_rgb
+from src.Classes.Project_mastermind import Project_mastermind
 from src.Constants import configuration_constants
 from src.Constants.algorithm_constants import HORIZONTAL_LINE_TYPE
+from src.Frontend.Utils.button_controller import deselect_all
 
 
 class QDrawable_label(QLabel):
@@ -63,6 +65,8 @@ class QDrawable_label(QLabel):
         painter.end()
 
     def mouseReleaseEvent(self, event):
+        project_mastermind = Project_mastermind.get_instance()
+        main_window = project_mastermind.main_window
         if self.polygon_finalized or not self.paint_flag:
             return
         if len(self.points_list) == 0 and not self.fixed_square_flag:
@@ -70,17 +74,22 @@ class QDrawable_label(QLabel):
                 self.draw_point(event)
             else:
                 self.draw_fixed_line(event, self.fixed_line_type)
+                deselect_all(main_window)
         elif self.square_flag:
             self.finalize_square(event)
+            deselect_all(main_window)
         elif self.fixed_square_flag:
             self.finalize_fixed_square(event)
+            deselect_all(main_window)
         elif self.diagonal_line_flag:
             self.draw_diagonal_line(event)
+            deselect_all(main_window)
         else:
             if event.button() == Qt.LeftButton:
                 self.draw_diagonal_line(event)
             else:
                 self.finalize_polygon()
+                deselect_all(main_window)
 
     def draw_point(self, event):
         if not self.paint_flag or self.actual_image_wrapper is None:

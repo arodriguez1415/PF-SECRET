@@ -5,21 +5,30 @@ import cv2 as cv
 FROM_0_TO_255 = 255
 FROM_0_TO_1 = 1
 
-# --- LBP methods ---
+# MGAC attributes
 
-# original local binary pattern which is gray scale but not rotation invariant.
-LBP_DEFAULT = "default"
+MGAC_NAME = "MGAC"
+MGAC_ITERATIONS = "Iteraciones"
+MGAC_THRESHOLD = "Umbral"
+MGAC_SMOOTHING = "Suavizado"
+MGAC_BALLOON = "Fuerza de contracción o expansión"
+MGAC_ALPHA = "Alpha"
+MGAC_SIGMA = "Sigma"
 
-# extension of default implementation which is gray scale and rotation invariant.
-LBP_ROR = "ror"
+# Adaptive threshold attributes
 
-# improved rotation invariance with uniform patterns and
-# finer quantization of the angular space which is gray scale and rotation invariant.
-LBP_UNIFORM = "uniform"
+ADAPTIVE_THRESHOLD_NAME = "Umbralización adaptativa"
+ADAPTIVE_THRESHOLD_WINDOW_SIZE = "Tamaño de ventana de vecinos"
+ADAPTIVE_THRESHOLD_C_CONSTANT = "Constante C"
+ADAPTIVE_THRESHOLD_METHOD = "Método"
 
-# non rotation-invariant uniform patterns variant which is only gray scale invariant
-LBP_NRI_UNIFORM = "nri_uniform"
+# Anisotropic filter attributes
 
+ANISOTROPIC_FILTER_NAME = "Filtro anisotrópico"
+
+# Original method attributes
+
+ORIGINAL_NAME = "Imagen original"
 
 # --- Line Texture Profile
 
@@ -31,6 +40,9 @@ DIAGONAL_LINE_TYPE = "Diagonal"
 
 ADAPTIVE_THRESHOLD_MEAN = cv.ADAPTIVE_THRESH_MEAN_C
 ADAPTIVE_THRESHOLD_GAUSSIAN = cv.ADAPTIVE_THRESH_GAUSSIAN_C
+
+ADAPTIVE_THRESHOLD_MEAN_NAME = "Umbralización de la media"
+ADAPTIVE_THRESHOLD_GAUSSIAN_NAME = "Umbralización gaussiana"
 
 # --- Metrics save method ---
 
