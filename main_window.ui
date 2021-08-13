@@ -384,7 +384,7 @@
      </property>
      <property name="font">
       <font>
-       <pointsize>26</pointsize>
+       <pointsize>20</pointsize>
       </font>
      </property>
      <property name="text">
@@ -3025,7 +3025,7 @@
      <string>Archivo</string>
     </property>
     <addaction name="load_main_image_menu_option"/>
-    <addaction name="load_secondary_image_menu_option"/>
+    <addaction name="set_images_source_directory_menu_option"/>
    </widget>
    <widget class="QMenu" name="preprocessing_menu">
     <property name="title">
@@ -3160,9 +3160,9 @@
     <string>Cambiar pixel</string>
    </property>
   </action>
-  <action name="load_secondary_image_menu_option">
+  <action name="set_images_source_directory_menu_option">
    <property name="text">
-    <string>Cargar imagen secundaria...</string>
+    <string>Setear carpeta principal de imagenes</string>
    </property>
    <property name="shortcut">
     <string>Ctrl+Shift+O</string>

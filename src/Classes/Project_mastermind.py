@@ -3,8 +3,7 @@ import os
 from PyQt5.QtWidgets import QProgressDialog
 
 import src.Frontend.Utils.message as messages
-from src.Backend.Image_processing_algorithms.Archive_manipulation.image_file_manipulation import \
-    get_files_from_directory
+from src.Backend.Image_processing_algorithms.Archive_manipulation.properties_manipulation import load_properties
 from src.Constants import string_constants
 
 
@@ -24,6 +23,7 @@ class Project_mastermind:
     is_global_progress_bar_active_flag = None
 
     # Application attributes
+    properties_dictionary = None
     main_window = None
     process_list_widget = None
     process_list = None
@@ -46,6 +46,7 @@ class Project_mastermind:
             self.main_window = main_window
             self.process_list = process_list
             self.process_list_widget = process_list_widget
+            self.properties_dictionary = load_properties()
             self.is_global_progress_bar_active_flag = False
 
     @staticmethod
@@ -179,6 +180,9 @@ class Project_mastermind:
         self.current_original_image_index -= 1
         return list_of_images[index]
 
+    def get_properties_dictionary(self):
+        return self.properties_dictionary
+
     def set_normal_progress_bar(self, progress_bar):
         self.normal_progress_bar = progress_bar
 
@@ -195,7 +199,7 @@ class Project_mastermind:
         self.original_image_dir = original_image_dir
 
     def set_original_images_from_dir_path(self, image_dir):
-        self.original_images_in_dir_path = get_files_from_directory(image_dir)
+        self.original_images_in_dir_path = self.get_files_from_directory(image_dir)
         self.find_current_original_image_index()
 
     def find_current_original_image_index(self):
@@ -230,3 +234,17 @@ class Project_mastermind:
 
     def set_texture_image_video(self, texture_image_video):
         self.texture_image_video_wrapper = texture_image_video
+
+    def reload_properties(self, new_properties_dictionary):
+        self.properties_dictionary = new_properties_dictionary
+
+    def get_files_from_directory(self, directory):
+        directory_files_paths_list = os.listdir(directory)
+        correct_directory_files_paths_list = []
+        for file in directory_files_paths_list:
+            if file.endswith(".tif"):
+                file_path = os.path.join(directory, file)
+                correct_directory_files_paths_list.append(file_path)
+        if correct_directory_files_paths_list:
+            correct_directory_files_paths_list.pop()
+        return correct_directory_files_paths_list
