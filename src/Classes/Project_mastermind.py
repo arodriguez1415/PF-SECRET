@@ -1,6 +1,9 @@
+import os
+
 from PyQt5.QtWidgets import QProgressDialog
 
 import src.Frontend.Utils.message as messages
+from src.Backend.Image_processing_algorithms.Archive_manipulation.properties_manipulation import load_properties
 from src.Constants import string_constants
 
 
@@ -9,6 +12,8 @@ class Project_mastermind:
 
     # Image processing attributes
     image_processing_list = []
+    original_images_in_dir_path = []
+    current_original_image_index = None
     original_image_path = None
     original_image_dir = None
 
@@ -18,7 +23,10 @@ class Project_mastermind:
     is_global_progress_bar_active_flag = None
 
     # Application attributes
+    properties_dictionary = None
     main_window = None
+    process_list_widget = None
+    process_list = None
     app = None
 
     # Movement and Texture processing attributes
@@ -29,13 +37,16 @@ class Project_mastermind:
     texture_image_video_wrapper = None
     texture_heat_map_image_video_wrapper = None
 
-    def __init__(self, app, main_window):
+    def __init__(self, app, main_window, process_list, process_list_widget):
         if Project_mastermind.__instance is not None:
             raise Exception("This class is a singleton!")
         else:
             Project_mastermind.__instance = self
             self.app = app
             self.main_window = main_window
+            self.process_list = process_list
+            self.process_list_widget = process_list_widget
+            self.properties_dictionary = load_properties()
             self.is_global_progress_bar_active_flag = False
 
     @staticmethod
@@ -110,6 +121,8 @@ class Project_mastermind:
 
     def clear_all(self):
         self.image_processing_list = []
+        self.original_images_in_dir_path = []
+        self.current_original_image_index = None
         self.original_image_path = None
         self.original_image_dir = None
         self.normal_progress_bar = None
@@ -121,6 +134,14 @@ class Project_mastermind:
         self.texture_heat_map_image_wrapper = None
         self.texture_image_video_wrapper = None
         self.texture_heat_map_image_video_wrapper = None
+
+    def clear_on_original_image_change(self):
+        self.image_processing_list = []
+        self.normal_progress_bar = None
+        self.global_progress_bar = None
+        self.is_global_progress_bar_active_flag = False
+        self.texture_image_wrapper = None
+        self.texture_heat_map_image_wrapper = None
 
     def remove_last_processing(self):
         if len(self.image_processing_list) > 1:
@@ -134,6 +155,33 @@ class Project_mastermind:
 
     def get_image_processing_list(self):
         return self.image_processing_list
+
+    def get_original_images_from_dir_path(self):
+        return self.original_images_in_dir_path
+
+    def get_current_original_image_index(self):
+        return self.current_original_image_index
+
+    def get_next_original_image(self):
+        index = self.current_original_image_index + 1
+        list_of_images = self.get_original_images_from_dir_path()
+        if len(list_of_images) == index or index < 0:
+            return None
+        self.clear_on_original_image_change()
+        self.current_original_image_index += 1
+        return list_of_images[index]
+
+    def get_previous_original_image(self):
+        index = self.current_original_image_index - 1
+        list_of_images = self.get_original_images_from_dir_path()
+        if len(list_of_images) == index or index < 0:
+            return None
+        self.clear_on_original_image_change()
+        self.current_original_image_index -= 1
+        return list_of_images[index]
+
+    def get_properties_dictionary(self):
+        return self.properties_dictionary
 
     def set_normal_progress_bar(self, progress_bar):
         self.normal_progress_bar = progress_bar
@@ -149,6 +197,22 @@ class Project_mastermind:
 
     def set_original_image_dir(self, original_image_dir):
         self.original_image_dir = original_image_dir
+
+    def set_original_images_from_dir_path(self, image_dir):
+        self.original_images_in_dir_path = self.get_files_from_directory(image_dir)
+        self.find_current_original_image_index()
+
+    def find_current_original_image_index(self):
+        original_path = os.path.realpath(self.original_image_path)
+        for i in range(0, len(self.original_images_in_dir_path)):
+            current_path = os.path.realpath(self.original_images_in_dir_path[i])
+            if current_path == original_path:
+                self.current_original_image_index = i
+                label_text = str(i + 1) + "/" + str(len(self.original_images_in_dir_path))
+                self.main_window.images_index_label.setText(label_text)
+                return
+        else:
+            raise Exception("Not found")
 
     def set_image_processing_list(self, image_processing_list):
         self.image_processing_list = image_processing_list
@@ -170,3 +234,17 @@ class Project_mastermind:
 
     def set_texture_image_video(self, texture_image_video):
         self.texture_image_video_wrapper = texture_image_video
+
+    def reload_properties(self, new_properties_dictionary):
+        self.properties_dictionary = new_properties_dictionary
+
+    def get_files_from_directory(self, directory):
+        directory_files_paths_list = os.listdir(directory)
+        correct_directory_files_paths_list = []
+        for file in directory_files_paths_list:
+            if file.endswith(".tif"):
+                file_path = os.path.join(directory, file)
+                correct_directory_files_paths_list.append(file_path)
+        if correct_directory_files_paths_list:
+            correct_directory_files_paths_list.pop()
+        return correct_directory_files_paths_list
