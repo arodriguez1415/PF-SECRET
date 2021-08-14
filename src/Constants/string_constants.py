@@ -10,10 +10,13 @@ TEXTURE_VIDEO_VIEW = "Texture video"
 
 # Error messages
 
-NO_PATH_SELECTION = "No se selecciono ningun path"
-NO_MGAC_METHOD_ERROR = "No se aplico el metodo mgac en la imagen aun"
+NO_PATH_SELECTION = "No se seleccionó ningun path"
+NO_MGAC_METHOD_ERROR = "No se aplico el metodo mgac en la imagen aún"
 NO_ALL_IMAGES_READY_FOR_ANALYZE_METRIC_DESCRIPTION = "Para la comparación de la métrica es necesario haber calculado " \
                                                      "el mapa de movimiento y el mapa de textura de imagen y video"
+NO_PROFILE_SELECTED_ERROR = "No se selecciono ningún perfil para analizar"
+NO_LINE_SELECTED_ERROR = "La figura utilizada para este método debe ser una línea"
+
 # Wait message
 
 WAIT_ESTIMATION_MESSAGE_TITLE = "Estimacion"
@@ -25,7 +28,7 @@ WAIT_TEXTURE_IMAGE_MESSAGE_DESC = "Se esta generando el mapa de textura de la im
 # Confirmation messages
 
 GLOBAL_ROUTINE_ESTIMATION_TITLE = "Estimación de resultados"
-GLOBAL_ROUTINE_TIME_ESTIMATION = "Estimacion de tiempo requerido: "
+GLOBAL_ROUTINE_TIME_ESTIMATION = "Estimación de tiempo requerido: "
 GLOBAL_ROUTINE_MEMORY_ESTIMATION = "Estimación de memoria requerida: "
 
 NO_REGION_FOUND_TITLE = "Confirmación de región"
@@ -109,8 +112,8 @@ PERIMETER_PLOT_TITLE = "Perímetro en el tiempo"
 PERIMETER_X_LABEL = "Perímetro en píxeles"
 PERIMETER_Y_LABEL = "Tiempo en frames"
 
-AREA_PLOT_TITLE = "Area en el tiempo"
-AREA_X_LABEL = "Area en píxeles"
+AREA_PLOT_TITLE = "Área en el tiempo"
+AREA_X_LABEL = "Área en píxeles"
 AREA_Y_LABEL = "Tiempo en frames"
 
 AXIS_RATIO_PLOT_TITLE = "Razón de ejes en el tiempo"
@@ -133,5 +136,4 @@ TEXTURE_VIDEO_TITLE = "Imagen de Textura-Video"
 TEXTURE_IMAGE_VS_TEXTURE_VIDEO = "Textura-Imagen vs Textura-Video"
 
 FOUR_GRID_COMPARISON = "Valor de la región en las 4 vistas"
-
 PROCESS_LIST_WIDGET_TITLE = "Lista de procesamiento"

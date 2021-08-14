@@ -10,7 +10,7 @@ from src.Classes.Region import Region
 from src.Constants import string_constants, configuration_constants
 from src.Frontend.Utils import progress_bar
 from src.Frontend.Utils.button_controller import disable_button, enable_button
-from src.Frontend.Utils.message import show_wait_message
+from src.Frontend.Utils.message import show_wait_message, show_error
 from src.Frontend.Utils.viewer_buttons import enable_view_button
 
 
@@ -66,7 +66,14 @@ def generate_profile_texture(main_window):
     current_image_array = project_mastermind.get_last_image()
     current_image_array = resize_image(current_image_array, width, height)
     line_region = Region()
-    profile_texture.fractal_dimension_line(current_image_array, line_region.get_line())
+    if not line_region.has_region():
+        show_error(string_constants.NO_PROFILE_SELECTED_ERROR)
+    else:
+        try:
+            line = line_region.get_line()
+            profile_texture.fractal_dimension_line(current_image_array, line)
+        except ValueError:
+            show_error(string_constants.NO_LINE_SELECTED_ERROR)
     enable_button(main_window.texture_profile_apply_button)
 
 
