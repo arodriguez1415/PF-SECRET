@@ -59,7 +59,6 @@ def setup(images_path_for_texture_list):
     progress_bar.start_progress_bar(string_constants.GENERATE_TEXTURE_HEAT_MAP_TITLE,
                                     string_constants.GENERATE_TEXTURE_HEAT_MAP_DESCRIPTION,
                                     len(images_path_for_texture_list) * 2 + 1)
-    print(len(images_path_for_texture_list))
     create_directory_if_not_exists(configuration_constants.TEMPORARY_VIDEO_DIRECTORY_PATH)
     create_directory_if_not_exists(configuration_constants.TEXTURE_HEATMAP_IMAGES_DIRECTORY)
 

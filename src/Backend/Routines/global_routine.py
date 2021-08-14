@@ -12,7 +12,8 @@ from src.Backend.Routines.estimator import estimate_time_and_space, prepare_esti
     estimate_steps, get_time_message
 from src.Backend.Video_processing_algorithms import multiple_cells_video_generator
 from src.Backend.Video_processing_algorithms.movement_image_generator import create_multiple_motion_images
-from src.Backend.Video_processing_algorithms.multiple_cells_video_generator import get_images_from_directories
+from src.Backend.Video_processing_algorithms.multiple_cells_video_generator import get_images_from_directories, \
+    generate_video_comparator_of_all_cells
 from src.Backend.Video_processing_algorithms.texture_image_generator import create_multiple_texture_images
 from src.Backend.Video_processing_algorithms.video_generator import set_save_name
 from src.Constants import algorithm_constants, configuration_constants, string_constants
@@ -38,14 +39,10 @@ def routine(sub_routines):
 
     init_time = time.time()
 
-
-
     if algorithm_constants.CONTOUR_SUBROUTINE in sub_routines:
-        contour_and_metrics_sub_routine(sub_routines, source_directory)
+        contour_comparison_and_metrics_subroutine(sub_routines, source_directory)
 
     movement_and_texture_heat_map_sub_routine(sub_routines, source_directory)
-
-
 
     total_time = time.time() - init_time
     print(get_time_message(total_time))
@@ -65,6 +62,7 @@ def estimate_time_and_space_sub_routine(sub_routines, source_directory):
 
 def routine_setup():
     create_directory_if_not_exists(configuration_constants.CELLS_VIDEOS)
+    create_directory_if_not_exists(configuration_constants.COMPARISON_VIDEOS)
     create_directory_if_not_exists(configuration_constants.GRAPHS_FOLDER)
     create_directory_if_not_exists(configuration_constants.METRICS_GRAPH_FOLDER)
     create_directory_if_not_exists(configuration_constants.DISTRIBUTION_METRICS_GRAPH_FOLDER)
@@ -76,14 +74,19 @@ def create_directory_if_not_exists(directory_path):
         os.mkdir(directory_path)
 
 
-def contour_and_metrics_sub_routine(sub_routines, source_directory):
-    masked_videos_paths_list, videos_filename_list, generated_files = contour_sub_routine(source_directory)
+def contour_comparison_and_metrics_subroutine(sub_routines, source_directory):
+    masked_videos_path_list, cells_videos_path_list, videos_filename_list, generated_files = contour_sub_routine(source_directory)
     metrics_generated_files = []
+    comparison_generated_files = []
+
+    if algorithm_constants.COMPARISON_SUBROUTINE in sub_routines:
+        comparison_generated_files = comparison_sub_routine(cells_videos_path_list, masked_videos_path_list)
 
     if algorithm_constants.METRICS_SUBROUTINE in sub_routines:
-        metrics_generated_files = metrics_sub_routine(source_directory, masked_videos_paths_list, videos_filename_list)
+        metrics_generated_files = metrics_sub_routine(source_directory, videos_filename_list, masked_videos_path_list)
 
     generated_files.extend(metrics_generated_files)
+    generated_files.extend(comparison_generated_files)
     return generated_files
 
 
@@ -99,10 +102,14 @@ def contour_sub_routine(source_directory):
     generated_files.extend(cells_videos_paths_list)
     generated_files.extend(masked_videos_paths_list)
 
-    return masked_videos_paths_list, videos_filename_list, generated_files
+    return masked_videos_paths_list, cells_videos_paths_list, videos_filename_list, generated_files
 
 
-def metrics_sub_routine(source_directory, masked_videos_paths_list, videos_filename_list):
+def comparison_sub_routine(cells_videos_path_list, masked_videos_path_list):
+    return generate_video_comparator_of_all_cells(cells_videos_path_list, masked_videos_path_list)
+
+
+def metrics_sub_routine(source_directory, videos_filename_list, masked_videos_paths_list):
     metrics_dictionary = {algorithm_constants.AXIS_RATE_METRIC: True, algorithm_constants.PERIMETER_METRIC: True,
                           algorithm_constants.AREA_METRIC: True}
     distribution_metrics_dictionary = metrics_dictionary

@@ -17,6 +17,7 @@ PROPERTIES_FILE_PATH = r"./Resources/Properties/properties.pkl"
 CELLS_VIDEOS = r"./generated/Celulas en video/"
 MASK_VIDEOS = r"./generated/Mascaras de contorno/"
 CONTOUR_VIDEOS = r"./generated/Celulas contorneadas/"
+COMPARISON_VIDEOS = r"./generated/Contorno vs realidad/"
 
 # Movement heat map directory
 

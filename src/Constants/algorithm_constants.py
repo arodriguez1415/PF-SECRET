@@ -97,6 +97,7 @@ SHANNON_ENTROPY = "Shannon"
 # Global routine -- Sub Routines
 
 CONTOUR_SUBROUTINE = "Contour sub routine"
+COMPARISON_SUBROUTINE = "Comparison sub routine"
 METRICS_SUBROUTINE = "Metrics sub routine"
 MOVEMENT_SUBROUTINE = "Movement sub routine"
 TEXTURE_SUBROUTINE = "Texture sub routine"

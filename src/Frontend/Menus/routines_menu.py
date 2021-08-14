@@ -11,7 +11,7 @@ def configure_routines_menu_connections(main_window):
 
     main_window.global_routine_initiate_button.clicked.connect(lambda: initiate_global_routine(main_window))
     main_window.global_routine_subroutines_contour_checkbox.stateChanged.connect(lambda:
-                                                                                 set_metrics_sub_routine(main_window))
+                                                                                 set_child_contour_routines(main_window))
 
 
 def load_global_routine_options(main_window):
@@ -36,6 +36,9 @@ def get_sub_routines(main_window):
     if main_window.global_routine_subroutines_contour_checkbox.isChecked():
         sub_routines_list.append(algorithm_constants.CONTOUR_SUBROUTINE)
 
+    if main_window.global_routine_subroutines_comparison.isChecked():
+        sub_routines_list.append(algorithm_constants.COMPARISON_SUBROUTINE)
+
     if main_window.global_routine_subroutines_contour_metrics.isChecked():
         sub_routines_list.append(algorithm_constants.METRICS_SUBROUTINE)
 
@@ -48,6 +51,7 @@ def get_sub_routines(main_window):
     return sub_routines_list
 
 
-def set_metrics_sub_routine(main_window):
+def set_child_contour_routines(main_window):
     checked = main_window.global_routine_subroutines_contour_checkbox.isChecked()
     main_window.global_routine_subroutines_contour_metrics.setChecked(checked)
+    main_window.global_routine_subroutines_comparison.setChecked(checked)

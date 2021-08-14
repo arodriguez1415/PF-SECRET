@@ -405,7 +405,7 @@
      </rect>
     </property>
     <property name="currentIndex">
-     <number>9</number>
+     <number>8</number>
     </property>
     <widget class="QWidget" name="blank_page"/>
     <widget class="QWidget" name="anisotropic_filter_options">
@@ -1689,7 +1689,7 @@
         <x>20</x>
         <y>120</y>
         <width>261</width>
-        <height>221</height>
+        <height>311</height>
        </rect>
       </property>
       <property name="font">
@@ -1725,7 +1725,7 @@
        <property name="geometry">
         <rect>
          <x>50</x>
-         <y>80</y>
+         <y>120</y>
          <width>121</width>
          <height>31</height>
         </rect>
@@ -1746,7 +1746,7 @@
        <property name="geometry">
         <rect>
          <x>20</x>
-         <y>120</y>
+         <y>160</y>
          <width>221</width>
          <height>31</height>
         </rect>
@@ -1767,7 +1767,7 @@
        <property name="geometry">
         <rect>
          <x>20</x>
-         <y>160</y>
+         <y>200</y>
          <width>221</width>
          <height>31</height>
         </rect>
@@ -1779,6 +1779,27 @@
        </property>
        <property name="text">
         <string>Mapa de textura</string>
+       </property>
+       <property name="checked">
+        <bool>true</bool>
+       </property>
+      </widget>
+      <widget class="QCheckBox" name="global_routine_subroutines_comparison">
+       <property name="geometry">
+        <rect>
+         <x>50</x>
+         <y>80</y>
+         <width>151</width>
+         <height>31</height>
+        </rect>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>16</pointsize>
+        </font>
+       </property>
+       <property name="text">
+        <string>Comparativa</string>
        </property>
        <property name="checked">
         <bool>true</bool>

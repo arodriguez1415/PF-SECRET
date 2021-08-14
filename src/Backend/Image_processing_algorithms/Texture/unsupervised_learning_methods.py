@@ -131,7 +131,6 @@ def self_organized_map(dataframe, clusters_quantity=2, network_shape=(5, 5),
     clusters_class = np.ravel_multi_index(winner_coordinates, network_shape)
     dataframe["classification"] = clusters_class
 
-    print(len(clusters_class))
     unique, counts = np.unique(clusters_class, return_counts=True)
     print(dict(zip(unique, counts)))
 

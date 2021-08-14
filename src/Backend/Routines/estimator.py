@@ -18,6 +18,10 @@ def estimate_steps(sub_routines, source_directory):
     if algorithm_constants.CONTOUR_SUBROUTINE in sub_routines:
         total_steps += images_amount * type_of_videos
 
+    # Comparison videos of simple cells, preprocessed cells and mask cells
+    if algorithm_constants.COMPARISON_SUBROUTINE in sub_routines:
+        total_steps += images_amount
+
     # Metrics: Area, Perimeter and Axis Rate
     if algorithm_constants.METRICS_SUBROUTINE in sub_routines:
         total_steps += images_amount * type_of_metrics
@@ -43,18 +47,18 @@ def estimate_time_and_space(sub_routines, source_directory):
 def estimate_time(images_amount, directories_of_images_amount, sub_routines):
     sample_directory = configuration_constants.SAMPLE_ESTIMATOR_DIRECTORY
     generated_files_path = []
-    contour_and_metrics_files = []
-    movement_and_texture_files = []
+    contour_comparison_and_metrics_files = []
 
-    init_time = time.time()
+    first_init_time = time.time()
 
     if algorithm_constants.CONTOUR_SUBROUTINE in sub_routines:
-        contour_and_metrics_files = global_routine.contour_and_metrics_sub_routine(sub_routines, sample_directory)
+        contour_comparison_and_metrics_files = global_routine.contour_comparison_and_metrics_subroutine(sub_routines,
+                                                                                                        sample_directory)
 
-    generated_files_path.extend(contour_and_metrics_files)
+    generated_files_path.extend(contour_comparison_and_metrics_files)
 
-    contours_and_metrics_time_for_one_image = time.time() - init_time
-    init_time = time.time()
+    contours_and_metrics_time_for_one_image = time.time() - first_init_time
+    second_init_time = time.time()
 
     movement_and_texture_files = global_routine.movement_and_texture_heat_map_sub_routine(sub_routines,
                                                                                           sample_directory)
@@ -62,14 +66,20 @@ def estimate_time(images_amount, directories_of_images_amount, sub_routines):
 
     remove_generated_files_for_estimation(generated_files_path)
 
-    texture_and_movement_time_for_one_directory = time.time() - init_time
+    texture_and_movement_time_for_one_directory = time.time() - second_init_time
 
     contours_and_metrics_time_for_all_images = contours_and_metrics_time_for_one_image * images_amount
     texture_and_movement_time_for_all_directories = texture_and_movement_time_for_one_directory * directories_of_images_amount
 
     total_time = contours_and_metrics_time_for_all_images + texture_and_movement_time_for_all_directories
-    max_time_error = (directories_of_images_amount * 30) * 2
-    total_time += max_time_error
+    max_time_texture_error = (directories_of_images_amount * 15) * 2
+    max_time_movement_error = (directories_of_images_amount * 15) * 2
+
+    if algorithm_constants.MOVEMENT_SUBROUTINE in sub_routines:
+        total_time += max_time_movement_error
+
+    if algorithm_constants.TEXTURE_SUBROUTINE in sub_routines:
+        total_time += max_time_texture_error
 
     return total_time
 
@@ -137,4 +147,3 @@ def get_memory_message(kilobytes):
 def remove_generated_files_for_estimation(files_path_list):
     for file_path in files_path_list:
         os.remove(file_path)
-

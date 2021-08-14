@@ -1,4 +1,8 @@
+# Plot figures save paths for load
+
 MGAC_BORDER_IMAGE_SAVE_NAME = "border_image.tiff"
+MGAC_MASK_IMAGE_SAVE_NAME = "mask_image.tiff"
+COMPARISON_CELL_VS_MASK_SAVE_NAME = "cell_vs_mask.tiff"
 ANISOTROPIC_IMAGE_SAVE_NAME = "anisotropic_image.tiff"
 
 # view names

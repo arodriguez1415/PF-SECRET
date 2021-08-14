@@ -17,15 +17,12 @@ class Mgac:
         self.mask_flag = mask_flag
 
     def apply_method(self, image_array):
+        borders_image, mask_image = mgac_functions.mgac(self.region_point, image_array, self.iterations,
+                                                 self.threshold, self.smoothing, self.balloon, self.alpha,
+                                                 self.sigma)
         if self.mask_flag:
-            result_array_image = mgac_functions.mgac_mask(self.region_point, image_array, self.iterations,
-                                                          self.threshold, self.smoothing, self.balloon, self.alpha,
-                                                          self.sigma)
-        else:
-            result_array_image = mgac_functions.mgac_borders(self.region_point, image_array, self.iterations,
-                                                             self.threshold, self.smoothing, self.balloon, self.alpha,
-                                                             self.sigma)
-        return result_array_image
+            return mask_image
+        return borders_image
 
     def set_mask_flag(self, mask_flag):
         self.mask_flag = mask_flag
