@@ -26,7 +26,6 @@ class Region:
 
     def get_line(self):
         region_qpoints = self.drawable_label.get_polygon()
-        print("ASD")
         if len(region_qpoints) != 2:
             raise ValueError('Need at least two points')
         for qpoint in region_qpoints:
