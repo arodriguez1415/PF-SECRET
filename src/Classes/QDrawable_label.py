@@ -43,6 +43,10 @@ class QDrawable_label(QLabel):
     def set_fixed_line_type(self, line_type):
         self.fixed_line_type = line_type
 
+    def reset_line_flag(self):
+        self.diagonal_line_flag = False
+        self.fixed_line_type = None
+
     def set_screen_image(self, image_wrapper):
         if image_wrapper is None:
             return
