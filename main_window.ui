@@ -2364,7 +2364,7 @@
        </font>
       </property>
       <property name="text">
-       <string>Nota 1: Para poder analizar el movimiento y textura de la celular es requerido que se haya calculado su movimiento, su textura de imagen y su textura de video</string>
+       <string>Nota 1: Para poder analizar el movimiento y textura de la celula es requerido que se haya calculado su movimiento, su textura de imagen y su textura de video</string>
       </property>
       <property name="textFormat">
        <enum>Qt::AutoText</enum>

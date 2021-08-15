@@ -1333,7 +1333,7 @@ class Ui_MainWindow(object):
         self.generate_metrics_algoritm_help.setText(_translate("MainWindow", "?"))
         self.analyze_movement_and_texture_button.setText(_translate("MainWindow", "Analizar"))
         self.analyze_movement_and_texture_title.setText(_translate("MainWindow", "Analizar movimiento y textura en region"))
-        self.analyze_movement_and_texture_title_2.setText(_translate("MainWindow", "Nota 1: Para poder analizar el movimiento y textura de la celular es requerido que se haya calculado su movimiento, su textura de imagen y su textura de video"))
+        self.analyze_movement_and_texture_title_2.setText(_translate("MainWindow", "Nota 1: Para poder analizar el movimiento y textura de la celula es requerido que se haya calculado su movimiento, su textura de imagen y su textura de video"))
         self.analyze_movement_and_texture_title_3.setText(_translate("MainWindow", "Nota 2: Utilizar la herramienta del cuadrado, seleccionar el area deseada a analizar y pulsar en \"Analizar\""))
         self.analyze_movement_and_texture_algorithm_help.setText(_translate("MainWindow", "?"))
         self.generate_heat_map_title.setText(_translate("MainWindow", "Generar mapa de calor"))

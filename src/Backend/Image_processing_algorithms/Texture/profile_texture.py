@@ -46,21 +46,27 @@ def fractal_dimension_line(image, region):
     all_entropy = all_entropy[0]
     all_fractal_dimensions = all_fractal_dimensions[0]
     combined_results = all_entropy * 0.5 + 0.5 * all_fractal_dimensions
-    plot_profile_texture(combined_results, x_coordinates, y_coordinates, all_points_size, all_fractal_dimensions,
+
+    x = []
+    y = []
+    for i in range(0, len(all_points) - 1):
+        x.append(all_points[i][0])
+        y.append(all_points[i][1])
+
+    plot_profile_texture(image, x, y, combined_results, x_coordinates, y_coordinates, all_points_size, all_fractal_dimensions,
                          all_entropy)
 
 
 def calculate_texture_in_line(image, x_coordinates, y_coordinates, all_points,
                               all_fractal_dimensions, all_entropy):
     index = 0
-    diff = 7
+    diff = 5
     width = image.shape[0]
     height = image.shape[1]
 
     for point in all_points:
         x = point[0]
         y = point[1]
-        # print("Point: " + str(x) + "," + str(y))
         x_coordinates[index] = x
         y_coordinates[index] = y
         entropy, fractal_dimension = \
@@ -70,33 +76,44 @@ def calculate_texture_in_line(image, x_coordinates, y_coordinates, all_points,
         index += 1
 
 
-def plot_profile_texture(combined_results, x_coordinates, y_coordinates, all_points_size, all_fractal_dimensions,
+def plot_profile_texture(image, x_points, y_points, combined_results, x_coordinates, y_coordinates, all_points_size, all_fractal_dimensions,
                          all_entropy):
-    gs = gridspec.GridSpec(2, 2)
+    gs = gridspec.GridSpec(2, 3, wspace=0.25, hspace=0.25)
 
     if abs(x_coordinates[0] - x_coordinates[all_points_size - 1]) > abs(
             y_coordinates[0] - y_coordinates[all_points_size - 1]):
         x_axis = x_coordinates
-        x_label = "X Point"
+        x_label = "Punto del eje X"
     else:
         x_axis = y_coordinates
-        x_label = "Y Point"
+        x_label = "Punto del eje Y"
 
     pl.figure()
-    ax = pl.subplot(gs[0, 0])
+    pl.subplot(gs[0, 1])
     pl.plot(x_axis, all_fractal_dimensions, color='green', label='FractalDimension')
-    pl.xlabel(x_label)
-    pl.ylabel('Fractal dimension')
+    pl.xlabel(x_label, fontsize=12)
+    pl.ylabel('Dimensión fractal', fontsize=12)
+    pl.title("Dimensión fractal en el perfil", fontsize=15)
 
-    ax = pl.subplot(gs[0, 1])
+    pl.subplot(gs[0, -1])
     pl.plot(x_axis, all_entropy, color='red', label='Entropy')
-    pl.xlabel(x_label)
-    pl.ylabel('Entropy')
+    pl.xlabel(x_label, fontsize=12)
+    pl.ylabel('Entropía', fontsize=12)
+    pl.title("Entropía en el perfil", fontsize=15)
 
-    ax = pl.subplot(gs[1, :])
+    pl.subplot(gs[1, :])
     pl.plot(x_axis, combined_results, color='blue', label='Combinated')
-    pl.xlabel(x_label)
-    pl.ylabel('Texture')
+    pl.xlabel(x_label, fontsize=12)
+    pl.ylabel('Textura', fontsize=12)
+    pl.title("Textura en el perfil", fontsize=15)
+
+    pl.subplot(gs[0, 0])
+    pl.title("Imagen con perfil", fontsize=15)
+    pl.imshow(image, cmap=pl.cm.gray, vmin=0, vmax=255)
+    pl.plot(x_points, y_points, linewidth=2, color='blue')
+
+    mng = pl.get_current_fig_manager()
+    mng.window.showMaximized()
     pl.show()
 
 
