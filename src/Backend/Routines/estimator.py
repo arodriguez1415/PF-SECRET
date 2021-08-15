@@ -86,12 +86,33 @@ def estimate_time(images_amount, directories_of_images_amount, sub_routines):
 
 # Memory estimation in KB
 def estimate_memory(images_amount, directories_of_images, sub_routines):
-    total_memory_space = 0
+    sample_directory = configuration_constants.SAMPLE_ESTIMATOR_DIRECTORY
+    contour_estimated_memory = 512
+    comparison_estimated_memory = 2048
+    metrics_estimated_memory = 512
+    rgb_image_estimated_memory = 1024
+    total_memory = 0
 
-    normal_image_memory_space = 500
-    masked_image_memory_space = 50
+    if algorithm_constants.CONTOUR_SUBROUTINE in sub_routines:
+        total_memory += images_amount * contour_estimated_memory
 
-    return masked_image_memory_space
+    if algorithm_constants.COMPARISON_SUBROUTINE in sub_routines:
+        total_memory += images_amount * comparison_estimated_memory
+
+    if algorithm_constants.METRICS_SUBROUTINE in sub_routines:
+        total_memory += directories_of_images * metrics_estimated_memory
+
+    if algorithm_constants.MOVEMENT_SUBROUTINE in sub_routines:
+        total_memory += directories_of_images * rgb_image_estimated_memory
+
+    if algorithm_constants.TEXTURE_SUBROUTINE in sub_routines:
+        total_memory += directories_of_images * rgb_image_estimated_memory
+
+    if algorithm_constants.MOVEMENT_SUBROUTINE in \
+            sub_routines and algorithm_constants.TEXTURE_SUBROUTINE in sub_routines:
+        total_memory += directories_of_images * rgb_image_estimated_memory
+
+    return total_memory
 
 
 def get_amount_of_images(source_directory):
@@ -120,16 +141,17 @@ def prepare_estimation_message_and_title(total_time_in_seconds, total_memory_in_
     title_message = string_constants.GLOBAL_ROUTINE_ESTIMATION_TITLE
     time_string = get_time_message(total_time_in_seconds)
     memory_string = get_memory_message(total_memory_in_kb)
-    time_description_message = string_constants.GLOBAL_ROUTINE_TIME_ESTIMATION + str(time_string) + "\n"
+    time_description_message = string_constants.GLOBAL_ROUTINE_TIME_ESTIMATION + str(time_string) + "\n\n"
     memory_description_message = string_constants.GLOBAL_ROUTINE_MEMORY_ESTIMATION + str(memory_string)
+    memory_description_message += string_constants.GLOBAL_ROUTINE_MEMORY_ESTIMATION_2
     description_message = time_description_message + memory_description_message
     return title_message, description_message
 
 
 def get_time_message(seconds):
-    hours = str(seconds // 3600)
-    minutes = str((seconds % 3600) // 60)
-    rem_seconds = str((seconds % 3600) % 60)
+    hours = str(round(seconds // 3600, 2))
+    minutes = str(round((seconds % 3600) // 60, 2))
+    rem_seconds = str(round((seconds % 3600) % 60, 2))
     message = "{} horas {} minutos {} segundos".format(hours, minutes, rem_seconds)
     return message
 
@@ -138,9 +160,9 @@ def get_memory_message(kilobytes):
     kilobytes_in_gigabytes = 1024 * 1024
     kilobytes_in_megabytes = 1024
     if kilobytes >= kilobytes_in_gigabytes:
-        return str(kilobytes / kilobytes_in_gigabytes) + " GB"
+        return str(round(kilobytes / kilobytes_in_gigabytes, 2)) + " GB"
     if kilobytes >= kilobytes_in_megabytes:
-        return str(kilobytes / kilobytes_in_megabytes) + " MB"
+        return str(round(kilobytes / kilobytes_in_megabytes, 2)) + " MB"
     return str(kilobytes) + " KB"
 
 

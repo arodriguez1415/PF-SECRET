@@ -31,6 +31,7 @@ WAIT_TEXTURE_IMAGE_MESSAGE_DESC = "Se esta generando el mapa de textura de la im
 GLOBAL_ROUTINE_ESTIMATION_TITLE = "Estimación de resultados"
 GLOBAL_ROUTINE_TIME_ESTIMATION = "Estimacion de tiempo requerido: "
 GLOBAL_ROUTINE_MEMORY_ESTIMATION = "Estimación de memoria requerida: "
+GLOBAL_ROUTINE_MEMORY_ESTIMATION_2 = " (cota máxima)"
 
 NO_REGION_FOUND_TITLE = "Confirmación de región"
 NO_REGION_FOUND_DESCRIPTION = "No se seleccionó ninguna región. Se tomará como región toda la imagen"
@@ -65,6 +66,7 @@ TEXTURE_CLASSIFICATION_VIDEO_ALGORITHM_HELP = "Mensaje de prueba para mostrar un
 GENERATE_MOVEMENT_HEAT_MAP_THRESHOLD_HELP = "Mensaje de prueba para mostrar una informacion"
 GENERATE_MOVEMENT_HEAT_MAP_ALGORITHM_HELP = "Mensaje de prueba para mostrar una informacion"
 
+ANALYZE_MOVEMENT_AND_TEXTURE_GENERATE_VIEWS_HELP = "Mensaje de prueba para mostrar una informacion"
 ANALYZE_MOVEMENT_AND_TEXTURE_ALGORITHM_HELP = "Mensaje de prueba para mostrar una informacion"
 
 GENERATE_METRICS_LOAD_HELP = "Mensaje de prueba para mostrar una informacion"

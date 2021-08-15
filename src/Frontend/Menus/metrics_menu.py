@@ -3,6 +3,10 @@ from src.Backend.Image_processing_algorithms.Archive_manipulation import video_f
 from src.Backend.Image_processing_algorithms.Metrics import metrics_generator, metrics_plotter
 from src.Backend.Image_processing_algorithms.Metrics.metrics_plotter import filter_keys
 from src.Backend.Image_processing_algorithms.Operations.common_operations import resize_image, normalize_to_range
+from src.Backend.Video_processing_algorithms.movement_image_generator import create_motion_image
+from src.Backend.Video_processing_algorithms.texture_image_generator import classify_single_image, \
+    create_texture_image_from_video
+from src.Classes.Image_wrapper import Image_wrapper
 from src.Classes.Project_mastermind import Project_mastermind
 from src.Classes.QDrawable_label import QDrawable_label
 from src.Classes.Region import Region
@@ -11,8 +15,9 @@ from src.Constants.string_constants import ORIGINAL_TITLE, MOVEMENT_TITLE, TEXTU
     FOUR_GRID_COMPARISON
 from src.Frontend.Utils import progress_bar
 from src.Frontend.Utils.button_controller import disable_button, enable_button
-from src.Frontend.Utils.message import show_confirmation_message, show_error
+from src.Frontend.Utils.message import show_confirmation_message, show_error, show_wait_message
 from src.Frontend.Utils.plot_comparator import plot_four_comparison
+from src.Frontend.Utils.viewer_buttons import enable_view_button
 
 
 def configure_metrics_menu_connections(main_window):
@@ -36,6 +41,8 @@ def configure_metrics_menu_connections(main_window):
     main_window.plot_metrics_distribution_button.clicked.connect(lambda: plot_distribution_metrics(main_window))
     main_window.analyze_movement_and_texture_button.clicked.connect(lambda:
                                                                     analyze_texture_and_movement_metrics(main_window))
+    main_window.analyze_movement_and_texture_generate_views_button.clicked.connect(lambda:
+                                                                                   generate_views(main_window))
 
 
 def load_generate_metrics_options(main_window):
@@ -203,6 +210,61 @@ def get_plotting_distribution_metrics_dictionary(main_window):
     metrics_dictionary[algorithm_constants.AXIS_RATE_METRIC] = is_axis_rate_checked
 
     return metrics_dictionary
+
+
+def generate_views(main_window):
+    disable_button(main_window.analyze_movement_and_texture_generate_views_button)
+    generate_movement_view(main_window)
+    generate_image_texture_view(main_window)
+    generate_video_texture_view(main_window)
+
+
+    enable_button(main_window.analyze_movement_and_texture_generate_views_button)
+
+
+def generate_movement_view(main_window):
+    project_mastermind = Project_mastermind.get_instance()
+    threshold_value = main_window.analyze_movement_and_texture_movement_threshold_input.value()
+    uncolored_motion_image_array, coloured_motion_image_array = create_motion_image(threshold_value)
+    movement_heat_map_image_wrapper = Image_wrapper(coloured_motion_image_array, "")
+    movement_image_wrapper = Image_wrapper(uncolored_motion_image_array, "")
+    project_mastermind.set_movement_heat_map_image(movement_heat_map_image_wrapper)
+    project_mastermind.set_movement_image(movement_image_wrapper)
+    progress_bar.force_to_close()
+    enable_view_button(string_constants.MOVEMENT_VIEW)
+
+
+def generate_image_texture_view(main_window):
+    project_mastermind = Project_mastermind.get_instance()
+    current_image_array = project_mastermind.get_last_image()
+    clusters_quantity = main_window.analyze_movement_and_texture_texture_image_clusters_input.value()
+    message_box = show_wait_message(string_constants.WAIT_TEXTURE_IMAGE_MESSAGE_TITLE,
+                                    string_constants.WAIT_TEXTURE_IMAGE_MESSAGE_DESC)
+    uncoloured_classified_image, coloured_classified_image = classify_single_image(current_image_array,
+                                                                                   clusters_quantity=clusters_quantity)
+    message_box.done(0)
+    texture_image_wrapper = Image_wrapper(uncoloured_classified_image)
+    texture_heat_map_image_wrapper = Image_wrapper(coloured_classified_image)
+    project_mastermind.set_texture_image(texture_image_wrapper)
+    project_mastermind.set_texture_heat_map_image(texture_heat_map_image_wrapper)
+    progress_bar.force_to_close()
+    enable_view_button(string_constants.TEXTURE_IMAGE_VIEW)
+
+
+def generate_video_texture_view(main_window):
+    project_mastermind = Project_mastermind.get_instance()
+    clusters_quantity = main_window.analyze_movement_and_texture_texture_video_clusters_input.value()
+    threshold = main_window.analyze_movement_and_texture_texture_video_threshold_input.value()
+    uncoloured_classified_image, coloured_classified_image = create_texture_image_from_video(
+        clusters_quantity=clusters_quantity,
+        threshold=threshold)
+    texture_image_wrapper = Image_wrapper(uncoloured_classified_image)
+    texture_heat_map_image_wrapper = Image_wrapper(coloured_classified_image)
+    project_mastermind.set_texture_image_video(texture_image_wrapper)
+    project_mastermind.set_texture_heat_map_image_video(texture_heat_map_image_wrapper)
+    progress_bar.force_to_close()
+    enable_view_button(string_constants.TEXTURE_VIDEO_VIEW)
+
 
 
 def analyze_texture_and_movement_metrics(main_window):

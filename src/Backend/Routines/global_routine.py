@@ -47,6 +47,8 @@ def routine(sub_routines):
     total_time = time.time() - init_time
     print(get_time_message(total_time))
 
+    progress_bar.force_to_close()
+
 
 def estimate_time_and_space_sub_routine(sub_routines, source_directory):
     progress_bar.set_global_progress_bar_active(True)

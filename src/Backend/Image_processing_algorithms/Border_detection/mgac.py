@@ -96,7 +96,7 @@ def inverse_gaussian_gradient(image, alpha=100.0, sigma=5.0):
     return 1.0 / np.sqrt(1.0 + alpha * gradnorm)
 
 
-def map_borders(cell_image_array, mask_image_array):
+def map_borders(cell_image_array, preprocessing_image_array, mask_image_array):
     mask_image_array = rgb_to_gray(mask_image_array)
     min_threshold = 5
     mask_image_array = binary_threshold(min_threshold, mask_image_array)
@@ -106,7 +106,9 @@ def map_borders(cell_image_array, mask_image_array):
         for col in range(cols):
             if mask_image_array[row][col] == 255 and is_perimeter(mask_image_array, row, col):
                 cell_image_array = cv2.circle(cell_image_array, (col, row), radius=2, color=(255, 0, 0), thickness=-1)
-    return cell_image_array
+                preprocessing_image_array = cv2.circle(cell_image_array, (col, row), radius=2, color=(255, 0, 0),
+                                                       thickness=-1)
+    return cell_image_array, preprocessing_image_array
 
 
 def is_perimeter(matrix, current_row, current_col):

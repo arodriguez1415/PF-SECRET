@@ -85,9 +85,9 @@ def force_to_close():
     progress_bar = get_progress_bar()
     if progress_bar is not None:
         project_mastermind.set_global_progress_bar_active(False)
+        project_mastermind.set_normal_progress_bar(None)
+        project_mastermind.set_global_progress_bar(None)
         progress_bar.done(0)
-
-
 
 
 def is_progress_bar_cancelled():

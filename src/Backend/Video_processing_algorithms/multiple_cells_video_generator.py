@@ -68,8 +68,9 @@ def generate_comparison(cell_images_array_list, mask_images_array_list):
         mask_image = gray_to_rgb(mask_image)
         preprocessed_image = generate_preprocessed_image(cell_image)
         preprocessed_image = gray_to_rgb(preprocessed_image)
-        cell_with_borders_images_array = map_borders(cell_image, mask_image)
-        preprocessed_image_with_borders_array = map_borders(preprocessed_image, mask_image)
+        cell_with_borders_images_array, preprocessed_image_with_borders_array = map_borders(cell_image,
+                                                                                            preprocessed_image,
+                                                                                            mask_image)
         save_path = configuration_constants.TEMPORARY_VIDEO_DIRECTORY_PATH + "frame - " + str(i) + ".tif"
         generate_comparison_figure(cell_with_borders_images_array, preprocessed_image_with_borders_array,
                                    mask_image, save_path)
