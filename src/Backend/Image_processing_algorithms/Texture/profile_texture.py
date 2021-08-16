@@ -89,27 +89,28 @@ def plot_profile_texture(image, x_points, y_points, combined_results, x_coordina
         x_label = "Punto del eje Y"
 
     pl.figure()
-    pl.subplot(gs[0, 1])
+    pl.subplot(gs[0, 0])
     pl.plot(x_axis, all_fractal_dimensions, color='green', label='FractalDimension')
     pl.xlabel(x_label, fontsize=12)
     pl.ylabel('Dimensión fractal', fontsize=12)
-    pl.title("Dimensión fractal en el perfil", fontsize=15)
+    pl.title("Dimensión fractal en el perfil", fontsize=15, fontweight='bold')
 
-    pl.subplot(gs[0, -1])
+    pl.subplot(gs[0, 1])
     pl.plot(x_axis, all_entropy, color='red', label='Entropy')
     pl.xlabel(x_label, fontsize=12)
     pl.ylabel('Entropía', fontsize=12)
-    pl.title("Entropía en el perfil", fontsize=15)
+    pl.title("Entropía en el perfil", fontsize=15, fontweight='bold')
 
-    pl.subplot(gs[1, :])
+    pl.subplot(gs[1, :-1])
     pl.plot(x_axis, combined_results, color='blue', label='Combinated')
     pl.xlabel(x_label, fontsize=12)
     pl.ylabel('Textura', fontsize=12)
-    pl.title("Textura en el perfil", fontsize=15)
+    pl.title("Textura en el perfil", fontsize=15, fontweight='bold')
 
-    pl.subplot(gs[0, 0])
-    pl.title("Imagen con perfil", fontsize=15)
+    pl.subplot(gs[0:, -1])
+    pl.title("Imagen con perfil", fontsize=15,  fontweight='bold')
     pl.imshow(image, cmap=pl.cm.gray, vmin=0, vmax=255)
+    pl.axis('off')
     pl.plot(x_points, y_points, linewidth=2, color='blue')
 
     mng = pl.get_current_fig_manager()
