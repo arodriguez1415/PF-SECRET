@@ -23,7 +23,8 @@ from src.Frontend.Utils.viewer_buttons import enable_view_button
 def configure_metrics_menu_connections(main_window):
     main_window.generate_metrics_menu_option.triggered.connect(lambda: load_generate_metrics_options(main_window))
     main_window.generate_multiple_cells_metrics_menu_option.triggered.connect(lambda:
-                                                                              load_generate_multiple_cells_metrics_options(main_window))
+                                                                              load_generate_multiple_cells_metrics_options(
+                                                                                  main_window))
     main_window.plot_metrics_menu_option.triggered.connect(lambda: load_plot_metrics_options(main_window))
     main_window.plot_distribution_metric_menu_option.triggered.connect(lambda:
                                                                        load_plot_distribution_metrics_option
@@ -34,7 +35,8 @@ def configure_metrics_menu_connections(main_window):
                                                                                    (main_window))
 
     main_window.generate_metrics_load_mask_video_button.clicked.connect(lambda: load_mask_video_path(main_window))
-    main_window.generate_multiple_cells_metrics_generate_button.clicked.connect(lambda: generate_multiple_cells_metrics(main_window))
+    main_window.generate_multiple_cells_metrics_generate_button.clicked.connect(
+        lambda: generate_multiple_cells_metrics(main_window))
     main_window.plot_metrics_load_dataframe_button.clicked.connect(lambda: load_metrics_data_path(main_window))
     main_window.generate_metrics_generate_button.clicked.connect(lambda: generate_metrics(main_window))
     main_window.plot_metrics_generate_button.clicked.connect(lambda: plot_metrics(main_window))
@@ -218,18 +220,20 @@ def generate_views(main_window):
     generate_image_texture_view(main_window)
     generate_video_texture_view(main_window)
 
-
     enable_button(main_window.analyze_movement_and_texture_generate_views_button)
 
 
 def generate_movement_view(main_window):
     project_mastermind = Project_mastermind.get_instance()
-    threshold_value = main_window.analyze_movement_and_texture_movement_threshold_input.value()
-    uncolored_motion_image_array, coloured_motion_image_array = create_motion_image(threshold_value)
-    movement_heat_map_image_wrapper = Image_wrapper(coloured_motion_image_array, "")
+    threshold_value = main_window.generate_heat_map_threshold_input.value()
+    uncolored_motion_image_array, uncolored_motion_image_array_normalized, coloured_motion_image_array = create_motion_image(
+        threshold_value)
+    movement_normalized_image_wrapper = Image_wrapper(uncolored_motion_image_array_normalized, "")
     movement_image_wrapper = Image_wrapper(uncolored_motion_image_array, "")
-    project_mastermind.set_movement_heat_map_image(movement_heat_map_image_wrapper)
+    movement_heat_map_image_wrapper = Image_wrapper(coloured_motion_image_array, "")
+    project_mastermind.set_normalized_movement_image(movement_normalized_image_wrapper)
     project_mastermind.set_movement_image(movement_image_wrapper)
+    project_mastermind.set_movement_heat_map_image(movement_heat_map_image_wrapper)
     progress_bar.force_to_close()
     enable_view_button(string_constants.MOVEMENT_VIEW)
 
@@ -266,15 +270,15 @@ def generate_video_texture_view(main_window):
     enable_view_button(string_constants.TEXTURE_VIDEO_VIEW)
 
 
-
 def analyze_texture_and_movement_metrics(main_window):
     disable_button(main_window.analyze_movement_and_texture_button)
     project_mastermind = Project_mastermind.get_instance()
+    movement_avg_index = 1
     region = Region()
 
     if not region.has_region():
         continue_flag = show_confirmation_message(string_constants.NO_REGION_FOUND_TITLE,
-                                  string_constants.NO_REGION_FOUND_DESCRIPTION)
+                                                  string_constants.NO_REGION_FOUND_DESCRIPTION)
         if not continue_flag:
             enable_button(main_window.analyze_movement_and_texture_button)
             return
@@ -285,7 +289,7 @@ def analyze_texture_and_movement_metrics(main_window):
         return
 
     original_array = project_mastermind.get_original_image()
-    movement_array = project_mastermind.get_movement_image().image_array
+    movement_array = project_mastermind.get_normalized_movement_wrapper().image_array
     texture_image_array = project_mastermind.get_texture_image().image_array
     texture_video_array = project_mastermind.get_texture_image_video().image_array
 
@@ -293,8 +297,10 @@ def analyze_texture_and_movement_metrics(main_window):
     show_texture_image_array = project_mastermind.get_texture_heat_map_image().image_array
     show_texture_video_array = project_mastermind.get_texture_heat_map_image_video().image_array
 
+    movement_weight_array = project_mastermind.get_movement_image().image_array
+
     width, height = configuration_constants.IMAGE_VIEWER_WIDTH, configuration_constants.IMAGE_VIEWER_HEIGHT
-    weight_image_array_list = [original_array, movement_array, texture_image_array, texture_video_array]
+    weight_image_array_list = [original_array, movement_weight_array, texture_image_array, texture_video_array]
     show_images_array_list = [original_array, show_movement_array, show_texture_image_array, show_texture_video_array]
     avg_values_array = []
 
@@ -303,9 +309,15 @@ def analyze_texture_and_movement_metrics(main_window):
         show_image_array = resize_image(show_images_array_list[i], width, height)
         weight_image_array = resize_image(weight_image_array_list[i], width, height)
         pixels_in_region = region.get_pixels_in_region(weight_image_array)
-        normalized_pixels_in_region = normalize_to_range(pixels_in_region, max_value=255)
+        if i != movement_avg_index:
+            normalized_pixels_in_region = normalize_to_range(pixels_in_region, max_value=255)
+            avg_values_array.append(normalized_pixels_in_region.mean())
+        else:
+            avg_values_array.append(pixels_in_region.mean())
         show_images_array_list[i] = QDrawable_label.draw_region_in_image(show_image_array, square_region)
-        avg_values_array.append(normalized_pixels_in_region.mean())
+
+
+
 
     avg_results = "Promedio de valor de pixel escala grises: " + str(round(avg_values_array[0], 2)) + "\n"
     avg_results += "Promedio de valor de pixel de movimiento: " + str(round(avg_values_array[1], 2)) + "\n"
@@ -313,7 +325,7 @@ def analyze_texture_and_movement_metrics(main_window):
     avg_results += "Promedio de valor de pixel de textura de video: " + str(round(avg_values_array[3], 2))
     title = FOUR_GRID_COMPARISON
     sub_titles = [ORIGINAL_TITLE, MOVEMENT_TITLE, TEXTURE_IMAGE_TITLE, TEXTURE_VIDEO_TITLE]
-    plot_four_comparison(show_images_array_list, title, sub_titles, avg_results)
+    plot_four_comparison(show_images_array_list, movement_weight_array, title, sub_titles, avg_results)
     enable_button(main_window.analyze_movement_and_texture_button)
 
 

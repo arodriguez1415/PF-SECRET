@@ -31,6 +31,7 @@ class Project_mastermind:
 
     # Movement and Texture processing attributes
     movement_image_wrapper = None
+    normalized_movement_wrapper = None
     movement_heat_map_image_wrapper = None
     texture_image_wrapper = None
     texture_heat_map_image_wrapper = None
@@ -107,6 +108,9 @@ class Project_mastermind:
     def get_movement_image(self):
         return self.movement_image_wrapper
 
+    def get_normalized_movement_wrapper(self):
+        return self.normalized_movement_wrapper
+
     def get_texture_heat_map_image(self):
         return self.texture_heat_map_image_wrapper
 
@@ -129,6 +133,7 @@ class Project_mastermind:
         self.global_progress_bar = None
         self.is_global_progress_bar_active_flag = False
         self.movement_image_wrapper = None
+        self.normalized_movement_wrapper = None
         self.movement_heat_map_image_wrapper = None
         self.texture_image_wrapper = None
         self.texture_heat_map_image_wrapper = None
@@ -222,6 +227,9 @@ class Project_mastermind:
 
     def set_movement_image(self, movement_image):
         self.movement_image_wrapper = movement_image
+
+    def set_normalized_movement_image(self, normalized_movement_image):
+        self.normalized_movement_wrapper = normalized_movement_image
 
     def set_texture_heat_map_image(self, texture_heat_map_image):
         self.texture_heat_map_image_wrapper = texture_heat_map_image

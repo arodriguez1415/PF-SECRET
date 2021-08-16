@@ -46,8 +46,10 @@ def plot_comparison(images, title, sub_titles, save_path=None):
         plt.show()
 
 
-def plot_four_comparison(images, title, sub_titles, avg_results):
+def plot_four_comparison(images, movement_weight_array, title, sub_titles, avg_results):
     fig = plt.figure(figsize=(16, 8))
+    movement_heatmap_index = 1
+    colorbar_ticks = 6
     fig.suptitle(title)
 
     grid = ImageGrid(fig, 111,
@@ -55,18 +57,30 @@ def plot_four_comparison(images, title, sub_titles, avg_results):
                      axes_pad=0.35,
                      share_all=True,
                      cbar_location="right",
-                     cbar_mode="edge",
+                     cbar_mode="each",
                      cbar_size="7%",
                      cbar_pad=0.15,
                      )
 
-    color_map_array = [plt.get_cmap("gray"), plt.get_cmap("hot")]
+    max_movement_steps = movement_weight_array.max()
+    colorbar_custom_ticks = [0]
+
+    for i in reversed(range(1, colorbar_ticks)):
+        tick = int(max_movement_steps / i)
+        colorbar_custom_ticks.append(tick)
+
+    color_map_array = [plt.get_cmap("gray"), plt.get_cmap("hot"), plt.get_cmap("hot"), plt.get_cmap("hot")]
     for i in range(0, len(images)):
-        im = grid[i].imshow(images[i], cmap=color_map_array[i//2])
+        im = grid[i].imshow(images[i], cmap=color_map_array[i])
         grid[i].set_title(sub_titles[i], fontdict=None, loc='center', color="k")
         grid[i].axis('off')
-        if i % 2:
-            grid.cbar_axes[i//2].colorbar(im)
+        grid.cbar_axes[i].colorbar(im)
+        if i == movement_heatmap_index:
+            grid.cbar_axes[i].set_yticklabels(colorbar_custom_ticks)
+
+    ## Set movement for cbar
+
+
 
     fig.text(0.15, 0.5, avg_results, fontsize=18, horizontalalignment='center', verticalalignment='center',
              style='italic', bbox={'facecolor': 'gray', 'alpha': 0.85, 'pad': 10})
