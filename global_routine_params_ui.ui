@@ -426,7 +426,7 @@
       <string>2</string>
      </property>
     </widget>
-    <widget class="QPushButton" name="global_routine_params_mgac_alpha_help_2">
+    <widget class="QPushButton" name="global_routine_params_mgac_sigma_help">
      <property name="geometry">
       <rect>
        <x>560</x>

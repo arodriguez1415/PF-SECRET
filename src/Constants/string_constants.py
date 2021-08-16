@@ -43,11 +43,12 @@ NO_REGION_FOUND_DESCRIPTION = "No se seleccionó ninguna región. Se tomará com
 
 INFORMATION_TITLE = "Information"
 
-ADAPTIVE_THRESHOLD_SIZE_HELP = "Mensaje de prueba para mostrar una informacion"
-ADAPTIVE_THRESHOLD_SIZE_CONSTANT_HELP = "Mensaje de prueba para mostrar una informacion"
+ADAPTIVE_THRESHOLD_WINDOW_SIZE_HELP = "Mensaje de prueba para mostrar una informacion"
+ADAPTIVE_THRESHOLD_C_CONSTANT_HELP = "Mensaje de prueba para mostrar una informacion"
 ADAPTIVE_THRESHOLD_METHOD_HELP = "Mensaje de prueba para mostrar una informacion"
 ADAPTIVE_THRESHOLD_ALGORITHM_HELP = "Mensaje de prueba para mostrar una informacion"
 
+ANISOTROPIC_FILTER_TIMES_HELP = "Mensaje de prueba para mostrar una informacion"
 ANISOTROPIC_FILTER_ALGORITHM_HELP = "Mensaje de prueba para mostrar una informacion"
 
 MGAC_ITERATIONS_HELP = "Mensaje de prueba para mostrar una informacion"

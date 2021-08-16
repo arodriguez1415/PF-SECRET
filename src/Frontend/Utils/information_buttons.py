@@ -2,11 +2,14 @@ from src.Constants import string_constants
 from src.Frontend.Utils.message import show_information_message
 
 
-def configure_information_buttons(main_window):
+def configure_information_buttons(main_window, global_routine_params):
+
+    ## Main window
+
     main_window.adaptive_threshold_window_size_help.clicked.connect(
-        lambda: show_information(string_constants.ADAPTIVE_THRESHOLD_SIZE_HELP))
+        lambda: show_information(string_constants.ADAPTIVE_THRESHOLD_WINDOW_SIZE_HELP))
     main_window.adaptive_threshold_c_constant_help.clicked.connect(
-        lambda: show_information(string_constants.ADAPTIVE_THRESHOLD_SIZE_CONSTANT_HELP))
+        lambda: show_information(string_constants.ADAPTIVE_THRESHOLD_C_CONSTANT_HELP))
     main_window.adaptive_threshold_method_help.clicked.connect(
         lambda: show_information(string_constants.ADAPTIVE_THRESHOLD_METHOD_HELP))
     main_window.adaptive_threshold_algoritm_help.clicked.connect(
@@ -73,6 +76,41 @@ def configure_information_buttons(main_window):
 
     main_window.global_routine_algorithm_help.clicked.connect(
         lambda: show_information(string_constants.GLOBAL_ROUTINE_ALGORITHM_HELP))
+
+
+    # Global routine params
+
+    global_routine_params.global_routine_params_anisotropic_filter_times_help.clicked.connect(
+        lambda: show_information(string_constants.ANISOTROPIC_FILTER_TIMES_HELP))
+
+    global_routine_params.global_routine_params_adaptive_threshold_window_size_help.clicked.connect(
+        lambda: show_information(string_constants.ADAPTIVE_THRESHOLD_WINDOW_SIZE_HELP))
+    global_routine_params.global_routine_params_adaptive_threshold_c_constant_help.clicked.connect(
+        lambda: show_information(string_constants.ADAPTIVE_THRESHOLD_C_CONSTANT_HELP))
+    global_routine_params.global_routine_params_adaptive_threshold_method_help.clicked.connect(
+        lambda: show_information(string_constants.ADAPTIVE_THRESHOLD_METHOD_HELP))
+
+    global_routine_params.global_routine_params_mgac_iterations_help.clicked.connect(
+        lambda: show_information(string_constants.MGAC_ALGORITHM_HELP))
+    global_routine_params.global_routine_params_mgac_threshold_help.clicked.connect(
+        lambda: show_information(string_constants.MGAC_THRESHOLD_HELP))
+    global_routine_params.global_routine_params_mgac_smoothing_help.clicked.connect(
+        lambda: show_information(string_constants.MGAC_SMOOTHING_HELP))
+    global_routine_params.global_routine_params_mgac_balloon_help.clicked.connect(
+        lambda: show_information(string_constants.MGAC_BALLOON_HELP))
+
+    global_routine_params.global_routine_params_mgac_alpha_help.clicked.connect(
+        lambda: show_information(string_constants.MGAC_ALPHA_HELP))
+    global_routine_params.global_routine_params_mgac_sigma_help.clicked.connect(
+        lambda: show_information(string_constants.MGAC_SIGMA_HELP))
+
+    global_routine_params.global_routine_params_movement_threshold_help.clicked.connect(
+        lambda: show_information(string_constants.GENERATE_MOVEMENT_HEAT_MAP_THRESHOLD_HELP))
+
+    global_routine_params.global_routine_params_movement_texture_clusters_help.clicked.connect(
+        lambda: show_information(string_constants.TEXTURE_CLASSIFICATION_VIDEO_THRESHOLD_HELP))
+    global_routine_params.global_routine_params_movement_texture_threshold_help.clicked.connect(
+        lambda: show_information(string_constants.TEXTURE_CLASSIFICATION_VIDEO_CLUSTERS_HELP))
 
 
 def show_information(message_id):
