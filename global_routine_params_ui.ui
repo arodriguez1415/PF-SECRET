@@ -138,24 +138,6 @@
       <string>?</string>
      </property>
     </widget>
-    <widget class="QLineEdit" name="global_routine_params_mgac_threshold_input">
-     <property name="geometry">
-      <rect>
-       <x>330</x>
-       <y>90</y>
-       <width>221</width>
-       <height>31</height>
-      </rect>
-     </property>
-     <property name="font">
-      <font>
-       <pointsize>12</pointsize>
-      </font>
-     </property>
-     <property name="text">
-      <string>0.35</string>
-     </property>
-    </widget>
     <widget class="QLabel" name="global_routine_params_mgac_threshold_label">
      <property name="geometry">
       <rect>
@@ -210,24 +192,6 @@
       <string>?</string>
      </property>
     </widget>
-    <widget class="QLineEdit" name="global_routine_params_mgac_balloon_input">
-     <property name="geometry">
-      <rect>
-       <x>330</x>
-       <y>180</y>
-       <width>221</width>
-       <height>31</height>
-      </rect>
-     </property>
-     <property name="font">
-      <font>
-       <pointsize>12</pointsize>
-      </font>
-     </property>
-     <property name="text">
-      <string>-1</string>
-     </property>
-    </widget>
     <widget class="QPushButton" name="global_routine_params_mgac_iterations_help">
      <property name="geometry">
       <rect>
@@ -264,42 +228,6 @@
       <string>?</string>
      </property>
     </widget>
-    <widget class="QLineEdit" name="global_routine_params_mgac_smoothing_input">
-     <property name="geometry">
-      <rect>
-       <x>20</x>
-       <y>180</y>
-       <width>221</width>
-       <height>31</height>
-      </rect>
-     </property>
-     <property name="font">
-      <font>
-       <pointsize>12</pointsize>
-      </font>
-     </property>
-     <property name="text">
-      <string>0</string>
-     </property>
-    </widget>
-    <widget class="QLineEdit" name="global_routine_params_mgac_iterations_input">
-     <property name="geometry">
-      <rect>
-       <x>20</x>
-       <y>90</y>
-       <width>221</width>
-       <height>31</height>
-      </rect>
-     </property>
-     <property name="font">
-      <font>
-       <pointsize>12</pointsize>
-      </font>
-     </property>
-     <property name="text">
-      <string>20</string>
-     </property>
-    </widget>
     <widget class="QLabel" name="global_routine_params_mgac_smoothing_label">
      <property name="geometry">
       <rect>
@@ -316,6 +244,97 @@
      </property>
      <property name="text">
       <string>Suavizado</string>
+     </property>
+    </widget>
+    <widget class="QSpinBox" name="global_routine_params_mgac_iterations_input">
+     <property name="geometry">
+      <rect>
+       <x>20</x>
+       <y>90</y>
+       <width>221</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <pointsize>12</pointsize>
+      </font>
+     </property>
+     <property name="minimum">
+      <number>1</number>
+     </property>
+     <property name="maximum">
+      <number>1000</number>
+     </property>
+     <property name="value">
+      <number>200</number>
+     </property>
+    </widget>
+    <widget class="QDoubleSpinBox" name="global_routine_params_mgac_threshold_input">
+     <property name="geometry">
+      <rect>
+       <x>330</x>
+       <y>90</y>
+       <width>221</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="minimum">
+      <double>0.010000000000000</double>
+     </property>
+     <property name="maximum">
+      <double>1.000000000000000</double>
+     </property>
+     <property name="singleStep">
+      <double>0.010000000000000</double>
+     </property>
+    </widget>
+    <widget class="QSpinBox" name="global_routine_params_mgac_smoothing_input">
+     <property name="geometry">
+      <rect>
+       <x>20</x>
+       <y>180</y>
+       <width>221</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <pointsize>12</pointsize>
+      </font>
+     </property>
+     <property name="minimum">
+      <number>0</number>
+     </property>
+     <property name="maximum">
+      <number>4</number>
+     </property>
+     <property name="value">
+      <number>0</number>
+     </property>
+    </widget>
+    <widget class="QSpinBox" name="global_routine_params_mgac_balloon_input">
+     <property name="geometry">
+      <rect>
+       <x>330</x>
+       <y>180</y>
+       <width>221</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <pointsize>12</pointsize>
+      </font>
+     </property>
+     <property name="minimum">
+      <number>-4</number>
+     </property>
+     <property name="maximum">
+      <number>4</number>
+     </property>
+     <property name="value">
+      <number>-1</number>
      </property>
     </widget>
    </widget>
@@ -339,7 +358,7 @@
     <widget class="QPushButton" name="global_routine_params_mgac_alpha_help">
      <property name="geometry">
       <rect>
-       <x>260</x>
+       <x>250</x>
        <y>90</y>
        <width>31</width>
        <height>31</height>
@@ -352,24 +371,6 @@
      </property>
      <property name="text">
       <string>?</string>
-     </property>
-    </widget>
-    <widget class="QLineEdit" name="global_routine_params_mgac_alpha_input">
-     <property name="geometry">
-      <rect>
-       <x>20</x>
-       <y>90</y>
-       <width>231</width>
-       <height>31</height>
-      </rect>
-     </property>
-     <property name="font">
-      <font>
-       <pointsize>12</pointsize>
-      </font>
-     </property>
-     <property name="text">
-      <string>200</string>
      </property>
     </widget>
     <widget class="QLabel" name="global_routine_params_mgac_alpha_label">
@@ -408,24 +409,6 @@
       <string>Sigma</string>
      </property>
     </widget>
-    <widget class="QLineEdit" name="global_routine_params_mgac_alpha_input_2">
-     <property name="geometry">
-      <rect>
-       <x>330</x>
-       <y>90</y>
-       <width>221</width>
-       <height>31</height>
-      </rect>
-     </property>
-     <property name="font">
-      <font>
-       <pointsize>12</pointsize>
-      </font>
-     </property>
-     <property name="text">
-      <string>2</string>
-     </property>
-    </widget>
     <widget class="QPushButton" name="global_routine_params_mgac_sigma_help">
      <property name="geometry">
       <rect>
@@ -442,6 +425,54 @@
      </property>
      <property name="text">
       <string>?</string>
+     </property>
+    </widget>
+    <widget class="QSpinBox" name="global_routine_params_mgac_alpha_input">
+     <property name="geometry">
+      <rect>
+       <x>20</x>
+       <y>90</y>
+       <width>221</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <pointsize>12</pointsize>
+      </font>
+     </property>
+     <property name="minimum">
+      <number>0</number>
+     </property>
+     <property name="maximum">
+      <number>1000</number>
+     </property>
+     <property name="value">
+      <number>200</number>
+     </property>
+    </widget>
+    <widget class="QSpinBox" name="global_routine_params_mgac_sigma_input">
+     <property name="geometry">
+      <rect>
+       <x>330</x>
+       <y>90</y>
+       <width>221</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <pointsize>12</pointsize>
+      </font>
+     </property>
+     <property name="minimum">
+      <number>0</number>
+     </property>
+     <property name="maximum">
+      <number>10</number>
+     </property>
+     <property name="value">
+      <number>2</number>
      </property>
     </widget>
    </widget>
@@ -481,24 +512,6 @@
      <set>Qt::AlignCenter</set>
     </property>
    </widget>
-   <widget class="QLineEdit" name="global_routine_params_anisotropic_filter_times_input">
-    <property name="geometry">
-     <rect>
-      <x>20</x>
-      <y>130</y>
-      <width>221</width>
-      <height>31</height>
-     </rect>
-    </property>
-    <property name="font">
-     <font>
-      <pointsize>12</pointsize>
-     </font>
-    </property>
-    <property name="text">
-     <string>1</string>
-    </property>
-   </widget>
    <widget class="QPushButton" name="global_routine_params_anisotropic_filter_times_help">
     <property name="geometry">
      <rect>
@@ -533,6 +546,30 @@
     </property>
     <property name="text">
      <string>Número de veces a usar</string>
+    </property>
+   </widget>
+   <widget class="QSpinBox" name="global_routine_params_anisotropic_filter_times_input">
+    <property name="geometry">
+     <rect>
+      <x>20</x>
+      <y>130</y>
+      <width>221</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>12</pointsize>
+     </font>
+    </property>
+    <property name="minimum">
+     <number>1</number>
+    </property>
+    <property name="maximum">
+     <number>20</number>
+    </property>
+    <property name="value">
+     <number>1</number>
     </property>
    </widget>
   </widget>
@@ -788,24 +825,6 @@
      <set>Qt::AlignCenter</set>
     </property>
    </widget>
-   <widget class="QLineEdit" name="global_routine_params_movement_threshold_input">
-    <property name="geometry">
-     <rect>
-      <x>20</x>
-      <y>130</y>
-      <width>221</width>
-      <height>31</height>
-     </rect>
-    </property>
-    <property name="font">
-     <font>
-      <pointsize>12</pointsize>
-     </font>
-    </property>
-    <property name="text">
-     <string>15</string>
-    </property>
-   </widget>
    <widget class="QPushButton" name="global_routine_params_movement_threshold_help">
     <property name="geometry">
      <rect>
@@ -840,6 +859,30 @@
     </property>
     <property name="text">
      <string>Umbral:</string>
+    </property>
+   </widget>
+   <widget class="QSpinBox" name="global_routine_params_movement_threshold_input">
+    <property name="geometry">
+     <rect>
+      <x>20</x>
+      <y>130</y>
+      <width>221</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>12</pointsize>
+     </font>
+    </property>
+    <property name="minimum">
+     <number>0</number>
+    </property>
+    <property name="maximum">
+     <number>255</number>
+    </property>
+    <property name="value">
+     <number>15</number>
     </property>
    </widget>
   </widget>
@@ -879,24 +922,6 @@
     </property>
     <property name="wordWrap">
      <bool>true</bool>
-    </property>
-   </widget>
-   <widget class="QLineEdit" name="global_routine_params_movement_texture_clusters_input">
-    <property name="geometry">
-     <rect>
-      <x>20</x>
-      <y>160</y>
-      <width>221</width>
-      <height>31</height>
-     </rect>
-    </property>
-    <property name="font">
-     <font>
-      <pointsize>12</pointsize>
-     </font>
-    </property>
-    <property name="text">
-     <string>5</string>
     </property>
    </widget>
    <widget class="QPushButton" name="global_routine_params_movement_texture_clusters_help">
@@ -971,7 +996,31 @@
      <string>Umbral:</string>
     </property>
    </widget>
-   <widget class="QLineEdit" name="global_routine_params_movement_texture_threshold_input">
+   <widget class="QSpinBox" name="global_routine_params_movement_texture_clusters_input">
+    <property name="geometry">
+     <rect>
+      <x>20</x>
+      <y>160</y>
+      <width>221</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>12</pointsize>
+     </font>
+    </property>
+    <property name="minimum">
+     <number>2</number>
+    </property>
+    <property name="maximum">
+     <number>50</number>
+    </property>
+    <property name="value">
+     <number>5</number>
+    </property>
+   </widget>
+   <widget class="QSpinBox" name="global_routine_params_movement_texture_threshold_input">
     <property name="geometry">
      <rect>
       <x>20</x>
@@ -985,8 +1034,14 @@
       <pointsize>12</pointsize>
      </font>
     </property>
-    <property name="text">
-     <string>15</string>
+    <property name="minimum">
+     <number>1</number>
+    </property>
+    <property name="maximum">
+     <number>255</number>
+    </property>
+    <property name="value">
+     <number>15</number>
     </property>
    </widget>
   </widget>

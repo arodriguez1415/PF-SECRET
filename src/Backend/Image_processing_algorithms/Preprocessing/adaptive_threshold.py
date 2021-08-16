@@ -18,3 +18,10 @@ def get_method(method_value):
         "Umbralización gaussiana": algorithm_constants.ADAPTIVE_THRESHOLD_GAUSSIAN,
     }
     return switcher.get(method_value, "nothing")
+
+def get_text_method(method_value):
+    switcher = {
+        algorithm_constants.ADAPTIVE_THRESHOLD_MEAN: "Umbralización de la media",
+        algorithm_constants.ADAPTIVE_THRESHOLD_GAUSSIAN: "Umbralización gaussiana",
+    }
+    return switcher.get(method_value, "nothing")

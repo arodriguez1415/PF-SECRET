@@ -3,7 +3,6 @@ import os
 from PyQt5.QtWidgets import QProgressDialog
 
 import src.Frontend.Utils.message as messages
-from src.Backend.Image_processing_algorithms.Archive_manipulation.properties_manipulation import load_properties
 from src.Constants import string_constants
 
 
@@ -53,7 +52,6 @@ class Project_mastermind:
             self.process_list_widget = process_list_widget
             self.global_routine_params = global_routine_params
             self.global_routine_params_widget = global_routine_params_widget
-            self.properties_dictionary = load_properties()
             self.is_global_progress_bar_active_flag = False
 
     @staticmethod
