@@ -405,7 +405,7 @@
      </rect>
     </property>
     <property name="currentIndex">
-     <number>11</number>
+     <number>8</number>
     </property>
     <widget class="QWidget" name="blank_page"/>
     <widget class="QWidget" name="anisotropic_filter_options">
@@ -1668,15 +1668,15 @@
      <widget class="QPushButton" name="global_routine_initiate_button">
       <property name="geometry">
        <rect>
-        <x>60</x>
-        <y>630</y>
-        <width>161</width>
+        <x>10</x>
+        <y>770</y>
+        <width>221</width>
         <height>51</height>
        </rect>
       </property>
       <property name="font">
        <font>
-        <pointsize>16</pointsize>
+        <pointsize>14</pointsize>
        </font>
       </property>
       <property name="text">
@@ -1809,8 +1809,8 @@
      <widget class="QPushButton" name="global_routine_algorithm_help">
       <property name="geometry">
        <rect>
-        <x>230</x>
-        <y>630</y>
+        <x>250</x>
+        <y>770</y>
         <width>51</width>
         <height>51</height>
        </rect>
@@ -1822,6 +1822,24 @@
       </property>
       <property name="text">
        <string>?</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="global_routine_change_params">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>690</y>
+        <width>221</width>
+        <height>51</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>14</pointsize>
+       </font>
+      </property>
+      <property name="text">
+       <string>Cambiar parámetros</string>
       </property>
      </widget>
     </widget>

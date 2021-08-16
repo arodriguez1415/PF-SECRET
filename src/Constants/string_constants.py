@@ -142,4 +142,7 @@ TEXTURE_VIDEO_TITLE = "Imagen de Textura-Video"
 TEXTURE_IMAGE_VS_TEXTURE_VIDEO = "Textura-Imagen vs Textura-Video"
 
 FOUR_GRID_COMPARISON = "Valor de la región en las 4 vistas"
+
+# Windows titles
 PROCESS_LIST_WIDGET_TITLE = "Lista de procesamiento"
+GLOBAL_ROUTINE_PARAMS_WIDGET_TITLE = "Parámetros de rutina global"
