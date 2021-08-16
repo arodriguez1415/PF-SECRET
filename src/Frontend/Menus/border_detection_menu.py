@@ -1,5 +1,3 @@
-from PyQt5.QtCore import QCoreApplication
-
 from src.Backend.Image_processing_algorithms.Operations.common_operations import resize_image
 from src.Classes.Image_wrapper import Image_wrapper
 from src.Classes.Methods.Mgac import Mgac
@@ -14,7 +12,7 @@ from src.Frontend.Utils.button_controller import disable_button, enable_button
 
 def configure_border_detection_menu_connections(main_window):
     main_window.mgac_border_detection_menu_option.triggered.connect(lambda: load_mgac_options(main_window))
-    main_window.apply_mgac_button.clicked.connect(lambda: mgac(main_window))
+    main_window.apply_mgac_button.clicked.connect(lambda: detect_borders(main_window))
 
 
 def load_mgac_options(main_window):
@@ -24,7 +22,7 @@ def load_mgac_options(main_window):
     return
 
 
-def mgac(main_window):
+def detect_borders(main_window):
     disable_button(main_window.apply_mgac_button)
     project_mastermind = Project_mastermind.get_instance()
     polygon_region = Region()
@@ -39,19 +37,10 @@ def mgac(main_window):
     balloon = int(main_window.balloon_mgac_input.text())
     alpha = int(main_window.alpha_mgac_input.text())
     sigma = int(main_window.sigma_mgac_input.text())
-    borders_image = mgac_functions.mgac_borders(polygon_region.points, image, iterations,
-                                                threshold, smoothing, balloon, alpha, sigma)
+    borders_image, mask_image = mgac_functions.mgac(polygon_region.points, image, iterations,
+                                                    threshold, smoothing, balloon, alpha, sigma, show_process=True)
     mgac_method = Mgac(polygon_region.points, iterations, threshold, smoothing, balloon, alpha, sigma)
     image_wrapper = Image_wrapper(borders_image, mgac_method)
     project_mastermind.add_image_process(image_wrapper)
     main_window.image_viewer.set_screen_image(image_wrapper)
     enable_button(main_window.apply_mgac_button)
-
-
-def mgac_only_cell(main_window):
-    project_mastermind = Project_mastermind.get_instance()
-    image_array = project_mastermind.get_last_image()
-    cell_image = mgac_functions.mgac_only_cell(image_array)
-    image_wrapper = Image_wrapper(cell_image)
-    project_mastermind.add_image_process(image_wrapper)
-    main_window.image_viewer.set_screen_image(image_wrapper)

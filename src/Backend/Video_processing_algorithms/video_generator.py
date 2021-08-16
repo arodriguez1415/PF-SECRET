@@ -1,4 +1,8 @@
+import random
+import string
+
 from src.Backend.Image_processing_algorithms.Operations import common_operations
+from src.Backend.Image_processing_algorithms.Operations.common_operations import resize_image
 from src.Constants import configuration_constants as configuration_constants, string_constants
 from src.Classes.Project_mastermind import Project_mastermind
 from PIL import Image
@@ -41,7 +45,7 @@ def get_original_images():
     project_mastermind = Project_mastermind.get_instance()
     original_directory = project_mastermind.get_original_image_dir()
     images_list_paths = get_files_from_directory(original_directory)
-    images_list_paths.pop() # Last one is odd
+    images_list_paths.pop()  # Last one is odd
     return images_list_paths
 
 
@@ -109,7 +113,20 @@ def delete_frames(frames_paths_list):
 def set_save_name(image_path_sample, save_directory, extension=".avi"):
     image_path_sample = image_path_sample.replace("\\", "/")
     initial_path = save_directory
-    filename = image_path_sample.split('/')[-5] + " - " + image_path_sample.split('/')[-4] + " - " + \
-                image_path_sample.split('/')[-3] + " - " + image_path_sample.split('/')[-2]
+    min_split_division = 6
+
+    if len(image_path_sample.split('/')) < min_split_division:
+        min_split_division = len(image_path_sample.split('/'))
+
+    filename = ""
+
+    for i in reversed(range(1, min_split_division)):
+        filename += image_path_sample.split('/')[-i]
+        filename += "-"
+
+    filename += ''.join(random.choices(string.ascii_lowercase + string.digits, k=10))
+    # filename = image_path_sample.split('/')[-5] + " - " + image_path_sample.split('/')[-4] + " - " + \
+    #            image_path_sample.split('/')[-3] + " - " + image_path_sample.split('/')[-2]
+
     save_path = initial_path + filename + extension
     return save_path

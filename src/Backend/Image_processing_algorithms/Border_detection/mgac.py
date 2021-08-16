@@ -7,69 +7,48 @@ from matplotlib import pyplot as plt
 from matplotlib.path import Path
 from scipy import ndimage as ndi
 from src.Backend.Image_processing_algorithms.Border_detection import mgac_library_functions as mgac_library
-from src.Backend.Image_processing_algorithms.Operations.common_operations import resize_image
-from src.Backend.Image_processing_algorithms.filters import anisotropic_filter as anisotropic_filter_functions
-from src.Classes.Region import Region
+from src.Backend.Image_processing_algorithms.Operations.common_operations import rgb_to_gray
+from src.Backend.Image_processing_algorithms.Preprocessing.threshold import binary_threshold
 from src.Constants import configuration_constants
 from src.Constants import string_constants
 
 
-def mgac_borders(polygon_region, image, iterations, threshold, smoothing, ballon, alpha, sigma):
-    borders = get_borders(polygon_region, image, iterations, threshold, smoothing, ballon, alpha, sigma)
-    borders_image = get_mgac_image(image, borders, mask=False)
-    return borders_image
+def mgac(polygon_region, image, iterations, threshold, smoothing, ballon, alpha, sigma, show_process=False):
+    borders = get_borders(polygon_region, image, iterations, threshold, smoothing, ballon, alpha, sigma, show_process)
+    borders_image, mask_borders_image = get_mgac_image_and_mask(image, borders)
+    return borders_image, mask_borders_image
 
 
-def mgac_mask(polygon_region, image, iterations, threshold, smoothing, ballon, alpha, sigma):
-    borders = get_borders(polygon_region, image, iterations, threshold, smoothing, ballon, alpha, sigma)
-    mask_borders_image = get_mgac_image(image, borders, mask=True)
-    return mask_borders_image
-
-
-# Esto es una villerada para ver si el metodo pasa, si pasa hay que mejorarlo
-def mgac_only_cell(image):
-    original_image = image.copy()
-    filtered_image = anisotropic_filter_functions.anisotropic_diffusion_filter_medpy(original_image)
-    polygon_region = Region()
-    polygon_region.get_region()
-    iterations = 250
-    threshold = 0.35
-    smoothing = 0
-    ballon = -1
-    alpha = 200
-    sigma = 2
-    mask_image = mgac_mask(polygon_region.points, filtered_image, iterations, threshold, smoothing, ballon, alpha, sigma)
-    shape = (mask_image.shape[0], mask_image.shape[1])
-    filtered_image = np.array(filtered_image, dtype=np.uint8)
-    resized_original_image = cv2.resize(filtered_image, shape, cv2.INTER_NEAREST)
-    only_cell_image = map_mask(mask_image, resized_original_image)
-    return only_cell_image
-
-
-def get_borders(polygon_region, image, iterations, threshold, smoothing, ballon, alpha, sigma):
+def get_borders(polygon_region, image, iterations, threshold, smoothing, ballon, alpha, sigma, show_process):
+    def callback(x): var = lambda y: None
+    if show_process:
+        callback = mgac_library.visual_callback_2d(image)
     gimg = inverse_gaussian_gradient(image, alpha=alpha, sigma=sigma)
-    # callback = mgac_library.visual_callback_2d(image)
     init_ls = polygon_level_set(polygon_region, gimg.shape[0], gimg.shape[1])
     borders = mgac_library.morphological_geodesic_active_contour(gimg, iterations=iterations,
-                                                                 # iter_callback=callback,
+                                                                 iter_callback=callback,
                                                                  init_level_set=init_ls,
                                                                  smoothing=smoothing, threshold=threshold,
                                                                  balloon=ballon)
     return borders
 
 
-def get_mgac_image(image, borders, mask=False):
-    save_path = configuration_constants.GENERATED_IMAGES_DIR + string_constants.MGAC_BORDER_IMAGE_SAVE_NAME
-    if mask:
-        generate_image_mask(image, borders, save_path)
-    else:
-        generate_image_with_borders(image, borders, save_path)
+def get_mgac_image_and_mask(image, borders):
+    save_path_borders = configuration_constants.GENERATED_IMAGES_DIR + string_constants.MGAC_BORDER_IMAGE_SAVE_NAME
+    save_path_mask = configuration_constants.GENERATED_IMAGES_DIR + string_constants.MGAC_MASK_IMAGE_SAVE_NAME
+    generate_image_with_borders(image, borders, save_path_borders)
+    generate_image_mask(image, borders, save_path_mask)
+    borders_image_array = get_generated_image(save_path_borders)
+    mask_image_array = get_generated_image(save_path_mask)
+    return borders_image_array, mask_image_array
+
+
+def get_generated_image(save_path):
     image = Image.open(save_path)
     image_array = np.asarray(image)
     image.close()
     os.remove(save_path)
     return image_array
-
 
 
 def generate_image_mask(image, borders, save_path):
@@ -117,14 +96,26 @@ def inverse_gaussian_gradient(image, alpha=100.0, sigma=5.0):
     return 1.0 / np.sqrt(1.0 + alpha * gradnorm)
 
 
-def map_mask(mask_image, resized_original_image):
-    rows, cols = mask_image.shape[0], mask_image.shape[1]
-    mapped_image = np.zeros((rows, cols))
+def map_borders(cell_image_array, preprocessing_image_array, mask_image_array):
+    mask_image_array = rgb_to_gray(mask_image_array)
+    min_threshold = 5
+    mask_image_array = binary_threshold(min_threshold, mask_image_array)
 
-    for i in range(0, rows):
-        for j in range(0, cols):
-            if mask_image[i][j][0] == 0:
-                mapped_image[i][j] = 0
-            else:
-                mapped_image[i][j] = resized_original_image[i][j]
-    return mapped_image
+    rows, cols = mask_image_array.shape
+    for row in range(rows):
+        for col in range(cols):
+            if mask_image_array[row][col] == 255 and is_perimeter(mask_image_array, row, col):
+                cell_image_array = cv2.circle(cell_image_array, (col, row), radius=2, color=(255, 0, 0), thickness=-1)
+                preprocessing_image_array = cv2.circle(cell_image_array, (col, row), radius=2, color=(255, 0, 0),
+                                                       thickness=-1)
+    return cell_image_array, preprocessing_image_array
+
+
+def is_perimeter(matrix, current_row, current_col):
+    rows, cols = matrix.shape
+
+    for i in range(max(0, current_row - 1), min(current_row + 1, rows)):
+        for j in range(max(0, current_col - 1), min(current_col + 1, cols)):
+            if matrix[i][j] == 0:
+                return True
+    return False

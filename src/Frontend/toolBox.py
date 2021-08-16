@@ -60,6 +60,7 @@ def disable_toolbox(main_window):
 def deselect_all_and_clear_viewer(main_window):
     deselect_all(main_window)
     main_window.image_viewer.clear_region()
+    main_window.image_viewer.reset_line_flag()
 
 
 def start_polygon(main_window):
