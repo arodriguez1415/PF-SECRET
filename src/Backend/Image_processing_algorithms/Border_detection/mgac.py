@@ -23,6 +23,7 @@ def get_borders(polygon_region, image, iterations, threshold, smoothing, ballon,
     def callback(x): var = lambda y: None
     if show_process:
         callback = mgac_library.visual_callback_2d(image)
+
     gimg = inverse_gaussian_gradient(image, alpha=alpha, sigma=sigma)
     init_ls = polygon_level_set(polygon_region, gimg.shape[0], gimg.shape[1])
     borders = mgac_library.morphological_geodesic_active_contour(gimg, iterations=iterations,
@@ -106,8 +107,8 @@ def map_borders(cell_image_array, preprocessing_image_array, mask_image_array):
         for col in range(cols):
             if mask_image_array[row][col] == 255 and is_perimeter(mask_image_array, row, col):
                 cell_image_array = cv2.circle(cell_image_array, (col, row), radius=2, color=(255, 0, 0), thickness=-1)
-                preprocessing_image_array = cv2.circle(cell_image_array, (col, row), radius=2, color=(255, 0, 0),
-                                                       thickness=-1)
+                preprocessing_image_array = cv2.circle(preprocessing_image_array, (col, row), radius=2,
+                                                       color=(255, 0, 0), thickness=-1)
     return cell_image_array, preprocessing_image_array
 
 

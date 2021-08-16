@@ -1,3 +1,5 @@
+from src.Backend.Image_processing_algorithms.Archive_manipulation.properties_manipulation import \
+    save_video_texture_params, save_image_texture_params
 from src.Backend.Image_processing_algorithms.Operations.common_operations import show_coloured_image, resize_image
 from src.Backend.Image_processing_algorithms.Texture import fractal_dimention
 from src.Backend.Image_processing_algorithms.Texture import profile_texture
@@ -94,6 +96,7 @@ def classify_image_texture(main_window):
     project_mastermind.set_texture_heat_map_image(texture_heat_map_image_wrapper)
     main_window.image_viewer.set_screen_image(texture_heat_map_image_wrapper)
     progress_bar.force_to_close()
+    save_image_texture_params(main_window)
     enable_button(main_window.texture_classification_image_button)
     enable_view_button(string_constants.TEXTURE_IMAGE_VIEW)
 
@@ -113,5 +116,6 @@ def classify_video_texture(main_window):
     project_mastermind.set_texture_heat_map_image_video(texture_heat_map_image_wrapper)
     main_window.image_viewer.set_screen_image(texture_heat_map_image_wrapper)
     progress_bar.force_to_close()
+    save_video_texture_params(main_window)
     enable_button(main_window.texture_classification_video_button)
     enable_view_button(string_constants.TEXTURE_VIDEO_VIEW)

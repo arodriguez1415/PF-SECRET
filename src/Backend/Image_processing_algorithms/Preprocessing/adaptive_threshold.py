@@ -6,6 +6,10 @@ from src.Constants import algorithm_constants
 
 def adaptive_threshold(image, window_size, constant, method):
     pixels = np.uint8(image)
+
+    if window_size % 2 == 0:
+        window_size = window_size + 1
+
     threshold_image = cv.adaptiveThreshold(pixels, 255, adaptiveMethod=method,
                                            thresholdType=cv.THRESH_BINARY, blockSize=window_size, C=constant)
     threshold_image = cv.bitwise_not(threshold_image)

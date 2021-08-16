@@ -2,7 +2,6 @@ import os
 
 from PyQt5.QtWidgets import QProgressDialog
 
-import src.Frontend.Utils.message as messages
 from src.Constants import string_constants
 
 
@@ -78,31 +77,26 @@ class Project_mastermind:
 
     def get_last_image_process(self):
         if len(self.image_processing_list) == 0:
-            messages.show_message("No se cargo ninguna imagen")
             return
         return self.image_processing_list[-1]
 
     def get_last_image(self):
         if len(self.image_processing_list) == 0:
-            messages.show_message("No se cargo ninguna imagen")
             return
         return self.image_processing_list[-1].image_array
 
     def get_original_image(self):
         if len(self.image_processing_list) == 0:
-            messages.show_message("No se cargo ninguna imagen")
             return
         return self.image_processing_list[0].image_array
 
     def get_last_image_wrapper(self):
         if len(self.image_processing_list) == 0:
-            messages.show_message("No se cargo ninguna imagen")
             return
         return self.image_processing_list[-1]
 
     def get_original_image_wrapper(self):
         if len(self.image_processing_list) == 0:
-            messages.show_message("No se cargo ninguna imagen")
             return
         return self.image_processing_list[0]
 
@@ -249,6 +243,7 @@ class Project_mastermind:
 
     def reload_properties(self, new_properties_dictionary):
         self.properties_dictionary = new_properties_dictionary
+
 
     def get_files_from_directory(self, directory):
         directory_files_paths_list = os.listdir(directory)
