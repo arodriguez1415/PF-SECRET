@@ -1,6 +1,10 @@
 import matplotlib.pyplot as plt
+from PyQt5.QtCore import Qt
+
 from src.Backend.Routines import global_routine
+from src.Classes.Project_mastermind import Project_mastermind
 from src.Constants import algorithm_constants
+from src.Constants.string_constants import GLOBAL_ROUTINE_PARAMS_WIDGET_TITLE
 from src.Frontend.Utils import progress_bar
 from src.Frontend.Utils.button_controller import disable_button, enable_button
 
@@ -10,6 +14,7 @@ def configure_routines_menu_connections(main_window):
         connect(lambda: load_global_routine_options(main_window))
 
     main_window.global_routine_initiate_button.clicked.connect(lambda: initiate_global_routine(main_window))
+    main_window.global_routine_change_params.clicked.connect(lambda: open_change_params_window())
     main_window.global_routine_subroutines_contour_checkbox.stateChanged.connect(lambda:
                                                                                  set_child_contour_routines(main_window))
 
@@ -28,6 +33,15 @@ def initiate_global_routine(main_window):
     progress_bar.force_to_close()
     plt.close('all')
     enable_button(main_window.global_routine_initiate_button)
+
+
+def open_change_params_window():
+    project_mastermind = Project_mastermind.get_instance()
+    process_list_widget = project_mastermind.global_routine_params_widget
+    process_list_widget.setWindowTitle(GLOBAL_ROUTINE_PARAMS_WIDGET_TITLE)
+    process_list_widget.setWindowModality(Qt.WindowModal)
+    process_list_widget.setWindowFlags(Qt.CustomizeWindowHint | Qt.WindowTitleHint)
+    process_list_widget.exec()
 
 
 def get_sub_routines(main_window):

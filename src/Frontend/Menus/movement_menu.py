@@ -1,3 +1,4 @@
+from src.Backend.Image_processing_algorithms.Archive_manipulation.properties_manipulation import save_movement_params
 from src.Backend.Image_processing_algorithms.Operations.common_operations import show_coloured_image
 from src.Backend.Video_processing_algorithms.movement_image_generator import create_motion_image
 from src.Classes.Image_wrapper import Image_wrapper
@@ -37,5 +38,6 @@ def generate_heat_map(main_window):
     show_coloured_image(coloured_motion_image_array)
     main_window.image_viewer.set_screen_image(movement_heat_map_image_wrapper)
     progress_bar.force_to_close()
+    save_movement_params(main_window)
     enable_button(main_window.generate_heat_map_button)
     enable_view_button(string_constants.MOVEMENT_VIEW)

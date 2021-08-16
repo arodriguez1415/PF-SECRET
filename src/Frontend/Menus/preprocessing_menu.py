@@ -1,6 +1,8 @@
 from PyQt5.QtCore import Qt
 from PyQt5.QtGui import QMovie
 
+from src.Backend.Image_processing_algorithms.Archive_manipulation.properties_manipulation import \
+    save_adaptive_threshold_params
 from src.Classes.Image_wrapper import Image_wrapper
 from src.Classes.Methods.Adaptive_threshold import Adaptive_threshold
 from src.Classes.Project_mastermind import Project_mastermind
@@ -45,16 +47,17 @@ def show_adaptive_threshold(main_window):
     method_box = main_window.adaptive_threshold_method_box
 
     current_image_array = project_mastermind.get_last_image()
-    window_size = int(window_size_slider.value())
-    constant = int(c_constant_slider.value())
+
+    if current_image_array is None:
+        return
+
+    window_size = window_size_slider.value()
+    constant = c_constant_slider.value()
     method = int(adaptive_threshold.get_method(method_box.currentText()))
 
-    if window_size % 2 == 0:
-        window_size = window_size + 1
-
-    lpb_image = adaptive_threshold.adaptive_threshold(current_image_array, window_size, constant, method)
+    adaptive_threshold_image = adaptive_threshold.adaptive_threshold(current_image_array, window_size, constant, method)
     adaptive_threshold_method = Adaptive_threshold(window_size, constant, method)
-    image_wrapper = Image_wrapper(lpb_image, adaptive_threshold_method)
+    image_wrapper = Image_wrapper(adaptive_threshold_image, adaptive_threshold_method)
     main_window.image_viewer.set_screen_image(image_wrapper)
     main_window.adaptive_threshold_highlight.setVisible(True)
 
@@ -63,4 +66,5 @@ def add_process(main_window):
     actual_image_wrapper = main_window.image_viewer.actual_image_wrapper
     project_mastermind = Project_mastermind.get_instance()
     project_mastermind.add_image_process(actual_image_wrapper)
+    save_adaptive_threshold_params(main_window)
     main_window.adaptive_threshold_highlight.setVisible(False)

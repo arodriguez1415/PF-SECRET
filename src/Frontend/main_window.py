@@ -26,10 +26,10 @@ def set_style(main_window):
     main_window.centralwidget.setStyleSheet(stylesheet_content)
 
 
-def configure_windows(main_window, app):
+def configure_windows(main_window, global_routine_params):
     set_initial_configuration(main_window)
     set_style(main_window)
-    configure_main_window_connections(main_window)
+    configure_main_window_connections(main_window, global_routine_params)
 
 
 def set_initial_configuration(main_window):
@@ -41,9 +41,9 @@ def set_initial_configuration(main_window):
     return
 
 
-def configure_main_window_connections(main_window):
+def configure_main_window_connections(main_window, global_routine_params):
     viewer_buttons.configure_viewer_buttons_connections(main_window)
-    information_buttons.configure_information_buttons(main_window)
+    information_buttons.configure_information_buttons(main_window, global_routine_params)
     archive_menu.configure_archive_menu_connections(main_window)
     texture_menu.configure_texture_menu_connections(main_window)
     filter_menu.configure_filter_menu_connections(main_window)

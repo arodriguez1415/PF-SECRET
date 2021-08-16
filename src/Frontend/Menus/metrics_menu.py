@@ -79,6 +79,13 @@ def load_analyze_texture_and_movement_options(main_window):
     page = main_window.movement_and_texture_metrics_options
     stacked_feature_windows = main_window.stacked_feature_windows
     stacked_feature_windows.setCurrentWidget(page)
+
+    print("ASD")
+    main_window.analyze_movement_and_texture_movement_threshold_input.setValue(main_window.generate_heat_map_threshold_input.value())
+    main_window.analyze_movement_and_texture_texture_image_clusters_input.setValue(main_window.texture_classification_image_clusters_input.value())
+    main_window.analyze_movement_and_texture_texture_video_clusters_input.setValue(main_window.texture_classification_video_clusters_input.value())
+    main_window.analyze_movement_and_texture_texture_video_threshold_input.setValue(main_window.texture_classification_video_threshold_input.value())
+
     return
 
 
@@ -225,7 +232,7 @@ def generate_views(main_window):
 
 def generate_movement_view(main_window):
     project_mastermind = Project_mastermind.get_instance()
-    threshold_value = main_window.generate_heat_map_threshold_input.value()
+    threshold_value = main_window.analyze_movement_and_texture_movement_threshold_input.value()
     uncolored_motion_image_array, uncolored_motion_image_array_normalized, coloured_motion_image_array = create_motion_image(
         threshold_value)
     movement_normalized_image_wrapper = Image_wrapper(uncolored_motion_image_array_normalized, "")

@@ -1,3 +1,4 @@
+from src.Backend.Image_processing_algorithms.Archive_manipulation.properties_manipulation import save_mgac_params
 from src.Backend.Image_processing_algorithms.Operations.common_operations import resize_image
 from src.Classes.Image_wrapper import Image_wrapper
 from src.Classes.Methods.Mgac import Mgac
@@ -31,16 +32,18 @@ def detect_borders(main_window):
     width, height = configuration_constants.IMAGE_VIEWER_WIDTH, configuration_constants.IMAGE_VIEWER_HEIGHT
     resized_image_array = resize_image(image_array, width, height)
     image = Image.fromarray(resized_image_array)
-    iterations = int(main_window.iterations_mgac_input.text())
-    threshold = float(main_window.threshold_mgac_input.text())
-    smoothing = int(main_window.smoothing_mgac_input.text())
-    balloon = int(main_window.balloon_mgac_input.text())
-    alpha = int(main_window.alpha_mgac_input.text())
-    sigma = int(main_window.sigma_mgac_input.text())
+    iterations = main_window.iterations_mgac_input.value()
+    threshold = main_window.threshold_mgac_input.value()
+    smoothing = main_window.smoothing_mgac_input.value()
+    balloon = main_window.balloon_mgac_input.value()
+    alpha = main_window.alpha_mgac_input.value()
+    sigma = main_window.sigma_mgac_input.value()
     borders_image, mask_image = mgac_functions.mgac(polygon_region.points, image, iterations,
                                                     threshold, smoothing, balloon, alpha, sigma, show_process=True)
     mgac_method = Mgac(polygon_region.points, iterations, threshold, smoothing, balloon, alpha, sigma)
     image_wrapper = Image_wrapper(borders_image, mgac_method)
     project_mastermind.add_image_process(image_wrapper)
     main_window.image_viewer.set_screen_image(image_wrapper)
+    save_mgac_params(main_window)
     enable_button(main_window.apply_mgac_button)
+

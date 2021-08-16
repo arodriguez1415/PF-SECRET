@@ -3,7 +3,6 @@ import shutil
 
 from PIL import Image
 import numpy as np
-from matplotlib import pyplot as plt
 
 from src.Backend.Image_processing_algorithms.Archive_manipulation import image_file_manipulation
 from src.Backend.Image_processing_algorithms.Archive_manipulation.video_file_manipulation import \
@@ -14,10 +13,12 @@ from src.Backend.Image_processing_algorithms.Operations.image_save import save_i
 from src.Backend.Video_processing_algorithms import video_generator
 from src.Classes.Methods.Adaptive_threshold import Adaptive_threshold
 from src.Classes.Methods.Anisotropic_Filter import Anisotropic_Filter
+from src.Classes.Project_mastermind import Project_mastermind
 from src.Frontend.Utils import progress_bar
 from src.Classes.Methods.Mgac import Mgac
 from src.Classes.Region import Region
-from src.Constants import algorithm_constants, configuration_constants
+from src.Constants import configuration_constants
+from src.Constants import properties_constants as ps
 
 
 def generate_mask_video_of_all_cells(source_directory):
@@ -88,7 +89,8 @@ def generate_comparison_figure(cell_image, preprocessed_image, mask_image, save_
 
 def generate_preprocessed_image(cell_image):
     methods_to_apply = []
-    methods_to_apply = set_preprocessed_methods(methods_to_apply)
+    props_dict = Project_mastermind.get_instance().get_properties_dictionary()
+    methods_to_apply = set_preprocessed_methods(methods_to_apply, props_dict)
     preprocessed_image = video_generator.apply_methods_specified(cell_image, methods_to_apply)
 
     return preprocessed_image
@@ -115,27 +117,41 @@ def get_source_directory(source_directory=None):
 
 def set_methods_to_apply(image_path):
     methods_to_apply = []
-    methods_to_apply = set_preprocessed_methods(methods_to_apply)
-    methods_to_apply = set_mgac_method(methods_to_apply, image_path)
+    props_dict = Project_mastermind.get_instance().get_properties_dictionary()
+    methods_to_apply = set_preprocessed_methods(methods_to_apply, props_dict)
+    methods_to_apply = set_mgac_method(methods_to_apply, image_path, props_dict)
     return methods_to_apply
 
 
-def set_preprocessed_methods(methods_to_apply):
+def set_preprocessed_methods(methods_to_apply, props_dict):
     anisotropic_method = Anisotropic_Filter()
-    adaptive_threshold_method = Adaptive_threshold(21, 5, algorithm_constants.ADAPTIVE_THRESHOLD_GAUSSIAN)
-    methods_to_apply.append(anisotropic_method)
-    methods_to_apply.append(anisotropic_method)
-    methods_to_apply.append(anisotropic_method)
+    for i in range(0, props_dict[ps.GLOBAL_ROUTINE_ANISOTROPIC_FILTER_TIMES]):
+        methods_to_apply.append(anisotropic_method)
+
+    adaptive_threshold_window_size = props_dict[ps.GLOBAL_ROUTINE_ADAPTIVE_THRESHOLD_WINDOW_SIZE]
+    adaptive_threshold_c_constant = props_dict[ps.GLOBAL_ROUTINE_ADAPTIVE_C_CONSTANT]
+    adaptive_threshold_method_type = props_dict[ps.GLOBAL_ROUTINE_ADAPTIVE_METHOD]
+    adaptive_threshold_method = Adaptive_threshold(adaptive_threshold_window_size,
+                                                   adaptive_threshold_c_constant,
+                                                   adaptive_threshold_method_type)
     methods_to_apply.append(adaptive_threshold_method)
 
     return methods_to_apply
 
 
-def set_mgac_method(methods_to_apply, image_path):
+def set_mgac_method(methods_to_apply, image_path, props_dict):
     image = Image.open(image_path)
     image_array = np.uint8(image)
     polygon_region = Region.get_all_image_as_region(image_array)
-    mgac_method = Mgac(polygon_region, 250, 0.35, 0, -1, 200, 2, mask_flag=True)
+    mgac_iterations = props_dict[ps.GLOBAL_ROUTINE_MGAC_ITERATIONS]
+    mgac_threshold = props_dict[ps.GLOBAL_ROUTINE_MGAC_THRESHOLD]
+    mgac_smoothing = props_dict[ps.GLOBAL_ROUTINE_MGAC_SMOOTHING]
+    mgac_balloon = props_dict[ps.GLOBAL_ROUTINE_MGAC_BALLOON]
+    mgac_alpha = props_dict[ps.GLOBAL_ROUTINE_MGAC_ALPHA]
+    mgac_sigma = props_dict[ps.GLOBAL_ROUTINE_MGAC_SIGMA]
+
+    mgac_method = Mgac(polygon_region, mgac_iterations, mgac_threshold, mgac_smoothing,
+                       mgac_balloon, mgac_alpha, mgac_sigma, mask_flag=True)
     methods_to_apply.append(mgac_method)
 
     return methods_to_apply

@@ -43,11 +43,12 @@ NO_REGION_FOUND_DESCRIPTION = "No se seleccionó ninguna región. Se tomará com
 
 INFORMATION_TITLE = "Information"
 
-ADAPTIVE_THRESHOLD_SIZE_HELP = "Mensaje de prueba para mostrar una informacion"
-ADAPTIVE_THRESHOLD_SIZE_CONSTANT_HELP = "Mensaje de prueba para mostrar una informacion"
+ADAPTIVE_THRESHOLD_WINDOW_SIZE_HELP = "Mensaje de prueba para mostrar una informacion"
+ADAPTIVE_THRESHOLD_C_CONSTANT_HELP = "Mensaje de prueba para mostrar una informacion"
 ADAPTIVE_THRESHOLD_METHOD_HELP = "Mensaje de prueba para mostrar una informacion"
 ADAPTIVE_THRESHOLD_ALGORITHM_HELP = "Mensaje de prueba para mostrar una informacion"
 
+ANISOTROPIC_FILTER_TIMES_HELP = "Mensaje de prueba para mostrar una informacion"
 ANISOTROPIC_FILTER_ALGORITHM_HELP = "Mensaje de prueba para mostrar una informacion"
 
 MGAC_ITERATIONS_HELP = "Mensaje de prueba para mostrar una informacion"
@@ -142,4 +143,7 @@ TEXTURE_VIDEO_TITLE = "Imagen de Textura-Video"
 TEXTURE_IMAGE_VS_TEXTURE_VIDEO = "Textura-Imagen vs Textura-Video"
 
 FOUR_GRID_COMPARISON = "Valor de la región en las 4 vistas"
+
+# Windows titles
 PROCESS_LIST_WIDGET_TITLE = "Lista de procesamiento"
+GLOBAL_ROUTINE_PARAMS_WIDGET_TITLE = "Parámetros de rutina global"

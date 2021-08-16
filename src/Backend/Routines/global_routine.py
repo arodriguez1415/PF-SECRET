@@ -16,9 +16,11 @@ from src.Backend.Video_processing_algorithms.multiple_cells_video_generator impo
     generate_video_comparator_of_all_cells
 from src.Backend.Video_processing_algorithms.texture_image_generator import create_multiple_texture_images
 from src.Backend.Video_processing_algorithms.video_generator import set_save_name
+from src.Classes.Project_mastermind import Project_mastermind
 from src.Constants import algorithm_constants, configuration_constants, string_constants
 from src.Frontend.Utils import plot_comparator, progress_bar
 from src.Frontend.Utils.message import show_confirmation_message, show_wait_message
+from src.Constants import properties_constants as ps
 
 
 def routine(sub_routines):
@@ -195,15 +197,17 @@ def movement_and_texture_heat_map_sub_routine(sub_routines, source_directory):
 
 def movement_heat_map_sub_routine(source_directory):
     # Movement heat map stage
-    threshold = 20
+    props_dict = Project_mastermind.get_instance().get_properties_dictionary()
+    threshold = props_dict[ps.GLOBAL_ROUTINE_MOVEMENT_THRESHOLD]
     motion_images_array_list, motion_images_path_list = create_multiple_motion_images(threshold, source_directory)
     return motion_images_array_list, motion_images_path_list
 
 
 def texture_heat_map_sub_routine(source_directory):
     # Texture heat map stage
-    threshold = 20
-    clusters_quantity = 10
+    props_dict = Project_mastermind.get_instance().get_properties_dictionary()
+    threshold = props_dict[ps.GLOBAL_ROUTINE_TEXTURE_THRESHOLD]
+    clusters_quantity = props_dict[ps.GLOBAL_ROUTINE_TEXTURE_CLUSTERS]
     texture_images_array_list, texture_images_path_list = create_multiple_texture_images(threshold, clusters_quantity,
                                                                                          source_directory)
     return texture_images_array_list, texture_images_path_list
