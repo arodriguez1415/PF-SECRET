@@ -1,3 +1,6 @@
+import numpy as np
+import cv2 as cv
+
 from src.Backend.Image_processing_algorithms.Operations import common_operations
 from src.Frontend.Utils import progress_bar
 
@@ -12,47 +15,39 @@ def get_axis_ratio_over_time(array_images_list):
         threshold_array_image = common_operations.threshold(grayscale_array_image, threshold_value)
         row_axis_diameter, row_axis = get_row_axis(threshold_array_image)
         col_axis_diameter, col_axis = get_col_axis(threshold_array_image)
+        # show_image(row_axis, col_axis, threshold_array_image)
         ratio = row_axis_diameter / col_axis_diameter
         axis_ratio_values_list.append(ratio)
         progress_bar.increment_value_progress_bar()
     return axis_ratio_values_list
 
 
-def get_row_axis(matrix):
-    rows, cols = matrix.shape
-    max_row = 0
-    max_consecutive_ones = 0
-    for row in range(rows):
-        consecutive_ones = 0
-        for col in range(cols):
-            if matrix[row][col] == 255:
-                consecutive_ones += 1
-            else:
-                if consecutive_ones > max_consecutive_ones:
-                    max_row = row
-                    max_consecutive_ones = consecutive_ones
-                consecutive_ones = 0
-        if consecutive_ones > max_consecutive_ones:
-            max_row = row
-            max_consecutive_ones = consecutive_ones
-    return max_consecutive_ones, max_row
+def get_row_axis(image_array):
+    rows, cols = image_array.shape
+
+    rows_sum_list = []
+    for i in range(0, rows):
+        rows_sum_list.append(np.sum(image_array[i, :]))
+
+    return np.max(rows_sum_list), np.argmax(rows_sum_list, axis=0)
 
 
-def get_col_axis(matrix):
-    rows, cols = matrix.shape
-    max_col = 0
-    max_consecutive_ones = 0
-    for col in range(cols):
-        consecutive_ones = 0
-        for row in range(rows):
-            if matrix[row][col] == 255:
-                consecutive_ones += 1
-            else:
-                if consecutive_ones > max_consecutive_ones:
-                    max_col = row
-                    max_consecutive_ones = consecutive_ones
-                consecutive_ones = 0
-        if consecutive_ones > max_consecutive_ones:
-            max_col = col
-            max_consecutive_ones = consecutive_ones
-    return max_consecutive_ones, max_col
+def get_col_axis(image_array):
+    rows, cols = image_array.shape
+
+    cols_sum_list = []
+    for i in range(0, cols):
+        cols_sum_list.append(np.sum(image_array[:, i]))
+
+    return np.max(cols_sum_list), np.argmax(cols_sum_list, axis=0)
+
+
+def show_image(row_axis, col_axis, threshold_array_image):
+    rows, cols = threshold_array_image.shape
+    color = (0, 255, 0)
+    thickness = 3
+    threshold_array_image = common_operations.gray_to_rgb(threshold_array_image)
+    cv.line(threshold_array_image, (0, row_axis), (cols, row_axis), color, thickness)
+    image = cv.line(threshold_array_image, (col_axis, 0), (col_axis, rows), color, thickness)
+    cv.imshow("Image", image)
+
