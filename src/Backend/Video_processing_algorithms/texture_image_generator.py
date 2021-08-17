@@ -8,7 +8,7 @@ import numpy as np
 from src.Backend.Image_processing_algorithms.Archive_manipulation.dataframe_file_manipulation import \
     create_dataframe_from_descriptors
 from src.Backend.Image_processing_algorithms.Operations.common_operations import bgr_to_rgb, resize_image
-from src.Backend.Image_processing_algorithms.Texture.unsupervised_learning_methods import get_descriptors, k_means
+from src.Backend.Image_processing_algorithms.Texture.k_means import get_descriptors, k_means
 from src.Backend.Video_processing_algorithms import video_generator
 from src.Backend.Video_processing_algorithms.multiple_cells_video_generator import get_images_from_directories
 from src.Classes.Methods.Anisotropic_Filter import Anisotropic_Filter

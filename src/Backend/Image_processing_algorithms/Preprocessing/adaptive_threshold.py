@@ -18,14 +18,14 @@ def adaptive_threshold(image, window_size, constant, method):
 
 def get_method(method_value):
     switcher = {
-        "Umbralización de la media": algorithm_constants.ADAPTIVE_THRESHOLD_MEAN,
-        "Umbralización gaussiana": algorithm_constants.ADAPTIVE_THRESHOLD_GAUSSIAN,
+        algorithm_constants.ADAPTIVE_THRESHOLD_MEAN_NAME: algorithm_constants.ADAPTIVE_THRESHOLD_MEAN,
+        algorithm_constants.ADAPTIVE_THRESHOLD_GAUSSIAN_NAME: algorithm_constants.ADAPTIVE_THRESHOLD_GAUSSIAN,
     }
     return switcher.get(method_value, "nothing")
 
 def get_text_method(method_value):
     switcher = {
-        algorithm_constants.ADAPTIVE_THRESHOLD_MEAN: "Umbralización de la media",
-        algorithm_constants.ADAPTIVE_THRESHOLD_GAUSSIAN: "Umbralización gaussiana",
+        algorithm_constants.ADAPTIVE_THRESHOLD_MEAN: algorithm_constants.ADAPTIVE_THRESHOLD_MEAN_NAME,
+        algorithm_constants.ADAPTIVE_THRESHOLD_GAUSSIAN: algorithm_constants.ADAPTIVE_THRESHOLD_GAUSSIAN_NAME,
     }
     return switcher.get(method_value, "nothing")

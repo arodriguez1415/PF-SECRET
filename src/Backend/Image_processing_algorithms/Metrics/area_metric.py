@@ -1,6 +1,7 @@
+import numpy as np
+
 from src.Backend.Image_processing_algorithms.Operations import common_operations
 from src.Frontend.Utils import progress_bar
-import numpy as np
 
 
 def get_area_over_time(array_images_list):

@@ -1,9 +1,7 @@
 from src.Backend.Image_processing_algorithms.Archive_manipulation.properties_manipulation import \
     save_video_texture_params, save_image_texture_params, save_movement_params
 from src.Backend.Image_processing_algorithms.Operations.common_operations import show_coloured_image, resize_image
-from src.Backend.Image_processing_algorithms.Texture import fractal_dimention
 from src.Backend.Image_processing_algorithms.Texture import profile_texture
-from src.Backend.Image_processing_algorithms.Texture import texture_heatmap
 from src.Backend.Video_processing_algorithms.movement_image_generator import create_motion_image
 from src.Backend.Video_processing_algorithms.texture_image_generator import create_texture_image_from_video, \
     classify_single_image
@@ -77,17 +75,6 @@ def generate_heat_map(main_window):
     enable_button(main_window.generate_heat_map_button)
     enable_view_button(string_constants.MOVEMENT_VIEW)
 
-
-def generate_fractal_dimension(main_window):
-    disable_button(main_window.fractal_dimension_apply_button)
-    project_mastermind = Project_mastermind.get_instance()
-    current_image_array = project_mastermind.get_last_image()
-    method = main_window.fractal_dimension_function_combobox.currentText()
-
-    fractal_dimension_image = fractal_dimention.fractal_dimension_texture(current_image_array, method)
-    image_wrapper = Image_wrapper(fractal_dimension_image)
-    main_window.image_viewer.set_screen_image(image_wrapper)
-    enable_button(main_window.fractal_dimension_apply_button)
 
 
 def generate_profile_texture(main_window):

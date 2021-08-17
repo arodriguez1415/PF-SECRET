@@ -1,11 +1,11 @@
 import os
-
 import cv2
 import numpy as np
 from PIL import Image
 from matplotlib import pyplot as plt
 from matplotlib.path import Path
 from scipy import ndimage as ndi
+
 from src.Backend.Image_processing_algorithms.Border_detection import mgac_library_functions as mgac_library
 from src.Backend.Image_processing_algorithms.Operations import common_operations
 from src.Backend.Image_processing_algorithms.Operations.common_operations import rgb_to_gray
@@ -20,7 +20,7 @@ def mgac(polygon_region, image, iterations, threshold, smoothing, ballon, alpha,
 
 
 def get_borders(polygon_region, image, iterations, threshold, smoothing, ballon, alpha, sigma, show_process):
-    def callback(x): var = lambda y: None
+    def callback(): pass
     if show_process:
         callback = mgac_library.visual_callback_2d(image)
 

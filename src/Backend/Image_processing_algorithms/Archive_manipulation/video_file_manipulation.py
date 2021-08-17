@@ -1,10 +1,9 @@
 import os
 from tkinter import filedialog, Tk
-
 from cv2 import cv2
 import numpy as np
 
-from src.Constants import configuration_constants
+from src.Constants import configuration_constants, string_constants
 
 
 def get_video_as_array(video_path):
@@ -16,7 +15,7 @@ def get_video_path():
     root.withdraw()
     initial_absolute_directory_path = os.path.abspath(configuration_constants.MASK_VIDEOS)
     video_path = filedialog.askopenfilename(initialdir=initial_absolute_directory_path,
-                                            title='Elegir video para calcular métricas',
+                                            title=string_constants.CHOOSE_VIDEO_WINDOW,
                                             filetypes=[("Video file", "*.avi"),
                                                        ("avi", "*.AVI"),
                                                        ("All files", "*")])
@@ -29,7 +28,7 @@ def get_multiple_videos_path():
     root.withdraw()
     initial_absolute_directory_path = os.path.abspath(configuration_constants.MASK_VIDEOS)
     file_path_list = filedialog.askopenfilenames(initialdir=initial_absolute_directory_path,
-                                                 title='Elegir videos para calcular métricas',
+                                                 title=string_constants.CHOOSE_MULTIPLE_VIDEOS_WINDOW,
                                                  filetypes=[("Video file", "*.avi"),
                                                             ("avi", "*.AVI"),
                                                             ("All files", "*")])
