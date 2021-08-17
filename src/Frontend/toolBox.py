@@ -7,8 +7,7 @@ from src.Classes.Project_mastermind import Project_mastermind
 import src.Backend.Image_processing_algorithms.Operations.image_save as image_saver
 from src.Constants.algorithm_constants import DIAGONAL_LINE_TYPE, HORIZONTAL_LINE_TYPE, VERTICAL_LINE_TYPE
 from src.Constants.string_constants import PROCESS_LIST_WIDGET_TITLE
-from src.Frontend.Utils.button_controller import enable_button, disable_button, select_button, deselect_button, \
-    deselect_all
+from src.Frontend.Utils.button_controller import enable_button, disable_button, select_button, deselect_all
 from src.Frontend.process_list import populate_process_list
 
 

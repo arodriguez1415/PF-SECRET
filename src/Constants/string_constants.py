@@ -8,6 +8,17 @@ CHOOSE_VIDEO_WINDOW = "Elegir video para calcular métricas"
 CHOOSE_MULTIPLE_VIDEOS_WINDOW = "Elegir videos para calcular métricas"
 WRITE_FILENAME = "Escriba el nombre del archivo"
 
+# Windows titles
+PROCESS_LIST_WIDGET_TITLE = "Lista de procesamiento"
+PROCESS_LIST_TITLE = "Procesos realizados:"
+
+GLOBAL_ROUTINE_PARAMS_WIDGET_TITLE = "Parámetros de rutina global"
+
+
+# Extensions
+
+TIF_EXTENSION = ".tif"
+
 # Plot figures save paths for load
 
 MGAC_BORDER_IMAGE_SAVE_NAME = "border_image.tiff"
@@ -149,6 +160,11 @@ AXIS_RATIO_DISTRIBUTION_X_LABEL = "Valores de razón de ejes"
 
 DISTRIBUTION_METRICS_Y_LABEL = "Cantidad de celulas"
 
+# Titles of some global routine metric plots
+
+GLOBAL_ROUTINE_SIMPLE_METRICS_PLOT_TITLE = "Area, perímetro y razón de ejes en el tiempo"
+GLOBAL_ROUTINE_DISTRIBUTION_METRICS_PLOT_TITLE = "Distribucion de area, perímetro y razón de ejes"
+
 # Comparison plot
 
 ORIGINAL_VS_ACTUAL_TITLE = "Original vs Actual"
@@ -166,6 +182,4 @@ TEXTURE_IMAGE_VS_TEXTURE_VIDEO = "Textura-Imagen vs Textura-Video"
 
 FOUR_GRID_COMPARISON = "Valor de la región en las 4 vistas"
 
-# Windows titles
-PROCESS_LIST_WIDGET_TITLE = "Lista de procesamiento"
-GLOBAL_ROUTINE_PARAMS_WIDGET_TITLE = "Parámetros de rutina global"
+

@@ -1,6 +1,6 @@
 from src.Backend.Image_processing_algorithms.Border_detection import mgac as mgac_functions
-from src.Constants.algorithm_constants import MGAC_ITERATIONS, MGAC_THRESHOLD, MGAC_SMOOTHING, MGAC_BALLOON, MGAC_ALPHA, \
-    MGAC_SIGMA, MGAC_NAME
+from src.Constants.algorithm_constants import MGAC_ITERATIONS, MGAC_THRESHOLD, MGAC_SMOOTHING, \
+    MGAC_BALLOON, MGAC_ALPHA, MGAC_SIGMA, MGAC_NAME
 
 
 class Mgac:
@@ -18,8 +18,8 @@ class Mgac:
 
     def apply_method(self, image_array):
         borders_image, mask_image = mgac_functions.mgac(self.region_point, image_array, self.iterations,
-                                                 self.threshold, self.smoothing, self.balloon, self.alpha,
-                                                 self.sigma)
+                                                        self.threshold, self.smoothing, self.balloon, self.alpha,
+                                                        self.sigma)
         if self.mask_flag:
             return mask_image
         return borders_image

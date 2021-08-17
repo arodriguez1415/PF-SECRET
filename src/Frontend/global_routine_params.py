@@ -1,8 +1,7 @@
-from PyQt5.QtGui import QStandardItemModel, QStandardItem
-
 from src.Backend.Image_processing_algorithms.Archive_manipulation.properties_manipulation import \
     save_global_routine_params
 from src.Classes.Project_mastermind import Project_mastermind
+
 
 def configure_window(global_routine_params):
     global_routine_params.global_routine_params_default_button.clicked.connect(lambda: set_defaults())

@@ -76,7 +76,6 @@ def generate_heat_map(main_window):
     enable_view_button(string_constants.MOVEMENT_VIEW)
 
 
-
 def generate_profile_texture(main_window):
     disable_button(main_window.texture_profile_apply_button)
     project_mastermind = Project_mastermind.get_instance()

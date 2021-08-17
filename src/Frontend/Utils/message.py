@@ -1,21 +1,8 @@
-import asyncio
-import threading
 import time
-
 from PyQt5.QtCore import Qt
-from PyQt5.QtGui import QFont
-from PyQt5.QtWidgets import QMessageBox, QProgressDialog, QApplication, QProgressBar
+from PyQt5.QtWidgets import QMessageBox, QApplication
 
 from src.Constants import string_constants
-
-
-def show_message(message_description):
-    messageBox = QMessageBox()
-    font = QFont("Tokyo")
-    font.setPointSize(18)
-    messageBox.setFont(font)
-    messageBox.setText(message_description)
-    messageBox.exec()
 
 
 def show_information_message(information_description):

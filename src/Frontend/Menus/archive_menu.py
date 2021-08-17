@@ -1,4 +1,3 @@
-import src.Frontend.Utils.message as messages
 from src.Backend.Image_processing_algorithms.Archive_manipulation import image_file_manipulation
 from src.Backend.Image_processing_algorithms.Archive_manipulation.properties_manipulation import save_properties
 from src.Classes.Image_wrapper import Image_wrapper

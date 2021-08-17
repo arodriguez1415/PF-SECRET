@@ -2,9 +2,7 @@ import os
 import random
 import string
 import time
-
 import numpy as np
-
 from PIL import Image
 
 from src.Backend.Image_processing_algorithms.Metrics import metrics_generator, metrics_plotter

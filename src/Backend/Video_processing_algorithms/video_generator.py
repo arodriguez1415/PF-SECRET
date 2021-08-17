@@ -1,6 +1,6 @@
 from src.Backend.Image_processing_algorithms.Archive_manipulation.save_file_manipulation import set_save_name
 from src.Backend.Image_processing_algorithms.Operations import common_operations
-from src.Constants import configuration_constants as configuration_constants, string_constants
+from src.Constants import configuration_constants, string_constants
 from src.Classes.Project_mastermind import Project_mastermind
 from src.Frontend.Utils import progress_bar
 
@@ -94,7 +94,7 @@ def get_files_from_directory(directory):
     directory_files_paths_list = os.listdir(directory)
     correct_directory_files_paths_list = []
     for file in directory_files_paths_list:
-        if file.endswith(".tif"):
+        if file.endswith(string_constants.TIF_EXTENSION):
             file_path = os.path.join(directory, file)
             correct_directory_files_paths_list.append(file_path)
     if correct_directory_files_paths_list:
