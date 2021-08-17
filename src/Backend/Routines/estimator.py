@@ -86,7 +86,6 @@ def estimate_time(images_amount, directories_of_images_amount, sub_routines):
 
 # Memory estimation in KB
 def estimate_memory(images_amount, directories_of_images, sub_routines):
-    sample_directory = configuration_constants.SAMPLE_ESTIMATOR_DIRECTORY
     contour_estimated_memory = 512
     comparison_estimated_memory = 2048
     metrics_estimated_memory = 512
