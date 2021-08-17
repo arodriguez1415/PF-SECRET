@@ -2,7 +2,6 @@ import random
 import string
 
 from src.Backend.Image_processing_algorithms.Operations import common_operations
-from src.Backend.Image_processing_algorithms.Operations.common_operations import resize_image
 from src.Constants import configuration_constants as configuration_constants, string_constants
 from src.Classes.Project_mastermind import Project_mastermind
 from PIL import Image

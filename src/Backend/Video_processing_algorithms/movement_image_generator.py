@@ -97,10 +97,12 @@ def get_motion(frames_path_list, threshold):
     ret, previous_grayscale_frame = cv2.threshold(previous_grayscale_frame, threshold, 255, cv2.THRESH_BINARY)
     width, height = previous_grayscale_frame.shape
     accumulated_motion = np.zeros((width, height), np.uint8)
+    accumulated_motion = resize_image(accumulated_motion, width, height)
     progress_bar.increment_value_progress_bar()
     for i in range(0, len(frames_path_list) - 1):
         current_grayscale_frame = get_grayscale(frames_path_list[i])
         current_grayscale_frame = resize_image(current_grayscale_frame, width, height)
+        previous_grayscale_frame = resize_image(previous_grayscale_frame, width, height)
         ret, current_grayscale_frame = cv2.threshold(current_grayscale_frame, threshold, 255, cv2.THRESH_BINARY)
         accumulated_motion = get_frame_motion(current_grayscale_frame, previous_grayscale_frame,
                                               accumulated_motion)
@@ -113,7 +115,7 @@ def get_motion(frames_path_list, threshold):
 
 def get_frame_motion(current_frame, previous_frame, accumulated_motion):
     MIN_MOVEMENT_VALUE = 1
-    rows, cols = current_frame.shape
+    rows, cols = accumulated_motion.shape
     for row in range(rows):
         for col in range(cols):
             difference = abs(int(current_frame[row][col]) - int(previous_frame[row][col]))

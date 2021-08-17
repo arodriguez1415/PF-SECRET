@@ -7,8 +7,8 @@ from matplotlib import pyplot as plt
 from matplotlib.path import Path
 from scipy import ndimage as ndi
 from src.Backend.Image_processing_algorithms.Border_detection import mgac_library_functions as mgac_library
+from src.Backend.Image_processing_algorithms.Operations import common_operations
 from src.Backend.Image_processing_algorithms.Operations.common_operations import rgb_to_gray
-from src.Backend.Image_processing_algorithms.Preprocessing.threshold import binary_threshold
 from src.Constants import configuration_constants
 from src.Constants import string_constants
 
@@ -99,24 +99,18 @@ def inverse_gaussian_gradient(image, alpha=100.0, sigma=5.0):
 
 def map_borders(cell_image_array, preprocessing_image_array, mask_image_array):
     mask_image_array = rgb_to_gray(mask_image_array)
-    min_threshold = 5
-    mask_image_array = binary_threshold(min_threshold, mask_image_array)
+    threshold_value = 5
 
-    rows, cols = mask_image_array.shape
+    grayscale_array_image = common_operations.rgb_to_gray(mask_image_array)
+    threshold_array_image = common_operations.threshold(grayscale_array_image, threshold_value)
+    threshold_array_image = cv2.Canny(threshold_array_image, threshold_value - 1, threshold_value - 1)
+
+    rows, cols = threshold_array_image.shape
+
     for row in range(rows):
         for col in range(cols):
-            if mask_image_array[row][col] == 255 and is_perimeter(mask_image_array, row, col):
+            if threshold_array_image[row][col] > threshold_value:
                 cell_image_array = cv2.circle(cell_image_array, (col, row), radius=2, color=(255, 0, 0), thickness=-1)
                 preprocessing_image_array = cv2.circle(preprocessing_image_array, (col, row), radius=2,
                                                        color=(255, 0, 0), thickness=-1)
     return cell_image_array, preprocessing_image_array
-
-
-def is_perimeter(matrix, current_row, current_col):
-    rows, cols = matrix.shape
-
-    for i in range(max(0, current_row - 1), min(current_row + 1, rows)):
-        for j in range(max(0, current_col - 1), min(current_col + 1, cols)):
-            if matrix[i][j] == 0:
-                return True
-    return False

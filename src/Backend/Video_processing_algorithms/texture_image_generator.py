@@ -93,6 +93,7 @@ def set_methods_to_apply():
 def get_texture_image(images_path_list, clusters_quantity, threshold):
     width, height = get_grayscale(images_path_list[0]).shape
     accumulated_texture = np.zeros((width, height), np.uint8)
+    accumulated_texture = resize_image(accumulated_texture, width, height)
     descriptors_labels = [algorithm_constants.GLCM_MEAN, algorithm_constants.GLCM_ENTROPY,
                           algorithm_constants.GLCM_HOMOGENEITY, algorithm_constants.GLCM_DISSIMILARITY]
     for i in range(0, len(images_path_list)):
