@@ -20,7 +20,7 @@ def mgac(polygon_region, image, iterations, threshold, smoothing, ballon, alpha,
 
 
 def get_borders(polygon_region, image, iterations, threshold, smoothing, ballon, alpha, sigma, show_process):
-    def callback(): pass
+    def callback(x): var = lambda y: None
     if show_process:
         callback = mgac_library.visual_callback_2d(image)
 
