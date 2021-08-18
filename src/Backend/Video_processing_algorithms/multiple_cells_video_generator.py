@@ -38,6 +38,7 @@ def generate_video_of_all_cells(source_directory):
     cells_videos_paths_list = []
     for images_list_paths in images_list_of_lists:
         video_path = video_generator.generate_video(images_list=images_list_paths,
+                                                    specified_methods_to_apply=[],
                                                     save_directory=configuration_constants.CELLS_VIDEOS)
         cells_videos_paths_list.append(video_path)
     return cells_videos_paths_list
@@ -52,6 +53,7 @@ def generate_video_comparator_of_all_cells(cell_videos, mask_videos):
         comparison_images_path_list = generate_comparison(cell_images_array_list,
                                                           mask_images_array_list)
         video_path = video_generator.generate_video(images_list=comparison_images_path_list,
+                                                    specified_methods_to_apply=[],
                                                     save_directory=configuration_constants.COMPARISON_VIDEOS)
         comparison_videos_paths_list.append(video_path)
     shutil.rmtree(configuration_constants.TEMPORARY_VIDEO_DIRECTORY_PATH, ignore_errors=True)

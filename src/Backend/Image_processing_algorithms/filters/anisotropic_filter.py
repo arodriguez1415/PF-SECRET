@@ -11,8 +11,6 @@ def anisotropic_diffusion_filter_medpy(image, times):
     for i in range(0, times):
         filtered_image = anisotropic_filter(filtered_image)
 
-    print(times)
-
     return filtered_image
 
 
