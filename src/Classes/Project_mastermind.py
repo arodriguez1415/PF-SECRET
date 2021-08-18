@@ -11,7 +11,7 @@ class Project_mastermind:
     # Image processing attributes
     image_processing_list = []
     original_images_in_dir_path = []
-    current_original_image_index = None
+    current_original_image_index = 0
     original_image_path = None
     original_image_dir = None
 
@@ -124,7 +124,7 @@ class Project_mastermind:
     def clear_all(self):
         self.image_processing_list = []
         self.original_images_in_dir_path = []
-        self.current_original_image_index = None
+        self.current_original_image_index = 0
         self.original_image_path = None
         self.original_image_dir = None
         self.normal_progress_bar = None
@@ -168,7 +168,7 @@ class Project_mastermind:
     def get_next_original_image(self):
         index = self.current_original_image_index + 1
         list_of_images = self.get_original_images_from_dir_path()
-        if len(list_of_images) == index or index < 0:
+        if len(list_of_images) <= index:
             return None
         self.clear_on_original_image_change()
         self.current_original_image_index += 1
@@ -207,6 +207,7 @@ class Project_mastermind:
 
     def find_current_original_image_index(self):
         original_path = os.path.realpath(self.original_image_path)
+
         for i in range(0, len(self.original_images_in_dir_path)):
             current_path = os.path.realpath(self.original_images_in_dir_path[i])
             if current_path == original_path:
@@ -214,8 +215,8 @@ class Project_mastermind:
                 label_text = str(i + 1) + "/" + str(len(self.original_images_in_dir_path))
                 self.main_window.images_index_label.setText(label_text)
                 return
-        else:
-            raise Exception("Not found")
+            else:
+                raise Exception("Not found")
 
     def set_image_processing_list(self, image_processing_list):
         self.image_processing_list = image_processing_list
@@ -251,6 +252,6 @@ class Project_mastermind:
             if file.endswith(string_constants.TIF_EXTENSION):
                 file_path = os.path.join(directory, file)
                 correct_directory_files_paths_list.append(file_path)
-        if correct_directory_files_paths_list:
+        if correct_directory_files_paths_list and len(correct_directory_files_paths_list) > 1:
             correct_directory_files_paths_list.pop()
         return correct_directory_files_paths_list

@@ -36,6 +36,24 @@ def get_multiple_videos_path():
     return file_path_list
 
 
+def is_video(video_path):
+    extension = os.path.splitext(video_path)[1]
+    admitted_extensions = [".avi"]
+
+    if extension not in admitted_extensions:
+        return False
+
+    return True
+
+
+def are_videos(videos_path_list):
+    flag = True
+    for i in range(0, len(videos_path_list)):
+        flag = flag and is_video(videos_path_list[i])
+
+    return flag
+
+
 def get_video_frames_as_array(video_path):
     cap = cv2.VideoCapture(video_path)
     frameCount = int(cap.get(cv2.CAP_PROP_FRAME_COUNT))

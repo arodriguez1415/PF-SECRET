@@ -1,5 +1,8 @@
 from src.Backend.Image_processing_algorithms.Archive_manipulation import dataframe_file_manipulation
 from src.Backend.Image_processing_algorithms.Archive_manipulation import video_file_manipulation
+from src.Backend.Image_processing_algorithms.Archive_manipulation.dataframe_file_manipulation import is_excel, \
+    are_excels
+from src.Backend.Image_processing_algorithms.Archive_manipulation.video_file_manipulation import is_video, are_videos
 from src.Backend.Image_processing_algorithms.Metrics import metrics_generator, metrics_plotter
 from src.Backend.Image_processing_algorithms.Metrics.metrics_plotter import filter_keys
 from src.Backend.Image_processing_algorithms.Operations.common_operations import resize_image, normalize_to_range
@@ -15,7 +18,7 @@ from src.Constants.string_constants import ORIGINAL_TITLE, MOVEMENT_TITLE, TEXTU
     FOUR_GRID_COMPARISON
 from src.Frontend.Utils import progress_bar
 from src.Frontend.Utils.button_controller import disable_button, enable_button
-from src.Frontend.Utils.message import show_confirmation_message, show_error, show_wait_message
+from src.Frontend.Utils.message import show_confirmation_message, show_error_message, show_wait_message
 from src.Frontend.Utils.plot_comparator import plot_four_comparison
 from src.Frontend.Utils.viewer_buttons import enable_view_button
 
@@ -109,6 +112,12 @@ def generate_metrics(main_window):
     metrics_dictionary = get_generation_metrics_dictionary(main_window)
 
     if len(filter_keys(metrics_dictionary)) == 0:
+        show_error_message(string_constants.NO_METRIC_SELECTED)
+        enable_button(main_window.generate_metrics_generate_button)
+        return
+
+    if not is_video(mask_video_path):
+        show_error_message(string_constants.NO_VIDEO_FILE)
         enable_button(main_window.generate_metrics_generate_button)
         return
 
@@ -138,7 +147,13 @@ def generate_multiple_cells_metrics(main_window):
     metrics_dictionary = get_generation_multiple_cells_metrics_dictionary(main_window)
 
     if len(filter_keys(metrics_dictionary)) == 0:
-        enable_button(main_window.generate_metrics_generate_button)
+        show_error_message(string_constants.NO_METRIC_SELECTED)
+        enable_button(main_window.generate_multiple_cells_metrics_generate_button)
+        return
+
+    if not are_videos(mask_videos_path_list):
+        show_error_message(string_constants.NO_VIDEO_FILES)
+        enable_button(main_window.generate_multiple_cells_metrics_generate_button)
         return
 
     metrics_generator.generate_multiple_cells_metrics(mask_videos_path_list, metrics_dictionary)
@@ -167,6 +182,12 @@ def plot_metrics(main_window):
     metrics_dictionary = get_plotting_metrics_dictionary(main_window)
 
     if len(filter_keys(metrics_dictionary)) == 0:
+        show_error_message(string_constants.NO_METRIC_SELECTED)
+        enable_button(main_window.plot_metrics_generate_button)
+        return
+
+    if not is_excel(metrics_data_path):
+        show_error_message(string_constants.NO_EXCEL_FILE)
         enable_button(main_window.plot_metrics_generate_button)
         return
 
@@ -197,6 +218,12 @@ def plot_distribution_metrics(main_window):
     distribution_metrics_dictionary = get_plotting_distribution_metrics_dictionary(main_window)
 
     if len(filter_keys(distribution_metrics_dictionary)) == 0:
+        show_error_message(string_constants.NO_METRIC_SELECTED)
+        enable_button(main_window.plot_metrics_distribution_button)
+        return
+
+    if not are_excels(metrics_data_paths):
+        show_error_message(string_constants.NO_EXCEL_FILES)
         enable_button(main_window.plot_metrics_distribution_button)
         return
 
@@ -222,7 +249,14 @@ def get_plotting_distribution_metrics_dictionary(main_window):
 
 
 def generate_views(main_window):
+    project_mastermind = Project_mastermind.get_instance()
     disable_button(main_window.analyze_movement_and_texture_generate_views_button)
+
+    if project_mastermind.get_last_image() is None:
+        show_error_message(string_constants.NO_IMAGE_LOADED)
+        enable_button(main_window.analyze_movement_and_texture_generate_views_button)
+        return
+
     generate_movement_view(main_window)
     generate_image_texture_view(main_window)
     generate_video_texture_view(main_window)
@@ -291,7 +325,7 @@ def analyze_texture_and_movement_metrics(main_window):
             return
 
     if not all_images_ready():
-        show_error(string_constants.NO_ALL_IMAGES_READY_FOR_ANALYZE_METRIC_DESCRIPTION)
+        show_error_message(string_constants.NO_ALL_IMAGES_READY_FOR_ANALYZE_METRIC_DESCRIPTION)
         enable_button(main_window.analyze_movement_and_texture_button)
         return
 

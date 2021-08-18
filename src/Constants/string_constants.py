@@ -35,12 +35,21 @@ TEXTURE_VIDEO_VIEW = "Texture video"
 
 # Error messages
 
+ERROR_TITLE = "Error ocurrido"
+
+NO_METRIC_SELECTED = "Debe seleccionar almenos una metrica"
+NO_IMAGE_FILE = "El archivo seleccionado no es una imagen. \n\nSolo se admiten las siguientes extensiones: \n.tif"
+NO_EXCEL_FILE = "El archivo seleccionado no es un excel. Debe tener la extensión '.xlsx'"
+NO_EXCEL_FILES = "Alguno de los archivos seleccionados no es un excel. Deben tener la extensión '.xlsx'"
+NO_VIDEO_FILE = "El archivo seleccionado no es un video. Debe tener la extensión '.avi'"
+NO_VIDEO_FILES = "Alguno de los archivos seleccionados no es un video. Deben tener la extensión '.avi'"
 NO_PATH_SELECTION = "No se seleccionó ningun path"
 NO_MGAC_METHOD_ERROR = "No se aplico el metodo mgac en la imagen aún"
 NO_ALL_IMAGES_READY_FOR_ANALYZE_METRIC_DESCRIPTION = "Para la comparación de la métrica es necesario haber calculado " \
                                                      "el mapa de movimiento y el mapa de textura de imagen y video"
 NO_PROFILE_SELECTED_ERROR = "No se selecciono ningún perfil para analizar"
 NO_LINE_SELECTED_ERROR = "La figura utilizada para este método debe ser una línea"
+NO_IMAGE_LOADED = "No se cargó ninguna imagen para analizar. Debe elegir una imagen '.tif' en el menu 'Archivo'"
 
 # Wait message
 

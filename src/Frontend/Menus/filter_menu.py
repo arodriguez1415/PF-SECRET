@@ -4,7 +4,9 @@ from src.Classes.Project_mastermind import Project_mastermind
 from src.Classes.Image_wrapper import Image_wrapper
 from PIL import Image
 
+from src.Constants import string_constants
 from src.Frontend.Utils.button_controller import disable_button, enable_button
+from src.Frontend.Utils.message import show_error_message
 
 
 def configure_filter_menu_connections(main_window):
@@ -25,6 +27,12 @@ def anisotropic_filter(main_window):
     disable_button(main_window.apply_anisotropic_filter_button)
     project_mastermind = Project_mastermind.get_instance()
     image_array = project_mastermind.get_last_image()
+
+    if image_array is None:
+        show_error_message(string_constants.NO_IMAGE_LOADED)
+        enable_button(main_window.apply_anisotropic_filter_button)
+        return
+
     iterations = main_window.apply_anisotropic_filter_times_input.value()
     image = Image.fromarray(image_array)
     image_filtered_array = anisotropic_filter_functions.anisotropic_diffusion_filter_medpy(image, iterations)

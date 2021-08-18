@@ -1,4 +1,5 @@
 from src.Backend.Image_processing_algorithms.Archive_manipulation import image_file_manipulation
+from src.Backend.Image_processing_algorithms.Archive_manipulation.image_file_manipulation import is_image
 from src.Backend.Image_processing_algorithms.Archive_manipulation.properties_manipulation import save_properties
 from src.Classes.Image_wrapper import Image_wrapper
 from src.Classes.Methods.Original import Original
@@ -6,6 +7,7 @@ from src.Classes.Project_mastermind import Project_mastermind
 from src.Classes.Image_loader import Image_loader
 from src.Constants import string_constants
 from src.Constants.properties_constants import IMAGES_SOURCE_FOLDER
+from src.Frontend.Utils.message import show_error_message
 from src.Frontend.Utils.viewer_buttons import disable_extra_views, enable_view_button
 from src.Frontend.toolBox import enable_toolbox
 
@@ -20,11 +22,15 @@ def load_image(image_viewer, method):
     project_mastermind = Project_mastermind.get_instance()
     image_path = image_file_manipulation.get_image_path()
     image_dir = image_file_manipulation.get_image_dir(image_path)
-    if image_path:
-        image_loader = Image_loader(image_path, method=method)
-        image_wrapper = Image_wrapper(image_loader.image_array, method=method)
-    else:
+
+    if image_path == "" or image_path is None:
         return
+    elif not is_image(image_path):
+        show_error_message(string_constants.NO_IMAGE_FILE)
+        return
+
+    image_loader = Image_loader(image_path, method=method)
+    image_wrapper = Image_wrapper(image_loader.image_array, method=method)
     project_mastermind.clear_all()
     disable_extra_views(project_mastermind.main_window)
     enable_toolbox(project_mastermind.main_window)
@@ -43,6 +49,10 @@ def set_image_on_screen(image_wrapper, image_viewer):
 def set_images_source_directory():
     project_mastermind = Project_mastermind.get_instance()
     source_directory_path = image_file_manipulation.get_directory_path()
+
+    if source_directory_path == "" or source_directory_path is None:
+        return
+
     properties_directory = project_mastermind.get_properties_dictionary()
     properties_directory[IMAGES_SOURCE_FOLDER] = source_directory_path
     save_properties(properties_directory)
