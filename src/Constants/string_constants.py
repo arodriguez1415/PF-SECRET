@@ -158,7 +158,7 @@ AREA_DISTRIBUTION_X_LABEL = "Valores de areas en pixeles"
 AXIS_RATIO_DISTRIBUTION_TITLE = "Distribución de razon de ejes"
 AXIS_RATIO_DISTRIBUTION_X_LABEL = "Valores de razón de ejes"
 
-DISTRIBUTION_METRICS_Y_LABEL = "Cantidad de celulas"
+DISTRIBUTION_METRICS_Y_LABEL = "Frecuencia"
 
 # Titles of some global routine metric plots
 
