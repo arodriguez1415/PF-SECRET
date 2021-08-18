@@ -2,13 +2,19 @@ from medpy.filter.smoothing import anisotropic_diffusion
 from PIL import Image
 import numpy as np
 
-from src.Backend.Image_processing_algorithms.Operations.common_operations import gray_to_rgb, normalize_to_range
-from src.Constants import configuration_constants
-from src.Constants import string_constants
+from src.Backend.Image_processing_algorithms.Operations.common_operations import normalize_to_range
 
 
 # https://loli.github.io/medpy/generated/medpy.filter.smoothing.anisotropic_diffusion.html
-def anisotropic_diffusion_filter_medpy(image):
+def anisotropic_diffusion_filter_medpy(image, times):
+    filtered_image = image
+    for i in range(0, times):
+        filtered_image = anisotropic_filter(filtered_image)
+
+    return filtered_image
+
+
+def anisotropic_filter(image):
     pixels = np.uint8(image)
     anisotropic_array = anisotropic_diffusion(pixels)
     filtered_image_array = anisotropic_array_correction(anisotropic_array)

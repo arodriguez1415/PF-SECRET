@@ -3,6 +3,7 @@ from tkinter import filedialog, Tk
 import numpy as np
 from src.Constants.configuration_constants import GENERATED_IMAGES_DIR
 import src.Backend.Image_processing_algorithms.Operations.common_operations as common_operations
+from src.Constants.string_constants import WRITE_FILENAME
 
 
 def get_save_path(image_array):
@@ -13,7 +14,7 @@ def get_save_path(image_array):
     else:
         save_extension = "pgm"
     save_file_path = filedialog.asksaveasfilename(initialdir=GENERATED_IMAGES_DIR,
-                                                  title='Choose filename',
+                                                  title=WRITE_FILENAME,
                                                   defaultextension=save_extension)
     root.destroy()
     return save_file_path

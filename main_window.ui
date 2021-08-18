@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1231</width>
+    <width>1265</width>
     <height>902</height>
    </rect>
   </property>
@@ -395,1046 +395,84 @@
      </property>
     </widget>
    </widget>
-   <widget class="QStackedWidget" name="stacked_feature_windows">
+   <widget class="QGroupBox" name="groupBox_2">
     <property name="geometry">
      <rect>
       <x>900</x>
       <y>10</y>
-      <width>311</width>
+      <width>351</width>
       <height>851</height>
      </rect>
     </property>
-    <property name="currentIndex">
-     <number>15</number>
+    <property name="title">
+     <string/>
     </property>
-    <widget class="QWidget" name="blank_page"/>
-    <widget class="QWidget" name="anisotropic_filter_options">
-     <widget class="QLabel" name="anisotropic_filter_label">
-      <property name="geometry">
-       <rect>
-        <x>10</x>
-        <y>10</y>
-        <width>271</width>
-        <height>41</height>
-       </rect>
-      </property>
-      <property name="font">
-       <font>
-        <pointsize>14</pointsize>
-       </font>
-      </property>
-      <property name="text">
-       <string>Opciones del Filtro Anisotrópico:</string>
-      </property>
-     </widget>
-     <widget class="QPushButton" name="apply_anisotropic_filter_button">
-      <property name="geometry">
-       <rect>
-        <x>80</x>
-        <y>140</y>
-        <width>161</width>
-        <height>41</height>
-       </rect>
-      </property>
-      <property name="font">
-       <font>
-        <pointsize>14</pointsize>
-       </font>
-      </property>
-      <property name="text">
-       <string>Aplicar</string>
-      </property>
-     </widget>
-     <widget class="QPushButton" name="anisotropic_filter_algoritm_help">
-      <property name="geometry">
-       <rect>
-        <x>250</x>
-        <y>140</y>
-        <width>41</width>
-        <height>41</height>
-       </rect>
-      </property>
-      <property name="font">
-       <font>
-        <pointsize>14</pointsize>
-       </font>
-      </property>
-      <property name="text">
-       <string>?</string>
-      </property>
-     </widget>
-    </widget>
-    <widget class="QWidget" name="bilateral_options">
-     <widget class="QLabel" name="bilateral_filter_label">
-      <property name="geometry">
-       <rect>
-        <x>10</x>
-        <y>10</y>
-        <width>271</width>
-        <height>41</height>
-       </rect>
-      </property>
-      <property name="font">
-       <font>
-        <pointsize>14</pointsize>
-       </font>
-      </property>
-      <property name="text">
-       <string>Opciones del Filtro Bilateral:</string>
-      </property>
-     </widget>
-     <widget class="QLineEdit" name="window_size_bilateral_filter_input">
-      <property name="geometry">
-       <rect>
-        <x>20</x>
-        <y>260</y>
-        <width>221</width>
-        <height>31</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>5</string>
-      </property>
-     </widget>
-     <widget class="QLineEdit" name="sigma_r_bilateral_filter_input">
-      <property name="geometry">
-       <rect>
-        <x>20</x>
-        <y>100</y>
-        <width>221</width>
-        <height>31</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>2</string>
-      </property>
-     </widget>
-     <widget class="QLabel" name="sigma_s_bilateral_filter_label">
-      <property name="geometry">
-       <rect>
-        <x>20</x>
-        <y>140</y>
-        <width>181</width>
-        <height>41</height>
-       </rect>
-      </property>
-      <property name="font">
-       <font>
-        <pointsize>12</pointsize>
-       </font>
-      </property>
-      <property name="text">
-       <string>Sigma s:</string>
-      </property>
-     </widget>
-     <widget class="QPushButton" name="apply_bilateral_filter_button">
-      <property name="geometry">
-       <rect>
-        <x>140</x>
-        <y>670</y>
-        <width>161</width>
-        <height>41</height>
-       </rect>
-      </property>
-      <property name="font">
-       <font>
-        <pointsize>14</pointsize>
-       </font>
-      </property>
-      <property name="text">
-       <string>Aplicar</string>
-      </property>
-     </widget>
-     <widget class="QLineEdit" name="sigma_s_bilateral_filter_input">
-      <property name="geometry">
-       <rect>
-        <x>20</x>
-        <y>180</y>
-        <width>221</width>
-        <height>31</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>2</string>
-      </property>
-     </widget>
-     <widget class="QLabel" name="window_size_bilateral_filter_label">
-      <property name="geometry">
-       <rect>
-        <x>20</x>
-        <y>220</y>
-        <width>181</width>
-        <height>41</height>
-       </rect>
-      </property>
-      <property name="font">
-       <font>
-        <pointsize>12</pointsize>
-       </font>
-      </property>
-      <property name="text">
-       <string>Window size</string>
-      </property>
-     </widget>
-     <widget class="QLabel" name="sigma_r_bilateral_filter_label">
-      <property name="geometry">
-       <rect>
-        <x>20</x>
-        <y>60</y>
-        <width>181</width>
-        <height>41</height>
-       </rect>
-      </property>
-      <property name="font">
-       <font>
-        <pointsize>12</pointsize>
-       </font>
-      </property>
-      <property name="text">
-       <string>Sigma r:</string>
-      </property>
-     </widget>
-    </widget>
-    <widget class="QWidget" name="mgac_options">
-     <widget class="QLabel" name="mgac_label">
-      <property name="geometry">
-       <rect>
-        <x>10</x>
-        <y>10</y>
-        <width>221</width>
-        <height>41</height>
-       </rect>
-      </property>
-      <property name="font">
-       <font>
-        <pointsize>14</pointsize>
-       </font>
-      </property>
-      <property name="text">
-       <string>Opciones del MGAC:</string>
-      </property>
-     </widget>
-     <widget class="QLabel" name="iterations_mgac_label">
-      <property name="geometry">
-       <rect>
-        <x>20</x>
-        <y>60</y>
-        <width>221</width>
-        <height>41</height>
-       </rect>
-      </property>
-      <property name="font">
-       <font>
-        <pointsize>12</pointsize>
-       </font>
-      </property>
-      <property name="text">
-       <string>Número de iteraciones:</string>
-      </property>
-     </widget>
-     <widget class="QLabel" name="threshold_mgac_label">
-      <property name="geometry">
-       <rect>
-        <x>20</x>
-        <y>140</y>
-        <width>181</width>
-        <height>41</height>
-       </rect>
-      </property>
-      <property name="font">
-       <font>
-        <pointsize>12</pointsize>
-       </font>
-      </property>
-      <property name="text">
-       <string>Umbral:</string>
-      </property>
-     </widget>
-     <widget class="QLabel" name="smoothing_mgac_label">
-      <property name="geometry">
-       <rect>
-        <x>20</x>
-        <y>220</y>
-        <width>221</width>
-        <height>41</height>
-       </rect>
-      </property>
-      <property name="font">
-       <font>
-        <pointsize>12</pointsize>
-       </font>
-      </property>
-      <property name="text">
-       <string>Suavizado de bordes</string>
-      </property>
-     </widget>
-     <widget class="QLabel" name="balloon_mgac_label">
-      <property name="geometry">
-       <rect>
-        <x>20</x>
-        <y>300</y>
-        <width>181</width>
-        <height>41</height>
-       </rect>
-      </property>
-      <property name="font">
-       <font>
-        <pointsize>12</pointsize>
-       </font>
-      </property>
-      <property name="text">
-       <string>Variable de succión</string>
-      </property>
-     </widget>
-     <widget class="Line" name="line">
-      <property name="geometry">
-       <rect>
-        <x>10</x>
-        <y>400</y>
-        <width>281</width>
-        <height>16</height>
-       </rect>
-      </property>
-      <property name="orientation">
-       <enum>Qt::Horizontal</enum>
-      </property>
-     </widget>
-     <widget class="QLabel" name="alpha_mgac_label">
-      <property name="geometry">
-       <rect>
-        <x>10</x>
-        <y>470</y>
-        <width>181</width>
-        <height>41</height>
-       </rect>
-      </property>
-      <property name="font">
-       <font>
-        <pointsize>12</pointsize>
-       </font>
-      </property>
-      <property name="text">
-       <string>Alpha</string>
-      </property>
-     </widget>
-     <widget class="QLabel" name="sigma_mgac_label">
-      <property name="geometry">
-       <rect>
-        <x>10</x>
-        <y>560</y>
-        <width>181</width>
-        <height>41</height>
-       </rect>
-      </property>
-      <property name="font">
-       <font>
-        <pointsize>12</pointsize>
-       </font>
-      </property>
-      <property name="text">
-       <string>Sigma</string>
-      </property>
-     </widget>
-     <widget class="QLabel" name="mgac_secondary_label">
-      <property name="geometry">
-       <rect>
-        <x>0</x>
-        <y>420</y>
-        <width>341</width>
-        <height>41</height>
-       </rect>
-      </property>
-      <property name="font">
-       <font>
-        <pointsize>14</pointsize>
-       </font>
-      </property>
-      <property name="text">
-       <string>Opciones secundarias del MGAC:</string>
-      </property>
-     </widget>
-     <widget class="QPushButton" name="apply_mgac_button">
-      <property name="geometry">
-       <rect>
-        <x>90</x>
-        <y>690</y>
-        <width>161</width>
-        <height>41</height>
-       </rect>
-      </property>
-      <property name="font">
-       <font>
-        <pointsize>14</pointsize>
-       </font>
-      </property>
-      <property name="text">
-       <string>Aplicar</string>
-      </property>
-     </widget>
-     <widget class="QPushButton" name="mgac_iterations_help">
-      <property name="geometry">
-       <rect>
-        <x>250</x>
-        <y>100</y>
-        <width>31</width>
-        <height>31</height>
-       </rect>
-      </property>
-      <property name="font">
-       <font>
-        <pointsize>14</pointsize>
-       </font>
-      </property>
-      <property name="text">
-       <string>?</string>
-      </property>
-     </widget>
-     <widget class="QPushButton" name="mgac_threshold_help">
-      <property name="geometry">
-       <rect>
-        <x>250</x>
-        <y>180</y>
-        <width>31</width>
-        <height>31</height>
-       </rect>
-      </property>
-      <property name="font">
-       <font>
-        <pointsize>14</pointsize>
-       </font>
-      </property>
-      <property name="text">
-       <string>?</string>
-      </property>
-     </widget>
-     <widget class="QPushButton" name="mgac_smoothing_help">
-      <property name="geometry">
-       <rect>
-        <x>250</x>
-        <y>260</y>
-        <width>31</width>
-        <height>31</height>
-       </rect>
-      </property>
-      <property name="font">
-       <font>
-        <pointsize>14</pointsize>
-       </font>
-      </property>
-      <property name="text">
-       <string>?</string>
-      </property>
-     </widget>
-     <widget class="QPushButton" name="mgac_balloon_help">
-      <property name="geometry">
-       <rect>
-        <x>250</x>
-        <y>350</y>
-        <width>31</width>
-        <height>31</height>
-       </rect>
-      </property>
-      <property name="font">
-       <font>
-        <pointsize>14</pointsize>
-       </font>
-      </property>
-      <property name="text">
-       <string>?</string>
-      </property>
-     </widget>
-     <widget class="QPushButton" name="mgac_alpha_help">
-      <property name="geometry">
-       <rect>
-        <x>240</x>
-        <y>520</y>
-        <width>31</width>
-        <height>31</height>
-       </rect>
-      </property>
-      <property name="font">
-       <font>
-        <pointsize>14</pointsize>
-       </font>
-      </property>
-      <property name="text">
-       <string>?</string>
-      </property>
-     </widget>
-     <widget class="QPushButton" name="mgac_sigma_help">
-      <property name="geometry">
-       <rect>
-        <x>240</x>
-        <y>610</y>
-        <width>31</width>
-        <height>31</height>
-       </rect>
-      </property>
-      <property name="font">
-       <font>
-        <pointsize>14</pointsize>
-       </font>
-      </property>
-      <property name="text">
-       <string>?</string>
-      </property>
-     </widget>
-     <widget class="QPushButton" name="mgac_algorithm_help">
-      <property name="geometry">
-       <rect>
-        <x>260</x>
-        <y>690</y>
-        <width>41</width>
-        <height>41</height>
-       </rect>
-      </property>
-      <property name="font">
-       <font>
-        <pointsize>14</pointsize>
-       </font>
-      </property>
-      <property name="text">
-       <string>?</string>
-      </property>
-     </widget>
-     <widget class="QSpinBox" name="iterations_mgac_input">
-      <property name="geometry">
-       <rect>
-        <x>20</x>
-        <y>100</y>
-        <width>221</width>
-        <height>31</height>
-       </rect>
-      </property>
-      <property name="minimum">
-       <number>1</number>
-      </property>
-      <property name="maximum">
-       <number>1000</number>
-      </property>
-      <property name="value">
-       <number>275</number>
-      </property>
-     </widget>
-     <widget class="QDoubleSpinBox" name="threshold_mgac_input">
-      <property name="geometry">
-       <rect>
-        <x>20</x>
-        <y>180</y>
-        <width>221</width>
-        <height>31</height>
-       </rect>
-      </property>
-      <property name="minimum">
-       <double>0.010000000000000</double>
-      </property>
-      <property name="maximum">
-       <double>1.000000000000000</double>
-      </property>
-      <property name="singleStep">
-       <double>0.010000000000000</double>
-      </property>
-      <property name="value">
-       <double>0.350000000000000</double>
-      </property>
-     </widget>
-     <widget class="QSpinBox" name="smoothing_mgac_input">
-      <property name="geometry">
-       <rect>
-        <x>20</x>
-        <y>260</y>
-        <width>221</width>
-        <height>31</height>
-       </rect>
-      </property>
-      <property name="minimum">
-       <number>0</number>
-      </property>
-      <property name="maximum">
-       <number>4</number>
-      </property>
-      <property name="value">
-       <number>0</number>
-      </property>
-     </widget>
-     <widget class="QSpinBox" name="balloon_mgac_input">
-      <property name="geometry">
-       <rect>
-        <x>20</x>
-        <y>350</y>
-        <width>221</width>
-        <height>31</height>
-       </rect>
-      </property>
-      <property name="minimum">
-       <number>-4</number>
-      </property>
-      <property name="maximum">
-       <number>4</number>
-      </property>
-      <property name="value">
-       <number>-1</number>
-      </property>
-     </widget>
-     <widget class="QSpinBox" name="alpha_mgac_input">
-      <property name="geometry">
-       <rect>
-        <x>10</x>
-        <y>520</y>
-        <width>221</width>
-        <height>31</height>
-       </rect>
-      </property>
-      <property name="minimum">
-       <number>1</number>
-      </property>
-      <property name="maximum">
-       <number>1000</number>
-      </property>
-      <property name="value">
-       <number>200</number>
-      </property>
-     </widget>
-     <widget class="QSpinBox" name="sigma_mgac_input">
-      <property name="geometry">
-       <rect>
-        <x>10</x>
-        <y>610</y>
-        <width>221</width>
-        <height>31</height>
-       </rect>
-      </property>
-      <property name="minimum">
-       <number>1</number>
-      </property>
-      <property name="maximum">
-       <number>10</number>
-      </property>
-      <property name="value">
-       <number>2</number>
-      </property>
-     </widget>
-    </widget>
-    <widget class="QWidget" name="lbp_options">
-     <widget class="QSlider" name="lbp_symmetric_points_slider">
-      <property name="geometry">
-       <rect>
-        <x>20</x>
-        <y>170</y>
-        <width>181</width>
-        <height>22</height>
-       </rect>
-      </property>
-      <property name="minimum">
-       <number>1</number>
-      </property>
-      <property name="maximum">
-       <number>20</number>
-      </property>
-      <property name="orientation">
-       <enum>Qt::Horizontal</enum>
-      </property>
-     </widget>
-     <widget class="QPushButton" name="lbp_add_process_button">
-      <property name="geometry">
-       <rect>
-        <x>120</x>
-        <y>500</y>
-        <width>161</width>
-        <height>41</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>Añadir proceso</string>
-      </property>
-     </widget>
-     <widget class="QSpinBox" name="lbp_symmetric_points_box">
-      <property name="geometry">
-       <rect>
-        <x>20</x>
-        <y>120</y>
-        <width>181</width>
-        <height>31</height>
-       </rect>
-      </property>
-      <property name="minimum">
-       <number>1</number>
-      </property>
-      <property name="maximum">
-       <number>20</number>
-      </property>
-     </widget>
-     <widget class="QLabel" name="lpb_symmetric_points_label">
-      <property name="geometry">
-       <rect>
-        <x>20</x>
-        <y>80</y>
-        <width>221</width>
-        <height>31</height>
-       </rect>
-      </property>
-      <property name="font">
-       <font>
-        <pointsize>14</pointsize>
-       </font>
-      </property>
-      <property name="text">
-       <string>Puntos de simetria cirular:</string>
-      </property>
-     </widget>
-     <widget class="QSlider" name="lbp_radius_slider">
-      <property name="geometry">
-       <rect>
-        <x>20</x>
-        <y>300</y>
-        <width>181</width>
-        <height>22</height>
-       </rect>
-      </property>
-      <property name="minimum">
-       <number>1</number>
-      </property>
-      <property name="maximum">
-       <number>50</number>
-      </property>
-      <property name="orientation">
-       <enum>Qt::Horizontal</enum>
-      </property>
-     </widget>
-     <widget class="QSpinBox" name="lbp_radius_box">
-      <property name="geometry">
-       <rect>
-        <x>20</x>
-        <y>250</y>
-        <width>181</width>
-        <height>31</height>
-       </rect>
-      </property>
-      <property name="minimum">
-       <number>1</number>
-      </property>
-      <property name="maximum">
-       <number>50</number>
-      </property>
-     </widget>
-     <widget class="QLabel" name="lbp_radius_label">
-      <property name="geometry">
-       <rect>
-        <x>20</x>
-        <y>200</y>
-        <width>181</width>
-        <height>31</height>
-       </rect>
-      </property>
-      <property name="font">
-       <font>
-        <pointsize>14</pointsize>
-       </font>
-      </property>
-      <property name="text">
-       <string>Radio de vecinos</string>
-      </property>
-     </widget>
-     <widget class="QLabel" name="lbp_title">
-      <property name="geometry">
-       <rect>
-        <x>20</x>
-        <y>20</y>
-        <width>151</width>
-        <height>31</height>
-       </rect>
-      </property>
-      <property name="font">
-       <font>
-        <pointsize>28</pointsize>
-       </font>
-      </property>
-      <property name="text">
-       <string>LBP</string>
-      </property>
-     </widget>
-     <widget class="QComboBox" name="lbp_method_box">
-      <property name="geometry">
-       <rect>
-        <x>20</x>
-        <y>390</y>
-        <width>181</width>
-        <height>31</height>
-       </rect>
-      </property>
-      <property name="editable">
-       <bool>false</bool>
-      </property>
-      <property name="placeholderText">
-       <string/>
-      </property>
-      <item>
-       <property name="text">
-        <string>Default</string>
-       </property>
-      </item>
-      <item>
-       <property name="text">
-        <string>Ror</string>
-       </property>
-      </item>
-      <item>
-       <property name="text">
-        <string>Uniforme</string>
-       </property>
-      </item>
-      <item>
-       <property name="text">
-        <string>Nri_uniforme</string>
-       </property>
-      </item>
-      <item>
-       <property name="text">
-        <string/>
-       </property>
-      </item>
-     </widget>
-     <widget class="QLabel" name="lbp_method_label">
-      <property name="geometry">
-       <rect>
-        <x>20</x>
-        <y>340</y>
-        <width>181</width>
-        <height>31</height>
-       </rect>
-      </property>
-      <property name="font">
-       <font>
-        <pointsize>14</pointsize>
-       </font>
-      </property>
-      <property name="text">
-       <string>Metodo:</string>
-      </property>
-     </widget>
-     <widget class="QPushButton" name="lbp_symmetric_points_information_button">
-      <property name="geometry">
-       <rect>
-        <x>210</x>
-        <y>120</y>
-        <width>31</width>
-        <height>31</height>
-       </rect>
-      </property>
-      <property name="font">
-       <font>
-        <pointsize>14</pointsize>
-       </font>
-      </property>
-      <property name="text">
-       <string>?</string>
-      </property>
-     </widget>
-     <widget class="QPushButton" name="lbp_method_information_button">
-      <property name="geometry">
-       <rect>
-        <x>210</x>
-        <y>390</y>
-        <width>31</width>
-        <height>31</height>
-       </rect>
-      </property>
-      <property name="font">
-       <font>
-        <pointsize>14</pointsize>
-       </font>
-      </property>
-      <property name="text">
-       <string>?</string>
-      </property>
-     </widget>
-    </widget>
-    <widget class="QWidget" name="fractal_dimension_options">
-     <widget class="QLabel" name="fractal_dimension_title">
-      <property name="geometry">
-       <rect>
-        <x>20</x>
-        <y>40</y>
-        <width>261</width>
-        <height>41</height>
-       </rect>
-      </property>
-      <property name="font">
-       <font>
-        <pointsize>18</pointsize>
-       </font>
-      </property>
-      <property name="text">
-       <string>Dimensión Fractal:</string>
-      </property>
-     </widget>
-     <widget class="QLabel" name="fractal_dimension_function_label">
-      <property name="geometry">
-       <rect>
-        <x>20</x>
-        <y>110</y>
-        <width>261</width>
-        <height>41</height>
-       </rect>
-      </property>
-      <property name="font">
-       <font>
-        <pointsize>18</pointsize>
-       </font>
-      </property>
-      <property name="text">
-       <string>Función:</string>
-      </property>
-     </widget>
-     <widget class="QComboBox" name="fractal_dimension_function_combobox">
-      <property name="geometry">
-       <rect>
-        <x>20</x>
-        <y>170</y>
-        <width>241</width>
-        <height>41</height>
-       </rect>
-      </property>
-      <item>
-       <property name="text">
-        <string>StackOverflow</string>
-       </property>
-      </item>
-      <item>
-       <property name="text">
-        <string>Github</string>
-       </property>
-      </item>
-     </widget>
-     <widget class="QPushButton" name="fractal_dimension_apply_button">
-      <property name="geometry">
-       <rect>
-        <x>120</x>
-        <y>260</y>
-        <width>141</width>
-        <height>41</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>Aplicar</string>
-      </property>
-     </widget>
-    </widget>
-    <widget class="QWidget" name="texture_profile_options">
-     <widget class="QLabel" name="texture_profile_title">
-      <property name="geometry">
-       <rect>
-        <x>20</x>
-        <y>40</y>
-        <width>261</width>
-        <height>41</height>
-       </rect>
-      </property>
-      <property name="font">
-       <font>
-        <pointsize>18</pointsize>
-       </font>
-      </property>
-      <property name="text">
-       <string>Perfil de textura:</string>
-      </property>
-     </widget>
-     <widget class="QPushButton" name="texture_profile_apply_button">
-      <property name="geometry">
-       <rect>
-        <x>40</x>
-        <y>100</y>
-        <width>141</width>
-        <height>41</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>Aplicar</string>
-      </property>
-     </widget>
-     <widget class="QPushButton" name="texture_profile_algorithm_help">
-      <property name="geometry">
-       <rect>
-        <x>190</x>
-        <y>100</y>
-        <width>41</width>
-        <height>41</height>
-       </rect>
-      </property>
-      <property name="font">
-       <font>
-        <pointsize>14</pointsize>
-       </font>
-      </property>
-      <property name="text">
-       <string>?</string>
-      </property>
-     </widget>
-    </widget>
-    <widget class="QWidget" name="texture_classification_options">
-     <widget class="QLabel" name="texture_classification_title">
-      <property name="geometry">
-       <rect>
-        <x>20</x>
-        <y>20</y>
-        <width>261</width>
-        <height>41</height>
-       </rect>
-      </property>
-      <property name="font">
-       <font>
-        <pointsize>18</pointsize>
-       </font>
-      </property>
-      <property name="layoutDirection">
-       <enum>Qt::LeftToRight</enum>
-      </property>
-      <property name="text">
-       <string>Clasificación de textura</string>
-      </property>
-     </widget>
-     <widget class="QGroupBox" name="texture_classification_image_group">
-      <property name="geometry">
-       <rect>
-        <x>10</x>
-        <y>110</y>
-        <width>271</width>
-        <height>221</height>
-       </rect>
-      </property>
-      <property name="font">
-       <font>
-        <pointsize>14</pointsize>
-       </font>
-      </property>
-      <property name="title">
-       <string>Clasificar imagen</string>
-      </property>
-      <widget class="QPushButton" name="texture_classification_image_button">
+    <widget class="QStackedWidget" name="stacked_feature_windows">
+     <property name="geometry">
+      <rect>
+       <x>20</x>
+       <y>10</y>
+       <width>311</width>
+       <height>831</height>
+      </rect>
+     </property>
+     <property name="currentIndex">
+      <number>5</number>
+     </property>
+     <widget class="QWidget" name="blank_page"/>
+     <widget class="QWidget" name="anisotropic_filter_options">
+      <widget class="QLabel" name="anisotropic_filter_label">
        <property name="geometry">
         <rect>
-         <x>30</x>
-         <y>160</y>
-         <width>161</width>
+         <x>10</x>
+         <y>10</y>
+         <width>291</width>
          <height>41</height>
         </rect>
        </property>
        <property name="font">
         <font>
-         <pointsize>12</pointsize>
+         <pointsize>20</pointsize>
+         <weight>75</weight>
+         <bold>true</bold>
+         <underline>true</underline>
         </font>
        </property>
        <property name="text">
-        <string>Clasificar</string>
+        <string>Filtro anisotrópico</string>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignCenter</set>
+       </property>
+       <property name="wordWrap">
+        <bool>true</bool>
        </property>
       </widget>
-      <widget class="QLabel" name="texture_classification_image_clusters_label">
+      <widget class="QPushButton" name="apply_anisotropic_filter_button">
        <property name="geometry">
         <rect>
          <x>10</x>
-         <y>40</y>
-         <width>231</width>
-         <height>31</height>
+         <y>750</y>
+         <width>241</width>
+         <height>51</height>
+        </rect>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>16</pointsize>
+        </font>
+       </property>
+       <property name="text">
+        <string>Aplicar</string>
+       </property>
+      </widget>
+      <widget class="QPushButton" name="anisotropic_filter_algoritm_help">
+       <property name="geometry">
+        <rect>
+         <x>260</x>
+         <y>750</y>
+         <width>51</width>
+         <height>51</height>
         </rect>
        </property>
        <property name="font">
@@ -1443,56 +481,56 @@
         </font>
        </property>
        <property name="text">
-        <string>Clusters:</string>
+        <string>?</string>
        </property>
       </widget>
-      <widget class="QSpinBox" name="texture_classification_image_clusters_input">
+      <widget class="QLabel" name="apply_anisotropic_filter_times_label">
        <property name="geometry">
         <rect>
-         <x>10</x>
-         <y>90</y>
-         <width>181</width>
+         <x>20</x>
+         <y>130</y>
+         <width>271</width>
+         <height>31</height>
+        </rect>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>16</pointsize>
+        </font>
+       </property>
+       <property name="text">
+        <string>Iteraciones</string>
+       </property>
+      </widget>
+      <widget class="QSpinBox" name="apply_anisotropic_filter_times_input">
+       <property name="geometry">
+        <rect>
+         <x>20</x>
+         <y>180</y>
+         <width>211</width>
          <height>41</height>
         </rect>
        </property>
        <property name="font">
         <font>
-         <pointsize>12</pointsize>
+         <pointsize>14</pointsize>
         </font>
        </property>
        <property name="minimum">
         <number>1</number>
        </property>
        <property name="maximum">
-        <number>255</number>
+        <number>50</number>
        </property>
        <property name="value">
-        <number>10</number>
+        <number>1</number>
        </property>
       </widget>
-      <widget class="QPushButton" name="texture_classification_image_clusters_help">
+      <widget class="QPushButton" name="apply_anisotropic_filter_times_help">
        <property name="geometry">
         <rect>
-         <x>200</x>
-         <y>90</y>
-         <width>41</width>
-         <height>41</height>
-        </rect>
-       </property>
-       <property name="font">
-        <font>
-         <pointsize>14</pointsize>
-        </font>
-       </property>
-       <property name="text">
-        <string>?</string>
-       </property>
-      </widget>
-      <widget class="QPushButton" name="texture_classification_image_algorithm_help">
-       <property name="geometry">
-        <rect>
-         <x>200</x>
-         <y>160</y>
+         <x>240</x>
+         <y>180</y>
          <width>41</width>
          <height>41</height>
         </rect>
@@ -1507,48 +545,59 @@
        </property>
       </widget>
      </widget>
-     <widget class="QGroupBox" name="texture_classification_video_group">
-      <property name="geometry">
-       <rect>
-        <x>10</x>
-        <y>360</y>
-        <width>271</width>
-        <height>331</height>
-       </rect>
-      </property>
-      <property name="font">
-       <font>
-        <pointsize>14</pointsize>
-       </font>
-      </property>
-      <property name="title">
-       <string>Clasificar video</string>
-      </property>
-      <widget class="QPushButton" name="texture_classification_video_button">
+     <widget class="QWidget" name="mgac_options">
+      <widget class="QLabel" name="mgac_label">
        <property name="geometry">
         <rect>
-         <x>30</x>
-         <y>270</y>
-         <width>161</width>
+         <x>10</x>
+         <y>10</y>
+         <width>291</width>
          <height>41</height>
         </rect>
        </property>
        <property name="font">
         <font>
-         <pointsize>12</pointsize>
+         <pointsize>20</pointsize>
+         <weight>75</weight>
+         <bold>true</bold>
+         <underline>true</underline>
         </font>
        </property>
        <property name="text">
-        <string>Clasificar</string>
+        <string>MGAC</string>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignCenter</set>
+       </property>
+       <property name="wordWrap">
+        <bool>true</bool>
        </property>
       </widget>
-      <widget class="QLabel" name="texture_classification_video_threshold_label">
+      <widget class="QLabel" name="iterations_mgac_label">
        <property name="geometry">
         <rect>
          <x>10</x>
-         <y>40</y>
-         <width>231</width>
-         <height>31</height>
+         <y>70</y>
+         <width>221</width>
+         <height>41</height>
+        </rect>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>14</pointsize>
+        </font>
+       </property>
+       <property name="text">
+        <string>Número de iteraciones:</string>
+       </property>
+      </widget>
+      <widget class="QLabel" name="threshold_mgac_label">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>160</y>
+         <width>181</width>
+         <height>41</height>
         </rect>
        </property>
        <property name="font">
@@ -1560,12 +609,1069 @@
         <string>Umbral:</string>
        </property>
       </widget>
-      <widget class="QSpinBox" name="texture_classification_video_threshold_input">
+      <widget class="QLabel" name="smoothing_mgac_label">
        <property name="geometry">
         <rect>
          <x>10</x>
-         <y>90</y>
+         <y>260</y>
+         <width>221</width>
+         <height>41</height>
+        </rect>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>14</pointsize>
+        </font>
+       </property>
+       <property name="text">
+        <string>Suavizado de bordes</string>
+       </property>
+      </widget>
+      <widget class="QLabel" name="balloon_mgac_label">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>360</y>
          <width>181</width>
+         <height>41</height>
+        </rect>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>14</pointsize>
+        </font>
+       </property>
+       <property name="text">
+        <string>Variable de succión</string>
+       </property>
+      </widget>
+      <widget class="Line" name="line">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>460</y>
+         <width>281</width>
+         <height>16</height>
+        </rect>
+       </property>
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+      </widget>
+      <widget class="QLabel" name="alpha_mgac_label">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>530</y>
+         <width>181</width>
+         <height>41</height>
+        </rect>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>14</pointsize>
+        </font>
+       </property>
+       <property name="text">
+        <string>Alpha</string>
+       </property>
+      </widget>
+      <widget class="QLabel" name="sigma_mgac_label">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>630</y>
+         <width>181</width>
+         <height>41</height>
+        </rect>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>14</pointsize>
+        </font>
+       </property>
+       <property name="text">
+        <string>Sigma</string>
+       </property>
+      </widget>
+      <widget class="QLabel" name="mgac_secondary_label">
+       <property name="geometry">
+        <rect>
+         <x>0</x>
+         <y>480</y>
+         <width>301</width>
+         <height>41</height>
+        </rect>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>18</pointsize>
+        </font>
+       </property>
+       <property name="text">
+        <string>Opciones secundarias</string>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignCenter</set>
+       </property>
+       <property name="wordWrap">
+        <bool>true</bool>
+       </property>
+      </widget>
+      <widget class="QPushButton" name="apply_mgac_button">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>750</y>
+         <width>241</width>
+         <height>51</height>
+        </rect>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>16</pointsize>
+        </font>
+       </property>
+       <property name="text">
+        <string>Aplicar</string>
+       </property>
+      </widget>
+      <widget class="QPushButton" name="mgac_iterations_help">
+       <property name="geometry">
+        <rect>
+         <x>260</x>
+         <y>120</y>
+         <width>41</width>
+         <height>41</height>
+        </rect>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>14</pointsize>
+        </font>
+       </property>
+       <property name="text">
+        <string>?</string>
+       </property>
+      </widget>
+      <widget class="QPushButton" name="mgac_threshold_help">
+       <property name="geometry">
+        <rect>
+         <x>260</x>
+         <y>210</y>
+         <width>41</width>
+         <height>41</height>
+        </rect>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>14</pointsize>
+        </font>
+       </property>
+       <property name="text">
+        <string>?</string>
+       </property>
+      </widget>
+      <widget class="QPushButton" name="mgac_smoothing_help">
+       <property name="geometry">
+        <rect>
+         <x>260</x>
+         <y>310</y>
+         <width>41</width>
+         <height>41</height>
+        </rect>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>14</pointsize>
+        </font>
+       </property>
+       <property name="text">
+        <string>?</string>
+       </property>
+      </widget>
+      <widget class="QPushButton" name="mgac_balloon_help">
+       <property name="geometry">
+        <rect>
+         <x>260</x>
+         <y>410</y>
+         <width>41</width>
+         <height>41</height>
+        </rect>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>14</pointsize>
+        </font>
+       </property>
+       <property name="text">
+        <string>?</string>
+       </property>
+      </widget>
+      <widget class="QPushButton" name="mgac_alpha_help">
+       <property name="geometry">
+        <rect>
+         <x>260</x>
+         <y>580</y>
+         <width>41</width>
+         <height>41</height>
+        </rect>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>14</pointsize>
+        </font>
+       </property>
+       <property name="text">
+        <string>?</string>
+       </property>
+      </widget>
+      <widget class="QPushButton" name="mgac_sigma_help">
+       <property name="geometry">
+        <rect>
+         <x>260</x>
+         <y>680</y>
+         <width>41</width>
+         <height>41</height>
+        </rect>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>14</pointsize>
+        </font>
+       </property>
+       <property name="text">
+        <string>?</string>
+       </property>
+      </widget>
+      <widget class="QPushButton" name="mgac_algorithm_help">
+       <property name="geometry">
+        <rect>
+         <x>260</x>
+         <y>750</y>
+         <width>51</width>
+         <height>51</height>
+        </rect>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>14</pointsize>
+        </font>
+       </property>
+       <property name="text">
+        <string>?</string>
+       </property>
+      </widget>
+      <widget class="QSpinBox" name="iterations_mgac_input">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>120</y>
+         <width>241</width>
+         <height>41</height>
+        </rect>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>14</pointsize>
+        </font>
+       </property>
+       <property name="minimum">
+        <number>1</number>
+       </property>
+       <property name="maximum">
+        <number>1000</number>
+       </property>
+       <property name="value">
+        <number>275</number>
+       </property>
+      </widget>
+      <widget class="QDoubleSpinBox" name="threshold_mgac_input">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>210</y>
+         <width>241</width>
+         <height>41</height>
+        </rect>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>14</pointsize>
+        </font>
+       </property>
+       <property name="minimum">
+        <double>0.010000000000000</double>
+       </property>
+       <property name="maximum">
+        <double>1.000000000000000</double>
+       </property>
+       <property name="singleStep">
+        <double>0.010000000000000</double>
+       </property>
+       <property name="value">
+        <double>0.350000000000000</double>
+       </property>
+      </widget>
+      <widget class="QSpinBox" name="smoothing_mgac_input">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>310</y>
+         <width>241</width>
+         <height>41</height>
+        </rect>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>14</pointsize>
+        </font>
+       </property>
+       <property name="minimum">
+        <number>0</number>
+       </property>
+       <property name="maximum">
+        <number>4</number>
+       </property>
+       <property name="value">
+        <number>0</number>
+       </property>
+      </widget>
+      <widget class="QSpinBox" name="balloon_mgac_input">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>410</y>
+         <width>241</width>
+         <height>41</height>
+        </rect>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>14</pointsize>
+        </font>
+       </property>
+       <property name="minimum">
+        <number>-4</number>
+       </property>
+       <property name="maximum">
+        <number>4</number>
+       </property>
+       <property name="value">
+        <number>-1</number>
+       </property>
+      </widget>
+      <widget class="QSpinBox" name="alpha_mgac_input">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>580</y>
+         <width>241</width>
+         <height>41</height>
+        </rect>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>14</pointsize>
+        </font>
+       </property>
+       <property name="minimum">
+        <number>1</number>
+       </property>
+       <property name="maximum">
+        <number>1000</number>
+       </property>
+       <property name="value">
+        <number>200</number>
+       </property>
+      </widget>
+      <widget class="QSpinBox" name="sigma_mgac_input">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>680</y>
+         <width>241</width>
+         <height>41</height>
+        </rect>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>14</pointsize>
+        </font>
+       </property>
+       <property name="minimum">
+        <number>1</number>
+       </property>
+       <property name="maximum">
+        <number>10</number>
+       </property>
+       <property name="value">
+        <number>2</number>
+       </property>
+      </widget>
+     </widget>
+     <widget class="QWidget" name="texture_profile_options">
+      <widget class="QLabel" name="texture_profile_title">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>10</y>
+         <width>291</width>
+         <height>41</height>
+        </rect>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>20</pointsize>
+         <weight>75</weight>
+         <bold>true</bold>
+         <underline>true</underline>
+        </font>
+       </property>
+       <property name="text">
+        <string>Perfil de textura:</string>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignCenter</set>
+       </property>
+       <property name="wordWrap">
+        <bool>true</bool>
+       </property>
+      </widget>
+      <widget class="QPushButton" name="texture_profile_apply_button">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>750</y>
+         <width>241</width>
+         <height>51</height>
+        </rect>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>16</pointsize>
+        </font>
+       </property>
+       <property name="text">
+        <string>Aplicar</string>
+       </property>
+      </widget>
+      <widget class="QPushButton" name="texture_profile_algorithm_help">
+       <property name="geometry">
+        <rect>
+         <x>260</x>
+         <y>750</y>
+         <width>51</width>
+         <height>51</height>
+        </rect>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>14</pointsize>
+        </font>
+       </property>
+       <property name="text">
+        <string>?</string>
+       </property>
+      </widget>
+     </widget>
+     <widget class="QWidget" name="texture_classification_options">
+      <widget class="QLabel" name="texture_classification_title">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>10</y>
+         <width>291</width>
+         <height>71</height>
+        </rect>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>20</pointsize>
+         <weight>75</weight>
+         <bold>true</bold>
+         <underline>true</underline>
+        </font>
+       </property>
+       <property name="layoutDirection">
+        <enum>Qt::LeftToRight</enum>
+       </property>
+       <property name="text">
+        <string>Clasificación de textura</string>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignCenter</set>
+       </property>
+       <property name="wordWrap">
+        <bool>true</bool>
+       </property>
+      </widget>
+      <widget class="QGroupBox" name="texture_classification_image_group">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>130</y>
+         <width>291</width>
+         <height>271</height>
+        </rect>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>14</pointsize>
+        </font>
+       </property>
+       <property name="title">
+        <string>Clasificar imagen</string>
+       </property>
+       <widget class="QPushButton" name="texture_classification_image_button">
+        <property name="geometry">
+         <rect>
+          <x>10</x>
+          <y>190</y>
+          <width>201</width>
+          <height>51</height>
+         </rect>
+        </property>
+        <property name="font">
+         <font>
+          <pointsize>16</pointsize>
+         </font>
+        </property>
+        <property name="text">
+         <string>Clasificar</string>
+        </property>
+       </widget>
+       <widget class="QLabel" name="texture_classification_image_clusters_label">
+        <property name="geometry">
+         <rect>
+          <x>10</x>
+          <y>60</y>
+          <width>231</width>
+          <height>31</height>
+         </rect>
+        </property>
+        <property name="font">
+         <font>
+          <pointsize>16</pointsize>
+         </font>
+        </property>
+        <property name="text">
+         <string>Clusters:</string>
+        </property>
+       </widget>
+       <widget class="QSpinBox" name="texture_classification_image_clusters_input">
+        <property name="geometry">
+         <rect>
+          <x>10</x>
+          <y>110</y>
+          <width>201</width>
+          <height>41</height>
+         </rect>
+        </property>
+        <property name="font">
+         <font>
+          <pointsize>14</pointsize>
+         </font>
+        </property>
+        <property name="minimum">
+         <number>1</number>
+        </property>
+        <property name="maximum">
+         <number>255</number>
+        </property>
+        <property name="value">
+         <number>10</number>
+        </property>
+       </widget>
+       <widget class="QPushButton" name="texture_classification_image_clusters_help">
+        <property name="geometry">
+         <rect>
+          <x>220</x>
+          <y>110</y>
+          <width>41</width>
+          <height>41</height>
+         </rect>
+        </property>
+        <property name="font">
+         <font>
+          <pointsize>14</pointsize>
+         </font>
+        </property>
+        <property name="text">
+         <string>?</string>
+        </property>
+       </widget>
+       <widget class="QPushButton" name="texture_classification_image_algorithm_help">
+        <property name="geometry">
+         <rect>
+          <x>220</x>
+          <y>190</y>
+          <width>51</width>
+          <height>51</height>
+         </rect>
+        </property>
+        <property name="font">
+         <font>
+          <pointsize>14</pointsize>
+         </font>
+        </property>
+        <property name="text">
+         <string>?</string>
+        </property>
+       </widget>
+      </widget>
+      <widget class="QGroupBox" name="texture_classification_video_group">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>430</y>
+         <width>291</width>
+         <height>381</height>
+        </rect>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>14</pointsize>
+        </font>
+       </property>
+       <property name="title">
+        <string>Clasificar video</string>
+       </property>
+       <widget class="QPushButton" name="texture_classification_video_button">
+        <property name="geometry">
+         <rect>
+          <x>10</x>
+          <y>300</y>
+          <width>201</width>
+          <height>51</height>
+         </rect>
+        </property>
+        <property name="font">
+         <font>
+          <pointsize>16</pointsize>
+         </font>
+        </property>
+        <property name="text">
+         <string>Clasificar</string>
+        </property>
+       </widget>
+       <widget class="QLabel" name="texture_classification_video_threshold_label">
+        <property name="geometry">
+         <rect>
+          <x>10</x>
+          <y>60</y>
+          <width>231</width>
+          <height>31</height>
+         </rect>
+        </property>
+        <property name="font">
+         <font>
+          <pointsize>16</pointsize>
+         </font>
+        </property>
+        <property name="text">
+         <string>Umbral:</string>
+        </property>
+       </widget>
+       <widget class="QSpinBox" name="texture_classification_video_threshold_input">
+        <property name="geometry">
+         <rect>
+          <x>10</x>
+          <y>110</y>
+          <width>201</width>
+          <height>41</height>
+         </rect>
+        </property>
+        <property name="font">
+         <font>
+          <pointsize>14</pointsize>
+         </font>
+        </property>
+        <property name="minimum">
+         <number>1</number>
+        </property>
+        <property name="maximum">
+         <number>255</number>
+        </property>
+        <property name="value">
+         <number>20</number>
+        </property>
+       </widget>
+       <widget class="QSpinBox" name="texture_classification_video_clusters_input">
+        <property name="geometry">
+         <rect>
+          <x>10</x>
+          <y>220</y>
+          <width>201</width>
+          <height>41</height>
+         </rect>
+        </property>
+        <property name="font">
+         <font>
+          <pointsize>14</pointsize>
+         </font>
+        </property>
+        <property name="minimum">
+         <number>1</number>
+        </property>
+        <property name="maximum">
+         <number>255</number>
+        </property>
+        <property name="value">
+         <number>10</number>
+        </property>
+       </widget>
+       <widget class="QLabel" name="texture_classification_video_clusters_label">
+        <property name="geometry">
+         <rect>
+          <x>10</x>
+          <y>170</y>
+          <width>231</width>
+          <height>31</height>
+         </rect>
+        </property>
+        <property name="font">
+         <font>
+          <pointsize>16</pointsize>
+         </font>
+        </property>
+        <property name="text">
+         <string>Clusters:</string>
+        </property>
+       </widget>
+       <widget class="QPushButton" name="texture_classification_video_threshold_help">
+        <property name="geometry">
+         <rect>
+          <x>220</x>
+          <y>110</y>
+          <width>41</width>
+          <height>41</height>
+         </rect>
+        </property>
+        <property name="font">
+         <font>
+          <pointsize>14</pointsize>
+         </font>
+        </property>
+        <property name="text">
+         <string>?</string>
+        </property>
+       </widget>
+       <widget class="QPushButton" name="texture_classification_video_clusters_help">
+        <property name="geometry">
+         <rect>
+          <x>220</x>
+          <y>220</y>
+          <width>41</width>
+          <height>41</height>
+         </rect>
+        </property>
+        <property name="font">
+         <font>
+          <pointsize>14</pointsize>
+         </font>
+        </property>
+        <property name="text">
+         <string>?</string>
+        </property>
+       </widget>
+       <widget class="QPushButton" name="texture_classification_video_algorithm_help">
+        <property name="geometry">
+         <rect>
+          <x>220</x>
+          <y>300</y>
+          <width>51</width>
+          <height>51</height>
+         </rect>
+        </property>
+        <property name="font">
+         <font>
+          <pointsize>14</pointsize>
+         </font>
+        </property>
+        <property name="text">
+         <string>?</string>
+        </property>
+       </widget>
+      </widget>
+     </widget>
+     <widget class="QWidget" name="global_routine_options">
+      <widget class="QLabel" name="global_routine_title">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>10</y>
+         <width>291</width>
+         <height>71</height>
+        </rect>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>20</pointsize>
+         <weight>75</weight>
+         <bold>true</bold>
+         <underline>true</underline>
+        </font>
+       </property>
+       <property name="layoutDirection">
+        <enum>Qt::LeftToRight</enum>
+       </property>
+       <property name="text">
+        <string>Rutina global</string>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignCenter</set>
+       </property>
+      </widget>
+      <widget class="QPushButton" name="global_routine_initiate_button">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>750</y>
+         <width>241</width>
+         <height>51</height>
+        </rect>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>16</pointsize>
+        </font>
+       </property>
+       <property name="text">
+        <string>Iniciar</string>
+       </property>
+      </widget>
+      <widget class="QGroupBox" name="global_routine_subroutines_label">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>120</y>
+         <width>291</width>
+         <height>361</height>
+        </rect>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>12</pointsize>
+        </font>
+       </property>
+       <property name="title">
+        <string>Sub - Rutinas</string>
+       </property>
+       <widget class="QCheckBox" name="global_routine_subroutines_contour_checkbox">
+        <property name="geometry">
+         <rect>
+          <x>20</x>
+          <y>40</y>
+          <width>251</width>
+          <height>31</height>
+         </rect>
+        </property>
+        <property name="font">
+         <font>
+          <pointsize>18</pointsize>
+         </font>
+        </property>
+        <property name="text">
+         <string>Contornos de celulas</string>
+        </property>
+        <property name="checked">
+         <bool>true</bool>
+        </property>
+       </widget>
+       <widget class="QCheckBox" name="global_routine_subroutines_contour_metrics">
+        <property name="geometry">
+         <rect>
+          <x>50</x>
+          <y>140</y>
+          <width>201</width>
+          <height>31</height>
+         </rect>
+        </property>
+        <property name="font">
+         <font>
+          <pointsize>18</pointsize>
+         </font>
+        </property>
+        <property name="text">
+         <string>Metricas</string>
+        </property>
+        <property name="checked">
+         <bool>true</bool>
+        </property>
+       </widget>
+       <widget class="QCheckBox" name="global_routine_subroutines_contour_movement_map_checkbox">
+        <property name="geometry">
+         <rect>
+          <x>20</x>
+          <y>190</y>
+          <width>221</width>
+          <height>31</height>
+         </rect>
+        </property>
+        <property name="font">
+         <font>
+          <pointsize>18</pointsize>
+         </font>
+        </property>
+        <property name="text">
+         <string>Mapa de calor</string>
+        </property>
+        <property name="checked">
+         <bool>true</bool>
+        </property>
+       </widget>
+       <widget class="QCheckBox" name="global_routine_subroutines_contour_checkbox_texture_map_checkbox">
+        <property name="geometry">
+         <rect>
+          <x>20</x>
+          <y>240</y>
+          <width>221</width>
+          <height>31</height>
+         </rect>
+        </property>
+        <property name="font">
+         <font>
+          <pointsize>18</pointsize>
+         </font>
+        </property>
+        <property name="text">
+         <string>Mapa de textura</string>
+        </property>
+        <property name="checked">
+         <bool>true</bool>
+        </property>
+       </widget>
+       <widget class="QCheckBox" name="global_routine_subroutines_comparison">
+        <property name="geometry">
+         <rect>
+          <x>50</x>
+          <y>90</y>
+          <width>191</width>
+          <height>31</height>
+         </rect>
+        </property>
+        <property name="font">
+         <font>
+          <pointsize>18</pointsize>
+         </font>
+        </property>
+        <property name="text">
+         <string>Comparativa</string>
+        </property>
+        <property name="checked">
+         <bool>true</bool>
+        </property>
+       </widget>
+      </widget>
+      <widget class="QPushButton" name="global_routine_algorithm_help">
+       <property name="geometry">
+        <rect>
+         <x>260</x>
+         <y>750</y>
+         <width>51</width>
+         <height>51</height>
+        </rect>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>14</pointsize>
+        </font>
+       </property>
+       <property name="text">
+        <string>?</string>
+       </property>
+      </widget>
+      <widget class="QPushButton" name="global_routine_change_params">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>690</y>
+         <width>241</width>
+         <height>51</height>
+        </rect>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>16</pointsize>
+        </font>
+       </property>
+       <property name="text">
+        <string>Cambiar parámetros</string>
+       </property>
+      </widget>
+     </widget>
+     <widget class="QWidget" name="adaptive_threshold_options">
+      <widget class="QLabel" name="adaptive_threshold_title">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>10</y>
+         <width>291</width>
+         <height>71</height>
+        </rect>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>20</pointsize>
+         <weight>75</weight>
+         <bold>true</bold>
+         <underline>true</underline>
+        </font>
+       </property>
+       <property name="text">
+        <string>Umbralización adaptativa</string>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignCenter</set>
+       </property>
+       <property name="wordWrap">
+        <bool>true</bool>
+       </property>
+      </widget>
+      <widget class="QSlider" name="adaptive_threshold_c_constant_spinner">
+       <property name="geometry">
+        <rect>
+         <x>20</x>
+         <y>420</y>
+         <width>221</width>
+         <height>22</height>
+        </rect>
+       </property>
+       <property name="minimum">
+        <number>1</number>
+       </property>
+       <property name="maximum">
+        <number>50</number>
+       </property>
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+      </widget>
+      <widget class="QLabel" name="adaptive_threshold_c_constant_label">
+       <property name="geometry">
+        <rect>
+         <x>20</x>
+         <y>300</y>
+         <width>181</width>
+         <height>31</height>
+        </rect>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>16</pointsize>
+        </font>
+       </property>
+       <property name="text">
+        <string>Constante C</string>
+       </property>
+      </widget>
+      <widget class="QComboBox" name="adaptive_threshold_method_box">
+       <property name="geometry">
+        <rect>
+         <x>20</x>
+         <y>540</y>
+         <width>221</width>
          <height>41</height>
         </rect>
        </property>
@@ -1574,47 +1680,126 @@
          <pointsize>12</pointsize>
         </font>
        </property>
+       <property name="editable">
+        <bool>false</bool>
+       </property>
+       <property name="placeholderText">
+        <string/>
+       </property>
+       <item>
+        <property name="text">
+         <string>Umbralización de la media</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Umbralización gaussiana</string>
+        </property>
+       </item>
+      </widget>
+      <widget class="QPushButton" name="adaptive_threshold_method_help">
+       <property name="geometry">
+        <rect>
+         <x>250</x>
+         <y>540</y>
+         <width>41</width>
+         <height>41</height>
+        </rect>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>14</pointsize>
+        </font>
+       </property>
+       <property name="text">
+        <string>?</string>
+       </property>
+      </widget>
+      <widget class="QSpinBox" name="adaptive_threshold_window_size_box">
+       <property name="geometry">
+        <rect>
+         <x>20</x>
+         <y>180</y>
+         <width>221</width>
+         <height>41</height>
+        </rect>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>14</pointsize>
+        </font>
+       </property>
        <property name="minimum">
-        <number>1</number>
+        <number>3</number>
        </property>
        <property name="maximum">
-        <number>255</number>
-       </property>
-       <property name="value">
         <number>20</number>
        </property>
       </widget>
-      <widget class="QSpinBox" name="texture_classification_video_clusters_input">
+      <widget class="QSpinBox" name="adaptive_threshold_c_constant_box">
        <property name="geometry">
         <rect>
-         <x>10</x>
-         <y>200</y>
-         <width>181</width>
+         <x>20</x>
+         <y>350</y>
+         <width>221</width>
          <height>41</height>
         </rect>
        </property>
        <property name="font">
         <font>
-         <pointsize>12</pointsize>
+         <pointsize>14</pointsize>
         </font>
        </property>
        <property name="minimum">
         <number>1</number>
        </property>
        <property name="maximum">
-        <number>255</number>
-       </property>
-       <property name="value">
-        <number>10</number>
+        <number>50</number>
        </property>
       </widget>
-      <widget class="QLabel" name="texture_classification_video_clusters_label">
+      <widget class="QLabel" name="adaptive_threshold_method_label">
+       <property name="geometry">
+        <rect>
+         <x>20</x>
+         <y>490</y>
+         <width>181</width>
+         <height>31</height>
+        </rect>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>16</pointsize>
+        </font>
+       </property>
+       <property name="text">
+        <string>Metodo:</string>
+       </property>
+      </widget>
+      <widget class="QPushButton" name="adaptive_threshold_window_size_help">
+       <property name="geometry">
+        <rect>
+         <x>250</x>
+         <y>180</y>
+         <width>41</width>
+         <height>41</height>
+        </rect>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>14</pointsize>
+        </font>
+       </property>
+       <property name="text">
+        <string>?</string>
+       </property>
+      </widget>
+      <widget class="QPushButton" name="adaptive_threshold_add_process_button">
        <property name="geometry">
         <rect>
          <x>10</x>
-         <y>150</y>
-         <width>231</width>
-         <height>31</height>
+         <y>750</y>
+         <width>241</width>
+         <height>51</height>
         </rect>
        </property>
        <property name="font">
@@ -1623,14 +1808,51 @@
         </font>
        </property>
        <property name="text">
-        <string>Clusters:</string>
+        <string>Añadir proceso</string>
        </property>
       </widget>
-      <widget class="QPushButton" name="texture_classification_video_threshold_help">
+      <widget class="QSlider" name="adaptive_threshold_window_size_spinner">
        <property name="geometry">
         <rect>
-         <x>200</x>
-         <y>90</y>
+         <x>20</x>
+         <y>240</y>
+         <width>221</width>
+         <height>22</height>
+        </rect>
+       </property>
+       <property name="minimum">
+        <number>3</number>
+       </property>
+       <property name="maximum">
+        <number>20</number>
+       </property>
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+      </widget>
+      <widget class="QLabel" name="adaptive_threshold_window_size_label">
+       <property name="geometry">
+        <rect>
+         <x>20</x>
+         <y>140</y>
+         <width>301</width>
+         <height>31</height>
+        </rect>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>16</pointsize>
+        </font>
+       </property>
+       <property name="text">
+        <string>Tamaño de ventana de vecinos</string>
+       </property>
+      </widget>
+      <widget class="QPushButton" name="adaptive_threshold_c_constant_help">
+       <property name="geometry">
+        <rect>
+         <x>250</x>
+         <y>350</y>
          <width>41</width>
          <height>41</height>
         </rect>
@@ -1644,13 +1866,13 @@
         <string>?</string>
        </property>
       </widget>
-      <widget class="QPushButton" name="texture_classification_video_clusters_help">
+      <widget class="QPushButton" name="adaptive_threshold_algoritm_help">
        <property name="geometry">
         <rect>
-         <x>200</x>
-         <y>200</y>
-         <width>41</width>
-         <height>41</height>
+         <x>260</x>
+         <y>750</y>
+         <width>51</width>
+         <height>51</height>
         </rect>
        </property>
        <property name="font">
@@ -1662,90 +1884,121 @@
         <string>?</string>
        </property>
       </widget>
-      <widget class="QPushButton" name="texture_classification_video_algorithm_help">
+      <widget class="QLabel" name="adaptive_threshold_highlight">
        <property name="geometry">
         <rect>
-         <x>200</x>
-         <y>270</y>
-         <width>41</width>
+         <x>90</x>
+         <y>650</y>
+         <width>161</width>
+         <height>41</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string/>
+       </property>
+       <property name="textFormat">
+        <enum>Qt::RichText</enum>
+       </property>
+       <property name="pixmap">
+        <pixmap>C:/Users/Ariel/.designer/asd.gif</pixmap>
+       </property>
+       <property name="scaledContents">
+        <bool>false</bool>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignCenter</set>
+       </property>
+      </widget>
+     </widget>
+     <widget class="QWidget" name="generate_metrics_options">
+      <widget class="QLabel" name="generate_metrics_title_label">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>10</y>
+         <width>291</width>
+         <height>71</height>
+        </rect>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>20</pointsize>
+         <weight>75</weight>
+         <bold>true</bold>
+         <underline>true</underline>
+        </font>
+       </property>
+       <property name="text">
+        <string>Métricas a partir de máscara</string>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignCenter</set>
+       </property>
+       <property name="wordWrap">
+        <bool>true</bool>
+       </property>
+      </widget>
+      <widget class="QLineEdit" name="generate_metrics_mask_video_input">
+       <property name="geometry">
+        <rect>
+         <x>20</x>
+         <y>180</y>
+         <width>271</width>
+         <height>41</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string/>
+       </property>
+       <property name="readOnly">
+        <bool>true</bool>
+       </property>
+      </widget>
+      <widget class="QLabel" name="generate_metrics_mask_video_label">
+       <property name="geometry">
+        <rect>
+         <x>20</x>
+         <y>130</y>
+         <width>271</width>
          <height>41</height>
         </rect>
        </property>
        <property name="font">
         <font>
+         <pointsize>16</pointsize>
+        </font>
+       </property>
+       <property name="text">
+        <string>Ruta de video:</string>
+       </property>
+      </widget>
+      <widget class="QPushButton" name="generate_metrics_load_mask_video_button">
+       <property name="geometry">
+        <rect>
+         <x>20</x>
+         <y>240</y>
+         <width>161</width>
+         <height>51</height>
+        </rect>
+       </property>
+       <property name="font">
+        <font>
          <pointsize>14</pointsize>
+         <weight>50</weight>
+         <bold>false</bold>
         </font>
        </property>
        <property name="text">
-        <string>?</string>
+        <string>Cargar ruta</string>
        </property>
       </widget>
-     </widget>
-    </widget>
-    <widget class="QWidget" name="global_routine_options">
-     <widget class="QLabel" name="global_routine_title">
-      <property name="geometry">
-       <rect>
-        <x>60</x>
-        <y>30</y>
-        <width>191</width>
-        <height>41</height>
-       </rect>
-      </property>
-      <property name="font">
-       <font>
-        <pointsize>24</pointsize>
-       </font>
-      </property>
-      <property name="layoutDirection">
-       <enum>Qt::LeftToRight</enum>
-      </property>
-      <property name="text">
-       <string>Rutina global</string>
-      </property>
-     </widget>
-     <widget class="QPushButton" name="global_routine_initiate_button">
-      <property name="geometry">
-       <rect>
-        <x>10</x>
-        <y>770</y>
-        <width>221</width>
-        <height>51</height>
-       </rect>
-      </property>
-      <property name="font">
-       <font>
-        <pointsize>14</pointsize>
-       </font>
-      </property>
-      <property name="text">
-       <string>Iniciar</string>
-      </property>
-     </widget>
-     <widget class="QGroupBox" name="global_routine_subroutines_label">
-      <property name="geometry">
-       <rect>
-        <x>20</x>
-        <y>120</y>
-        <width>261</width>
-        <height>311</height>
-       </rect>
-      </property>
-      <property name="font">
-       <font>
-        <pointsize>12</pointsize>
-       </font>
-      </property>
-      <property name="title">
-       <string>Sub - Rutinas</string>
-      </property>
-      <widget class="QCheckBox" name="global_routine_subroutines_contour_checkbox">
+      <widget class="QLabel" name="generate_metrics_options_label">
        <property name="geometry">
         <rect>
          <x>20</x>
-         <y>40</y>
-         <width>221</width>
-         <height>31</height>
+         <y>340</y>
+         <width>271</width>
+         <height>41</height>
         </rect>
        </property>
        <property name="font">
@@ -1754,80 +2007,14 @@
         </font>
        </property>
        <property name="text">
-        <string>Contornos de celulas</string>
-       </property>
-       <property name="checked">
-        <bool>true</bool>
+        <string>Métricas a generar</string>
        </property>
       </widget>
-      <widget class="QCheckBox" name="global_routine_subroutines_contour_metrics">
+      <widget class="QCheckBox" name="generate_metrics_perimeter_checkbox">
        <property name="geometry">
         <rect>
-         <x>50</x>
-         <y>120</y>
-         <width>121</width>
-         <height>31</height>
-        </rect>
-       </property>
-       <property name="font">
-        <font>
-         <pointsize>16</pointsize>
-        </font>
-       </property>
-       <property name="text">
-        <string>Metricas</string>
-       </property>
-       <property name="checked">
-        <bool>true</bool>
-       </property>
-      </widget>
-      <widget class="QCheckBox" name="global_routine_subroutines_contour_movement_map_checkbox">
-       <property name="geometry">
-        <rect>
-         <x>20</x>
-         <y>160</y>
-         <width>221</width>
-         <height>31</height>
-        </rect>
-       </property>
-       <property name="font">
-        <font>
-         <pointsize>16</pointsize>
-        </font>
-       </property>
-       <property name="text">
-        <string>Mapa de calor</string>
-       </property>
-       <property name="checked">
-        <bool>true</bool>
-       </property>
-      </widget>
-      <widget class="QCheckBox" name="global_routine_subroutines_contour_checkbox_texture_map_checkbox">
-       <property name="geometry">
-        <rect>
-         <x>20</x>
-         <y>200</y>
-         <width>221</width>
-         <height>31</height>
-        </rect>
-       </property>
-       <property name="font">
-        <font>
-         <pointsize>16</pointsize>
-        </font>
-       </property>
-       <property name="text">
-        <string>Mapa de textura</string>
-       </property>
-       <property name="checked">
-        <bool>true</bool>
-       </property>
-      </widget>
-      <widget class="QCheckBox" name="global_routine_subroutines_comparison">
-       <property name="geometry">
-        <rect>
-         <x>50</x>
-         <y>80</y>
+         <x>30</x>
+         <y>390</y>
          <width>151</width>
          <height>31</height>
         </rect>
@@ -1838,679 +2025,158 @@
         </font>
        </property>
        <property name="text">
-        <string>Comparativa</string>
+        <string>Perímetro</string>
        </property>
-       <property name="checked">
+      </widget>
+      <widget class="QCheckBox" name="generate_metrics_area_checkbox">
+       <property name="geometry">
+        <rect>
+         <x>30</x>
+         <y>440</y>
+         <width>151</width>
+         <height>31</height>
+        </rect>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>16</pointsize>
+        </font>
+       </property>
+       <property name="text">
+        <string>Área</string>
+       </property>
+      </widget>
+      <widget class="QCheckBox" name="generate_metrics_axis_rate_checkbox">
+       <property name="geometry">
+        <rect>
+         <x>30</x>
+         <y>490</y>
+         <width>151</width>
+         <height>31</height>
+        </rect>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>16</pointsize>
+        </font>
+       </property>
+       <property name="text">
+        <string>Razón de ejes</string>
+       </property>
+      </widget>
+      <widget class="QPushButton" name="generate_metrics_generate_button">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>750</y>
+         <width>241</width>
+         <height>51</height>
+        </rect>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>14</pointsize>
+         <weight>50</weight>
+         <bold>false</bold>
+        </font>
+       </property>
+       <property name="text">
+        <string>Generar métricas</string>
+       </property>
+      </widget>
+      <widget class="QPushButton" name="generate_metrics_load_metrics_help">
+       <property name="geometry">
+        <rect>
+         <x>190</x>
+         <y>240</y>
+         <width>51</width>
+         <height>51</height>
+        </rect>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>14</pointsize>
+        </font>
+       </property>
+       <property name="text">
+        <string>?</string>
+       </property>
+      </widget>
+      <widget class="QPushButton" name="generate_metrics_algoritm_help">
+       <property name="geometry">
+        <rect>
+         <x>260</x>
+         <y>750</y>
+         <width>51</width>
+         <height>51</height>
+        </rect>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>14</pointsize>
+        </font>
+       </property>
+       <property name="text">
+        <string>?</string>
+       </property>
+      </widget>
+     </widget>
+     <widget class="QWidget" name="movement_and_texture_metrics_options">
+      <widget class="QPushButton" name="analyze_movement_and_texture_button">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>750</y>
+         <width>241</width>
+         <height>51</height>
+        </rect>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>14</pointsize>
+        </font>
+       </property>
+       <property name="text">
+        <string>Analizar</string>
+       </property>
+      </widget>
+      <widget class="QLabel" name="analyze_movement_and_texture_title">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>10</y>
+         <width>291</width>
+         <height>71</height>
+        </rect>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>20</pointsize>
+         <weight>75</weight>
+         <bold>true</bold>
+         <underline>true</underline>
+        </font>
+       </property>
+       <property name="text">
+        <string>Analizar movimiento y textura en region</string>
+       </property>
+       <property name="textFormat">
+        <enum>Qt::AutoText</enum>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignCenter</set>
+       </property>
+       <property name="wordWrap">
         <bool>true</bool>
        </property>
       </widget>
-     </widget>
-     <widget class="QPushButton" name="global_routine_algorithm_help">
-      <property name="geometry">
-       <rect>
-        <x>250</x>
-        <y>770</y>
-        <width>51</width>
-        <height>51</height>
-       </rect>
-      </property>
-      <property name="font">
-       <font>
-        <pointsize>14</pointsize>
-       </font>
-      </property>
-      <property name="text">
-       <string>?</string>
-      </property>
-     </widget>
-     <widget class="QPushButton" name="global_routine_change_params">
-      <property name="geometry">
-       <rect>
-        <x>10</x>
-        <y>690</y>
-        <width>221</width>
-        <height>51</height>
-       </rect>
-      </property>
-      <property name="font">
-       <font>
-        <pointsize>14</pointsize>
-       </font>
-      </property>
-      <property name="text">
-       <string>Cambiar parámetros</string>
-      </property>
-     </widget>
-    </widget>
-    <widget class="QWidget" name="adaptive_threshold_options">
-     <widget class="QLabel" name="adaptive_threshold_title">
-      <property name="geometry">
-       <rect>
-        <x>10</x>
-        <y>20</y>
-        <width>271</width>
-        <height>51</height>
-       </rect>
-      </property>
-      <property name="font">
-       <font>
-        <pointsize>16</pointsize>
-       </font>
-      </property>
-      <property name="text">
-       <string>Umbralización adaptativa</string>
-      </property>
-     </widget>
-     <widget class="QSlider" name="adaptive_threshold_c_constant_spinner">
-      <property name="geometry">
-       <rect>
-        <x>20</x>
-        <y>350</y>
-        <width>181</width>
-        <height>22</height>
-       </rect>
-      </property>
-      <property name="minimum">
-       <number>1</number>
-      </property>
-      <property name="maximum">
-       <number>50</number>
-      </property>
-      <property name="orientation">
-       <enum>Qt::Horizontal</enum>
-      </property>
-     </widget>
-     <widget class="QLabel" name="adaptive_threshold_c_constant_label">
-      <property name="geometry">
-       <rect>
-        <x>20</x>
-        <y>250</y>
-        <width>181</width>
-        <height>31</height>
-       </rect>
-      </property>
-      <property name="font">
-       <font>
-        <pointsize>14</pointsize>
-       </font>
-      </property>
-      <property name="text">
-       <string>Constante C</string>
-      </property>
-     </widget>
-     <widget class="QComboBox" name="adaptive_threshold_method_box">
-      <property name="geometry">
-       <rect>
-        <x>20</x>
-        <y>490</y>
-        <width>181</width>
-        <height>31</height>
-       </rect>
-      </property>
-      <property name="font">
-       <font>
-        <pointsize>10</pointsize>
-       </font>
-      </property>
-      <property name="editable">
-       <bool>false</bool>
-      </property>
-      <property name="placeholderText">
-       <string/>
-      </property>
-      <item>
-       <property name="text">
-        <string>Umbralización de la media</string>
-       </property>
-      </item>
-      <item>
-       <property name="text">
-        <string>Umbralización gaussiana</string>
-       </property>
-      </item>
-     </widget>
-     <widget class="QPushButton" name="adaptive_threshold_method_help">
-      <property name="geometry">
-       <rect>
-        <x>210</x>
-        <y>490</y>
-        <width>31</width>
-        <height>31</height>
-       </rect>
-      </property>
-      <property name="font">
-       <font>
-        <pointsize>14</pointsize>
-       </font>
-      </property>
-      <property name="text">
-       <string>?</string>
-      </property>
-     </widget>
-     <widget class="QSpinBox" name="adaptive_threshold_window_size_box">
-      <property name="geometry">
-       <rect>
-        <x>20</x>
-        <y>130</y>
-        <width>181</width>
-        <height>31</height>
-       </rect>
-      </property>
-      <property name="font">
-       <font>
-        <pointsize>12</pointsize>
-       </font>
-      </property>
-      <property name="minimum">
-       <number>3</number>
-      </property>
-      <property name="maximum">
-       <number>20</number>
-      </property>
-     </widget>
-     <widget class="QSpinBox" name="adaptive_threshold_c_constant_box">
-      <property name="geometry">
-       <rect>
-        <x>20</x>
-        <y>300</y>
-        <width>181</width>
-        <height>31</height>
-       </rect>
-      </property>
-      <property name="font">
-       <font>
-        <pointsize>12</pointsize>
-       </font>
-      </property>
-      <property name="minimum">
-       <number>1</number>
-      </property>
-      <property name="maximum">
-       <number>50</number>
-      </property>
-     </widget>
-     <widget class="QLabel" name="adaptive_threshold_method_label">
-      <property name="geometry">
-       <rect>
-        <x>20</x>
-        <y>440</y>
-        <width>181</width>
-        <height>31</height>
-       </rect>
-      </property>
-      <property name="font">
-       <font>
-        <pointsize>14</pointsize>
-       </font>
-      </property>
-      <property name="text">
-       <string>Metodo:</string>
-      </property>
-     </widget>
-     <widget class="QPushButton" name="adaptive_threshold_window_size_help">
-      <property name="geometry">
-       <rect>
-        <x>210</x>
-        <y>130</y>
-        <width>31</width>
-        <height>31</height>
-       </rect>
-      </property>
-      <property name="font">
-       <font>
-        <pointsize>14</pointsize>
-       </font>
-      </property>
-      <property name="text">
-       <string>?</string>
-      </property>
-     </widget>
-     <widget class="QPushButton" name="adaptive_threshold_add_process_button">
-      <property name="geometry">
-       <rect>
-        <x>90</x>
-        <y>610</y>
-        <width>161</width>
-        <height>41</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>Añadir proceso</string>
-      </property>
-     </widget>
-     <widget class="QSlider" name="adaptive_threshold_window_size_spinner">
-      <property name="geometry">
-       <rect>
-        <x>20</x>
-        <y>180</y>
-        <width>181</width>
-        <height>22</height>
-       </rect>
-      </property>
-      <property name="minimum">
-       <number>3</number>
-      </property>
-      <property name="maximum">
-       <number>20</number>
-      </property>
-      <property name="orientation">
-       <enum>Qt::Horizontal</enum>
-      </property>
-     </widget>
-     <widget class="QLabel" name="adaptive_threshold_window_size_label">
-      <property name="geometry">
-       <rect>
-        <x>10</x>
-        <y>90</y>
-        <width>271</width>
-        <height>31</height>
-       </rect>
-      </property>
-      <property name="font">
-       <font>
-        <pointsize>14</pointsize>
-       </font>
-      </property>
-      <property name="text">
-       <string>Tamaño de ventana de vecinos</string>
-      </property>
-     </widget>
-     <widget class="QPushButton" name="adaptive_threshold_c_constant_help">
-      <property name="geometry">
-       <rect>
-        <x>210</x>
-        <y>300</y>
-        <width>31</width>
-        <height>31</height>
-       </rect>
-      </property>
-      <property name="font">
-       <font>
-        <pointsize>14</pointsize>
-       </font>
-      </property>
-      <property name="text">
-       <string>?</string>
-      </property>
-     </widget>
-     <widget class="QPushButton" name="adaptive_threshold_algoritm_help">
-      <property name="geometry">
-       <rect>
-        <x>260</x>
-        <y>610</y>
-        <width>41</width>
-        <height>41</height>
-       </rect>
-      </property>
-      <property name="font">
-       <font>
-        <pointsize>14</pointsize>
-       </font>
-      </property>
-      <property name="text">
-       <string>?</string>
-      </property>
-     </widget>
-     <widget class="QLabel" name="adaptive_threshold_highlight">
-      <property name="geometry">
-       <rect>
-        <x>90</x>
-        <y>650</y>
-        <width>161</width>
-        <height>41</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string/>
-      </property>
-      <property name="textFormat">
-       <enum>Qt::RichText</enum>
-      </property>
-      <property name="pixmap">
-       <pixmap>C:/Users/Ariel/.designer/asd.gif</pixmap>
-      </property>
-      <property name="scaledContents">
-       <bool>false</bool>
-      </property>
-      <property name="alignment">
-       <set>Qt::AlignCenter</set>
-      </property>
-     </widget>
-    </widget>
-    <widget class="QWidget" name="generate_metrics_options">
-     <widget class="QLabel" name="generate_metrics_title_label">
-      <property name="geometry">
-       <rect>
-        <x>10</x>
-        <y>30</y>
-        <width>271</width>
-        <height>41</height>
-       </rect>
-      </property>
-      <property name="font">
-       <font>
-        <pointsize>16</pointsize>
-       </font>
-      </property>
-      <property name="text">
-       <string>Métricas a partir de máscara</string>
-      </property>
-     </widget>
-     <widget class="QLineEdit" name="generate_metrics_mask_video_input">
-      <property name="geometry">
-       <rect>
-        <x>20</x>
-        <y>160</y>
-        <width>271</width>
-        <height>31</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string/>
-      </property>
-      <property name="readOnly">
-       <bool>true</bool>
-      </property>
-     </widget>
-     <widget class="QLabel" name="generate_metrics_mask_video_label">
-      <property name="geometry">
-       <rect>
-        <x>20</x>
-        <y>110</y>
-        <width>271</width>
-        <height>41</height>
-       </rect>
-      </property>
-      <property name="font">
-       <font>
-        <pointsize>14</pointsize>
-       </font>
-      </property>
-      <property name="text">
-       <string>Ruta de video:</string>
-      </property>
-     </widget>
-     <widget class="QPushButton" name="generate_metrics_load_mask_video_button">
-      <property name="geometry">
-       <rect>
-        <x>20</x>
-        <y>210</y>
-        <width>151</width>
-        <height>41</height>
-       </rect>
-      </property>
-      <property name="font">
-       <font>
-        <pointsize>10</pointsize>
-        <weight>75</weight>
-        <bold>true</bold>
-       </font>
-      </property>
-      <property name="text">
-       <string>Cargar ruta</string>
-      </property>
-     </widget>
-     <widget class="QLabel" name="generate_metrics_options_label">
-      <property name="geometry">
-       <rect>
-        <x>20</x>
-        <y>300</y>
-        <width>271</width>
-        <height>41</height>
-       </rect>
-      </property>
-      <property name="font">
-       <font>
-        <pointsize>14</pointsize>
-       </font>
-      </property>
-      <property name="text">
-       <string>Métricas a generar</string>
-      </property>
-     </widget>
-     <widget class="QCheckBox" name="generate_metrics_perimeter_checkbox">
-      <property name="geometry">
-       <rect>
-        <x>30</x>
-        <y>350</y>
-        <width>151</width>
-        <height>31</height>
-       </rect>
-      </property>
-      <property name="font">
-       <font>
-        <pointsize>14</pointsize>
-       </font>
-      </property>
-      <property name="text">
-       <string>Perímetro</string>
-      </property>
-     </widget>
-     <widget class="QCheckBox" name="generate_metrics_area_checkbox">
-      <property name="geometry">
-       <rect>
-        <x>30</x>
-        <y>390</y>
-        <width>151</width>
-        <height>31</height>
-       </rect>
-      </property>
-      <property name="font">
-       <font>
-        <pointsize>14</pointsize>
-       </font>
-      </property>
-      <property name="text">
-       <string>Área</string>
-      </property>
-     </widget>
-     <widget class="QCheckBox" name="generate_metrics_axis_rate_checkbox">
-      <property name="geometry">
-       <rect>
-        <x>30</x>
-        <y>430</y>
-        <width>151</width>
-        <height>31</height>
-       </rect>
-      </property>
-      <property name="font">
-       <font>
-        <pointsize>14</pointsize>
-       </font>
-      </property>
-      <property name="text">
-       <string>Razón de ejes</string>
-      </property>
-     </widget>
-     <widget class="QPushButton" name="generate_metrics_generate_button">
-      <property name="geometry">
-       <rect>
-        <x>100</x>
-        <y>570</y>
-        <width>151</width>
-        <height>41</height>
-       </rect>
-      </property>
-      <property name="font">
-       <font>
-        <pointsize>10</pointsize>
-        <weight>75</weight>
-        <bold>true</bold>
-       </font>
-      </property>
-      <property name="text">
-       <string>Generar métricas</string>
-      </property>
-     </widget>
-     <widget class="QPushButton" name="generate_metrics_load_metrics_help">
-      <property name="geometry">
-       <rect>
-        <x>180</x>
-        <y>210</y>
-        <width>41</width>
-        <height>41</height>
-       </rect>
-      </property>
-      <property name="font">
-       <font>
-        <pointsize>14</pointsize>
-       </font>
-      </property>
-      <property name="text">
-       <string>?</string>
-      </property>
-     </widget>
-     <widget class="QPushButton" name="generate_metrics_algoritm_help">
-      <property name="geometry">
-       <rect>
-        <x>260</x>
-        <y>570</y>
-        <width>41</width>
-        <height>41</height>
-       </rect>
-      </property>
-      <property name="font">
-       <font>
-        <pointsize>14</pointsize>
-       </font>
-      </property>
-      <property name="text">
-       <string>?</string>
-      </property>
-     </widget>
-    </widget>
-    <widget class="QWidget" name="movement_and_texture_metrics_options">
-     <widget class="QPushButton" name="analyze_movement_and_texture_button">
-      <property name="geometry">
-       <rect>
-        <x>100</x>
-        <y>790</y>
-        <width>151</width>
-        <height>41</height>
-       </rect>
-      </property>
-      <property name="font">
-       <font>
-        <pointsize>14</pointsize>
-       </font>
-      </property>
-      <property name="text">
-       <string>Analizar</string>
-      </property>
-     </widget>
-     <widget class="QLabel" name="analyze_movement_and_texture_title">
-      <property name="geometry">
-       <rect>
-        <x>10</x>
-        <y>0</y>
-        <width>291</width>
-        <height>71</height>
-       </rect>
-      </property>
-      <property name="font">
-       <font>
-        <pointsize>18</pointsize>
-        <weight>75</weight>
-        <bold>true</bold>
-       </font>
-      </property>
-      <property name="text">
-       <string>Analizar movimiento y textura en region</string>
-      </property>
-      <property name="textFormat">
-       <enum>Qt::AutoText</enum>
-      </property>
-      <property name="alignment">
-       <set>Qt::AlignCenter</set>
-      </property>
-      <property name="wordWrap">
-       <bool>true</bool>
-      </property>
-     </widget>
-     <widget class="QPushButton" name="analyze_movement_and_texture_algorithm_help">
-      <property name="geometry">
-       <rect>
-        <x>260</x>
-        <y>790</y>
-        <width>41</width>
-        <height>41</height>
-       </rect>
-      </property>
-      <property name="font">
-       <font>
-        <pointsize>14</pointsize>
-       </font>
-      </property>
-      <property name="text">
-       <string>?</string>
-      </property>
-     </widget>
-     <widget class="QGroupBox" name="analyze_movement_and_texture_group">
-      <property name="geometry">
-       <rect>
-        <x>20</x>
-        <y>90</y>
-        <width>271</width>
-        <height>671</height>
-       </rect>
-      </property>
-      <property name="font">
-       <font>
-        <pointsize>14</pointsize>
-       </font>
-      </property>
-      <property name="title">
-       <string>Vistas necesarias</string>
-      </property>
-      <widget class="QLabel" name="analyze_movement_and_texture_movement_label">
+      <widget class="QPushButton" name="analyze_movement_and_texture_algorithm_help">
        <property name="geometry">
         <rect>
-         <x>10</x>
-         <y>90</y>
-         <width>231</width>
-         <height>31</height>
-        </rect>
-       </property>
-       <property name="font">
-        <font>
-         <pointsize>14</pointsize>
-        </font>
-       </property>
-       <property name="text">
-        <string>Umbral:</string>
-       </property>
-      </widget>
-      <widget class="QSpinBox" name="analyze_movement_and_texture_movement_threshold_input">
-       <property name="geometry">
-        <rect>
-         <x>10</x>
-         <y>130</y>
-         <width>181</width>
-         <height>31</height>
-        </rect>
-       </property>
-       <property name="font">
-        <font>
-         <pointsize>12</pointsize>
-        </font>
-       </property>
-       <property name="minimum">
-        <number>1</number>
-       </property>
-       <property name="maximum">
-        <number>255</number>
-       </property>
-       <property name="value">
-        <number>20</number>
-       </property>
-      </widget>
-      <widget class="QPushButton" name="analyze_movement_and_texture_movement_theshold_help">
-       <property name="geometry">
-        <rect>
-         <x>200</x>
-         <y>130</y>
-         <width>31</width>
-         <height>31</height>
+         <x>260</x>
+         <y>750</y>
+         <width>51</width>
+         <height>51</height>
         </rect>
        </property>
        <property name="font">
@@ -2522,290 +2188,471 @@
         <string>?</string>
        </property>
       </widget>
-      <widget class="QLabel" name="analyze_movement_and_texture_movement_title">
+      <widget class="QGroupBox" name="analyze_movement_and_texture_group">
        <property name="geometry">
         <rect>
          <x>10</x>
-         <y>40</y>
-         <width>231</width>
-         <height>31</height>
+         <y>110</y>
+         <width>291</width>
+         <height>621</height>
         </rect>
        </property>
        <property name="font">
         <font>
-         <pointsize>14</pointsize>
+         <pointsize>8</pointsize>
+        </font>
+       </property>
+       <property name="title">
+        <string>Vistas necesarias</string>
+       </property>
+       <widget class="QLabel" name="analyze_movement_and_texture_movement_label">
+        <property name="geometry">
+         <rect>
+          <x>10</x>
+          <y>50</y>
+          <width>231</width>
+          <height>31</height>
+         </rect>
+        </property>
+        <property name="font">
+         <font>
+          <pointsize>14</pointsize>
+         </font>
+        </property>
+        <property name="text">
+         <string>Umbral:</string>
+        </property>
+       </widget>
+       <widget class="QSpinBox" name="analyze_movement_and_texture_movement_threshold_input">
+        <property name="geometry">
+         <rect>
+          <x>10</x>
+          <y>90</y>
+          <width>211</width>
+          <height>31</height>
+         </rect>
+        </property>
+        <property name="font">
+         <font>
+          <pointsize>12</pointsize>
+         </font>
+        </property>
+        <property name="minimum">
+         <number>1</number>
+        </property>
+        <property name="maximum">
+         <number>255</number>
+        </property>
+        <property name="value">
+         <number>20</number>
+        </property>
+       </widget>
+       <widget class="QPushButton" name="analyze_movement_and_texture_movement_theshold_help">
+        <property name="geometry">
+         <rect>
+          <x>230</x>
+          <y>90</y>
+          <width>31</width>
+          <height>31</height>
+         </rect>
+        </property>
+        <property name="font">
+         <font>
+          <pointsize>14</pointsize>
+         </font>
+        </property>
+        <property name="text">
+         <string>?</string>
+        </property>
+       </widget>
+       <widget class="QLabel" name="analyze_movement_and_texture_movement_title">
+        <property name="geometry">
+         <rect>
+          <x>30</x>
+          <y>20</y>
+          <width>231</width>
+          <height>31</height>
+         </rect>
+        </property>
+        <property name="font">
+         <font>
+          <pointsize>14</pointsize>
+          <weight>75</weight>
+          <bold>true</bold>
+          <underline>true</underline>
+         </font>
+        </property>
+        <property name="text">
+         <string>Movimiento</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignCenter</set>
+        </property>
+       </widget>
+       <widget class="Line" name="line_3">
+        <property name="geometry">
+         <rect>
+          <x>10</x>
+          <y>140</y>
+          <width>261</width>
+          <height>16</height>
+         </rect>
+        </property>
+        <property name="orientation">
+         <enum>Qt::Horizontal</enum>
+        </property>
+       </widget>
+       <widget class="QSpinBox" name="analyze_movement_and_texture_texture_image_clusters_input">
+        <property name="geometry">
+         <rect>
+          <x>10</x>
+          <y>250</y>
+          <width>211</width>
+          <height>31</height>
+         </rect>
+        </property>
+        <property name="font">
+         <font>
+          <pointsize>12</pointsize>
+         </font>
+        </property>
+        <property name="minimum">
+         <number>1</number>
+        </property>
+        <property name="maximum">
+         <number>255</number>
+        </property>
+        <property name="value">
+         <number>10</number>
+        </property>
+       </widget>
+       <widget class="QLabel" name="analyze_movement_and_texture_texture_image_clusters_label">
+        <property name="geometry">
+         <rect>
+          <x>10</x>
+          <y>210</y>
+          <width>231</width>
+          <height>31</height>
+         </rect>
+        </property>
+        <property name="font">
+         <font>
+          <pointsize>14</pointsize>
+         </font>
+        </property>
+        <property name="text">
+         <string>Clusters:</string>
+        </property>
+       </widget>
+       <widget class="QPushButton" name="analyze_movement_and_texture_texture_image_clusters_help">
+        <property name="geometry">
+         <rect>
+          <x>230</x>
+          <y>250</y>
+          <width>31</width>
+          <height>31</height>
+         </rect>
+        </property>
+        <property name="font">
+         <font>
+          <pointsize>14</pointsize>
+         </font>
+        </property>
+        <property name="text">
+         <string>?</string>
+        </property>
+       </widget>
+       <widget class="QLabel" name="analyze_movement_and_texture_texture_image_title">
+        <property name="geometry">
+         <rect>
+          <x>30</x>
+          <y>160</y>
+          <width>231</width>
+          <height>31</height>
+         </rect>
+        </property>
+        <property name="font">
+         <font>
+          <pointsize>14</pointsize>
+          <weight>75</weight>
+          <bold>true</bold>
+          <underline>true</underline>
+         </font>
+        </property>
+        <property name="text">
+         <string>Textura Video</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignCenter</set>
+        </property>
+       </widget>
+       <widget class="QSpinBox" name="analyze_movement_and_texture_texture_video_clusters_input">
+        <property name="geometry">
+         <rect>
+          <x>10</x>
+          <y>410</y>
+          <width>211</width>
+          <height>31</height>
+         </rect>
+        </property>
+        <property name="font">
+         <font>
+          <pointsize>12</pointsize>
+         </font>
+        </property>
+        <property name="minimum">
+         <number>1</number>
+        </property>
+        <property name="maximum">
+         <number>255</number>
+        </property>
+        <property name="value">
+         <number>10</number>
+        </property>
+       </widget>
+       <widget class="QLabel" name="analyze_movement_and_texture_texture_video_title">
+        <property name="geometry">
+         <rect>
+          <x>10</x>
+          <y>320</y>
+          <width>231</width>
+          <height>31</height>
+         </rect>
+        </property>
+        <property name="font">
+         <font>
+          <pointsize>14</pointsize>
+          <weight>75</weight>
+          <bold>true</bold>
+          <underline>true</underline>
+         </font>
+        </property>
+        <property name="text">
+         <string>Textura Video</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignCenter</set>
+        </property>
+       </widget>
+       <widget class="QPushButton" name="analyze_movement_and_texture_texture_video_clusters_help">
+        <property name="geometry">
+         <rect>
+          <x>230</x>
+          <y>410</y>
+          <width>31</width>
+          <height>31</height>
+         </rect>
+        </property>
+        <property name="font">
+         <font>
+          <pointsize>14</pointsize>
+         </font>
+        </property>
+        <property name="text">
+         <string>?</string>
+        </property>
+       </widget>
+       <widget class="Line" name="line_4">
+        <property name="geometry">
+         <rect>
+          <x>10</x>
+          <y>300</y>
+          <width>261</width>
+          <height>16</height>
+         </rect>
+        </property>
+        <property name="orientation">
+         <enum>Qt::Horizontal</enum>
+        </property>
+       </widget>
+       <widget class="QLabel" name="analyze_movement_and_texture_texture_video_clusters_label">
+        <property name="geometry">
+         <rect>
+          <x>10</x>
+          <y>370</y>
+          <width>231</width>
+          <height>31</height>
+         </rect>
+        </property>
+        <property name="font">
+         <font>
+          <pointsize>14</pointsize>
+         </font>
+        </property>
+        <property name="text">
+         <string>Clusters:</string>
+        </property>
+       </widget>
+       <widget class="QSpinBox" name="analyze_movement_and_texture_texture_video_threshold_input">
+        <property name="geometry">
+         <rect>
+          <x>10</x>
+          <y>500</y>
+          <width>211</width>
+          <height>31</height>
+         </rect>
+        </property>
+        <property name="font">
+         <font>
+          <pointsize>12</pointsize>
+         </font>
+        </property>
+        <property name="minimum">
+         <number>1</number>
+        </property>
+        <property name="maximum">
+         <number>255</number>
+        </property>
+        <property name="value">
+         <number>20</number>
+        </property>
+       </widget>
+       <widget class="QLabel" name="analyze_movement_and_texture_texture_video_threshold_label">
+        <property name="geometry">
+         <rect>
+          <x>10</x>
+          <y>460</y>
+          <width>231</width>
+          <height>31</height>
+         </rect>
+        </property>
+        <property name="font">
+         <font>
+          <pointsize>14</pointsize>
+         </font>
+        </property>
+        <property name="text">
+         <string>Umbral:</string>
+        </property>
+       </widget>
+       <widget class="QPushButton" name="analyze_movement_and_texture_texture_video_threshold_help">
+        <property name="geometry">
+         <rect>
+          <x>230</x>
+          <y>500</y>
+          <width>31</width>
+          <height>31</height>
+         </rect>
+        </property>
+        <property name="font">
+         <font>
+          <pointsize>14</pointsize>
+         </font>
+        </property>
+        <property name="text">
+         <string>?</string>
+        </property>
+       </widget>
+       <widget class="QPushButton" name="analyze_movement_and_texture_generate_views_button">
+        <property name="geometry">
+         <rect>
+          <x>10</x>
+          <y>560</y>
+          <width>211</width>
+          <height>41</height>
+         </rect>
+        </property>
+        <property name="font">
+         <font>
+          <pointsize>14</pointsize>
+         </font>
+        </property>
+        <property name="text">
+         <string>Generar vistas</string>
+        </property>
+       </widget>
+       <widget class="QPushButton" name="analyze_movement_and_texture_generate_views_help">
+        <property name="geometry">
+         <rect>
+          <x>230</x>
+          <y>560</y>
+          <width>41</width>
+          <height>41</height>
+         </rect>
+        </property>
+        <property name="font">
+         <font>
+          <pointsize>14</pointsize>
+         </font>
+        </property>
+        <property name="text">
+         <string>?</string>
+        </property>
+       </widget>
+      </widget>
+     </widget>
+     <widget class="QWidget" name="heat_map_options">
+      <widget class="QLabel" name="generate_heat_map_title">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>10</y>
+         <width>291</width>
+         <height>71</height>
+        </rect>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>20</pointsize>
          <weight>75</weight>
          <bold>true</bold>
          <underline>true</underline>
         </font>
        </property>
        <property name="text">
-        <string>Movimiento</string>
+        <string>Generar mapa de calor</string>
        </property>
        <property name="alignment">
         <set>Qt::AlignCenter</set>
        </property>
+       <property name="wordWrap">
+        <bool>true</bool>
+       </property>
       </widget>
-      <widget class="Line" name="line_3">
+      <widget class="QPushButton" name="generate_heat_map_button">
        <property name="geometry">
         <rect>
          <x>10</x>
+         <y>750</y>
+         <width>241</width>
+         <height>51</height>
+        </rect>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>14</pointsize>
+         <weight>50</weight>
+         <bold>false</bold>
+        </font>
+       </property>
+       <property name="text">
+        <string>Generar mapa de calor</string>
+       </property>
+      </widget>
+      <widget class="QLabel" name="generate_heat_map_threshold_label">
+       <property name="geometry">
+        <rect>
+         <x>20</x>
+         <y>130</y>
+         <width>271</width>
+         <height>31</height>
+        </rect>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>16</pointsize>
+        </font>
+       </property>
+       <property name="text">
+        <string>Umbral:</string>
+       </property>
+      </widget>
+      <widget class="QSpinBox" name="generate_heat_map_threshold_input">
+       <property name="geometry">
+        <rect>
+         <x>20</x>
          <y>180</y>
-         <width>241</width>
-         <height>16</height>
-        </rect>
-       </property>
-       <property name="orientation">
-        <enum>Qt::Horizontal</enum>
-       </property>
-      </widget>
-      <widget class="QSpinBox" name="analyze_movement_and_texture_texture_image_clusters_input">
-       <property name="geometry">
-        <rect>
-         <x>10</x>
-         <y>290</y>
-         <width>181</width>
-         <height>31</height>
-        </rect>
-       </property>
-       <property name="font">
-        <font>
-         <pointsize>12</pointsize>
-        </font>
-       </property>
-       <property name="minimum">
-        <number>1</number>
-       </property>
-       <property name="maximum">
-        <number>255</number>
-       </property>
-       <property name="value">
-        <number>10</number>
-       </property>
-      </widget>
-      <widget class="QLabel" name="analyze_movement_and_texture_texture_image_clusters_label">
-       <property name="geometry">
-        <rect>
-         <x>10</x>
-         <y>250</y>
-         <width>231</width>
-         <height>31</height>
-        </rect>
-       </property>
-       <property name="font">
-        <font>
-         <pointsize>14</pointsize>
-        </font>
-       </property>
-       <property name="text">
-        <string>Clusters:</string>
-       </property>
-      </widget>
-      <widget class="QPushButton" name="analyze_movement_and_texture_texture_image_clusters_help">
-       <property name="geometry">
-        <rect>
-         <x>200</x>
-         <y>290</y>
-         <width>31</width>
-         <height>31</height>
-        </rect>
-       </property>
-       <property name="font">
-        <font>
-         <pointsize>14</pointsize>
-        </font>
-       </property>
-       <property name="text">
-        <string>?</string>
-       </property>
-      </widget>
-      <widget class="QLabel" name="analyze_movement_and_texture_texture_image_title">
-       <property name="geometry">
-        <rect>
-         <x>10</x>
-         <y>200</y>
-         <width>231</width>
-         <height>31</height>
-        </rect>
-       </property>
-       <property name="font">
-        <font>
-         <pointsize>14</pointsize>
-         <weight>75</weight>
-         <bold>true</bold>
-         <underline>true</underline>
-        </font>
-       </property>
-       <property name="text">
-        <string>Textura Video</string>
-       </property>
-       <property name="alignment">
-        <set>Qt::AlignCenter</set>
-       </property>
-      </widget>
-      <widget class="QSpinBox" name="analyze_movement_and_texture_texture_video_clusters_input">
-       <property name="geometry">
-        <rect>
-         <x>10</x>
-         <y>450</y>
-         <width>181</width>
-         <height>31</height>
-        </rect>
-       </property>
-       <property name="font">
-        <font>
-         <pointsize>12</pointsize>
-        </font>
-       </property>
-       <property name="minimum">
-        <number>1</number>
-       </property>
-       <property name="maximum">
-        <number>255</number>
-       </property>
-       <property name="value">
-        <number>10</number>
-       </property>
-      </widget>
-      <widget class="QLabel" name="analyze_movement_and_texture_texture_video_title">
-       <property name="geometry">
-        <rect>
-         <x>10</x>
-         <y>360</y>
-         <width>231</width>
-         <height>31</height>
-        </rect>
-       </property>
-       <property name="font">
-        <font>
-         <pointsize>14</pointsize>
-         <weight>75</weight>
-         <bold>true</bold>
-         <underline>true</underline>
-        </font>
-       </property>
-       <property name="text">
-        <string>Textura Video</string>
-       </property>
-       <property name="alignment">
-        <set>Qt::AlignCenter</set>
-       </property>
-      </widget>
-      <widget class="QPushButton" name="analyze_movement_and_texture_texture_video_clusters_help">
-       <property name="geometry">
-        <rect>
-         <x>200</x>
-         <y>450</y>
-         <width>31</width>
-         <height>31</height>
-        </rect>
-       </property>
-       <property name="font">
-        <font>
-         <pointsize>14</pointsize>
-        </font>
-       </property>
-       <property name="text">
-        <string>?</string>
-       </property>
-      </widget>
-      <widget class="Line" name="line_4">
-       <property name="geometry">
-        <rect>
-         <x>10</x>
-         <y>340</y>
-         <width>241</width>
-         <height>16</height>
-        </rect>
-       </property>
-       <property name="orientation">
-        <enum>Qt::Horizontal</enum>
-       </property>
-      </widget>
-      <widget class="QLabel" name="analyze_movement_and_texture_texture_video_clusters_label">
-       <property name="geometry">
-        <rect>
-         <x>10</x>
-         <y>410</y>
-         <width>231</width>
-         <height>31</height>
-        </rect>
-       </property>
-       <property name="font">
-        <font>
-         <pointsize>14</pointsize>
-        </font>
-       </property>
-       <property name="text">
-        <string>Clusters:</string>
-       </property>
-      </widget>
-      <widget class="QSpinBox" name="analyze_movement_and_texture_texture_video_threshold_input">
-       <property name="geometry">
-        <rect>
-         <x>10</x>
-         <y>540</y>
-         <width>181</width>
-         <height>31</height>
-        </rect>
-       </property>
-       <property name="font">
-        <font>
-         <pointsize>12</pointsize>
-        </font>
-       </property>
-       <property name="minimum">
-        <number>1</number>
-       </property>
-       <property name="maximum">
-        <number>255</number>
-       </property>
-       <property name="value">
-        <number>20</number>
-       </property>
-      </widget>
-      <widget class="QLabel" name="analyze_movement_and_texture_texture_video_threshold_label">
-       <property name="geometry">
-        <rect>
-         <x>10</x>
-         <y>500</y>
-         <width>231</width>
-         <height>31</height>
-        </rect>
-       </property>
-       <property name="font">
-        <font>
-         <pointsize>14</pointsize>
-        </font>
-       </property>
-       <property name="text">
-        <string>Umbral:</string>
-       </property>
-      </widget>
-      <widget class="QPushButton" name="analyze_movement_and_texture_texture_video_threshold_help">
-       <property name="geometry">
-        <rect>
-         <x>200</x>
-         <y>540</y>
-         <width>31</width>
-         <height>31</height>
-        </rect>
-       </property>
-       <property name="font">
-        <font>
-         <pointsize>14</pointsize>
-        </font>
-       </property>
-       <property name="text">
-        <string>?</string>
-       </property>
-      </widget>
-      <widget class="QPushButton" name="analyze_movement_and_texture_generate_views_button">
-       <property name="geometry">
-        <rect>
-         <x>10</x>
-         <y>610</y>
-         <width>181</width>
+         <width>211</width>
          <height>41</height>
         </rect>
        </property>
@@ -2814,15 +2661,39 @@
          <pointsize>14</pointsize>
         </font>
        </property>
-       <property name="text">
-        <string>Generar vistas</string>
+       <property name="minimum">
+        <number>1</number>
+       </property>
+       <property name="maximum">
+        <number>255</number>
+       </property>
+       <property name="value">
+        <number>20</number>
        </property>
       </widget>
-      <widget class="QPushButton" name="analyze_movement_and_texture_generate_views_help">
+      <widget class="QPushButton" name="generate_heat_map_algorithm_help">
        <property name="geometry">
         <rect>
-         <x>200</x>
-         <y>610</y>
+         <x>260</x>
+         <y>750</y>
+         <width>51</width>
+         <height>51</height>
+        </rect>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>14</pointsize>
+        </font>
+       </property>
+       <property name="text">
+        <string>?</string>
+       </property>
+      </widget>
+      <widget class="QPushButton" name="generate_heat_map_threshold_help">
+       <property name="geometry">
+        <rect>
+         <x>240</x>
+         <y>180</y>
          <width>41</width>
          <height>41</height>
         </rect>
@@ -2837,591 +2708,494 @@
        </property>
       </widget>
      </widget>
-    </widget>
-    <widget class="QWidget" name="heat_map_options">
-     <widget class="QLabel" name="generate_heat_map_title">
-      <property name="geometry">
-       <rect>
-        <x>20</x>
-        <y>20</y>
-        <width>261</width>
-        <height>51</height>
-       </rect>
-      </property>
-      <property name="font">
-       <font>
-        <pointsize>16</pointsize>
-       </font>
-      </property>
-      <property name="text">
-       <string>Generar mapa de calor</string>
-      </property>
+     <widget class="QWidget" name="plot_metrics_options">
+      <widget class="QPushButton" name="plot_metrics_generate_button">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>750</y>
+         <width>241</width>
+         <height>51</height>
+        </rect>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>16</pointsize>
+         <weight>50</weight>
+         <bold>false</bold>
+        </font>
+       </property>
+       <property name="text">
+        <string>Graficar métricas</string>
+       </property>
+      </widget>
+      <widget class="QLineEdit" name="plot_metrics_dataframe_input">
+       <property name="geometry">
+        <rect>
+         <x>20</x>
+         <y>180</y>
+         <width>271</width>
+         <height>41</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string/>
+       </property>
+       <property name="readOnly">
+        <bool>true</bool>
+       </property>
+      </widget>
+      <widget class="QCheckBox" name="plot_metrics_perimeter_checkbox">
+       <property name="geometry">
+        <rect>
+         <x>30</x>
+         <y>390</y>
+         <width>151</width>
+         <height>31</height>
+        </rect>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>16</pointsize>
+        </font>
+       </property>
+       <property name="text">
+        <string>Perímetro</string>
+       </property>
+      </widget>
+      <widget class="QLabel" name="plot_metrics_dataframe_label">
+       <property name="geometry">
+        <rect>
+         <x>20</x>
+         <y>130</y>
+         <width>271</width>
+         <height>41</height>
+        </rect>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>16</pointsize>
+        </font>
+       </property>
+       <property name="text">
+        <string>Ruta de video:</string>
+       </property>
+      </widget>
+      <widget class="QCheckBox" name="plot_metrics_area_checkbox">
+       <property name="geometry">
+        <rect>
+         <x>30</x>
+         <y>440</y>
+         <width>151</width>
+         <height>31</height>
+        </rect>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>16</pointsize>
+        </font>
+       </property>
+       <property name="text">
+        <string>Área</string>
+       </property>
+      </widget>
+      <widget class="QCheckBox" name="plot_metrics_axis_rate_checkbox">
+       <property name="geometry">
+        <rect>
+         <x>30</x>
+         <y>490</y>
+         <width>151</width>
+         <height>31</height>
+        </rect>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>16</pointsize>
+        </font>
+       </property>
+       <property name="text">
+        <string>Razón de ejes</string>
+       </property>
+      </widget>
+      <widget class="QLabel" name="plot_metrics_options_label">
+       <property name="geometry">
+        <rect>
+         <x>20</x>
+         <y>340</y>
+         <width>271</width>
+         <height>41</height>
+        </rect>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>16</pointsize>
+        </font>
+       </property>
+       <property name="text">
+        <string>Métricas a graficar</string>
+       </property>
+      </widget>
+      <widget class="QPushButton" name="plot_metrics_load_dataframe_button">
+       <property name="geometry">
+        <rect>
+         <x>20</x>
+         <y>240</y>
+         <width>151</width>
+         <height>51</height>
+        </rect>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>14</pointsize>
+         <weight>50</weight>
+         <bold>false</bold>
+        </font>
+       </property>
+       <property name="text">
+        <string>Cargar ruta</string>
+       </property>
+      </widget>
+      <widget class="QLabel" name="plot_metrics_title_label">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>10</y>
+         <width>291</width>
+         <height>71</height>
+        </rect>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>20</pointsize>
+         <weight>75</weight>
+         <bold>true</bold>
+         <underline>true</underline>
+        </font>
+       </property>
+       <property name="text">
+        <string>Métricas a partir de máscara</string>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignCenter</set>
+       </property>
+       <property name="wordWrap">
+        <bool>true</bool>
+       </property>
+      </widget>
+      <widget class="QPushButton" name="plot_metrics_load_metrics_help">
+       <property name="geometry">
+        <rect>
+         <x>180</x>
+         <y>240</y>
+         <width>51</width>
+         <height>51</height>
+        </rect>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>14</pointsize>
+        </font>
+       </property>
+       <property name="text">
+        <string>?</string>
+       </property>
+      </widget>
+      <widget class="QPushButton" name="plot_metrics_algorithm_help">
+       <property name="geometry">
+        <rect>
+         <x>260</x>
+         <y>750</y>
+         <width>51</width>
+         <height>51</height>
+        </rect>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>14</pointsize>
+        </font>
+       </property>
+       <property name="text">
+        <string>?</string>
+       </property>
+      </widget>
      </widget>
-     <widget class="QPushButton" name="generate_heat_map_button">
-      <property name="geometry">
-       <rect>
-        <x>40</x>
-        <y>240</y>
-        <width>191</width>
-        <height>41</height>
-       </rect>
-      </property>
-      <property name="font">
-       <font>
-        <pointsize>10</pointsize>
-        <weight>75</weight>
-        <bold>true</bold>
-       </font>
-      </property>
-      <property name="text">
-       <string>Generar mapa de calor</string>
-      </property>
+     <widget class="QWidget" name="generate_multiple_cells_metrics_options">
+      <widget class="QLabel" name="generate_multiple_cells_metrics_title">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>10</y>
+         <width>291</width>
+         <height>101</height>
+        </rect>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>20</pointsize>
+         <weight>75</weight>
+         <bold>true</bold>
+         <underline>true</underline>
+        </font>
+       </property>
+       <property name="text">
+        <string>Métricas a partir de máscara de múltiples celulas</string>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignCenter</set>
+       </property>
+       <property name="wordWrap">
+        <bool>true</bool>
+       </property>
+      </widget>
+      <widget class="QCheckBox" name="generate_multiple_cells_metrics_area_checkbox">
+       <property name="geometry">
+        <rect>
+         <x>30</x>
+         <y>270</y>
+         <width>151</width>
+         <height>31</height>
+        </rect>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>16</pointsize>
+        </font>
+       </property>
+       <property name="text">
+        <string>Area</string>
+       </property>
+      </widget>
+      <widget class="QPushButton" name="generate_multiple_cells_metrics_generate_button">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>750</y>
+         <width>241</width>
+         <height>51</height>
+        </rect>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>16</pointsize>
+         <weight>50</weight>
+         <bold>false</bold>
+        </font>
+       </property>
+       <property name="text">
+        <string>Generar métricas</string>
+       </property>
+      </widget>
+      <widget class="QLabel" name="generate_multiple_cells_metrics_label">
+       <property name="geometry">
+        <rect>
+         <x>20</x>
+         <y>170</y>
+         <width>271</width>
+         <height>41</height>
+        </rect>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>16</pointsize>
+        </font>
+       </property>
+       <property name="text">
+        <string>Métricas a graficar</string>
+       </property>
+      </widget>
+      <widget class="QCheckBox" name="generate_multiple_cells_metrics_axis_rate_checkbox">
+       <property name="geometry">
+        <rect>
+         <x>30</x>
+         <y>320</y>
+         <width>151</width>
+         <height>31</height>
+        </rect>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>16</pointsize>
+        </font>
+       </property>
+       <property name="text">
+        <string>Razón de ejes</string>
+       </property>
+      </widget>
+      <widget class="QCheckBox" name="generate_multiple_cells_metrics_perimeter_checkbox">
+       <property name="geometry">
+        <rect>
+         <x>30</x>
+         <y>220</y>
+         <width>151</width>
+         <height>31</height>
+        </rect>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>16</pointsize>
+        </font>
+       </property>
+       <property name="text">
+        <string>Perímetro</string>
+       </property>
+      </widget>
+      <widget class="QPushButton" name="generate_multiple_cells_metrics_algorithm_help">
+       <property name="geometry">
+        <rect>
+         <x>260</x>
+         <y>750</y>
+         <width>51</width>
+         <height>51</height>
+        </rect>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>14</pointsize>
+        </font>
+       </property>
+       <property name="text">
+        <string>?</string>
+       </property>
+      </widget>
      </widget>
-     <widget class="QLabel" name="generate_heat_map_threshold_label">
-      <property name="geometry">
-       <rect>
-        <x>20</x>
-        <y>120</y>
-        <width>271</width>
-        <height>31</height>
-       </rect>
-      </property>
-      <property name="font">
-       <font>
-        <pointsize>14</pointsize>
-       </font>
-      </property>
-      <property name="text">
-       <string>Umbral:</string>
-      </property>
-     </widget>
-     <widget class="QSpinBox" name="generate_heat_map_threshold_input">
-      <property name="geometry">
-       <rect>
-        <x>20</x>
-        <y>170</y>
-        <width>211</width>
-        <height>41</height>
-       </rect>
-      </property>
-      <property name="font">
-       <font>
-        <pointsize>12</pointsize>
-       </font>
-      </property>
-      <property name="minimum">
-       <number>1</number>
-      </property>
-      <property name="maximum">
-       <number>255</number>
-      </property>
-      <property name="value">
-       <number>20</number>
-      </property>
-     </widget>
-     <widget class="QPushButton" name="generate_heat_map_algorithm_help">
-      <property name="geometry">
-       <rect>
-        <x>240</x>
-        <y>240</y>
-        <width>41</width>
-        <height>41</height>
-       </rect>
-      </property>
-      <property name="font">
-       <font>
-        <pointsize>14</pointsize>
-       </font>
-      </property>
-      <property name="text">
-       <string>?</string>
-      </property>
-     </widget>
-     <widget class="QPushButton" name="generate_heat_map_threshold_help">
-      <property name="geometry">
-       <rect>
-        <x>240</x>
-        <y>170</y>
-        <width>41</width>
-        <height>41</height>
-       </rect>
-      </property>
-      <property name="font">
-       <font>
-        <pointsize>14</pointsize>
-       </font>
-      </property>
-      <property name="text">
-       <string>?</string>
-      </property>
-     </widget>
-    </widget>
-    <widget class="QWidget" name="plot_metrics_options">
-     <widget class="QPushButton" name="plot_metrics_generate_button">
-      <property name="geometry">
-       <rect>
-        <x>100</x>
-        <y>570</y>
-        <width>151</width>
-        <height>41</height>
-       </rect>
-      </property>
-      <property name="font">
-       <font>
-        <pointsize>10</pointsize>
-        <weight>75</weight>
-        <bold>true</bold>
-       </font>
-      </property>
-      <property name="text">
-       <string>Graficar métricas</string>
-      </property>
-     </widget>
-     <widget class="QLineEdit" name="plot_metrics_dataframe_input">
-      <property name="geometry">
-       <rect>
-        <x>20</x>
-        <y>160</y>
-        <width>271</width>
-        <height>31</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string/>
-      </property>
-      <property name="readOnly">
-       <bool>true</bool>
-      </property>
-     </widget>
-     <widget class="QCheckBox" name="plot_metrics_perimeter_checkbox">
-      <property name="geometry">
-       <rect>
-        <x>30</x>
-        <y>350</y>
-        <width>151</width>
-        <height>31</height>
-       </rect>
-      </property>
-      <property name="font">
-       <font>
-        <pointsize>14</pointsize>
-       </font>
-      </property>
-      <property name="text">
-       <string>Perímetro</string>
-      </property>
-     </widget>
-     <widget class="QLabel" name="plot_metrics_dataframe_label">
-      <property name="geometry">
-       <rect>
-        <x>20</x>
-        <y>110</y>
-        <width>271</width>
-        <height>41</height>
-       </rect>
-      </property>
-      <property name="font">
-       <font>
-        <pointsize>14</pointsize>
-       </font>
-      </property>
-      <property name="text">
-       <string>Ruta de video:</string>
-      </property>
-     </widget>
-     <widget class="QCheckBox" name="plot_metrics_area_checkbox">
-      <property name="geometry">
-       <rect>
-        <x>30</x>
-        <y>390</y>
-        <width>151</width>
-        <height>31</height>
-       </rect>
-      </property>
-      <property name="font">
-       <font>
-        <pointsize>14</pointsize>
-       </font>
-      </property>
-      <property name="text">
-       <string>Área</string>
-      </property>
-     </widget>
-     <widget class="QCheckBox" name="plot_metrics_axis_rate_checkbox">
-      <property name="geometry">
-       <rect>
-        <x>30</x>
-        <y>430</y>
-        <width>151</width>
-        <height>31</height>
-       </rect>
-      </property>
-      <property name="font">
-       <font>
-        <pointsize>14</pointsize>
-       </font>
-      </property>
-      <property name="text">
-       <string>Razón de ejes</string>
-      </property>
-     </widget>
-     <widget class="QLabel" name="plot_metrics_options_label">
-      <property name="geometry">
-       <rect>
-        <x>20</x>
-        <y>300</y>
-        <width>271</width>
-        <height>41</height>
-       </rect>
-      </property>
-      <property name="font">
-       <font>
-        <pointsize>14</pointsize>
-       </font>
-      </property>
-      <property name="text">
-       <string>Métricas a graficar</string>
-      </property>
-     </widget>
-     <widget class="QPushButton" name="plot_metrics_load_dataframe_button">
-      <property name="geometry">
-       <rect>
-        <x>20</x>
-        <y>210</y>
-        <width>151</width>
-        <height>41</height>
-       </rect>
-      </property>
-      <property name="font">
-       <font>
-        <pointsize>10</pointsize>
-        <weight>75</weight>
-        <bold>true</bold>
-       </font>
-      </property>
-      <property name="text">
-       <string>Cargar ruta</string>
-      </property>
-     </widget>
-     <widget class="QLabel" name="plot_metrics_title_label">
-      <property name="geometry">
-       <rect>
-        <x>10</x>
-        <y>30</y>
-        <width>271</width>
-        <height>41</height>
-       </rect>
-      </property>
-      <property name="font">
-       <font>
-        <pointsize>16</pointsize>
-       </font>
-      </property>
-      <property name="text">
-       <string>Métricas a partir de máscara</string>
-      </property>
-     </widget>
-     <widget class="QPushButton" name="plot_metrics_load_metrics_help">
-      <property name="geometry">
-       <rect>
-        <x>180</x>
-        <y>210</y>
-        <width>41</width>
-        <height>41</height>
-       </rect>
-      </property>
-      <property name="font">
-       <font>
-        <pointsize>14</pointsize>
-       </font>
-      </property>
-      <property name="text">
-       <string>?</string>
-      </property>
-     </widget>
-     <widget class="QPushButton" name="plot_metrics_algorithm_help">
-      <property name="geometry">
-       <rect>
-        <x>260</x>
-        <y>570</y>
-        <width>41</width>
-        <height>41</height>
-       </rect>
-      </property>
-      <property name="font">
-       <font>
-        <pointsize>14</pointsize>
-       </font>
-      </property>
-      <property name="text">
-       <string>?</string>
-      </property>
-     </widget>
-    </widget>
-    <widget class="QWidget" name="generate_multiple_cells_metrics_options">
-     <widget class="QLabel" name="generate_multiple_cells_metrics_title">
-      <property name="geometry">
-       <rect>
-        <x>20</x>
-        <y>30</y>
-        <width>281</width>
-        <height>91</height>
-       </rect>
-      </property>
-      <property name="font">
-       <font>
-        <pointsize>16</pointsize>
-       </font>
-      </property>
-      <property name="text">
-       <string>Métricas a partir de máscara de múltiples celulas</string>
-      </property>
-      <property name="alignment">
-       <set>Qt::AlignCenter</set>
-      </property>
-      <property name="wordWrap">
-       <bool>true</bool>
-      </property>
-     </widget>
-     <widget class="QCheckBox" name="generate_multiple_cells_metrics_area_checkbox">
-      <property name="geometry">
-       <rect>
-        <x>30</x>
-        <y>250</y>
-        <width>151</width>
-        <height>31</height>
-       </rect>
-      </property>
-      <property name="font">
-       <font>
-        <pointsize>14</pointsize>
-       </font>
-      </property>
-      <property name="text">
-       <string>Area</string>
-      </property>
-     </widget>
-     <widget class="QPushButton" name="generate_multiple_cells_metrics_generate_button">
-      <property name="geometry">
-       <rect>
-        <x>100</x>
-        <y>560</y>
-        <width>151</width>
-        <height>41</height>
-       </rect>
-      </property>
-      <property name="font">
-       <font>
-        <pointsize>10</pointsize>
-        <weight>75</weight>
-        <bold>true</bold>
-       </font>
-      </property>
-      <property name="text">
-       <string>Generar métricas</string>
-      </property>
-     </widget>
-     <widget class="QLabel" name="generate_multiple_cells_metrics_label">
-      <property name="geometry">
-       <rect>
-        <x>20</x>
-        <y>160</y>
-        <width>271</width>
-        <height>41</height>
-       </rect>
-      </property>
-      <property name="font">
-       <font>
-        <pointsize>14</pointsize>
-       </font>
-      </property>
-      <property name="text">
-       <string>Métricas a graficar</string>
-      </property>
-     </widget>
-     <widget class="QCheckBox" name="generate_multiple_cells_metrics_axis_rate_checkbox">
-      <property name="geometry">
-       <rect>
-        <x>30</x>
-        <y>290</y>
-        <width>151</width>
-        <height>31</height>
-       </rect>
-      </property>
-      <property name="font">
-       <font>
-        <pointsize>14</pointsize>
-       </font>
-      </property>
-      <property name="text">
-       <string>Razón de ejes</string>
-      </property>
-     </widget>
-     <widget class="QCheckBox" name="generate_multiple_cells_metrics_perimeter_checkbox">
-      <property name="geometry">
-       <rect>
-        <x>30</x>
-        <y>210</y>
-        <width>151</width>
-        <height>31</height>
-       </rect>
-      </property>
-      <property name="font">
-       <font>
-        <pointsize>14</pointsize>
-       </font>
-      </property>
-      <property name="text">
-       <string>Perímetro</string>
-      </property>
-     </widget>
-     <widget class="QPushButton" name="generate_multiple_cells_metrics_algorithm_help">
-      <property name="geometry">
-       <rect>
-        <x>260</x>
-        <y>560</y>
-        <width>41</width>
-        <height>41</height>
-       </rect>
-      </property>
-      <property name="font">
-       <font>
-        <pointsize>14</pointsize>
-       </font>
-      </property>
-      <property name="text">
-       <string>?</string>
-      </property>
-     </widget>
-    </widget>
-    <widget class="QWidget" name="plot_distribution_metrics_options">
-     <widget class="QLabel" name="plot_metrics_distribution_title">
-      <property name="geometry">
-       <rect>
-        <x>20</x>
-        <y>30</y>
-        <width>271</width>
-        <height>41</height>
-       </rect>
-      </property>
-      <property name="font">
-       <font>
-        <pointsize>14</pointsize>
-       </font>
-      </property>
-      <property name="text">
-       <string>Graficar distribución de métrica</string>
-      </property>
-     </widget>
-     <widget class="QLabel" name="plot_metrics_distribution_label">
-      <property name="geometry">
-       <rect>
-        <x>20</x>
-        <y>100</y>
-        <width>271</width>
-        <height>41</height>
-       </rect>
-      </property>
-      <property name="font">
-       <font>
-        <pointsize>14</pointsize>
-       </font>
-      </property>
-      <property name="text">
-       <string>Métrica a graficar:</string>
-      </property>
-     </widget>
-     <widget class="QCheckBox" name="plot_metrics_distribution_area_checkbox">
-      <property name="geometry">
-       <rect>
-        <x>20</x>
-        <y>200</y>
-        <width>151</width>
-        <height>31</height>
-       </rect>
-      </property>
-      <property name="font">
-       <font>
-        <pointsize>14</pointsize>
-       </font>
-      </property>
-      <property name="text">
-       <string>Área</string>
-      </property>
-     </widget>
-     <widget class="QCheckBox" name="plot_metrics_distribution_perimeter_checkbox">
-      <property name="geometry">
-       <rect>
-        <x>20</x>
-        <y>160</y>
-        <width>151</width>
-        <height>31</height>
-       </rect>
-      </property>
-      <property name="font">
-       <font>
-        <pointsize>14</pointsize>
-       </font>
-      </property>
-      <property name="text">
-       <string>Perímetro</string>
-      </property>
-     </widget>
-     <widget class="QCheckBox" name="plot_metrics_distribution_axis_rate_checkbox">
-      <property name="geometry">
-       <rect>
-        <x>20</x>
-        <y>240</y>
-        <width>151</width>
-        <height>31</height>
-       </rect>
-      </property>
-      <property name="font">
-       <font>
-        <pointsize>14</pointsize>
-       </font>
-      </property>
-      <property name="text">
-       <string>Razón de ejes</string>
-      </property>
-     </widget>
-     <widget class="QPushButton" name="plot_metrics_distribution_button">
-      <property name="geometry">
-       <rect>
-        <x>100</x>
-        <y>550</y>
-        <width>151</width>
-        <height>41</height>
-       </rect>
-      </property>
-      <property name="font">
-       <font>
-        <pointsize>10</pointsize>
-        <weight>75</weight>
-        <bold>true</bold>
-       </font>
-      </property>
-      <property name="text">
-       <string>Graficar distribución</string>
-      </property>
-     </widget>
-     <widget class="QPushButton" name="plot_metrics_distribution_algorithm_metrics">
-      <property name="geometry">
-       <rect>
-        <x>260</x>
-        <y>550</y>
-        <width>41</width>
-        <height>41</height>
-       </rect>
-      </property>
-      <property name="font">
-       <font>
-        <pointsize>14</pointsize>
-       </font>
-      </property>
-      <property name="text">
-       <string>?</string>
-      </property>
+     <widget class="QWidget" name="plot_distribution_metrics_options">
+      <widget class="QLabel" name="plot_metrics_distribution_title">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>10</y>
+         <width>291</width>
+         <height>71</height>
+        </rect>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>20</pointsize>
+         <weight>75</weight>
+         <bold>true</bold>
+         <underline>true</underline>
+        </font>
+       </property>
+       <property name="text">
+        <string>Graficar distribución de métrica</string>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignCenter</set>
+       </property>
+       <property name="wordWrap">
+        <bool>true</bool>
+       </property>
+      </widget>
+      <widget class="QLabel" name="plot_metrics_distribution_label">
+       <property name="geometry">
+        <rect>
+         <x>20</x>
+         <y>130</y>
+         <width>271</width>
+         <height>41</height>
+        </rect>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>16</pointsize>
+        </font>
+       </property>
+       <property name="text">
+        <string>Métrica a graficar:</string>
+       </property>
+      </widget>
+      <widget class="QCheckBox" name="plot_metrics_distribution_area_checkbox">
+       <property name="geometry">
+        <rect>
+         <x>30</x>
+         <y>230</y>
+         <width>151</width>
+         <height>31</height>
+        </rect>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>16</pointsize>
+        </font>
+       </property>
+       <property name="text">
+        <string>Área</string>
+       </property>
+      </widget>
+      <widget class="QCheckBox" name="plot_metrics_distribution_perimeter_checkbox">
+       <property name="geometry">
+        <rect>
+         <x>30</x>
+         <y>180</y>
+         <width>151</width>
+         <height>31</height>
+        </rect>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>16</pointsize>
+        </font>
+       </property>
+       <property name="text">
+        <string>Perímetro</string>
+       </property>
+      </widget>
+      <widget class="QCheckBox" name="plot_metrics_distribution_axis_rate_checkbox">
+       <property name="geometry">
+        <rect>
+         <x>30</x>
+         <y>280</y>
+         <width>151</width>
+         <height>31</height>
+        </rect>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>16</pointsize>
+        </font>
+       </property>
+       <property name="text">
+        <string>Razón de ejes</string>
+       </property>
+      </widget>
+      <widget class="QPushButton" name="plot_metrics_distribution_button">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>750</y>
+         <width>241</width>
+         <height>51</height>
+        </rect>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>16</pointsize>
+         <weight>50</weight>
+         <bold>false</bold>
+        </font>
+       </property>
+       <property name="text">
+        <string>Graficar distribución</string>
+       </property>
+      </widget>
+      <widget class="QPushButton" name="plot_metrics_distribution_algorithm_metrics">
+       <property name="geometry">
+        <rect>
+         <x>260</x>
+         <y>750</y>
+         <width>51</width>
+         <height>51</height>
+        </rect>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>14</pointsize>
+        </font>
+       </property>
+       <property name="text">
+        <string>?</string>
+       </property>
+      </widget>
      </widget>
     </widget>
    </widget>
@@ -3432,7 +3206,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>1231</width>
+     <width>1265</width>
      <height>21</height>
     </rect>
    </property>
@@ -3451,13 +3225,12 @@
    </widget>
    <widget class="QMenu" name="texture_menu">
     <property name="title">
-     <string>Textura</string>
+     <string>Movimiento y Textura</string>
     </property>
-    <addaction name="lbp_menu_option"/>
-    <addaction name="fractal_dimension_menu_option"/>
-    <addaction name="texture_profile_menu_option"/>
-    <addaction name="texture_classification_menu_option"/>
-    <addaction name="texture_generate_test_menu_option"/>
+    <addaction name="texture_and_movement_generate_movement_heat_map_menu_option"/>
+    <addaction name="separator"/>
+    <addaction name="texture_and_movement_generate_profile_menu_option"/>
+    <addaction name="texture_and_movement_generate_texture_heat_map_menu_option"/>
    </widget>
    <widget class="QMenu" name="filters_menu">
     <property name="title">
@@ -3471,14 +3244,6 @@
     </property>
     <addaction name="mgac_border_detection_menu_option"/>
    </widget>
-   <widget class="QMenu" name="video_menu">
-    <property name="title">
-     <string>Video</string>
-    </property>
-    <addaction name="borders_video_menu_option"/>
-    <addaction name="mask_borders_video_menu_option"/>
-    <addaction name="mask_borders_of_multiple_cells_video_menu_option"/>
-   </widget>
    <widget class="QMenu" name="metrics_menu">
     <property name="title">
      <string>Metricas</string>
@@ -3490,12 +3255,6 @@
     <addaction name="plot_metrics_menu_option"/>
     <addaction name="plot_distribution_metric_menu_option"/>
    </widget>
-   <widget class="QMenu" name="movement_menu">
-    <property name="title">
-     <string>Movimiento</string>
-    </property>
-    <addaction name="generate_heat_map_menu_option"/>
-   </widget>
    <widget class="QMenu" name="routines_menu">
     <property name="title">
      <string>Rutina</string>
@@ -3503,13 +3262,11 @@
     <addaction name="global_routine_menu_option"/>
    </widget>
    <addaction name="archive_menu"/>
-   <addaction name="preprocessing_menu"/>
-   <addaction name="texture_menu"/>
    <addaction name="filters_menu"/>
+   <addaction name="preprocessing_menu"/>
    <addaction name="border_detection_menu"/>
-   <addaction name="movement_menu"/>
+   <addaction name="texture_menu"/>
    <addaction name="metrics_menu"/>
-   <addaction name="video_menu"/>
    <addaction name="routines_menu"/>
   </widget>
   <action name="load_main_image_menu_option">
@@ -3749,12 +3506,12 @@
     <string>Graficar distribución de perímetros</string>
    </property>
   </action>
-  <action name="fractal_dimension_menu_option">
+  <action name="texture_and_movement_generate_movement_heat_map_menu_option">
    <property name="text">
-    <string>Dimensión Fractal</string>
+    <string>Generar mapa de Movimiento</string>
    </property>
   </action>
-  <action name="texture_profile_menu_option">
+  <action name="texture_and_movement_generate_profile_menu_option">
    <property name="text">
     <string>Perfil de textura</string>
    </property>
@@ -3784,9 +3541,9 @@
     <string>Graficar distribución de métrica</string>
    </property>
   </action>
-  <action name="texture_classification_menu_option">
+  <action name="texture_and_movement_generate_texture_heat_map_menu_option">
    <property name="text">
-    <string>Clasificar textura</string>
+    <string>Generar mapa de Textura</string>
    </property>
   </action>
   <action name="texture_generate_test_menu_option">
@@ -3825,38 +3582,6 @@
     <hint type="destinationlabel">
      <x>852</x>
      <y>174</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>lbp_symmetric_points_box</sender>
-   <signal>valueChanged(int)</signal>
-   <receiver>lbp_symmetric_points_slider</receiver>
-   <slot>setValue(int)</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>854</x>
-     <y>159</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>859</x>
-     <y>200</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>lbp_radius_slider</sender>
-   <signal>valueChanged(int)</signal>
-   <receiver>lbp_radius_box</receiver>
-   <slot>setValue(int)</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>945</x>
-     <y>335</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>941</x>
-     <y>295</y>
     </hint>
    </hints>
   </connection>
@@ -3905,38 +3630,6 @@
     <hint type="destinationlabel">
      <x>866</x>
      <y>373</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>lbp_radius_box</sender>
-   <signal>valueChanged(int)</signal>
-   <receiver>lbp_radius_slider</receiver>
-   <slot>setValue(int)</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>861</x>
-     <y>298</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>867</x>
-     <y>334</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>lbp_symmetric_points_slider</sender>
-   <signal>valueChanged(int)</signal>
-   <receiver>lbp_symmetric_points_box</receiver>
-   <slot>setValue(int)</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>959</x>
-     <y>204</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>958</x>
-     <y>156</y>
     </hint>
    </hints>
   </connection>

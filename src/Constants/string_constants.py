@@ -1,3 +1,24 @@
+# Tk windows
+
+CHOOSE_EXCEL_WINDOW = "Elegir excel de datos"
+CHOOSE_IMAGE_WINDOW = "Elegir imagen"
+CHOOSE_MULTIPLE_IMAGES_WINDOW = "Elegir imagenes"
+CHOOSE_DIRECTORY_WINDOW = "Elegir carpeta"
+CHOOSE_VIDEO_WINDOW = "Elegir video para calcular métricas"
+CHOOSE_MULTIPLE_VIDEOS_WINDOW = "Elegir videos para calcular métricas"
+WRITE_FILENAME = "Escriba el nombre del archivo"
+
+# Windows titles
+PROCESS_LIST_WIDGET_TITLE = "Lista de procesamiento"
+PROCESS_LIST_TITLE = "Procesos realizados:"
+
+GLOBAL_ROUTINE_PARAMS_WIDGET_TITLE = "Parámetros de rutina global"
+
+
+# Extensions
+
+TIF_EXTENSION = ".tif"
+
 # Plot figures save paths for load
 
 MGAC_BORDER_IMAGE_SAVE_NAME = "border_image.tiff"
@@ -113,19 +134,36 @@ GENERATE_TEXTURE_HEAT_MAP_DESCRIPTION = "Generando mapa de calor de textura"
 
 GLOBAL_ROUTINE_PROGRESS_BAR_TITLE = "Rutina Global"
 
-# Metrics plot
+# Simple Metrics plot
 
 PERIMETER_PLOT_TITLE = "Perímetro en el tiempo"
 PERIMETER_X_LABEL = "Perímetro en píxeles"
-PERIMETER_Y_LABEL = "Tiempo en frames"
 
 AREA_PLOT_TITLE = "Área en el tiempo"
 AREA_X_LABEL = "Área en píxeles"
-AREA_Y_LABEL = "Tiempo en frames"
 
 AXIS_RATIO_PLOT_TITLE = "Razón de ejes en el tiempo"
 AXIS_RATIO_X_LABEL = "Razón de ejes"
-AXIS_RATIO_Y_LABEL = "Tiempo en frames"
+
+SIMPLE_METRICS_Y_LABEL = "Tiempo en frames"
+
+# Distribution Metrics plot
+
+PERIMETER_DISTRIBUTION_TITLE = "Distribucion de perímetros"
+PERIMETER_DISTRIBUTION_X_LABEL = "Valores de perimetro en pixeles"
+
+AREA_DISTRIBUTION_TITLE = "Distribucion de áreas"
+AREA_DISTRIBUTION_X_LABEL = "Valores de areas en pixeles"
+
+AXIS_RATIO_DISTRIBUTION_TITLE = "Distribución de razon de ejes"
+AXIS_RATIO_DISTRIBUTION_X_LABEL = "Valores de razón de ejes"
+
+DISTRIBUTION_METRICS_Y_LABEL = "Cantidad de celulas"
+
+# Titles of some global routine metric plots
+
+GLOBAL_ROUTINE_SIMPLE_METRICS_PLOT_TITLE = "Area, perímetro y razón de ejes en el tiempo"
+GLOBAL_ROUTINE_DISTRIBUTION_METRICS_PLOT_TITLE = "Distribucion de area, perímetro y razón de ejes"
 
 # Comparison plot
 
@@ -144,6 +182,4 @@ TEXTURE_IMAGE_VS_TEXTURE_VIDEO = "Textura-Imagen vs Textura-Video"
 
 FOUR_GRID_COMPARISON = "Valor de la región en las 4 vistas"
 
-# Windows titles
-PROCESS_LIST_WIDGET_TITLE = "Lista de procesamiento"
-GLOBAL_ROUTINE_PARAMS_WIDGET_TITLE = "Parámetros de rutina global"
+

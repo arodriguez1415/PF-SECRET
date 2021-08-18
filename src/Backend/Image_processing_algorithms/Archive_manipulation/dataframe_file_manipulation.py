@@ -4,16 +4,15 @@ import pandas as pd
 import numpy as np
 
 from src.Backend.Image_processing_algorithms.Operations.common_operations import normalize_to_range
-from src.Constants import configuration_constants
-from src.Constants import algorithm_constants
-
+from src.Constants import configuration_constants, algorithm_constants, string_constants
 
 
 def get_dataframe_path():
     root = Tk()
     root.withdraw()
     initial_absolute_directory_path = os.path.abspath(configuration_constants.METRICS_DIRECTORY_PATH)
-    file_path = filedialog.askopenfilename(initialdir=initial_absolute_directory_path, title='Elegir excel de datos',
+    file_path = filedialog.askopenfilename(initialdir=initial_absolute_directory_path,
+                                           title=string_constants.CHOOSE_EXCEL_WINDOW,
                                            filetypes=[("Excel", "*.xlsx"),
                                                       ("xlsx", "*.XLSX"),
                                                       ("All files", "*")])
@@ -26,7 +25,7 @@ def get_multiple_dataframes_path():
     root.withdraw()
     initial_absolute_directory_path = os.path.abspath(configuration_constants.METRICS_DIRECTORY_PATH)
     file_path_list = filedialog.askopenfilenames(initialdir=initial_absolute_directory_path,
-                                                 title='Elegir excels de datos',
+                                                 title=string_constants.CHOOSE_EXCEL_WINDOW,
                                                  filetypes=[("Excel", "*.xlsx"),
                                                             ("xlsx", "*.XLSX"),
                                                             ("All files", "*")])
@@ -73,6 +72,3 @@ def normalize_dataframe_values(dataframe, normalize_method=algorithm_constants.F
         dataframe[col_name] = normalized_values
 
     return dataframe
-
-
-

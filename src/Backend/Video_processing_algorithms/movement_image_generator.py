@@ -10,7 +10,9 @@ from src.Backend.Image_processing_algorithms.Operations.common_operations import
 from src.Backend.Video_processing_algorithms import video_generator
 from src.Backend.Video_processing_algorithms.multiple_cells_video_generator import get_images_from_directories
 from src.Classes.Methods.Anisotropic_Filter import Anisotropic_Filter
+from src.Classes.Project_mastermind import Project_mastermind
 from src.Constants import configuration_constants, string_constants
+from src.Constants import properties_constants as ps
 from src.Frontend.Utils import progress_bar
 
 
@@ -57,11 +59,32 @@ def generate_frames(images_path_for_motion_list):
 
 def set_methods_to_apply():
     methods_to_apply = []
-    anisotropic_method = Anisotropic_Filter()
-    methods_to_apply.append(anisotropic_method)
-    methods_to_apply.append(anisotropic_method)
+    min_iterations = 3
+    iterations_to_apply = get_anisotropic_iterations()
+
+    if iterations_to_apply < min_iterations:
+        iterations_to_apply = min_iterations
+
+    anisotropic_method = Anisotropic_Filter(iterations_to_apply)
     methods_to_apply.append(anisotropic_method)
     return methods_to_apply
+
+
+def get_anisotropic_iterations():
+    project_mastermind = Project_mastermind.get_instance()
+    process_list = project_mastermind.get_image_processing_list()
+    props_dict = project_mastermind.get_properties_dictionary()
+    iterations = 0
+
+    if project_mastermind.is_global_progress_bar_active():
+        return props_dict[ps.GLOBAL_ROUTINE_ANISOTROPIC_FILTER_TIMES]
+
+    for i in range(0, len(process_list)):
+        process = process_list[i].get_method()
+        if isinstance(process, Anisotropic_Filter):
+            iterations += process.iterations
+
+    return iterations
 
 
 def setup(images_path_for_motion_list):

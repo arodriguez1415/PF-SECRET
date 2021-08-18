@@ -1,16 +1,14 @@
-import random
-import string
-
+from src.Backend.Image_processing_algorithms.Archive_manipulation.save_file_manipulation import set_save_name
 from src.Backend.Image_processing_algorithms.Operations import common_operations
-from src.Constants import configuration_constants as configuration_constants, string_constants
+from src.Constants import configuration_constants, string_constants
 from src.Classes.Project_mastermind import Project_mastermind
+from src.Frontend.Utils import progress_bar
+
 from PIL import Image
 import shutil
 import cv2 as cv
 import numpy as np
 import os
-
-from src.Frontend.Utils import progress_bar
 
 
 def generate_video(images_list=None, specified_methods_to_apply=None,
@@ -96,7 +94,7 @@ def get_files_from_directory(directory):
     directory_files_paths_list = os.listdir(directory)
     correct_directory_files_paths_list = []
     for file in directory_files_paths_list:
-        if file.endswith(".tif"):
+        if file.endswith(string_constants.TIF_EXTENSION):
             file_path = os.path.join(directory, file)
             correct_directory_files_paths_list.append(file_path)
     if correct_directory_files_paths_list:
@@ -107,25 +105,3 @@ def get_files_from_directory(directory):
 def delete_frames(frames_paths_list):
     for frame_path in frames_paths_list:
         os.remove(frame_path)
-
-
-def set_save_name(image_path_sample, save_directory, extension=".avi"):
-    image_path_sample = image_path_sample.replace("\\", "/")
-    initial_path = save_directory
-    min_split_division = 6
-
-    if len(image_path_sample.split('/')) < min_split_division:
-        min_split_division = len(image_path_sample.split('/'))
-
-    filename = ""
-
-    for i in reversed(range(1, min_split_division)):
-        filename += image_path_sample.split('/')[-i]
-        filename += "-"
-
-    filename += ''.join(random.choices(string.ascii_lowercase + string.digits, k=10))
-    # filename = image_path_sample.split('/')[-5] + " - " + image_path_sample.split('/')[-4] + " - " + \
-    #            image_path_sample.split('/')[-3] + " - " + image_path_sample.split('/')[-2]
-
-    save_path = initial_path + filename + extension
-    return save_path

@@ -1,5 +1,8 @@
 import matplotlib.pyplot as plt
 
+from src.Constants.string_constants import GLOBAL_ROUTINE_SIMPLE_METRICS_PLOT_TITLE, \
+    GLOBAL_ROUTINE_DISTRIBUTION_METRICS_PLOT_TITLE
+
 
 def plot_metric_over_time(metric_values, frame_values, plot_title, y_label,
                           x_label, show_flag=False):
@@ -26,7 +29,7 @@ def save_plot_metrics(metric_values_lists, frame_values_lists, plot_title_list, 
                       x_label_list, cell_image_array, save_path):
     fig, ((ax1, ax2), (ax3, ax4)) = plt.subplots(2, 2)
     metrics_axis = [ax2, ax3, ax4]
-    fig.suptitle("Area, perímetro y razón de ejes en el tiempo")
+    fig.suptitle(GLOBAL_ROUTINE_SIMPLE_METRICS_PLOT_TITLE)
 
     ax1.imshow(cell_image_array, cmap='gray', vmin=0, vmax=255)
 
@@ -42,7 +45,7 @@ def save_plot_metrics(metric_values_lists, frame_values_lists, plot_title_list, 
 
 def save_plot_distribution_metrics(metrics_avg_lists, plot_title_list, x_label_list, y_label_list, save_path):
     fig, ax = plt.subplots(figsize=(15, 4), nrows=1, ncols=3)
-    fig.suptitle("Distribucion de area, perímetro y razón de ejes")
+    fig.suptitle(GLOBAL_ROUTINE_DISTRIBUTION_METRICS_PLOT_TITLE)
 
     for i in range(0, 3):
         axis_to_plot = ax[i]

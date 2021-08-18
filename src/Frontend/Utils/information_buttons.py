@@ -3,8 +3,7 @@ from src.Frontend.Utils.message import show_information_message
 
 
 def configure_information_buttons(main_window, global_routine_params):
-
-    ## Main window
+    # Main window
 
     main_window.adaptive_threshold_window_size_help.clicked.connect(
         lambda: show_information(string_constants.ADAPTIVE_THRESHOLD_WINDOW_SIZE_HELP))
@@ -15,6 +14,9 @@ def configure_information_buttons(main_window, global_routine_params):
     main_window.adaptive_threshold_algoritm_help.clicked.connect(
         lambda: show_information(string_constants.ADAPTIVE_THRESHOLD_ALGORITHM_HELP))
 
+    main_window.apply_anisotropic_filter_times_help.clicked.connect(
+        lambda: show_information(string_constants.ANISOTROPIC_FILTER_TIMES_HELP)
+    )
     main_window.anisotropic_filter_algoritm_help.clicked.connect(
         lambda: show_information(string_constants.ANISOTROPIC_FILTER_ALGORITHM_HELP))
 
@@ -76,7 +78,6 @@ def configure_information_buttons(main_window, global_routine_params):
 
     main_window.global_routine_algorithm_help.clicked.connect(
         lambda: show_information(string_constants.GLOBAL_ROUTINE_ALGORITHM_HELP))
-
 
     # Global routine params
 

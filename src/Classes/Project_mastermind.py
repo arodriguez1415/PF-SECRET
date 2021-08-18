@@ -148,7 +148,7 @@ class Project_mastermind:
 
     def remove_last_processing(self):
         if len(self.image_processing_list) > 1:
-            del(self.image_processing_list[-1])
+            del (self.image_processing_list[-1])
 
     def get_original_image_path(self):
         return self.original_image_path
@@ -244,12 +244,11 @@ class Project_mastermind:
     def reload_properties(self, new_properties_dictionary):
         self.properties_dictionary = new_properties_dictionary
 
-
     def get_files_from_directory(self, directory):
         directory_files_paths_list = os.listdir(directory)
         correct_directory_files_paths_list = []
         for file in directory_files_paths_list:
-            if file.endswith(".tif"):
+            if file.endswith(string_constants.TIF_EXTENSION):
                 file_path = os.path.join(directory, file)
                 correct_directory_files_paths_list.append(file_path)
         if correct_directory_files_paths_list:

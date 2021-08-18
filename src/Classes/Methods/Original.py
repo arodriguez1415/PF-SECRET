@@ -1,5 +1,6 @@
 from src.Constants.algorithm_constants import ORIGINAL_NAME
 
+
 class Original:
 
     def __init__(self):

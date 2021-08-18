@@ -9,12 +9,6 @@ def normalize(array):
     return result.astype(np.uint8)
 
 
-def normalize_with_min(array, min_value):
-    array2 = array - min_value
-    result = array2 * (255.0 / array2.max())
-    return result.astype(np.uint8)
-
-
 def normalize_from_pil_image(pil_image):
     image_data = np.array(pil_image)
     image_width = pil_image.width
@@ -34,7 +28,8 @@ def normalize_to_range(array, max_value=255):
 
 def is_RGB(image_array):
     dimensions = len(image_array.shape)
-    if dimensions == 2:
+    two_dimensions = 2
+    if dimensions == two_dimensions:
         return False
     else:
         return True
@@ -78,12 +73,4 @@ def resize_image(image_array, width, height):
 def show_coloured_image(rgb_coloured_matrix):
     plt.imshow(rgb_coloured_matrix, cmap="hot")
     plt.colorbar(label="Texture", orientation="vertical")
-    plt.show()
-
-
-def show_histogram(image_texture_descriptor):
-    dst = cv2.calcHist(image_texture_descriptor, [0], None, [256], [0, 256])
-
-    plt.hist(image_texture_descriptor.ravel(), 256, [0, 256])
-    plt.title('Histogram for gray scale image')
     plt.show()

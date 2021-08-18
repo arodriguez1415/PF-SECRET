@@ -24,6 +24,7 @@ ADAPTIVE_THRESHOLD_METHOD = "Método"
 
 # Anisotropic filter attributes
 
+ANISOTROPIC_TIMES = "Iteraciones del filtro anisotrópico"
 ANISOTROPIC_FILTER_NAME = "Filtro anisotrópico"
 
 # Original method attributes

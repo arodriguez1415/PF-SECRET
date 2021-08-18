@@ -1,5 +1,5 @@
 from src.Backend.Image_processing_algorithms.Metrics import metrics_file
-from src.Constants import algorithm_constants
+from src.Constants import algorithm_constants, string_constants
 from src.Frontend.Utils import metrics_plot
 
 
@@ -104,25 +104,25 @@ def set_show_flag(metrics_values_lists, metric_index):
 
 def get_metric_plot_labels(metric_type):
     labels_dictionary = {
-        algorithm_constants.PERIMETER_METRIC: {"title": "Perimetro en el tiempo",
-                                               "x_label": "Perimetro en pixeles"},
-        algorithm_constants.AREA_METRIC: {"title": "Area en el tiempo",
-                                          "x_label": "Area en pixeles"},
-        algorithm_constants.AXIS_RATE_METRIC: {"title": "Razon de ejes en el tiempo",
-                                               "x_label": "Razón de ejes"},
+        algorithm_constants.PERIMETER_METRIC: {"title": string_constants.PERIMETER_PLOT_TITLE,
+                                               "x_label": string_constants.PERIMETER_X_LABEL},
+        algorithm_constants.AREA_METRIC: {"title": string_constants.AREA_PLOT_TITLE,
+                                          "x_label": string_constants.AREA_X_LABEL},
+        algorithm_constants.AXIS_RATE_METRIC: {"title": string_constants.AXIS_RATIO_PLOT_TITLE,
+                                               "x_label": string_constants.AXIS_RATIO_X_LABEL},
     }.get(metric_type, {"title": "None", "x_label": "None"})
-    labels_dictionary["y_label"] = "Tiempo en frames"
+    labels_dictionary["y_label"] = string_constants.SIMPLE_METRICS_Y_LABEL
     return labels_dictionary
 
 
 def get_distribution_plot_labels(metric_type):
     labels_dictionary = {
-        algorithm_constants.PERIMETER_METRIC: {"title": "Distribucion de perimetros",
-                                               "x_label": "Valores de perimetro en pixeles"},
-        algorithm_constants.AREA_METRIC: {"title": "Distribucion de areas",
-                                          "x_label": "Valores de areas en pixeles"},
-        algorithm_constants.AXIS_RATE_METRIC: {"title": "Distribucion de razon de ejes",
-                                               "x_label": "Valores de razon de ejes"}
+        algorithm_constants.PERIMETER_METRIC: {"title": string_constants.PERIMETER_DISTRIBUTION_TITLE,
+                                               "x_label": string_constants.PERIMETER_DISTRIBUTION_X_LABEL},
+        algorithm_constants.AREA_METRIC: {"title": string_constants.AREA_DISTRIBUTION_TITLE,
+                                          "x_label": string_constants.AREA_DISTRIBUTION_X_LABEL},
+        algorithm_constants.AXIS_RATE_METRIC: {"title": string_constants.AXIS_RATIO_DISTRIBUTION_TITLE,
+                                               "x_label": string_constants.AXIS_RATIO_DISTRIBUTION_X_LABEL}
     }.get(metric_type, {"title": "None", "x_label": "None"})
-    labels_dictionary["y_label"] = "Cantidad de celulas"
+    labels_dictionary["y_label"] = string_constants.DISTRIBUTION_METRICS_Y_LABEL
     return labels_dictionary

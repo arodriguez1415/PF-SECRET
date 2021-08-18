@@ -1,6 +1,7 @@
 from PyQt5.QtGui import QStandardItemModel, QStandardItem
 
 from src.Classes.Project_mastermind import Project_mastermind
+from src.Constants.string_constants import PROCESS_LIST_TITLE
 
 
 def configure_window(process_list):
@@ -18,7 +19,7 @@ def populate_process_list():
     image_wrapper_list = project_mastermind.get_image_processing_list()
     view = process_list.process_widget_tree_list
     model = QStandardItemModel()
-    model.setHorizontalHeaderLabels(["Procesos realizados:"])
+    model.setHorizontalHeaderLabels([PROCESS_LIST_TITLE])
     view.setModel(model)
     view.setUniformRowHeights(True)
 
@@ -30,5 +31,4 @@ def populate_process_list():
             attribute = QStandardItem('{}: '.format(attribute_name) + '{}'.format(attribute_value))
             process_item.appendRow(attribute)
         model.appendRow(process_item)
-        # span container columns
         view.setFirstColumnSpanned(i, view.rootIndex(), True)
