@@ -124,5 +124,5 @@ def get_distribution_plot_labels(metric_type):
         algorithm_constants.AXIS_RATE_METRIC: {"title": "Distribucion de razon de ejes",
                                                "x_label": "Valores de razon de ejes"}
     }.get(metric_type, {"title": "None", "x_label": "None"})
-    labels_dictionary["y_label"] = "Cantidad de celulas"
+    labels_dictionary["y_label"] = "Frecuencia"
     return labels_dictionary

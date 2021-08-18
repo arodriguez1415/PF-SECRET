@@ -14,7 +14,7 @@ def plot_metric_over_time(metric_values, frame_values, plot_title, y_label,
 def plot_metric_histogram(metric_values, plot_title=None, x_label=None,
                           y_label=None, show_flag=False):
     plt.figure(plot_title)
-    plt.hist(metric_values, bins=50)
+    plt.hist(metric_values, bins='fd')
     plt.title(plot_title)
     plt.xlabel(x_label)
     plt.ylabel(y_label)
