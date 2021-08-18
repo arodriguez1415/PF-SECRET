@@ -126,6 +126,10 @@ def save_image(main_window):
     project_mastermind = Project_mastermind.get_instance()
     current_image_array = project_mastermind.get_last_image()
     image_save_path = image_saver.get_save_path(current_image_array)
+
+    if image_save_path == "" or image_save_path is None:
+        return
+
     image_saver.save_image(current_image_array, image_save_path)
 
 
@@ -148,12 +152,13 @@ def get_next_image(main_window):
     label_text = str(current_index + 1) + "/" + str(original_list_length)
     main_window.images_index_label.setText(label_text)
     enable_button(main_window.previous_image_button)
-    image_wrapper = Image_loader(image_path, method=Original())
+    image_loader = Image_loader(image_path, method=Original())
+    image_wrapper = Image_wrapper(image_loader.image_array, method=Original())
     project_mastermind.add_image_process(image_wrapper)
     disable_button(main_window.texture_image)
     disable_button(main_window.movement_compare_to_texture_image)
     disable_button(main_window.texture_image_compare_to_texture_video)
-    main_window.image_viewer.set_screen_image(image_wrapper)
+    main_window.image_viewer.set_screen_image(image_loader)
 
 
 def get_previous_image(main_window):
@@ -175,9 +180,10 @@ def get_previous_image(main_window):
     label_text = str(current_index + 1) + "/" + str(original_list_length)
     main_window.images_index_label.setText(label_text)
     enable_button(main_window.next_image_button)
-    image_wrapper = Image_loader(image_path, method=Original())
+    image_loader = Image_loader(image_path, method=Original())
+    image_wrapper = Image_wrapper(image_loader.image_array, method=Original())
     project_mastermind.add_image_process(image_wrapper)
     disable_button(main_window.texture_image)
     disable_button(main_window.movement_compare_to_texture_image)
     disable_button(main_window.texture_image_compare_to_texture_video)
-    main_window.image_viewer.set_screen_image(image_wrapper)
+    main_window.image_viewer.set_screen_image(image_loader)

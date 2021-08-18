@@ -12,8 +12,9 @@ def show_information_message(information_description):
     messageBox.exec()
 
 
-def show_error(error_description):
+def show_error_message(error_description):
     messageBox = QMessageBox()
+    messageBox.setWindowTitle(string_constants.ERROR_TITLE)
     messageBox.setText(error_description)
     messageBox.exec()
 

@@ -72,3 +72,21 @@ def normalize_dataframe_values(dataframe, normalize_method=algorithm_constants.F
         dataframe[col_name] = normalized_values
 
     return dataframe
+
+
+def is_excel(file_path):
+    extension = os.path.splitext(file_path)[1]
+    admitted_extensions = [".xlsx"]
+
+    if extension not in admitted_extensions:
+        return False
+
+    return True
+
+
+def are_excels(file_path_list):
+    flag = True
+    for i in range(0, len(file_path_list)):
+        flag = flag and is_excel(file_path_list[i])
+
+    return flag

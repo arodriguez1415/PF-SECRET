@@ -11,7 +11,7 @@ from src.Classes.Region import Region
 from src.Constants import string_constants, configuration_constants
 from src.Frontend.Utils import progress_bar
 from src.Frontend.Utils.button_controller import disable_button, enable_button
-from src.Frontend.Utils.message import show_wait_message, show_error
+from src.Frontend.Utils.message import show_wait_message, show_error_message
 from src.Frontend.Utils.viewer_buttons import enable_view_button
 
 
@@ -60,6 +60,12 @@ def texture_classification_options(main_window):
 def generate_heat_map(main_window):
     disable_button(main_window.generate_heat_map_button)
     project_mastermind = Project_mastermind.get_instance()
+
+    if project_mastermind.get_last_image() is None:
+        show_error_message(string_constants.NO_IMAGE_LOADED)
+        enable_button(main_window.generate_heat_map_button)
+        return
+
     threshold_value = main_window.generate_heat_map_threshold_input.value()
     uncolored_motion_image_array, uncolored_motion_image_array_normalized, coloured_motion_image_array = create_motion_image(threshold_value)
     movement_normalized_image_wrapper = Image_wrapper(uncolored_motion_image_array_normalized, "")
@@ -81,16 +87,22 @@ def generate_profile_texture(main_window):
     project_mastermind = Project_mastermind.get_instance()
     width, height = configuration_constants.IMAGE_VIEWER_WIDTH, configuration_constants.IMAGE_VIEWER_HEIGHT
     current_image_array = project_mastermind.get_last_image()
+
+    if project_mastermind.get_last_image() is None:
+        show_error_message(string_constants.NO_IMAGE_LOADED)
+        enable_button(main_window.texture_profile_apply_button)
+        return
+
     current_image_array = resize_image(current_image_array, width, height)
     line_region = Region()
     if not line_region.has_region():
-        show_error(string_constants.NO_PROFILE_SELECTED_ERROR)
+        show_error_message(string_constants.NO_PROFILE_SELECTED_ERROR)
     else:
         try:
             line = line_region.get_line()
             profile_texture.fractal_dimension_line(current_image_array, line)
         except ValueError:
-            show_error(string_constants.NO_LINE_SELECTED_ERROR)
+            show_error_message(string_constants.NO_LINE_SELECTED_ERROR)
     enable_button(main_window.texture_profile_apply_button)
 
 
@@ -98,6 +110,12 @@ def classify_image_texture(main_window):
     disable_button(main_window.texture_classification_image_button)
     project_mastermind = Project_mastermind.get_instance()
     current_image_array = project_mastermind.get_last_image()
+
+    if project_mastermind.get_last_image() is None:
+        show_error_message(string_constants.NO_IMAGE_LOADED)
+        enable_button(main_window.texture_classification_image_button)
+        return
+
     clusters_quantity = main_window.texture_classification_image_clusters_input.value()
     message_box = show_wait_message(string_constants.WAIT_TEXTURE_IMAGE_MESSAGE_TITLE,
                                     string_constants.WAIT_TEXTURE_IMAGE_MESSAGE_DESC)
@@ -121,6 +139,12 @@ def classify_video_texture(main_window):
     project_mastermind = Project_mastermind.get_instance()
     clusters_quantity = main_window.texture_classification_video_clusters_input.value()
     threshold = main_window.texture_classification_video_threshold_input.value()
+
+    if project_mastermind.get_last_image() is None:
+        show_error_message(string_constants.NO_IMAGE_LOADED)
+        enable_button(main_window.texture_classification_video_button)
+        return
+
     uncoloured_classified_image, coloured_classified_image = create_texture_image_from_video(
         clusters_quantity=clusters_quantity,
         threshold=threshold)

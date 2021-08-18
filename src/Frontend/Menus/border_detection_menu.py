@@ -1,5 +1,5 @@
 from src.Backend.Image_processing_algorithms.Archive_manipulation.properties_manipulation import save_mgac_params
-from src.Backend.Image_processing_algorithms.Operations.common_operations import resize_image
+from src.Backend.Image_processing_algorithms.Operations.common_operations import resize_image, rgb_to_gray
 from src.Classes.Image_wrapper import Image_wrapper
 from src.Classes.Methods.Mgac import Mgac
 from src.Classes.Region import Region
@@ -7,8 +7,9 @@ from src.Classes.Project_mastermind import Project_mastermind
 from src.Backend.Image_processing_algorithms.Border_detection import mgac as mgac_functions
 from PIL import Image
 
-from src.Constants import configuration_constants
+from src.Constants import configuration_constants, string_constants
 from src.Frontend.Utils.button_controller import disable_button, enable_button
+from src.Frontend.Utils.message import show_error_message
 
 
 def configure_border_detection_menu_connections(main_window):
@@ -29,8 +30,15 @@ def detect_borders(main_window):
     polygon_region = Region()
     polygon_region.get_region()
     image_array = project_mastermind.get_last_image()
+
+    if image_array is None:
+        show_error_message(string_constants.NO_IMAGE_LOADED)
+        enable_button(main_window.apply_mgac_button)
+        return
+
     width, height = configuration_constants.IMAGE_VIEWER_WIDTH, configuration_constants.IMAGE_VIEWER_HEIGHT
     resized_image_array = resize_image(image_array, width, height)
+    resized_image_array = rgb_to_gray(resized_image_array)
     image = Image.fromarray(resized_image_array)
     iterations = main_window.iterations_mgac_input.value()
     threshold = main_window.threshold_mgac_input.value()

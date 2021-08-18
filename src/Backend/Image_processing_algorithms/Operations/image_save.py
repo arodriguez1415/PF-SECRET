@@ -9,13 +9,12 @@ from src.Constants.string_constants import WRITE_FILENAME
 def get_save_path(image_array):
     root = Tk()
     root.withdraw()
-    if common_operations.is_RGB(image_array):
-        save_extension = "ppm"
-    else:
-        save_extension = "pgm"
+    save_extension = ".tif"
     save_file_path = filedialog.asksaveasfilename(initialdir=GENERATED_IMAGES_DIR,
                                                   title=WRITE_FILENAME,
-                                                  defaultextension=save_extension)
+                                                  defaultextension=save_extension,
+                                                  filetypes=(("Tif file", "*.tif"),("All Files", "*.*"))
+                                                  )
     root.destroy()
     return save_file_path
 

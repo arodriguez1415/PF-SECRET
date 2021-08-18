@@ -10,6 +10,8 @@ import cv2 as cv
 import numpy as np
 import os
 
+from src.Frontend.Utils.message import show_error_message
+
 
 def generate_video(images_list=None, specified_methods_to_apply=None,
                    save_directory=configuration_constants.MASK_VIDEOS):
@@ -42,7 +44,13 @@ def get_original_images():
     project_mastermind = Project_mastermind.get_instance()
     original_directory = project_mastermind.get_original_image_dir()
     images_list_paths = get_files_from_directory(original_directory)
-    images_list_paths.pop()  # Last one is odd
+
+    if images_list_paths and len(images_list_paths) > 1:
+        images_list_paths.pop()  # Last one is odd
+
+    if images_list_paths and len(images_list_paths) == 0:
+        show_error_message(string_constants.NO_IMAGE_LOADED)
+        return
     return images_list_paths
 
 
@@ -97,7 +105,7 @@ def get_files_from_directory(directory):
         if file.endswith(string_constants.TIF_EXTENSION):
             file_path = os.path.join(directory, file)
             correct_directory_files_paths_list.append(file_path)
-    if correct_directory_files_paths_list:
+    if correct_directory_files_paths_list and len(correct_directory_files_paths_list) > 1:
         correct_directory_files_paths_list.pop()
     return correct_directory_files_paths_list
 

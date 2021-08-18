@@ -7,6 +7,9 @@ from src.Classes.Image_wrapper import Image_wrapper
 from src.Classes.Methods.Adaptive_threshold import Adaptive_threshold
 from src.Classes.Project_mastermind import Project_mastermind
 from src.Backend.Image_processing_algorithms.Preprocessing import adaptive_threshold
+from src.Constants import string_constants
+from src.Frontend.Utils.button_controller import disable_button, enable_button
+from src.Frontend.Utils.message import show_error_message
 
 
 def configure_preprocessing_menu_connections(main_window):
@@ -32,12 +35,15 @@ def adaptive_threshold_options(main_window):
 
 
 def set_highlight(main_window):
-    label_highlight = main_window.adaptive_threshold_highlight
-    gif_animation = QMovie(r"./Resources/asd.gif")
+    highlight_labels = [main_window.adaptive_threshold_highlight, main_window.adaptive_threshold_highlight_2,
+                        main_window.adaptive_threshold_highlight_3]
+    gif_animation = QMovie(r"./Resources/Icons/arrow.gif")
     gif_animation.start()
-    label_highlight.setAttribute(Qt.WA_NoSystemBackground)
-    label_highlight.setMovie(gif_animation)
-    label_highlight.setVisible(False)
+    for i in range(0, len(highlight_labels)):
+        highlight_label = highlight_labels[i]
+        highlight_label.setAttribute(Qt.WA_NoSystemBackground)
+        highlight_label.setMovie(gif_animation)
+        highlight_label.setVisible(False)
 
 
 def show_adaptive_threshold(main_window):
@@ -60,11 +66,27 @@ def show_adaptive_threshold(main_window):
     image_wrapper = Image_wrapper(adaptive_threshold_image, adaptive_threshold_method)
     main_window.image_viewer.set_screen_image(image_wrapper)
     main_window.adaptive_threshold_highlight.setVisible(True)
+    main_window.adaptive_threshold_highlight_2.setVisible(True)
+    main_window.adaptive_threshold_highlight_3.setVisible(True)
 
 
 def add_process(main_window):
+    disable_button(main_window.adaptive_threshold_add_process_button)
+    project_mastermind = Project_mastermind.get_instance()
     actual_image_wrapper = main_window.image_viewer.actual_image_wrapper
+
+    if project_mastermind.get_last_image() is None:
+        show_error_message(string_constants.NO_IMAGE_LOADED)
+        enable_button(main_window.adaptive_threshold_add_process_button)
+        return
+
+    if actual_image_wrapper is None or not isinstance(actual_image_wrapper.get_method(), Adaptive_threshold):
+        return
+
     project_mastermind = Project_mastermind.get_instance()
     project_mastermind.add_image_process(actual_image_wrapper)
     save_adaptive_threshold_params(main_window)
     main_window.adaptive_threshold_highlight.setVisible(False)
+    main_window.adaptive_threshold_highlight_2.setVisible(False)
+    main_window.adaptive_threshold_highlight_3.setVisible(False)
+    enable_button(main_window.adaptive_threshold_add_process_button)

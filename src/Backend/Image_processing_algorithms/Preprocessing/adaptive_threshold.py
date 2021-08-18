@@ -2,10 +2,14 @@ import numpy as np
 import cv2 as cv
 
 from src.Constants import algorithm_constants
+from src.Backend.Image_processing_algorithms.Operations import common_operations
 
 
 def adaptive_threshold(image, window_size, constant, method):
     pixels = np.uint8(image)
+
+    if common_operations.is_RGB(image):
+        pixels = common_operations.rgb_to_gray(pixels)
 
     if window_size % 2 == 0:
         window_size = window_size + 1
@@ -22,6 +26,7 @@ def get_method(method_value):
         algorithm_constants.ADAPTIVE_THRESHOLD_GAUSSIAN_NAME: algorithm_constants.ADAPTIVE_THRESHOLD_GAUSSIAN,
     }
     return switcher.get(method_value, "nothing")
+
 
 def get_text_method(method_value):
     switcher = {

@@ -15,10 +15,7 @@ def get_image_path():
     initial_absolute_directory_path = os.path.abspath(properties_dictionary[IMAGES_SOURCE_FOLDER])
     file_path = filedialog.askopenfilename(initialdir=initial_absolute_directory_path,
                                            title=string_constants.CHOOSE_IMAGE_WINDOW,
-                                           filetypes=[("Image files", "*.tif;;*.pgm;;*.ppm;;*.jpg;;*.raw"),
-                                                      ("ppm", "*.PPM"),
-                                                      ("jpg", "*.JPG"),
-                                                      ("raw", "*.RAW"),
+                                           filetypes=[("Image files", "*.tif"),
                                                       ("tif", "*.TIF"),
                                                       ("All files", "*")])
     root.destroy()
@@ -33,10 +30,7 @@ def get_multiple_images_path():
     initial_absolute_directory_path = os.path.abspath(properties_dictionary[IMAGES_SOURCE_FOLDER])
     file_path_list = filedialog.askopenfilenames(initialdir=initial_absolute_directory_path,
                                                  title=string_constants.CHOOSE_MULTIPLE_IMAGES_WINDOW,
-                                                 filetypes=[("Image files", "*.tif;;*.pgm;;*.ppm;;*.jpg;;*.raw"),
-                                                            ("ppm", "*.PPM"),
-                                                            ("jpg", "*.JPG"),
-                                                            ("raw", "*.RAW"),
+                                                 filetypes=[("Image files", "*.tif"),
                                                             ("tif", "*.TIF"),
                                                             ("All files", "*")])
     root.destroy()
@@ -59,3 +53,13 @@ def get_image_dir(file_path):
     path = Path(file_path)
     dir_path = path.parent.absolute()
     return dir_path
+
+
+def is_image(image_path):
+    extension = os.path.splitext(image_path)[1]
+    admitted_extensions = [".tif"]
+
+    if extension not in admitted_extensions:
+        return False
+
+    return True
