@@ -1,5 +1,3 @@
-import numpy as np
-
 from src.Classes.Project_mastermind import Project_mastermind
 from src.Constants import configuration_constants
 
@@ -60,7 +58,6 @@ class Region:
         self.points.append(top_left_point)
         return self.points
 
-
     def get_pixels_in_region(self, image_array):
         min_x = min(self.points)[0]
         max_x = max(self.points)[0]
@@ -69,7 +66,6 @@ class Region:
 
         pixels_in_region = image_array[min_y:max_y, min_x:max_x]
         return pixels_in_region
-
 
     @staticmethod
     def get_all_image_as_region(image_array):
@@ -85,5 +81,3 @@ class Region:
         points.append(top_right_point)
         points.append(top_left_point)
         return points
-
-

@@ -1,10 +1,8 @@
-import os
-
 import numpy as np
 import cv2 as cv
 from PIL import Image
+
 from src.Classes.Methods.Original import Original
-from src.Frontend.Menus import archive_menu
 
 
 class Image_loader:
@@ -14,38 +12,7 @@ class Image_loader:
     height = 0
 
     def __init__(self, image_path, method=Original()):
-        image_name, image_extension = os.path.splitext(image_path)
-        if image_extension == ".RAW":
-            self.generate_raw_image(image_path, method)
-        else:
-            self.generate_normal_image(image_path, method)
-
-    def generate_raw_image(self, image_path, method):
-        width, height = self.get_shape_of_raw(image_path)
-        if width is None or height is None:
-            raise Exception("Bad shape")
-        file = open(image_path, 'rb')
-        rawData = file.read()
-        file.close()
-        imgSize = (width, height)
-        image = Image.frombytes('L', imgSize, rawData, 'raw')
-        self.generate_normal_image(image_path=image_path, method=method, image=image)
-
-    def get_shape_of_raw(self, image_path):
-        information_path = archive_menu.get_information_path()
-        width = None
-        height = None
-        f = open(information_path, "r")
-        lines = f.readlines()
-        for line in lines:
-            line = ' '.join(line.split())
-            line_array = line.split(' ')
-            if line_array[0] in image_path and len(line_array) == 3:
-                width = int(line_array[1])
-                height = int(line_array[2])
-                break
-        f.close()
-        return width, height
+        self.generate_normal_image(image_path, method)
 
     def generate_normal_image(self, image_path, method, image=None):
         if image is None:

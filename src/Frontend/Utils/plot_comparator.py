@@ -78,9 +78,7 @@ def plot_four_comparison(images, movement_weight_array, title, sub_titles, avg_r
         if i == movement_heatmap_index:
             grid.cbar_axes[i].set_yticklabels(colorbar_custom_ticks)
 
-    ## Set movement for cbar
-
-
+    # Set movement for cbar
 
     fig.text(0.15, 0.5, avg_results, fontsize=18, horizontalalignment='center', verticalalignment='center',
              style='italic', bbox={'facecolor': 'gray', 'alpha': 0.85, 'pad': 10})

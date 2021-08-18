@@ -113,7 +113,7 @@
      </property>
      <property name="font">
       <font>
-       <pointsize>12</pointsize>
+       <pointsize>14</pointsize>
       </font>
      </property>
      <property name="text">
@@ -149,7 +149,7 @@
      </property>
      <property name="font">
       <font>
-       <pointsize>12</pointsize>
+       <pointsize>14</pointsize>
       </font>
      </property>
      <property name="text">
@@ -167,7 +167,7 @@
      </property>
      <property name="font">
       <font>
-       <pointsize>12</pointsize>
+       <pointsize>14</pointsize>
       </font>
      </property>
      <property name="text">
@@ -239,7 +239,7 @@
      </property>
      <property name="font">
       <font>
-       <pointsize>12</pointsize>
+       <pointsize>14</pointsize>
       </font>
      </property>
      <property name="text">
@@ -384,7 +384,7 @@
      </property>
      <property name="font">
       <font>
-       <pointsize>12</pointsize>
+       <pointsize>14</pointsize>
       </font>
      </property>
      <property name="text">
@@ -402,7 +402,7 @@
      </property>
      <property name="font">
       <font>
-       <pointsize>12</pointsize>
+       <pointsize>14</pointsize>
       </font>
      </property>
      <property name="text">
@@ -541,11 +541,11 @@
     </property>
     <property name="font">
      <font>
-      <pointsize>12</pointsize>
+      <pointsize>14</pointsize>
      </font>
     </property>
     <property name="text">
-     <string>Número de veces a usar</string>
+     <string>Iteraciones</string>
     </property>
    </widget>
    <widget class="QSpinBox" name="global_routine_params_anisotropic_filter_times_input">
@@ -854,7 +854,7 @@
     </property>
     <property name="font">
      <font>
-      <pointsize>12</pointsize>
+      <pointsize>14</pointsize>
      </font>
     </property>
     <property name="text">
@@ -953,7 +953,7 @@
     </property>
     <property name="font">
      <font>
-      <pointsize>12</pointsize>
+      <pointsize>14</pointsize>
      </font>
     </property>
     <property name="text">
@@ -989,7 +989,7 @@
     </property>
     <property name="font">
      <font>
-      <pointsize>12</pointsize>
+      <pointsize>14</pointsize>
      </font>
     </property>
     <property name="text">
@@ -1050,15 +1050,15 @@
     <rect>
      <x>50</x>
      <y>790</y>
-     <width>191</width>
+     <width>251</width>
      <height>51</height>
     </rect>
    </property>
    <property name="font">
     <font>
-     <pointsize>10</pointsize>
-     <weight>75</weight>
-     <bold>true</bold>
+     <pointsize>16</pointsize>
+     <weight>50</weight>
+     <bold>false</bold>
     </font>
    </property>
    <property name="text">
@@ -1081,17 +1081,17 @@
   <widget class="QPushButton" name="global_routine_params_cancel_button">
    <property name="geometry">
     <rect>
-     <x>1060</x>
+     <x>940</x>
      <y>790</y>
-     <width>191</width>
+     <width>251</width>
      <height>51</height>
     </rect>
    </property>
    <property name="font">
     <font>
-     <pointsize>10</pointsize>
-     <weight>75</weight>
-     <bold>true</bold>
+     <pointsize>16</pointsize>
+     <weight>50</weight>
+     <bold>false</bold>
     </font>
    </property>
    <property name="text">
@@ -1101,17 +1101,17 @@
   <widget class="QPushButton" name="global_routine_params_accept_button">
    <property name="geometry">
     <rect>
-     <x>1270</x>
+     <x>1210</x>
      <y>790</y>
-     <width>191</width>
+     <width>251</width>
      <height>51</height>
     </rect>
    </property>
    <property name="font">
     <font>
-     <pointsize>10</pointsize>
-     <weight>75</weight>
-     <bold>true</bold>
+     <pointsize>16</pointsize>
+     <weight>50</weight>
+     <bold>false</bold>
     </font>
    </property>
    <property name="text">

@@ -22,17 +22,14 @@ from src.Frontend.Utils.viewer_buttons import enable_view_button
 
 def configure_metrics_menu_connections(main_window):
     main_window.generate_metrics_menu_option.triggered.connect(lambda: load_generate_metrics_options(main_window))
-    main_window.generate_multiple_cells_metrics_menu_option.triggered.connect(lambda:
-                                                                              load_generate_multiple_cells_metrics_options(
-                                                                                  main_window))
+    main_window.generate_multiple_cells_metrics_menu_option.triggered.connect(
+        lambda: load_generate_multiple_cells_metrics_options(main_window))
     main_window.plot_metrics_menu_option.triggered.connect(lambda: load_plot_metrics_options(main_window))
-    main_window.plot_distribution_metric_menu_option.triggered.connect(lambda:
-                                                                       load_plot_distribution_metrics_option
-                                                                       (main_window))
+    main_window.plot_distribution_metric_menu_option.triggered.connect(
+        lambda: load_plot_distribution_metrics_option(main_window))
 
-    main_window.analize_texture_and_movement_metrics_menu_option.triggered.connect(lambda:
-                                                                                   load_analyze_texture_and_movement_options
-                                                                                   (main_window))
+    main_window.analize_texture_and_movement_metrics_menu_option.triggered.connect(
+        lambda: load_analyze_texture_and_movement_options(main_window))
 
     main_window.generate_metrics_load_mask_video_button.clicked.connect(lambda: load_mask_video_path(main_window))
     main_window.generate_multiple_cells_metrics_generate_button.clicked.connect(
@@ -41,10 +38,10 @@ def configure_metrics_menu_connections(main_window):
     main_window.generate_metrics_generate_button.clicked.connect(lambda: generate_metrics(main_window))
     main_window.plot_metrics_generate_button.clicked.connect(lambda: plot_metrics(main_window))
     main_window.plot_metrics_distribution_button.clicked.connect(lambda: plot_distribution_metrics(main_window))
-    main_window.analyze_movement_and_texture_button.clicked.connect(lambda:
-                                                                    analyze_texture_and_movement_metrics(main_window))
-    main_window.analyze_movement_and_texture_generate_views_button.clicked.connect(lambda:
-                                                                                   generate_views(main_window))
+    main_window.analyze_movement_and_texture_button.clicked.connect(
+        lambda: analyze_texture_and_movement_metrics(main_window))
+    main_window.analyze_movement_and_texture_generate_views_button.clicked.connect(
+        lambda: generate_views(main_window))
 
 
 def load_generate_metrics_options(main_window):
@@ -80,11 +77,14 @@ def load_analyze_texture_and_movement_options(main_window):
     stacked_feature_windows = main_window.stacked_feature_windows
     stacked_feature_windows.setCurrentWidget(page)
 
-    print("ASD")
-    main_window.analyze_movement_and_texture_movement_threshold_input.setValue(main_window.generate_heat_map_threshold_input.value())
-    main_window.analyze_movement_and_texture_texture_image_clusters_input.setValue(main_window.texture_classification_image_clusters_input.value())
-    main_window.analyze_movement_and_texture_texture_video_clusters_input.setValue(main_window.texture_classification_video_clusters_input.value())
-    main_window.analyze_movement_and_texture_texture_video_threshold_input.setValue(main_window.texture_classification_video_threshold_input.value())
+    main_window.analyze_movement_and_texture_movement_threshold_input.setValue(
+        main_window.generate_heat_map_threshold_input.value())
+    main_window.analyze_movement_and_texture_texture_image_clusters_input.setValue(
+        main_window.texture_classification_image_clusters_input.value())
+    main_window.analyze_movement_and_texture_texture_video_clusters_input.setValue(
+        main_window.texture_classification_video_clusters_input.value())
+    main_window.analyze_movement_and_texture_texture_video_threshold_input.setValue(
+        main_window.texture_classification_video_threshold_input.value())
 
     return
 

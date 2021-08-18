@@ -1,9 +1,8 @@
 from src.Backend.Image_processing_algorithms.Archive_manipulation.properties_manipulation import \
-    save_video_texture_params, save_image_texture_params
+    save_video_texture_params, save_image_texture_params, save_movement_params
 from src.Backend.Image_processing_algorithms.Operations.common_operations import show_coloured_image, resize_image
-from src.Backend.Image_processing_algorithms.Texture import fractal_dimention
 from src.Backend.Image_processing_algorithms.Texture import profile_texture
-from src.Backend.Image_processing_algorithms.Texture import texture_heatmap
+from src.Backend.Video_processing_algorithms.movement_image_generator import create_motion_image
 from src.Backend.Video_processing_algorithms.texture_image_generator import create_texture_image_from_video, \
     classify_single_image
 from src.Classes.Image_wrapper import Image_wrapper
@@ -17,15 +16,24 @@ from src.Frontend.Utils.viewer_buttons import enable_view_button
 
 
 def configure_texture_menu_connections(main_window):
-    main_window.fractal_dimension_menu_option.triggered.connect(lambda: fractal_dimension_options(main_window))
-    main_window.texture_profile_menu_option.triggered.connect(lambda: texture_profile_options(main_window))
-    main_window.texture_classification_menu_option.triggered.connect(
+    main_window.texture_and_movement_generate_movement_heat_map_menu_option.triggered.connect(
+        lambda: load_heat_map_options(main_window))
+    main_window.texture_and_movement_generate_profile_menu_option.triggered.connect(
+        lambda: texture_profile_options(main_window))
+    main_window.texture_and_movement_generate_texture_heat_map_menu_option.triggered.connect(
         lambda: texture_classification_options(main_window))
 
-    main_window.fractal_dimension_apply_button.clicked.connect(lambda: generate_fractal_dimension(main_window))
+    main_window.generate_heat_map_button.clicked.connect(lambda: generate_heat_map(main_window))
     main_window.texture_profile_apply_button.clicked.connect(lambda: generate_profile_texture(main_window))
     main_window.texture_classification_image_button.clicked.connect(lambda: classify_image_texture(main_window))
     main_window.texture_classification_video_button.clicked.connect(lambda: classify_video_texture(main_window))
+
+
+def load_heat_map_options(main_window):
+    page = main_window.heat_map_options
+    stacked_feature_windows = main_window.stacked_feature_windows
+    stacked_feature_windows.setCurrentWidget(page)
+    return
 
 
 def fractal_dimension_options(main_window):
@@ -49,16 +57,23 @@ def texture_classification_options(main_window):
     return
 
 
-def generate_fractal_dimension(main_window):
-    disable_button(main_window.fractal_dimension_apply_button)
+def generate_heat_map(main_window):
+    disable_button(main_window.generate_heat_map_button)
     project_mastermind = Project_mastermind.get_instance()
-    current_image_array = project_mastermind.get_last_image()
-    method = main_window.fractal_dimension_function_combobox.currentText()
-
-    fractal_dimension_image = fractal_dimention.fractal_dimension_texture(current_image_array, method)
-    image_wrapper = Image_wrapper(fractal_dimension_image)
-    main_window.image_viewer.set_screen_image(image_wrapper)
-    enable_button(main_window.fractal_dimension_apply_button)
+    threshold_value = main_window.generate_heat_map_threshold_input.value()
+    uncolored_motion_image_array, uncolored_motion_image_array_normalized, coloured_motion_image_array = create_motion_image(threshold_value)
+    movement_normalized_image_wrapper = Image_wrapper(uncolored_motion_image_array_normalized, "")
+    movement_image_wrapper = Image_wrapper(uncolored_motion_image_array, "")
+    movement_heat_map_image_wrapper = Image_wrapper(coloured_motion_image_array, "")
+    project_mastermind.set_normalized_movement_image(movement_normalized_image_wrapper)
+    project_mastermind.set_movement_image(movement_image_wrapper)
+    project_mastermind.set_movement_heat_map_image(movement_heat_map_image_wrapper)
+    show_coloured_image(coloured_motion_image_array)
+    main_window.image_viewer.set_screen_image(movement_heat_map_image_wrapper)
+    progress_bar.force_to_close()
+    save_movement_params(main_window)
+    enable_button(main_window.generate_heat_map_button)
+    enable_view_button(string_constants.MOVEMENT_VIEW)
 
 
 def generate_profile_texture(main_window):
