@@ -82,9 +82,8 @@ def generate_frames(images_path_for_texture_list):
 
 def set_methods_to_apply():
     methods_to_apply = []
-    anisotropic_method = Anisotropic_Filter()
-    methods_to_apply.append(anisotropic_method)
-    methods_to_apply.append(anisotropic_method)
+    iterations = 3
+    anisotropic_method = Anisotropic_Filter(iterations)
     methods_to_apply.append(anisotropic_method)
     return methods_to_apply
 

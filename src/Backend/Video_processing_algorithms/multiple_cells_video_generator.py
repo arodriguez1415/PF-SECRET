@@ -123,9 +123,8 @@ def set_methods_to_apply(image_path):
 
 
 def set_preprocessed_methods(methods_to_apply, props_dict):
-    anisotropic_method = Anisotropic_Filter()
-    for i in range(0, props_dict[ps.GLOBAL_ROUTINE_ANISOTROPIC_FILTER_TIMES]):
-        methods_to_apply.append(anisotropic_method)
+    anisotropic_method = Anisotropic_Filter(props_dict[ps.GLOBAL_ROUTINE_ANISOTROPIC_FILTER_TIMES])
+    methods_to_apply.append(anisotropic_method)
 
     adaptive_threshold_window_size = props_dict[ps.GLOBAL_ROUTINE_ADAPTIVE_THRESHOLD_WINDOW_SIZE]
     adaptive_threshold_c_constant = props_dict[ps.GLOBAL_ROUTINE_ADAPTIVE_C_CONSTANT]

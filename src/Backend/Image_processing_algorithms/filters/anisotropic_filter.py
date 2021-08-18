@@ -6,7 +6,17 @@ from src.Backend.Image_processing_algorithms.Operations.common_operations import
 
 
 # https://loli.github.io/medpy/generated/medpy.filter.smoothing.anisotropic_diffusion.html
-def anisotropic_diffusion_filter_medpy(image):
+def anisotropic_diffusion_filter_medpy(image, times):
+    filtered_image = image
+    for i in range(0, times):
+        filtered_image = anisotropic_filter(filtered_image)
+
+    print(times)
+
+    return filtered_image
+
+
+def anisotropic_filter(image):
     pixels = np.uint8(image)
     anisotropic_array = anisotropic_diffusion(pixels)
     filtered_image_array = anisotropic_array_correction(anisotropic_array)

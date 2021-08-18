@@ -14,6 +14,9 @@ def configure_information_buttons(main_window, global_routine_params):
     main_window.adaptive_threshold_algoritm_help.clicked.connect(
         lambda: show_information(string_constants.ADAPTIVE_THRESHOLD_ALGORITHM_HELP))
 
+    main_window.apply_anisotropic_filter_times_help.clicked.connect(
+        lambda: show_information(string_constants.ANISOTROPIC_FILTER_TIMES_HELP)
+    )
     main_window.anisotropic_filter_algoritm_help.clicked.connect(
         lambda: show_information(string_constants.ANISOTROPIC_FILTER_ALGORITHM_HELP))
 
