@@ -90,3 +90,5 @@ def add_process(main_window):
     main_window.adaptive_threshold_highlight_2.setVisible(False)
     main_window.adaptive_threshold_highlight_3.setVisible(False)
     enable_button(main_window.adaptive_threshold_add_process_button)
+
+

@@ -6,6 +6,10 @@ IMAGES_SOURCE_FOLDER = "images_source_folder"
 
 # Main window properties
 
+# Anisotropic filter
+
+ANISOTROPIC_FILTER_TIMES = "ANISOTROPIC_FILTER"
+
 # Adaptive threshold
 
 ADAPTIVE_THRESHOLD_WINDOW_SIZE = "ADAPTIVE_THRESHOLD_WINDOW_SIZE"
@@ -54,6 +58,10 @@ GLOBAL_ROUTINE_TEXTURE_CLUSTERS = "GLOBAL_ROUTINE_TEXTURE_CLUSTERS"
 ## Values
 
 # Main window properties
+
+# Anisotropic filter
+
+ANISOTROPIC_FILTER_TIMES_VALUE = 1
 
 # Adaptive threshold
 

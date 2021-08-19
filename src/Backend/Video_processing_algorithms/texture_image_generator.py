@@ -113,7 +113,7 @@ def get_anisotropic_iterations():
 
 
 def get_texture_image(images_path_list, clusters_quantity, threshold):
-    width, height = get_grayscale(images_path_list[0]).shape
+    height, width = get_grayscale(images_path_list[0]).shape
     accumulated_texture = np.zeros((width, height), np.uint8)
     accumulated_texture = resize_image(accumulated_texture, width, height)
     descriptors_labels = [algorithm_constants.GLCM_MEAN, algorithm_constants.GLCM_ENTROPY,

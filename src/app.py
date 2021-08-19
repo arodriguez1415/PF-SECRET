@@ -10,15 +10,7 @@ from src.Classes.Project_mastermind import Project_mastermind
 from main_window import Ui_MainWindow
 
 
-def catch_exceptions(t, val, tb):
-    if t == SystemExit or t == KeyboardInterrupt or t == GeneratorExit:
-        sys.exit()
-    QtWidgets.QMessageBox.critical(None, "An exception was raised", "Exception type: {t}\nMessage: {val}")
-    old_hook(t, val, tb)
-
 app = QtWidgets.QApplication(sys.argv)
-old_hook = sys.excepthook
-sys.excepthook = catch_exceptions
 main_window_widget = QtWidgets.QMainWindow()
 main_window = Ui_MainWindow()
 main_window.setupUi(main_window_widget)

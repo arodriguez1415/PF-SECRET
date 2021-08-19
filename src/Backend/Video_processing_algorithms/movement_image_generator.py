@@ -118,7 +118,7 @@ def get_grayscale(frame_path):
 def get_motion(frames_path_list, threshold):
     previous_grayscale_frame = get_grayscale(frames_path_list[0])
     ret, previous_grayscale_frame = cv2.threshold(previous_grayscale_frame, threshold, 255, cv2.THRESH_BINARY)
-    width, height = previous_grayscale_frame.shape
+    height, width = previous_grayscale_frame.shape
     accumulated_motion = np.zeros((width, height), np.uint8)
     accumulated_motion = resize_image(accumulated_motion, width, height)
     progress_bar.increment_value_progress_bar()

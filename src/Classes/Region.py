@@ -69,7 +69,7 @@ class Region:
 
     @staticmethod
     def get_all_image_as_region(image_array):
-        width, height = image_array.shape
+        height, width = image_array.shape
         points = []
         top_left_point = (0, 0)
         bottom_left_point = (0, height - 1)

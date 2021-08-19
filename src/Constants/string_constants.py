@@ -37,6 +37,10 @@ TEXTURE_VIDEO_VIEW = "Texture video"
 
 ERROR_TITLE = "Error ocurrido"
 
+UNKNOWN_ERROR = "Ha ocurrido un error inesperado. La interfaz volverá a un estado seguro para evitar errores de " \
+                "arrastre "
+UNKNOWN_ERROR_TYPE = "Tipo de error: "
+
 NO_METRIC_SELECTED = "Debe seleccionar almenos una metrica"
 NO_IMAGE_FILE = "El archivo seleccionado no es una imagen. \n\nSolo se admiten las siguientes extensiones: \n.tif"
 NO_EXCEL_FILE = "El archivo seleccionado no es un excel. Debe tener la extensión '.xlsx'"

@@ -18,9 +18,12 @@ def configure_archive_menu_connections(main_window):
     main_window.set_images_source_directory_menu_option.triggered.connect(lambda: set_images_source_directory())
 
 
-def load_image(image_viewer, method):
+def load_image(image_viewer, method, image_path=""):
     project_mastermind = Project_mastermind.get_instance()
-    image_path = image_file_manipulation.get_image_path()
+
+    if image_path == "":
+        image_path = image_file_manipulation.get_image_path()
+
     image_dir = image_file_manipulation.get_image_dir(image_path)
 
     if image_path == "" or image_path is None:

@@ -1,5 +1,6 @@
 from src.Backend.Image_processing_algorithms.Archive_manipulation.save_file_manipulation import set_save_name
 from src.Backend.Image_processing_algorithms.Operations import common_operations
+from src.Backend.Image_processing_algorithms.Operations.common_operations import resize_image
 from src.Constants import configuration_constants, string_constants
 from src.Classes.Project_mastermind import Project_mastermind
 from src.Frontend.Utils import progress_bar
@@ -94,7 +95,8 @@ def save_video(frames_paths_list, video_path):
     video = cv.VideoWriter(video_path, 0, 1, (width, height))
     for frame_path in frames_paths_list:
         frame_array = cv.imread(frame_path)
-        video.write(frame_array)
+        resized_frame_array = resize_image(frame_array, width, height)
+        video.write(resized_frame_array)
     video.release()
 
 

@@ -1,7 +1,10 @@
+import shutil
+
 from PyQt5.QtCore import Qt
 from PyQt5.QtWidgets import QApplication
 
 from src.Classes.Project_mastermind import Project_mastermind
+from src.Constants import configuration_constants
 
 
 def start_progress_bar(process_title, process_description, progress_steps, is_global=False):
@@ -84,6 +87,7 @@ def force_to_close():
     project_mastermind = Project_mastermind.get_instance()
     progress_bar = get_progress_bar()
     if progress_bar is not None:
+        shutil.rmtree(configuration_constants.TEMPORARY_VIDEO_DIRECTORY_PATH, ignore_errors=True)
         project_mastermind.set_global_progress_bar_active(False)
         project_mastermind.set_normal_progress_bar(None)
         project_mastermind.set_global_progress_bar(None)
