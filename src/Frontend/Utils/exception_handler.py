@@ -40,7 +40,8 @@ def set_consistent_interface_state():
     image_viewer = main_window.image_viewer
 
     original_image_path = project_mastermind.get_original_image_path()
-    load_image(image_viewer, method=Original(), image_path=original_image_path)
+    if original_image_path is not None and original_image_path != "":
+        load_image(image_viewer, method=Original(), image_path=original_image_path)
 
     shutil.rmtree(configuration_constants.TEMPORARY_VIDEO_DIRECTORY_PATH, ignore_errors=True)
     project_mastermind.reload_properties(load_properties(main_window, global_routine_params))

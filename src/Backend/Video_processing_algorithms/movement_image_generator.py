@@ -150,6 +150,10 @@ def get_frame_motion(current_frame, previous_frame, accumulated_motion):
 def normalize_values(accumulated_motion):
     max_value = np.max(accumulated_motion)
     rows, cols = accumulated_motion.shape
+
+    if np.isnan(max_value) or max_value == 0:
+        max_value = 1
+
     for row in range(rows):
         for col in range(cols):
             accumulated_motion[row][col] = accumulated_motion[row][col] * 255 / max_value

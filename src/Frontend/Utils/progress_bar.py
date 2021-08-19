@@ -1,7 +1,7 @@
 import shutil
 
 from PyQt5.QtCore import Qt
-from PyQt5.QtWidgets import QApplication
+from PyQt5.QtWidgets import QApplication, QPushButton
 
 from src.Classes.Project_mastermind import Project_mastermind
 from src.Constants import configuration_constants
@@ -24,6 +24,7 @@ def start_global_progress_bar(process_title, progress_steps):
     progress_bar = project_mastermind.get_global_progress_bar()
     progress_bar = setup_progress_bar(progress_bar, process_title, "", progress_steps=progress_steps)
     project_mastermind.set_global_progress_bar(progress_bar)
+    set_cancel_operation(progress_bar)
 
 
 def start_normal_progress_bar(process_title, process_description, progress_steps):
@@ -32,6 +33,7 @@ def start_normal_progress_bar(process_title, process_description, progress_steps
     progress_bar = project_mastermind.get_normal_progress_bar()
     progress_bar = setup_progress_bar(progress_bar, process_title, process_description, progress_steps=progress_steps)
     project_mastermind.set_normal_progress_bar(progress_bar)
+    set_cancel_operation(progress_bar)
 
 
 def setup_progress_bar(progress_bar, process_title, process_description, progress_steps=100):
@@ -81,6 +83,15 @@ def get_progress_bar():
 def set_global_progress_bar_active(flag=True):
     project_mastermind = Project_mastermind.get_instance()
     project_mastermind.set_global_progress_bar_active(flag)
+
+
+def set_cancel_operation(progress_bar):
+    progress_bar.canceled.connect(lambda: cancel_progress_dialog())
+
+
+def cancel_progress_dialog():
+    force_to_close()
+    raise SystemExit(0)
 
 
 def force_to_close():
