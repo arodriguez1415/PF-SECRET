@@ -33,6 +33,7 @@ def catch_any_exception(error_class, error_type, traceback_object):
     if project_mastermind.is_cancel_progress_bar_flag_active():
         show_information_message(string_constants.PROGRESS_BAR_CANCELLED)
         eliminate_remaining_plots()
+        close_any_wait_message()
         enable_process_buttons(main_window)
         project_mastermind.set_cancel_progress_bar_flag(False)
         return
@@ -51,6 +52,7 @@ def set_consistent_interface_state():
     image_viewer = main_window.image_viewer
 
     original_image_path = project_mastermind.get_original_image_path()
+    close_any_wait_message()
     if original_image_path is not None and original_image_path != "":
         load_image(image_viewer, method=Original(), image_path=original_image_path)
 
@@ -59,6 +61,7 @@ def set_consistent_interface_state():
     progress_bar.force_to_close()
     enable_process_buttons(main_window)
     eliminate_remaining_plots()
+
 
 
 def enable_process_buttons(main_window):
@@ -93,3 +96,9 @@ def enable_process_buttons(main_window):
 
 def eliminate_remaining_plots():
     plt.close('all')
+
+
+def close_any_wait_message():
+    project_mastermind = Project_mastermind.get_instance()
+    wait_message = project_mastermind.get_wait_message()
+    wait_message.done(0)

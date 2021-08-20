@@ -1,7 +1,7 @@
-import time
 from PyQt5.QtCore import Qt
 from PyQt5.QtWidgets import QMessageBox, QApplication
 
+from src.Classes.Project_mastermind import Project_mastermind
 from src.Constants import string_constants
 
 
@@ -28,14 +28,9 @@ def show_wait_message(title, message):
     messageBox.setText(message)
     messageBox.show()
     QApplication.processEvents()
+    project_mastermind = Project_mastermind.get_instance()
+    project_mastermind.set_wait_message(messageBox)
     return messageBox
-
-
-def increment_wait_message(progress_bar_window):
-    for i in range(0, progress_bar_window.maximum()):
-        progress_bar_window.setValue(progress_bar_window.value() + 1)
-        time.sleep(0.1)
-    return
 
 
 def show_confirmation_message(title, message):
