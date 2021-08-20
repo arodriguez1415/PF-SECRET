@@ -21,6 +21,8 @@ def create_multiple_motion_images(threshold, source_directory):
     coloured_motion_images_list = []
     coloured_motion_images_save_path_list = []
     for i in range(0, len(images_list_of_lists)):
+        if progress_bar.is_progress_bar_cancelled():
+            return None
         unc_motion_image, unc_motion_image_normalized, c_motion_image = create_motion_image(threshold,
                                                                                             images_list_of_lists[i])
         coloured_motion_images_list.append(c_motion_image)

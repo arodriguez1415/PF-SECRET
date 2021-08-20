@@ -59,6 +59,8 @@ def generate_frames(images_path, specified_methods_to_apply, apply_methods_flag=
     index = 0
     frames_paths_list = []
     for image_path in images_path:
+        if progress_bar.is_progress_bar_cancelled():
+            return None
         image = Image.open(image_path)
         image_array = common_operations.normalize_from_pil_image(image)
         frame_path = configuration_constants.TEMPORARY_VIDEO_DIRECTORY_PATH + "frame - " + str(index) + ".tif"

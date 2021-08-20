@@ -37,6 +37,8 @@ def generate_video_of_all_cells(source_directory):
     images_list_of_lists = get_images_from_directories(source_directory)
     cells_videos_paths_list = []
     for images_list_paths in images_list_of_lists:
+        if progress_bar.is_progress_bar_cancelled():
+            return None
         video_path = video_generator.generate_video(images_list=images_list_paths,
                                                     specified_methods_to_apply=[],
                                                     save_directory=configuration_constants.CELLS_VIDEOS)
@@ -47,6 +49,8 @@ def generate_video_of_all_cells(source_directory):
 def generate_video_comparator_of_all_cells(cell_videos, mask_videos):
     comparison_videos_paths_list = []
     for i in range(0, len(mask_videos)):
+        if progress_bar.is_progress_bar_cancelled():
+            return None
         setup()
         cell_images_array_list = get_video_frames_as_array(cell_videos[i])
         mask_images_array_list = get_video_frames_as_array(mask_videos[i])

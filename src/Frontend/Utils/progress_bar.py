@@ -90,8 +90,14 @@ def set_cancel_operation(progress_bar):
 
 
 def cancel_progress_dialog():
+    project_mastermind = Project_mastermind.get_instance()
+    project_mastermind.set_cancel_progress_bar_flag(True)
     force_to_close()
-    raise SystemExit(0)
+
+
+def is_progress_bar_cancelled():
+    project_mastermind = Project_mastermind.get_instance()
+    return project_mastermind.is_cancel_progress_bar_flag_active()
 
 
 def force_to_close():
@@ -103,14 +109,3 @@ def force_to_close():
         project_mastermind.set_normal_progress_bar(None)
         project_mastermind.set_global_progress_bar(None)
         progress_bar.done(0)
-
-
-def is_progress_bar_cancelled():
-    progress_bar = get_progress_bar()
-    if progress_bar is not None and progress_bar.wasCanceled():
-        exit()
-        project_mastermind = Project_mastermind.get_instance()
-        project_mastermind.set_global_progress_bar_active(False)
-        progress_bar.close()
-        return True
-    return False

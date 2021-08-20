@@ -8,7 +8,7 @@ from src.Constants import string_constants, configuration_constants
 from src.Frontend.Menus.archive_menu import load_image
 from src.Frontend.Utils import progress_bar
 from src.Frontend.Utils.button_controller import enable_button
-from src.Frontend.Utils.message import show_error_message
+from src.Frontend.Utils.message import show_error_message, show_information_message
 
 old_hook = sys.excepthook
 
@@ -18,12 +18,20 @@ def initialize_exception_handler():
 
 
 def catch_any_exception(error_class, error_type, traceback_object):
+    project_mastermind = Project_mastermind.get_instance()
+    main_window = project_mastermind.main_window
+
     if error_class == SystemExit or error_class == KeyboardInterrupt or error_class == GeneratorExit:
         sys.exit()
 
     if error_class is None or error_type is None or traceback_object is None:
         show_error_message(string_constants.UNKNOWN_ERROR)
         set_consistent_interface_state()
+        return
+
+    if project_mastermind.is_cancel_progress_bar_flag_active():
+        show_information_message(string_constants.PROGRESS_BAR_CANCELLED)
+        enable_process_buttons(main_window)
         return
 
     error_type_str = str(error_type)
