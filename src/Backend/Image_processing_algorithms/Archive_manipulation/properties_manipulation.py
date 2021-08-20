@@ -26,7 +26,13 @@ def load_properties(main_window, global_routine_params):
 
 def generate_default_properties():
     default_properties_dict = {ps.IMAGES_SOURCE_FOLDER: configuration_constants.TEST_IMAGES_DIR}
+    default_properties_dict = generate_default_manual_routines_properties(default_properties_dict)
+    default_properties_dict = generate_global_routine_properties(default_properties_dict)
 
+    return default_properties_dict
+
+
+def generate_default_manual_routines_properties(default_properties_dict):
     default_properties_dict[ps.ANISOTROPIC_FILTER_TIMES] = ps.ANISOTROPIC_FILTER_TIMES_VALUE
 
     default_properties_dict[ps.ADAPTIVE_THRESHOLD_WINDOW_SIZE] = ps.ADAPTIVE_THRESHOLD_WINDOW_SIZE_VALUE
@@ -46,6 +52,10 @@ def generate_default_properties():
 
     default_properties_dict[ps.TEXTURE_MOVEMENT_THRESHOLD] = ps.TEXTURE_MOVEMENT_THRESHOLD_VALUE
 
+    return default_properties_dict
+
+
+def generate_global_routine_properties(default_properties_dict):
     default_properties_dict[ps.GLOBAL_ROUTINE_ANISOTROPIC_FILTER_TIMES] = ps.GLOBAL_ROUTINE_ANISOTROPIC_FILTER_TIMES_VALUE
 
     default_properties_dict[ps.GLOBAL_ROUTINE_ADAPTIVE_THRESHOLD_WINDOW_SIZE] = ps.GLOBAL_ROUTINE_ADAPTIVE_THRESHOLD_WINDOW_SIZE_VALUE
@@ -89,12 +99,19 @@ def is_double(potential_float):
 def set_properties(prop_dict, main_window, global_routine_params):
     prop_dict = transform_dict(prop_dict)
 
+    set_manual_routines_properties(prop_dict, main_window)
+    set_global_routine_properties(prop_dict, global_routine_params)
+
+
+def set_manual_routines_properties(prop_dict, main_window):
     set_anisotropic_filter_params(prop_dict, main_window)
     set_adaptive_threshold_params(prop_dict, main_window)
     set_mgac_params(prop_dict, main_window)
     set_texture_params(prop_dict, main_window)
     set_movement_params(prop_dict, main_window)
 
+
+def set_global_routine_properties(prop_dict, global_routine_params):
     set_global_routine_params(prop_dict, global_routine_params)
 
 
