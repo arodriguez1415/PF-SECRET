@@ -33,6 +33,8 @@ def create_multiple_texture_images(threshold, clusters_quantity, source_director
     texture_images_array_list = []
     texture_images_path = []
     for i in range(0, len(images_list_of_lists)):
+        if progress_bar.is_progress_bar_cancelled():
+            return None
         uncoloured_classified_image, coloured_classified_image = create_texture_image_from_video(images_list_of_lists[i],
                                                                                                  clusters_quantity,
                                                                                                  threshold)
@@ -113,7 +115,7 @@ def get_anisotropic_iterations():
 
 
 def get_texture_image(images_path_list, clusters_quantity, threshold):
-    width, height = get_grayscale(images_path_list[0]).shape
+    height, width = get_grayscale(images_path_list[0]).shape
     accumulated_texture = np.zeros((width, height), np.uint8)
     accumulated_texture = resize_image(accumulated_texture, width, height)
     descriptors_labels = [algorithm_constants.GLCM_MEAN, algorithm_constants.GLCM_ENTROPY,

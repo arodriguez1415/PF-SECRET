@@ -21,6 +21,8 @@ def create_multiple_motion_images(threshold, source_directory):
     coloured_motion_images_list = []
     coloured_motion_images_save_path_list = []
     for i in range(0, len(images_list_of_lists)):
+        if progress_bar.is_progress_bar_cancelled():
+            return None
         unc_motion_image, unc_motion_image_normalized, c_motion_image = create_motion_image(threshold,
                                                                                             images_list_of_lists[i])
         coloured_motion_images_list.append(c_motion_image)
@@ -118,7 +120,7 @@ def get_grayscale(frame_path):
 def get_motion(frames_path_list, threshold):
     previous_grayscale_frame = get_grayscale(frames_path_list[0])
     ret, previous_grayscale_frame = cv2.threshold(previous_grayscale_frame, threshold, 255, cv2.THRESH_BINARY)
-    width, height = previous_grayscale_frame.shape
+    height, width = previous_grayscale_frame.shape
     accumulated_motion = np.zeros((width, height), np.uint8)
     accumulated_motion = resize_image(accumulated_motion, width, height)
     progress_bar.increment_value_progress_bar()
@@ -150,6 +152,10 @@ def get_frame_motion(current_frame, previous_frame, accumulated_motion):
 def normalize_values(accumulated_motion):
     max_value = np.max(accumulated_motion)
     rows, cols = accumulated_motion.shape
+
+    if np.isnan(max_value) or max_value == 0:
+        max_value = 1
+
     for row in range(rows):
         for col in range(cols):
             accumulated_motion[row][col] = accumulated_motion[row][col] * 255 / max_value

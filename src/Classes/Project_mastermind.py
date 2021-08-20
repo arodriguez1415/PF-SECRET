@@ -19,6 +19,7 @@ class Project_mastermind:
     normal_progress_bar = None
     global_progress_bar = None
     is_global_progress_bar_active_flag = None
+    cancel_progress_bar_flag = False
 
     # Application attributes
     properties_dictionary = None
@@ -65,6 +66,9 @@ class Project_mastermind:
 
     def is_global_progress_bar_active(self):
         return self.is_global_progress_bar_active_flag
+
+    def is_cancel_progress_bar_flag_active(self):
+        return self.cancel_progress_bar_flag
 
     def reset_normal_progress_bar(self):
         self.normal_progress_bar = QProgressDialog("", string_constants.CANCEL_BUTTON_TEXT, 0, 0)
@@ -130,6 +134,7 @@ class Project_mastermind:
         self.normal_progress_bar = None
         self.global_progress_bar = None
         self.is_global_progress_bar_active_flag = False
+        self.cancel_progress_bar_flag = False
         self.movement_image_wrapper = None
         self.normalized_movement_wrapper = None
         self.movement_heat_map_image_wrapper = None
@@ -143,6 +148,7 @@ class Project_mastermind:
         self.normal_progress_bar = None
         self.global_progress_bar = None
         self.is_global_progress_bar_active_flag = False
+        self.cancel_progress_bar_flag = False
         self.texture_image_wrapper = None
         self.texture_heat_map_image_wrapper = None
 
@@ -194,6 +200,9 @@ class Project_mastermind:
 
     def set_global_progress_bar_active(self, flag):
         self.is_global_progress_bar_active_flag = flag
+
+    def set_cancel_progress_bar_flag(self, flag):
+        self.cancel_progress_bar_flag = flag
 
     def set_original_image_path(self, original_image_path):
         self.original_image_path = original_image_path

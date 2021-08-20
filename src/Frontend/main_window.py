@@ -11,7 +11,7 @@ import src.Frontend.Menus.preprocessing_menu as preprocessing_menu
 import src.Frontend.Menus.border_detection_menu as border_detection_menu
 import src.Frontend.Menus.metrics_menu as metrics_menu
 import src.Frontend.Menus.routines_menu as routines_menu
-from src.Frontend.Utils import viewer_buttons, information_buttons
+from src.Frontend.Utils import viewer_buttons, information_buttons, exception_handler
 from src.Frontend.Utils.viewer_buttons import disable_extra_views, disable_main_view
 
 
@@ -33,6 +33,7 @@ def configure_windows(main_window, global_routine_params):
 def set_initial_configuration(main_window):
     main_window.image_viewer = replace_image_viewer(main_window.image_viewer)
     main_window.stacked_feature_windows.setCurrentIndex(0)
+    exception_handler.initialize_exception_handler()
     disable_main_view(main_window)
     disable_extra_views(main_window)
     toolBox.disable_toolbox(main_window)

@@ -221,7 +221,9 @@ class QDrawable_label(QLabel):
         self.square_flag = False
         self.fixed_square_flag = False
         self.diagonal_line_flag = False
+        self.fixed_line_type = None
         self.set_screen_image(self.actual_image_wrapper)
+
 
     @staticmethod
     def draw_region_in_image(image_array, points):

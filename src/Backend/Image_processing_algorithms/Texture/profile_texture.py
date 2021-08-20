@@ -62,7 +62,7 @@ def calculate_texture_in_line(image, x_coordinates, y_coordinates, all_points,
     index = 0
     diff = 5
     width = image.shape[0]
-    height = image.shape[1]
+    height = image.shape[1] # mirar ro
 
     for point in all_points:
         x = point[0]

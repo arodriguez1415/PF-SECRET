@@ -1,7 +1,10 @@
+import shutil
+
 from PyQt5.QtCore import Qt
-from PyQt5.QtWidgets import QApplication
+from PyQt5.QtWidgets import QApplication, QPushButton
 
 from src.Classes.Project_mastermind import Project_mastermind
+from src.Constants import configuration_constants
 
 
 def start_progress_bar(process_title, process_description, progress_steps, is_global=False):
@@ -21,6 +24,7 @@ def start_global_progress_bar(process_title, progress_steps):
     progress_bar = project_mastermind.get_global_progress_bar()
     progress_bar = setup_progress_bar(progress_bar, process_title, "", progress_steps=progress_steps)
     project_mastermind.set_global_progress_bar(progress_bar)
+    set_cancel_operation(progress_bar)
 
 
 def start_normal_progress_bar(process_title, process_description, progress_steps):
@@ -29,6 +33,7 @@ def start_normal_progress_bar(process_title, process_description, progress_steps
     progress_bar = project_mastermind.get_normal_progress_bar()
     progress_bar = setup_progress_bar(progress_bar, process_title, process_description, progress_steps=progress_steps)
     project_mastermind.set_normal_progress_bar(progress_bar)
+    set_cancel_operation(progress_bar)
 
 
 def setup_progress_bar(progress_bar, process_title, process_description, progress_steps=100):
@@ -80,22 +85,27 @@ def set_global_progress_bar_active(flag=True):
     project_mastermind.set_global_progress_bar_active(flag)
 
 
+def set_cancel_operation(progress_bar):
+    progress_bar.canceled.connect(lambda: cancel_progress_dialog())
+
+
+def cancel_progress_dialog():
+    project_mastermind = Project_mastermind.get_instance()
+    project_mastermind.set_cancel_progress_bar_flag(True)
+    force_to_close()
+
+
+def is_progress_bar_cancelled():
+    project_mastermind = Project_mastermind.get_instance()
+    return project_mastermind.is_cancel_progress_bar_flag_active()
+
+
 def force_to_close():
     project_mastermind = Project_mastermind.get_instance()
     progress_bar = get_progress_bar()
     if progress_bar is not None:
+        shutil.rmtree(configuration_constants.TEMPORARY_VIDEO_DIRECTORY_PATH, ignore_errors=True)
         project_mastermind.set_global_progress_bar_active(False)
         project_mastermind.set_normal_progress_bar(None)
         project_mastermind.set_global_progress_bar(None)
         progress_bar.done(0)
-
-
-def is_progress_bar_cancelled():
-    progress_bar = get_progress_bar()
-    if progress_bar is not None and progress_bar.wasCanceled():
-        exit()
-        project_mastermind = Project_mastermind.get_instance()
-        project_mastermind.set_global_progress_bar_active(False)
-        progress_bar.close()
-        return True
-    return False

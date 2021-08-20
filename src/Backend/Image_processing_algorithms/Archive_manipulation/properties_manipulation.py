@@ -27,6 +27,8 @@ def load_properties(main_window, global_routine_params):
 def generate_default_properties():
     default_properties_dict = {ps.IMAGES_SOURCE_FOLDER: configuration_constants.TEST_IMAGES_DIR}
 
+    default_properties_dict[ps.ANISOTROPIC_FILTER_TIMES] = ps.ANISOTROPIC_FILTER_TIMES_VALUE
+
     default_properties_dict[ps.ADAPTIVE_THRESHOLD_WINDOW_SIZE] = ps.ADAPTIVE_THRESHOLD_WINDOW_SIZE_VALUE
     default_properties_dict[ps.ADAPTIVE_THRESHOLD_C_CONSTANT] = ps.ADAPTIVE_THRESHOLD_C_CONSTANT_VALUE
     default_properties_dict[ps.ADAPTIVE_THRESHOLD_METHOD] = ps.ADAPTIVE_THRESHOLD_METHOD_VALUE
@@ -87,12 +89,17 @@ def is_double(potential_float):
 def set_properties(prop_dict, main_window, global_routine_params):
     prop_dict = transform_dict(prop_dict)
 
+    set_anisotropic_filter_params(prop_dict, main_window)
     set_adaptive_threshold_params(prop_dict, main_window)
     set_mgac_params(prop_dict, main_window)
     set_texture_params(prop_dict, main_window)
     set_movement_params(prop_dict, main_window)
 
     set_global_routine_params(prop_dict, global_routine_params)
+
+
+def set_anisotropic_filter_params(prop_dict, main_window):
+    main_window.apply_anisotropic_filter_times_input.setValue(prop_dict[ps.ANISOTROPIC_FILTER_TIMES])
 
 
 def set_adaptive_threshold_params(prop_dict, main_window):
@@ -148,6 +155,16 @@ def set_global_routine_params(prop_dict, global_routine_params):
         prop_dict[ps.GLOBAL_ROUTINE_TEXTURE_CLUSTERS])
     global_routine_params.global_routine_params_movement_texture_threshold_input.setValue(
         prop_dict[ps.GLOBAL_ROUTINE_TEXTURE_THRESHOLD])
+
+
+def save_anisotropic_filter_params(main_window):
+    project_mastermind = Project_mastermind.get_instance()
+    prop_dict = project_mastermind.get_properties_dictionary()
+
+    prop_dict[ps.ANISOTROPIC_FILTER_TIMES] = main_window.apply_anisotropic_filter_times_input.value()
+
+    project_mastermind.reload_properties(prop_dict)
+    save_properties(prop_dict)
 
 
 def save_adaptive_threshold_params(main_window):
