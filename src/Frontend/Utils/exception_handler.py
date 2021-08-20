@@ -1,5 +1,6 @@
 import shutil
 import sys
+from matplotlib import pyplot as plt
 
 from src.Backend.Image_processing_algorithms.Archive_manipulation.properties_manipulation import load_properties
 from src.Classes.Methods.Original import Original
@@ -31,7 +32,9 @@ def catch_any_exception(error_class, error_type, traceback_object):
 
     if project_mastermind.is_cancel_progress_bar_flag_active():
         show_information_message(string_constants.PROGRESS_BAR_CANCELLED)
+        eliminate_remaining_plots()
         enable_process_buttons(main_window)
+        project_mastermind.set_cancel_progress_bar_flag(False)
         return
 
     error_type_str = str(error_type)
@@ -55,6 +58,7 @@ def set_consistent_interface_state():
     project_mastermind.reload_properties(load_properties(main_window, global_routine_params))
     progress_bar.force_to_close()
     enable_process_buttons(main_window)
+    eliminate_remaining_plots()
 
 
 def enable_process_buttons(main_window):
@@ -85,3 +89,7 @@ def enable_process_buttons(main_window):
 
     # Global Routine
     enable_button(main_window.global_routine_initiate_button)
+
+
+def eliminate_remaining_plots():
+    plt.close('all')
