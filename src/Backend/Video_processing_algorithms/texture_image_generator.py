@@ -5,7 +5,7 @@ import numpy as np
 
 from src.Backend.Image_processing_algorithms.Archive_manipulation.dataframe_file_manipulation import \
     create_dataframe_from_descriptors
-from src.Backend.Image_processing_algorithms.Archive_manipulation.directories_manipulation import \
+from src.Backend.Image_processing_algorithms.Archive_manipulation.file_manipulation import \
     create_directory_if_not_exists, remove_directory
 from src.Backend.Image_processing_algorithms.Operations.common_operations import bgr_to_rgb, resize_image
 from src.Backend.Image_processing_algorithms.Texture.k_means import get_descriptors, k_means

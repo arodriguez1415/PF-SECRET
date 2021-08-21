@@ -1,7 +1,7 @@
 from PyQt5.QtCore import Qt
 from PyQt5.QtWidgets import QApplication
 
-from src.Backend.Image_processing_algorithms.Archive_manipulation.directories_manipulation import remove_directory
+from src.Backend.Image_processing_algorithms.Archive_manipulation.file_manipulation import remove_directory
 from src.Classes.Project_mastermind import Project_mastermind
 from src.Constants import configuration_constants
 

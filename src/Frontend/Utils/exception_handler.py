@@ -1,7 +1,7 @@
 import sys
 from matplotlib import pyplot as plt
 
-from src.Backend.Image_processing_algorithms.Archive_manipulation.directories_manipulation import remove_directory
+from src.Backend.Image_processing_algorithms.Archive_manipulation.file_manipulation import remove_directory
 from src.Backend.Image_processing_algorithms.Archive_manipulation.properties_manipulation import load_properties
 from src.Classes.Methods.Original import Original
 from src.Classes.Project_mastermind import Project_mastermind

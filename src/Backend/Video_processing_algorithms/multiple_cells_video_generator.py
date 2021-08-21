@@ -3,7 +3,7 @@ from PIL import Image
 import numpy as np
 
 from src.Backend.Image_processing_algorithms.Archive_manipulation import image_file_manipulation
-from src.Backend.Image_processing_algorithms.Archive_manipulation.directories_manipulation import \
+from src.Backend.Image_processing_algorithms.Archive_manipulation.file_manipulation import \
     create_directory_if_not_exists, remove_directory
 from src.Backend.Image_processing_algorithms.Archive_manipulation.video_file_manipulation import \
     get_video_frames_as_array

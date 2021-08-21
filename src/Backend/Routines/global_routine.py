@@ -4,8 +4,8 @@ import time
 import numpy as np
 from PIL import Image
 
-from src.Backend.Image_processing_algorithms.Archive_manipulation.directories_manipulation import \
-    create_directory_if_not_exists, move_directory, get_parent_directory_path
+from src.Backend.Image_processing_algorithms.Archive_manipulation.file_manipulation import \
+    create_directory_if_not_exists, move_directory, get_parent_directory_path, move_file
 from src.Backend.Image_processing_algorithms.Metrics import metrics_generator, metrics_plotter
 from src.Backend.Image_processing_algorithms.Operations.string_manipulator import generate_random_string, \
     generate_date_string
@@ -287,14 +287,14 @@ def save_files(save_form, list_of_lists_of_generated_files, distribution_metrics
     if save_form == algorithm_constants.CELL_SAVE_FORM:
         save_by_cell(list_of_lists_of_generated_files, distribution_metrics_path_list)
     else:
-        save_by_feature(directory_path)
+        save_by_feature(directory_path, list_of_lists_of_generated_files)
 
 
 def save_by_cell(list_of_lists_of_generated_files, distribution_metrics_path_list):
     return
 
 
-def save_by_feature(target_folder_path):
+def save_by_feature(target_folder_path, list_of_lists_of_generated_files):
     move_directory(configuration_constants.MASK_VIDEOS,
                    get_parent_directory_path(configuration_constants.MASK_VIDEOS) + target_folder_path)
     move_directory(configuration_constants.CELLS_VIDEOS,
@@ -312,3 +312,11 @@ def save_by_feature(target_folder_path):
     move_directory(configuration_constants.MOVEMENT_VS_TEXTURE_COMPARISON_DIRECTORY,
                    get_parent_directory_path(configuration_constants.MOVEMENT_VS_TEXTURE_COMPARISON_DIRECTORY) +
                    target_folder_path)
+
+    metrics_folder_path = configuration_constants.GLOBAL_ROUTINE_DIRECTORY + target_folder_path + configuration_constants.METRICS_FOLDER_NAME
+    create_directory_if_not_exists(metrics_folder_path)
+
+    for file_path_list in list_of_lists_of_generated_files:
+        for file_path in file_path_list:
+            if configuration_constants.METRICS_FOLDER_NAME in file_path:
+                move_file(file_path, metrics_folder_path)

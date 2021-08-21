@@ -5,7 +5,7 @@ from PIL import Image
 import numpy as np
 import cv2
 
-from src.Backend.Image_processing_algorithms.Archive_manipulation.directories_manipulation import \
+from src.Backend.Image_processing_algorithms.Archive_manipulation.file_manipulation import \
     create_directory_if_not_exists, remove_directory
 from src.Backend.Image_processing_algorithms.Operations.common_operations import bgr_to_rgb, resize_image
 from src.Backend.Video_processing_algorithms import video_generator

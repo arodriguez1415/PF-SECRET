@@ -1,7 +1,7 @@
 import os
 import pickle
 
-from src.Backend.Image_processing_algorithms.Archive_manipulation.directories_manipulation import \
+from src.Backend.Image_processing_algorithms.Archive_manipulation.file_manipulation import \
     create_directory_if_not_exists
 from src.Backend.Image_processing_algorithms.Preprocessing import adaptive_threshold
 from src.Backend.Image_processing_algorithms.Preprocessing.adaptive_threshold import get_text_method

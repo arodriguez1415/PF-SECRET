@@ -3,7 +3,7 @@ import cv2 as cv
 import numpy as np
 import os
 
-from src.Backend.Image_processing_algorithms.Archive_manipulation.directories_manipulation import \
+from src.Backend.Image_processing_algorithms.Archive_manipulation.file_manipulation import \
     create_directory_if_not_exists, remove_directory
 from src.Backend.Image_processing_algorithms.Archive_manipulation.save_file_manipulation import set_save_name
 from src.Backend.Image_processing_algorithms.Operations import common_operations

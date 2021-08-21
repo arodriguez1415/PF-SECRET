@@ -16,6 +16,10 @@ def move_directory(source, destination):
     shutil.move(source, destination)
 
 
+def move_file(source, destination):
+    shutil.move(source, destination)
+
+
 def get_parent_directory_path(directory_path):
     path = Path(directory_path)
     parent_directory_path = path.parent.absolute()
