@@ -5,9 +5,10 @@ import numpy as np
 from PIL import Image
 
 from src.Backend.Image_processing_algorithms.Archive_manipulation.directories_manipulation import \
-    create_directory_if_not_exists
+    create_directory_if_not_exists, move_directory, get_parent_directory_path
 from src.Backend.Image_processing_algorithms.Metrics import metrics_generator, metrics_plotter
-from src.Backend.Image_processing_algorithms.Operations.string_manipulator import generate_random_string
+from src.Backend.Image_processing_algorithms.Operations.string_manipulator import generate_random_string, \
+    generate_date_string
 from src.Backend.Routines.estimator import estimate_time_and_space, prepare_estimation_message_and_title, \
     estimate_steps, get_time_message
 from src.Backend.Video_processing_algorithms import multiple_cells_video_generator
@@ -25,6 +26,7 @@ from src.Constants import properties_constants as ps
 
 def routine(sub_routines, save_form):
     routine_setup()
+
     source_directory = multiple_cells_video_generator.get_source_directory()
 
     if source_directory is None or source_directory == "":
@@ -76,12 +78,14 @@ def estimate_time_and_space_sub_routine(sub_routines, source_directory):
 def routine_setup():
     create_directory_if_not_exists(configuration_constants.GENERATED_IMAGES_DIR)
     create_directory_if_not_exists(configuration_constants.GLOBAL_ROUTINE_DIRECTORY)
+    create_directory_if_not_exists(configuration_constants.MASK_VIDEOS)
     create_directory_if_not_exists(configuration_constants.CELLS_VIDEOS)
     create_directory_if_not_exists(configuration_constants.COMPARISON_VIDEOS)
-    create_directory_if_not_exists(configuration_constants.GLOBAL_METRICS_DIRECTORY_PATH)
     create_directory_if_not_exists(configuration_constants.GLOBAL_GRAPHS_FOLDER)
     create_directory_if_not_exists(configuration_constants.GLOBAL_METRICS_GRAPH_FOLDER)
     create_directory_if_not_exists(configuration_constants.GLOBAL_DISTRIBUTION_METRICS_GRAPH_FOLDER)
+    create_directory_if_not_exists(configuration_constants.MOVEMENT_HEATMAP_IMAGES_DIRECTORY)
+    create_directory_if_not_exists(configuration_constants.TEXTURE_HEATMAP_IMAGES_DIRECTORY)
     create_directory_if_not_exists(configuration_constants.MOVEMENT_VS_TEXTURE_COMPARISON_DIRECTORY)
 
 
@@ -278,15 +282,33 @@ def get_first_cell_image_list(source_directory):
 
 
 def save_files(save_form, list_of_lists_of_generated_files, distribution_metrics_path_list):
+    directory_path = generate_date_string()
+    create_directory_if_not_exists(configuration_constants.GLOBAL_ROUTINE_DIRECTORY + directory_path)
     if save_form == algorithm_constants.CELL_SAVE_FORM:
         save_by_cell(list_of_lists_of_generated_files, distribution_metrics_path_list)
     else:
-        save_by_feature(list_of_lists_of_generated_files, distribution_metrics_path_list)
+        save_by_feature(directory_path)
 
 
 def save_by_cell(list_of_lists_of_generated_files, distribution_metrics_path_list):
     return
 
 
-def save_by_feature(list_of_lists_of_generated_files, distribution_metrics_path_list):
-    return
+def save_by_feature(target_folder_path):
+    move_directory(configuration_constants.MASK_VIDEOS,
+                   get_parent_directory_path(configuration_constants.MASK_VIDEOS) + target_folder_path)
+    move_directory(configuration_constants.CELLS_VIDEOS,
+                   get_parent_directory_path(configuration_constants.CELLS_VIDEOS) + target_folder_path)
+    move_directory(configuration_constants.COMPARISON_VIDEOS,
+                   get_parent_directory_path(configuration_constants.COMPARISON_VIDEOS) + target_folder_path)
+    move_directory(configuration_constants.GLOBAL_GRAPHS_FOLDER,
+                   get_parent_directory_path(configuration_constants.GLOBAL_GRAPHS_FOLDER) + target_folder_path)
+    move_directory(configuration_constants.MOVEMENT_HEATMAP_IMAGES_DIRECTORY,
+                   get_parent_directory_path(configuration_constants.MOVEMENT_HEATMAP_IMAGES_DIRECTORY) +
+                   target_folder_path)
+    move_directory(configuration_constants.TEXTURE_HEATMAP_IMAGES_DIRECTORY,
+                   get_parent_directory_path(configuration_constants.TEXTURE_HEATMAP_IMAGES_DIRECTORY) +
+                   target_folder_path)
+    move_directory(configuration_constants.MOVEMENT_VS_TEXTURE_COMPARISON_DIRECTORY,
+                   get_parent_directory_path(configuration_constants.MOVEMENT_VS_TEXTURE_COMPARISON_DIRECTORY) +
+                   target_folder_path)

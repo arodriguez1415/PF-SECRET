@@ -1,7 +1,7 @@
-import shutil
 import sys
 from matplotlib import pyplot as plt
 
+from src.Backend.Image_processing_algorithms.Archive_manipulation.directories_manipulation import remove_directory
 from src.Backend.Image_processing_algorithms.Archive_manipulation.properties_manipulation import load_properties
 from src.Classes.Methods.Original import Original
 from src.Classes.Project_mastermind import Project_mastermind
@@ -56,7 +56,7 @@ def set_consistent_interface_state():
     if original_image_path is not None and original_image_path != "":
         load_image(image_viewer, method=Original(), image_path=original_image_path)
 
-    shutil.rmtree(configuration_constants.TEMPORARY_VIDEO_DIRECTORY_PATH, ignore_errors=True)
+    remove_directory(configuration_constants.TEMPORARY_VIDEO_DIRECTORY_PATH)
     project_mastermind.reload_properties(load_properties(main_window, global_routine_params))
     progress_bar.force_to_close()
     enable_process_buttons(main_window)

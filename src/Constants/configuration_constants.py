@@ -22,7 +22,6 @@ GLOBAL_ROUTINE_DIRECTORY = r"./generated/Rutina global/"
 
 CELLS_VIDEOS = r"./generated/Rutina global/Celulas en video/"
 MASK_VIDEOS = r"./generated/Rutina global/Mascaras de contorno/"
-CONTOUR_VIDEOS = r"./generated/Rutina global/Celulas contorneadas/"
 COMPARISON_VIDEOS = r"./generated/Rutina global/Contorno vs realidad/"
 
 # Movement heat map directory
@@ -41,9 +40,6 @@ MOVEMENT_VS_TEXTURE_COMPARISON_DIRECTORY = r"./generated/Rutina global/Comparaci
 
 METRICS_DIRECTORY_PATH = r"./generated/metrics/"
 
-# Metrics directory
-
-GLOBAL_METRICS_DIRECTORY_PATH = r"./generated/Rutina global/metrics/"
 
 # Graphs directories global
 

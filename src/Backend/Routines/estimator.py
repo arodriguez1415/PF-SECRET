@@ -61,7 +61,7 @@ def estimate_time(images_amount, directories_of_images_amount, sub_routines):
 
     movement_and_texture_files = global_routine.movement_and_texture_heat_map_sub_routine(sub_routines,
                                                                                           sample_directory)
-    print(movement_and_texture_files)
+
     contour_comparison_and_metrics_files.extend(movement_and_texture_files)
     generated_files_path = contour_comparison_and_metrics_files
 
@@ -169,7 +169,6 @@ def get_memory_message(kilobytes):
 def remove_generated_files_for_estimation(list_of_lists_of_generated_files, distribution_metrics_path_list):
     for file_path_list in list_of_lists_of_generated_files:
         for file_path in file_path_list:
-            print(file_path)
             os.remove(file_path)
 
     for file_path in distribution_metrics_path_list:

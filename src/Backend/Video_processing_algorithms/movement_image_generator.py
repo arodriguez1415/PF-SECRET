@@ -1,5 +1,4 @@
 import os
-import shutil
 
 from PIL import Image
 
@@ -7,7 +6,7 @@ import numpy as np
 import cv2
 
 from src.Backend.Image_processing_algorithms.Archive_manipulation.directories_manipulation import \
-    create_directory_if_not_exists
+    create_directory_if_not_exists, remove_directory
 from src.Backend.Image_processing_algorithms.Operations.common_operations import bgr_to_rgb, resize_image
 from src.Backend.Video_processing_algorithms import video_generator
 from src.Backend.Video_processing_algorithms.multiple_cells_video_generator import get_images_from_directories
@@ -44,7 +43,7 @@ def create_motion_image(threshold, images_path_for_motion_list=None):
     coloured_motion_image_array = bgr_to_rgb(cv2.applyColorMap(uncolored_motion_image_array_normalized,
                                                                cv2.COLORMAP_HOT))
     video_generator.delete_frames(frames_path_list)
-    shutil.rmtree(configuration_constants.TEMPORARY_VIDEO_DIRECTORY_PATH, ignore_errors=True)
+    remove_directory(configuration_constants.TEMPORARY_VIDEO_DIRECTORY_PATH)
     return uncolored_motion_image_array, uncolored_motion_image_array, coloured_motion_image_array
 
 
