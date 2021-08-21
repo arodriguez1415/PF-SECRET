@@ -65,6 +65,10 @@ WAIT_TEXTURE_IMAGE_MESSAGE_DESC = "Se esta generando el mapa de textura de la im
 
 # Confirmation messages
 
+DEFAULT_PARAMETERS_MANUAL_ROUTINE_TITLE = "Restaurar defaults"
+DEFAULT_PARAMETERS_MANUAL_ROUTINE_DESCRIPTION = "¿Esta seguro que quiere volver a tener los parametros default en todas" \
+                                                " las rutinas? Se sobreescribirán los actuales"
+
 GLOBAL_ROUTINE_ESTIMATION_TITLE = "Estimación de resultados"
 GLOBAL_ROUTINE_TIME_ESTIMATION = "Estimación de tiempo requerido: "
 GLOBAL_ROUTINE_MEMORY_ESTIMATION = "Estimación de memoria requerida: "

@@ -1,3 +1,5 @@
+from src.Backend.Image_processing_algorithms.Archive_manipulation.properties_manipulation import \
+    save_anisotropic_filter_params
 from src.Backend.Image_processing_algorithms.filters import anisotropic_filter as anisotropic_filter_functions
 from src.Classes.Methods.Anisotropic_Filter import Anisotropic_Filter
 from src.Classes.Project_mastermind import Project_mastermind
@@ -40,4 +42,5 @@ def anisotropic_filter(main_window):
     image_wrapper = Image_wrapper(image_filtered_array, anisotropic_method)
     project_mastermind.add_image_process(image_wrapper)
     main_window.image_viewer.set_screen_image(image_wrapper)
+    save_anisotropic_filter_params(main_window)
     enable_button(main_window.apply_anisotropic_filter_button)

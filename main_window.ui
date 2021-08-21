@@ -417,7 +417,7 @@
       </rect>
      </property>
      <property name="currentIndex">
-      <number>6</number>
+      <number>1</number>
      </property>
      <widget class="QWidget" name="blank_page"/>
      <widget class="QWidget" name="anisotropic_filter_options">
@@ -3266,6 +3266,7 @@
     </property>
     <addaction name="load_main_image_menu_option"/>
     <addaction name="set_images_source_directory_menu_option"/>
+    <addaction name="restore_defaults_menu_option"/>
    </widget>
    <widget class="QMenu" name="preprocessing_menu">
     <property name="title">
@@ -3614,6 +3615,11 @@
   <action name="generate_multiple_cells_metrics_menu_option">
    <property name="text">
     <string>Generar métricas de máscara de múltiples células</string>
+   </property>
+  </action>
+  <action name="restore_defaults_menu_option">
+   <property name="text">
+    <string>Restaurar parametros default de rutinas</string>
    </property>
   </action>
  </widget>
