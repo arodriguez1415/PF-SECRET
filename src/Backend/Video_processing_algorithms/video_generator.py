@@ -1,3 +1,5 @@
+from src.Backend.Image_processing_algorithms.Archive_manipulation.directories_manipulation import \
+    create_directory_if_not_exists
 from src.Backend.Image_processing_algorithms.Archive_manipulation.save_file_manipulation import set_save_name
 from src.Backend.Image_processing_algorithms.Operations import common_operations
 from src.Backend.Image_processing_algorithms.Operations.common_operations import resize_image
@@ -32,13 +34,9 @@ def generate_video(images_list=None, specified_methods_to_apply=None,
 def setup(images_paths_list):
     progress_bar.start_progress_bar(string_constants.GENERATE_VIDEO_TITLE,
                                     string_constants.GENERATE_VIDEO_DESCRIPTION, len(images_paths_list))
+    create_directory_if_not_exists(configuration_constants.GENERATED_IMAGES_DIR)
     create_directory_if_not_exists(configuration_constants.TEMPORARY_VIDEO_DIRECTORY_PATH)
     create_directory_if_not_exists(configuration_constants.MASK_VIDEOS)
-
-
-def create_directory_if_not_exists(directory_path):
-    if not os.path.isdir(directory_path):
-        os.mkdir(directory_path)
 
 
 def get_original_images():

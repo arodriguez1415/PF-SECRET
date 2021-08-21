@@ -55,6 +55,9 @@ NO_PROFILE_SELECTED_ERROR = "No se selecciono ningún perfil para analizar"
 NO_LINE_SELECTED_ERROR = "La figura utilizada para este método debe ser una línea"
 NO_IMAGE_LOADED = "No se cargó ninguna imagen para analizar. Debe elegir una imagen '.tif' en el menu 'Archivo'"
 
+BOTH_SAVE_OPTIONS_SELECTED_EXCEPTION = "No pueden estar ambas opciones seleccionadas"
+NO_SAVE_OPTIONS_SELECTED_EXCEPTION = "No se seleccionó ninguna opción de guardado"
+
 # Wait message
 
 WAIT_ESTIMATION_MESSAGE_TITLE = "Estimacion"

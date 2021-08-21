@@ -46,25 +46,26 @@ def estimate_time_and_space(sub_routines, source_directory):
 
 def estimate_time(images_amount, directories_of_images_amount, sub_routines):
     sample_directory = configuration_constants.SAMPLE_ESTIMATOR_DIRECTORY
-    generated_files_path = []
     contour_comparison_and_metrics_files = []
+    distribution_metrics_path_list = []
 
     first_init_time = time.time()
 
     if algorithm_constants.CONTOUR_SUBROUTINE in sub_routines:
-        contour_comparison_and_metrics_files = global_routine.contour_comparison_and_metrics_subroutine(sub_routines,
-                                                                                                        sample_directory)
-
-    generated_files_path.extend(contour_comparison_and_metrics_files)
+        contour_comparison_and_metrics_files, distribution_metrics_path_list = global_routine.contour_comparison_and_metrics_subroutine(
+            sub_routines,
+            sample_directory)
 
     contours_and_metrics_time_for_one_image = time.time() - first_init_time
     second_init_time = time.time()
 
     movement_and_texture_files = global_routine.movement_and_texture_heat_map_sub_routine(sub_routines,
                                                                                           sample_directory)
-    generated_files_path.extend(movement_and_texture_files)
+    print(movement_and_texture_files)
+    contour_comparison_and_metrics_files.extend(movement_and_texture_files)
+    generated_files_path = contour_comparison_and_metrics_files
 
-    remove_generated_files_for_estimation(generated_files_path)
+    remove_generated_files_for_estimation(generated_files_path, distribution_metrics_path_list)
 
     texture_and_movement_time_for_one_directory = time.time() - second_init_time
 
@@ -165,6 +166,11 @@ def get_memory_message(kilobytes):
     return str(kilobytes) + " KB"
 
 
-def remove_generated_files_for_estimation(files_path_list):
-    for file_path in files_path_list:
+def remove_generated_files_for_estimation(list_of_lists_of_generated_files, distribution_metrics_path_list):
+    for file_path_list in list_of_lists_of_generated_files:
+        for file_path in file_path_list:
+            print(file_path)
+            os.remove(file_path)
+
+    for file_path in distribution_metrics_path_list:
         os.remove(file_path)

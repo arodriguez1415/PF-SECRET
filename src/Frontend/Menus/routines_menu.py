@@ -4,7 +4,8 @@ from PyQt5.QtCore import Qt
 from src.Backend.Routines import global_routine
 from src.Classes.Project_mastermind import Project_mastermind
 from src.Constants import algorithm_constants
-from src.Constants.string_constants import GLOBAL_ROUTINE_PARAMS_WIDGET_TITLE
+from src.Constants.string_constants import GLOBAL_ROUTINE_PARAMS_WIDGET_TITLE, BOTH_SAVE_OPTIONS_SELECTED_EXCEPTION, \
+    NO_SAVE_OPTIONS_SELECTED_EXCEPTION
 from src.Frontend.Utils import progress_bar
 from src.Frontend.Utils.button_controller import disable_button, enable_button
 
@@ -29,7 +30,8 @@ def load_global_routine_options(main_window):
 def initiate_global_routine(main_window):
     disable_button(main_window.global_routine_initiate_button)
     sub_routines_list = get_sub_routines(main_window)
-    global_routine.routine(sub_routines_list)
+    save_form = get_save_form(main_window)
+    global_routine.routine(sub_routines_list, save_form)
     progress_bar.force_to_close()
     plt.close('all')
     enable_button(main_window.global_routine_initiate_button)
@@ -69,3 +71,20 @@ def set_child_contour_routines(main_window):
     checked = main_window.global_routine_subroutines_contour_checkbox.isChecked()
     main_window.global_routine_subroutines_contour_metrics.setChecked(checked)
     main_window.global_routine_subroutines_comparison.setChecked(checked)
+
+
+def get_save_form(main_window):
+    cell_save_form_flag = main_window.global_routine_save_by_cell_option.isChecked()
+    feature_save_form_flag = main_window.global_routine_save_by_feature_option.isChecked()
+
+    if cell_save_form_flag and feature_save_form_flag:
+        raise Exception(BOTH_SAVE_OPTIONS_SELECTED_EXCEPTION)
+
+    if cell_save_form_flag:
+        return algorithm_constants.CELL_SAVE_FORM
+    elif feature_save_form_flag:
+        return algorithm_constants.FEATURE_SAVE_FORM
+    else:
+        raise Exception(NO_SAVE_OPTIONS_SELECTED_EXCEPTION)
+
+
