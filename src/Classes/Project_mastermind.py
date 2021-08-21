@@ -15,7 +15,8 @@ class Project_mastermind:
     original_image_path = None
     original_image_dir = None
 
-    # Progress Bar attributes
+    # Progress Bar and messages attributes
+    wait_message = None
     normal_progress_bar = None
     global_progress_bar = None
     is_global_progress_bar_active_flag = None
@@ -57,6 +58,9 @@ class Project_mastermind:
     @staticmethod
     def get_instance():
         return Project_mastermind.__instance
+
+    def get_wait_message(self):
+        return self.wait_message
 
     def get_normal_progress_bar(self):
         return self.normal_progress_bar
@@ -125,33 +129,6 @@ class Project_mastermind:
     def get_texture_image_video(self):
         return self.texture_image_video_wrapper
 
-    def clear_all(self):
-        self.image_processing_list = []
-        self.original_images_in_dir_path = []
-        self.current_original_image_index = 0
-        self.original_image_path = None
-        self.original_image_dir = None
-        self.normal_progress_bar = None
-        self.global_progress_bar = None
-        self.is_global_progress_bar_active_flag = False
-        self.cancel_progress_bar_flag = False
-        self.movement_image_wrapper = None
-        self.normalized_movement_wrapper = None
-        self.movement_heat_map_image_wrapper = None
-        self.texture_image_wrapper = None
-        self.texture_heat_map_image_wrapper = None
-        self.texture_image_video_wrapper = None
-        self.texture_heat_map_image_video_wrapper = None
-
-    def clear_on_original_image_change(self):
-        self.image_processing_list = []
-        self.normal_progress_bar = None
-        self.global_progress_bar = None
-        self.is_global_progress_bar_active_flag = False
-        self.cancel_progress_bar_flag = False
-        self.texture_image_wrapper = None
-        self.texture_heat_map_image_wrapper = None
-
     def remove_last_processing(self):
         if len(self.image_processing_list) > 1:
             del (self.image_processing_list[-1])
@@ -191,6 +168,9 @@ class Project_mastermind:
 
     def get_properties_dictionary(self):
         return self.properties_dictionary
+
+    def set_wait_message(self, wait_message):
+        self.wait_message = wait_message
 
     def set_normal_progress_bar(self, progress_bar):
         self.normal_progress_bar = progress_bar
@@ -264,3 +244,32 @@ class Project_mastermind:
         if correct_directory_files_paths_list and len(correct_directory_files_paths_list) > 1:
             correct_directory_files_paths_list.pop()
         return correct_directory_files_paths_list
+
+    def clear_all(self):
+        self.image_processing_list = []
+        self.original_images_in_dir_path = []
+        self.current_original_image_index = 0
+        self.original_image_path = None
+        self.original_image_dir = None
+        self.wait_message = None
+        self.normal_progress_bar = None
+        self.global_progress_bar = None
+        self.is_global_progress_bar_active_flag = False
+        self.cancel_progress_bar_flag = False
+        self.movement_image_wrapper = None
+        self.normalized_movement_wrapper = None
+        self.movement_heat_map_image_wrapper = None
+        self.texture_image_wrapper = None
+        self.texture_heat_map_image_wrapper = None
+        self.texture_image_video_wrapper = None
+        self.texture_heat_map_image_video_wrapper = None
+
+    def clear_on_original_image_change(self):
+        self.image_processing_list = []
+        self.wait_message = None
+        self.normal_progress_bar = None
+        self.global_progress_bar = None
+        self.is_global_progress_bar_active_flag = False
+        self.cancel_progress_bar_flag = False
+        self.texture_image_wrapper = None
+        self.texture_heat_map_image_wrapper = None

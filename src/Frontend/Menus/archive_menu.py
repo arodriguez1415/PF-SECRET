@@ -1,13 +1,16 @@
 from src.Backend.Image_processing_algorithms.Archive_manipulation import image_file_manipulation
 from src.Backend.Image_processing_algorithms.Archive_manipulation.image_file_manipulation import is_image
-from src.Backend.Image_processing_algorithms.Archive_manipulation.properties_manipulation import save_properties
+from src.Backend.Image_processing_algorithms.Archive_manipulation.properties_manipulation import save_properties, \
+    generate_default_manual_routines_properties, set_manual_routines_properties
 from src.Classes.Image_wrapper import Image_wrapper
 from src.Classes.Methods.Original import Original
 from src.Classes.Project_mastermind import Project_mastermind
 from src.Classes.Image_loader import Image_loader
 from src.Constants import string_constants
 from src.Constants.properties_constants import IMAGES_SOURCE_FOLDER
-from src.Frontend.Utils.message import show_error_message
+from src.Constants.string_constants import DEFAULT_PARAMETERS_MANUAL_ROUTINE_TITLE, \
+    DEFAULT_PARAMETERS_MANUAL_ROUTINE_DESCRIPTION
+from src.Frontend.Utils.message import show_error_message, show_confirmation_message
 from src.Frontend.Utils.viewer_buttons import disable_extra_views, enable_view_button
 from src.Frontend.toolBox import enable_toolbox
 
@@ -16,6 +19,7 @@ def configure_archive_menu_connections(main_window):
     image_viewer = main_window.image_viewer
     main_window.load_main_image_menu_option.triggered.connect(lambda: load_image(image_viewer, method=Original()))
     main_window.set_images_source_directory_menu_option.triggered.connect(lambda: set_images_source_directory())
+    main_window.restore_defaults_menu_option.triggered.connect(lambda: set_default_manual_routine_properties())
 
 
 def load_image(image_viewer, method, image_path=""):
@@ -60,3 +64,18 @@ def set_images_source_directory():
     properties_directory[IMAGES_SOURCE_FOLDER] = source_directory_path
     save_properties(properties_directory)
     project_mastermind.reload_properties(properties_directory)
+
+
+def set_default_manual_routine_properties():
+    project_mastermind = Project_mastermind.get_instance()
+
+    title = DEFAULT_PARAMETERS_MANUAL_ROUTINE_TITLE
+    description = DEFAULT_PARAMETERS_MANUAL_ROUTINE_DESCRIPTION
+    continue_flag = show_confirmation_message(title, description)
+
+    if continue_flag:
+        props_dictionary = project_mastermind.get_properties_dictionary()
+        props_dictionary = generate_default_manual_routines_properties(props_dictionary)
+        project_mastermind.reload_properties(props_dictionary)
+        set_manual_routines_properties(props_dictionary, project_mastermind.main_window)
+        save_properties(props_dictionary)
