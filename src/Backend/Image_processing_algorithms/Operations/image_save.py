@@ -6,7 +6,7 @@ import src.Backend.Image_processing_algorithms.Operations.common_operations as c
 from src.Constants.string_constants import WRITE_FILENAME
 
 
-def get_save_path(image_array):
+def get_save_image_path():
     root = Tk()
     root.withdraw()
     save_extension = ".tif"

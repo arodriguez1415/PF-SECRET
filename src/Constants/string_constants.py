@@ -129,6 +129,8 @@ PLOT_METRICS_ALGORITHM_HELP = "Mensaje de prueba para mostrar una informacion"
 
 PLOT_METRICS_DISTRIBUTION_ALGORITHM_HELP = "Mensaje de prueba para mostrar una informacion"
 
+VIDEO_GENERATOR_ALGORITHM_HELP = "Mensaje de prueba para mostrar una informacion"
+
 GLOBAL_ROUTINE_ALGORITHM_HELP = "Mensaje de prueba para mostrar una informacion"
 
 # Progress Bar

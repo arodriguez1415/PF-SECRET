@@ -417,7 +417,7 @@
       </rect>
      </property>
      <property name="currentIndex">
-      <number>1</number>
+      <number>5</number>
      </property>
      <widget class="QWidget" name="blank_page"/>
      <widget class="QWidget" name="anisotropic_filter_options">
@@ -1417,6 +1417,95 @@
          <string>?</string>
         </property>
        </widget>
+      </widget>
+     </widget>
+     <widget class="QWidget" name="generate_video_options">
+      <widget class="QPushButton" name="generate_video_algorithm_button">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>750</y>
+         <width>241</width>
+         <height>51</height>
+        </rect>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>16</pointsize>
+        </font>
+       </property>
+       <property name="text">
+        <string>Iniciar</string>
+       </property>
+      </widget>
+      <widget class="QLabel" name="generate_video_title">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>10</y>
+         <width>291</width>
+         <height>71</height>
+        </rect>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>20</pointsize>
+         <weight>75</weight>
+         <bold>true</bold>
+         <underline>true</underline>
+        </font>
+       </property>
+       <property name="layoutDirection">
+        <enum>Qt::LeftToRight</enum>
+       </property>
+       <property name="text">
+        <string>Video de célula</string>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignCenter</set>
+       </property>
+      </widget>
+      <widget class="QPushButton" name="generate_video_algorithm_help">
+       <property name="geometry">
+        <rect>
+         <x>260</x>
+         <y>750</y>
+         <width>51</width>
+         <height>51</height>
+        </rect>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>14</pointsize>
+        </font>
+       </property>
+       <property name="text">
+        <string>?</string>
+       </property>
+      </widget>
+      <widget class="QLabel" name="label">
+       <property name="geometry">
+        <rect>
+         <x>30</x>
+         <y>130</y>
+         <width>251</width>
+         <height>221</height>
+        </rect>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>16</pointsize>
+        </font>
+       </property>
+       <property name="text">
+        <string>Nota: Esta rutina genera un video con todas las células en la carpeta de la célula cargada aplicándole a cada frame todos los procesos aplicados a la imagen</string>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
+       </property>
+       <property name="wordWrap">
+        <bool>true</bool>
+       </property>
       </widget>
      </widget>
      <widget class="QWidget" name="global_routine_options">
@@ -3399,12 +3488,19 @@
     </property>
     <addaction name="global_routine_menu_option"/>
    </widget>
+   <widget class="QMenu" name="video_menu">
+    <property name="title">
+     <string>Generación de video</string>
+    </property>
+    <addaction name="generate_video_with_process_menu_option"/>
+   </widget>
    <addaction name="archive_menu"/>
    <addaction name="filters_menu"/>
    <addaction name="preprocessing_menu"/>
    <addaction name="border_detection_menu"/>
    <addaction name="texture_menu"/>
    <addaction name="metrics_menu"/>
+   <addaction name="video_menu"/>
    <addaction name="routines_menu"/>
   </widget>
   <action name="load_main_image_menu_option">
@@ -3707,6 +3803,11 @@
   <action name="restore_defaults_menu_option">
    <property name="text">
     <string>Restaurar parametros default de rutinas</string>
+   </property>
+  </action>
+  <action name="generate_video_with_process_menu_option">
+   <property name="text">
+    <string>Generar video de célula con procesos</string>
    </property>
   </action>
  </widget>

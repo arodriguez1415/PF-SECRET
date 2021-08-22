@@ -93,6 +93,10 @@ def enable_process_buttons(main_window):
     enable_button(main_window.plot_metrics_load_dataframe_button)
     enable_button(main_window.generate_metrics_load_mask_video_button)
 
+    # Video generator
+
+    enable_button(main_window.generate_video_algorithm_button)
+
     # Global Routine
     enable_button(main_window.global_routine_initiate_button)
 

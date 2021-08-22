@@ -10,6 +10,10 @@ TEST_IMAGES_DIR = r"./Resources/Mediciones"
 GENERAL_DIRECTORY = r"./Resources"
 SAMPLE_ESTIMATOR_DIRECTORY = r"./Resources/Sample"
 
+# Default directory for videos:
+
+GENERATED_VIDEOS_DEFAULT_DIR = r"./Generado/Videos/"
+
 # Properties
 PROPERTIES_DIRECTORY = r"./Resources/Properties/"
 PROPERTIES_FILE_PATH = r"./Resources/Properties/properties.pkl"

@@ -11,6 +11,7 @@ import src.Frontend.Menus.preprocessing_menu as preprocessing_menu
 import src.Frontend.Menus.border_detection_menu as border_detection_menu
 import src.Frontend.Menus.metrics_menu as metrics_menu
 import src.Frontend.Menus.routines_menu as routines_menu
+from src.Frontend.Menus import video_menu
 from src.Frontend.Utils import viewer_buttons, information_buttons, exception_handler
 from src.Frontend.Utils.viewer_buttons import disable_extra_views, disable_main_view
 
@@ -51,6 +52,7 @@ def configure_main_window_connections(main_window, global_routine_params):
     border_detection_menu.configure_border_detection_menu_connections(main_window)
     texture_menu.configure_texture_menu_connections(main_window)
     metrics_menu.configure_metrics_menu_connections(main_window)
+    video_menu.configure_video_menu_connections(main_window)
     routines_menu.configure_routines_menu_connections(main_window)
 
 

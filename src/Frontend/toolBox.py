@@ -125,7 +125,7 @@ def save_image(main_window):
     deselect_all_and_clear_viewer(main_window)
     project_mastermind = Project_mastermind.get_instance()
     current_image_array = project_mastermind.get_last_image()
-    image_save_path = image_saver.get_save_path(current_image_array)
+    image_save_path = image_saver.get_save_image_path()
 
     if image_save_path == "" or image_save_path is None:
         return
