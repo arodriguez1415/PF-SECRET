@@ -30,8 +30,12 @@ ANISOTROPIC_IMAGE_SAVE_NAME = "anisotropic_image.tiff"
 
 MAIN_VIEW = "Main View"
 MOVEMENT_VIEW = "Movement"
-TEXTURE_IMAGE_VIEW = "Texture Image"
+TEXTURE_IMAGE_VIEW = "Texture Imagen"
 TEXTURE_VIDEO_VIEW = "Texture video"
+
+MOVEMENT_VIEW_TITLE = "Mapa de calor del movimiento"
+TEXTURE_IMAGE_VIEW_TITLE = "Mapa de calor de la textura de la imagen"
+TEXTURE_VIDEO_VIEW_TITLE = "Mapa de calor de la textura del video"
 
 # Error messages
 
@@ -39,12 +43,12 @@ NO_PATH_SELECTION = "No se seleccionó ningun path"
 NO_MGAC_METHOD_ERROR = "No se aplico el metodo mgac en la imagen aún"
 NO_ALL_IMAGES_READY_FOR_ANALYZE_METRIC_DESCRIPTION = "Para la comparación de la métrica es necesario haber calculado " \
                                                      "el mapa de movimiento y el mapa de textura de imagen y video"
-NO_PROFILE_SELECTED_ERROR = "No se selecciono ningún perfil para analizar"
+NO_PROFILE_SELECTED_ERROR = "No se seleccionó ningún perfil para analizar"
 NO_LINE_SELECTED_ERROR = "La figura utilizada para este método debe ser una línea"
 
 # Wait message
 
-WAIT_ESTIMATION_MESSAGE_TITLE = "Estimacion"
+WAIT_ESTIMATION_MESSAGE_TITLE = "Estimación"
 WAIT_ESTIMATION_MESSAGE_DESC = "Se esta estimando el costo de tiempo y espacio de la rutina. Espere unos segundos... "
 
 WAIT_TEXTURE_IMAGE_MESSAGE_TITLE = "Textura de imagen"
@@ -111,8 +115,8 @@ GLOBAL_ROUTINE_ALGORITHM_HELP = "Mensaje de prueba para mostrar una informacion"
 CANCEL_BUTTON_TEXT = "Cancelar"
 CONTINUE_BUTTON_TEXT = "Continuar"
 
-CALCULATE_PERIMETERS_TITLE = "Calculo de perimetro"
-CALCULATE_PERIMETERS_DESCRIPTION = "Calculando perimetros"
+CALCULATE_PERIMETERS_TITLE = "Calculo de perímetro"
+CALCULATE_PERIMETERS_DESCRIPTION = "Calculando perímetros"
 
 CALCULATE_AREA_TITLE = "Calculo de área"
 CALCULATE_AREA_DESCRIPTION = "Calculando área"
@@ -149,21 +153,21 @@ SIMPLE_METRICS_Y_LABEL = "Tiempo en frames"
 
 # Distribution Metrics plot
 
-PERIMETER_DISTRIBUTION_TITLE = "Distribucion de perímetros"
-PERIMETER_DISTRIBUTION_X_LABEL = "Valores de perimetro en pixeles"
+PERIMETER_DISTRIBUTION_TITLE = "Distribución de perímetros"
+PERIMETER_DISTRIBUTION_X_LABEL = "Valores de perímetro en píxeles"
 
-AREA_DISTRIBUTION_TITLE = "Distribucion de áreas"
-AREA_DISTRIBUTION_X_LABEL = "Valores de areas en pixeles"
+AREA_DISTRIBUTION_TITLE = "Distribución de áreas"
+AREA_DISTRIBUTION_X_LABEL = "Valores de áreas en pixeles"
 
-AXIS_RATIO_DISTRIBUTION_TITLE = "Distribución de razon de ejes"
+AXIS_RATIO_DISTRIBUTION_TITLE = "Distribución de razón de ejes"
 AXIS_RATIO_DISTRIBUTION_X_LABEL = "Valores de razón de ejes"
 
-DISTRIBUTION_METRICS_Y_LABEL = "Cantidad de celulas"
+DISTRIBUTION_METRICS_Y_LABEL = "Cantidad de células"
 
 # Titles of some global routine metric plots
 
-GLOBAL_ROUTINE_SIMPLE_METRICS_PLOT_TITLE = "Area, perímetro y razón de ejes en el tiempo"
-GLOBAL_ROUTINE_DISTRIBUTION_METRICS_PLOT_TITLE = "Distribucion de area, perímetro y razón de ejes"
+GLOBAL_ROUTINE_SIMPLE_METRICS_PLOT_TITLE = "Área, perímetro y razón de ejes en el tiempo"
+GLOBAL_ROUTINE_DISTRIBUTION_METRICS_PLOT_TITLE = "Distribución de área, perímetro y razón de ejes"
 
 # Comparison plot
 
@@ -173,7 +177,7 @@ ACTUAL_TITLE = "Imagen Actual"
 
 MOVEMENT_VS_TEXTURE_IMAGE_TITLE = "Movimiento vs Textura-Imagen"
 MOVEMENT_TITLE = "Imagen de Movimiento"
-TEXTURE_IMAGE_TITLE = "Imagen de Textura-Image"
+TEXTURE_IMAGE_TITLE = "Imagen de Textura-Imagen"
 
 MOVEMENT_VS_TEXTURE_VIDEO_TITLE = "Movimiento vs Textura-Video"
 TEXTURE_VIDEO_TITLE = "Imagen de Textura-Video"

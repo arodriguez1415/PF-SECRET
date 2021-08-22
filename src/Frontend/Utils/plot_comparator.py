@@ -2,27 +2,33 @@ import matplotlib.pyplot as plt
 from mpl_toolkits.axes_grid1 import ImageGrid
 
 
-def plot_original_vs_actual(images, title, sub_titles):
-    fig, ax = plt.subplots(nrows=1, ncols=2)
-    fig.suptitle(title)
+def plot_original_vs_actual(images, title, sub_titles, with_heatmap=False):
+    if with_heatmap:
+        plot_original_vs_actual_with_heatmap(images, title, sub_titles)
+    else:
+        fig, ax = plt.subplots(nrows=1, ncols=2)
+        fig.suptitle(title, fontsize=20, fontweight='bold')
 
-    for i in range(0, len(images)):
-        axis_to_plot = ax[i]
-        axis_to_plot.imshow(images[i], cmap="gray")
-        axis_to_plot.set_title(sub_titles[i])
-        axis_to_plot.axis('off')
+        for i in range(0, len(images)):
+            axis_to_plot = ax[i]
+            axis_to_plot.imshow(images[i], cmap="gray")
+            axis_to_plot.set_title(sub_titles[i], fontsize=15)
+            axis_to_plot.axis('off')
 
-    plt.show()
+        mng = plt.get_current_fig_manager()
+        mng.window.showMaximized()
+        plt.show()
 
 
-def plot_comparison(images, title, sub_titles, save_path=None):
+def plot_original_vs_actual_with_heatmap(images, title, sub_titles):
     fig = plt.figure(figsize=(9.75, 3))
-    fig.suptitle(title)
+    cmap = ["gray", "hot"]
+    fig.suptitle(title, fontsize=20, fontweight='bold')
     image = None
 
     grid = ImageGrid(fig, 111,
                      nrows_ncols=(1, 2),
-                     axes_pad=0.15,
+                     axes_pad=0.30,
                      share_all=True,
                      cbar_location="right",
                      cbar_mode="single",
@@ -32,17 +38,48 @@ def plot_comparison(images, title, sub_titles, save_path=None):
 
     for i in range(0, len(images)):
         ax = grid[i]
-        image = ax.imshow(images[i], cmap="hot")
-        ax.set_title(sub_titles[i])
+        image = ax.imshow(images[i], cmap=cmap[i])
+        ax.set_title(sub_titles[i], fontsize=15)
         grid[i].axis('off')
 
     # Colorbar
     grid[1].cax.colorbar(image)
     grid[1].cax.toggle_label(True)
 
+    mng = plt.get_current_fig_manager()
+    mng.window.showMaximized()
+    plt.show()
+
+
+def plot_comparison(images, title, sub_titles, labels, save_path=None):
+    fig = plt.figure(figsize=(9.75, 3))
+    fig.suptitle(title, fontsize=20, fontweight='bold')
+
+    grid = ImageGrid(fig, 111,
+                     nrows_ncols=(1, 2),
+                     axes_pad=0.9,
+                     share_all=True,
+                     cbar_location="right",
+                     cbar_mode="each",
+                     cbar_size="7%",
+                     cbar_pad=0.15
+                     )
+
+    for i in range(0, len(images)):
+        im = grid[i].imshow(images[i], cmap="hot")
+        grid[i].set_title(sub_titles[i], fontsize=15)
+        grid[i].axis('off')
+        grid.cbar_axes[i].colorbar(im)
+        cax = grid.cbar_axes[i]
+        axis = cax.axis[cax.orientation]
+        axis.label.set_text(labels[i])
+
     if save_path is not None:
-        plt.savefig(save_path)
+        fig.set_size_inches(8, 6)
+        plt.savefig(save_path, dpi=500)
     else:
+        mng = plt.get_current_fig_manager()
+        mng.window.showMaximized()
         plt.show()
 
 
@@ -50,11 +87,12 @@ def plot_four_comparison(images, movement_weight_array, title, sub_titles, avg_r
     fig = plt.figure(figsize=(16, 8))
     movement_heatmap_index = 1
     colorbar_ticks = 6
-    fig.suptitle(title)
+    fig.suptitle(title, fontsize=20, fontweight='bold')
+    labels = ["", "Movimiento", "Textura", "Textura"]
 
     grid = ImageGrid(fig, 111,
                      nrows_ncols=(2, 2),
-                     axes_pad=0.35,
+                     axes_pad=1,
                      share_all=True,
                      cbar_location="right",
                      cbar_mode="each",
@@ -72,15 +110,16 @@ def plot_four_comparison(images, movement_weight_array, title, sub_titles, avg_r
     color_map_array = [plt.get_cmap("gray"), plt.get_cmap("hot"), plt.get_cmap("hot"), plt.get_cmap("hot")]
     for i in range(0, len(images)):
         im = grid[i].imshow(images[i], cmap=color_map_array[i])
-        grid[i].set_title(sub_titles[i], fontdict=None, loc='center', color="k")
+        grid[i].set_title(sub_titles[i], fontsize=15)
         grid[i].axis('off')
         grid.cbar_axes[i].colorbar(im)
+        cax = grid.cbar_axes[i]
+        axis = cax.axis[cax.orientation]
+        axis.label.set_text(labels[i])
+        grid[i].text(0.5, -0.1, avg_results[i], size=12, ha="center", transform=grid[i].transAxes)
         if i == movement_heatmap_index:
             grid.cbar_axes[i].set_yticklabels(colorbar_custom_ticks)
 
-    # Set movement for cbar
-
-    fig.text(0.15, 0.5, avg_results, fontsize=18, horizontalalignment='center', verticalalignment='center',
-             style='italic', bbox={'facecolor': 'gray', 'alpha': 0.85, 'pad': 10})
-
+    mng = plt.get_current_fig_manager()
+    mng.window.showMaximized()
     plt.show()

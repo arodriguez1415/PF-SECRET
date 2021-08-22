@@ -19,7 +19,6 @@ from src.Frontend.Utils.message import show_confirmation_message, show_error, sh
 from src.Frontend.Utils.plot_comparator import plot_four_comparison
 from src.Frontend.Utils.viewer_buttons import enable_view_button
 
-
 def configure_metrics_menu_connections(main_window):
     main_window.generate_metrics_menu_option.triggered.connect(lambda: load_generate_metrics_options(main_window))
     main_window.generate_multiple_cells_metrics_menu_option.triggered.connect(
@@ -323,13 +322,12 @@ def analyze_texture_and_movement_metrics(main_window):
             avg_values_array.append(pixels_in_region.mean())
         show_images_array_list[i] = QDrawable_label.draw_region_in_image(show_image_array, square_region)
 
+    avg_results = []
+    avg_results.append("Promedio de valor de pixel escala grises: " + str(round(avg_values_array[0], 2)))
+    avg_results.append("Promedio de valor de pixel de movimiento: " + str(round(avg_values_array[1], 2)))
+    avg_results.append("Promedio de valor de pixel de textura de imagen: " + str(round(avg_values_array[2], 2)))
+    avg_results.append("Promedio de valor de pixel de textura de video: " + str(round(avg_values_array[3], 2)))
 
-
-
-    avg_results = "Promedio de valor de pixel escala grises: " + str(round(avg_values_array[0], 2)) + "\n"
-    avg_results += "Promedio de valor de pixel de movimiento: " + str(round(avg_values_array[1], 2)) + "\n"
-    avg_results += "Promedio de valor de pixel de textura de imagen: " + str(round(avg_values_array[2], 2)) + "\n"
-    avg_results += "Promedio de valor de pixel de textura de video: " + str(round(avg_values_array[3], 2))
     title = FOUR_GRID_COMPARISON
     sub_titles = [ORIGINAL_TITLE, MOVEMENT_TITLE, TEXTURE_IMAGE_TITLE, TEXTURE_VIDEO_TITLE]
     plot_four_comparison(show_images_array_list, movement_weight_array, title, sub_titles, avg_results)
