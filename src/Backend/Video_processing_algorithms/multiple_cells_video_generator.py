@@ -1,10 +1,10 @@
-import os
 from PIL import Image
 import numpy as np
 
-from src.Backend.Image_processing_algorithms.Archive_manipulation import image_file_manipulation
 from src.Backend.Image_processing_algorithms.Archive_manipulation.file_manipulation import \
     create_directory_if_not_exists, remove_directory
+from src.Backend.Image_processing_algorithms.Archive_manipulation.image_file_manipulation import \
+    get_images_from_directories
 from src.Backend.Image_processing_algorithms.Archive_manipulation.video_file_manipulation import \
     get_video_frames_as_array
 from src.Backend.Image_processing_algorithms.Border_detection.mgac import map_borders
@@ -14,6 +14,7 @@ from src.Backend.Video_processing_algorithms import video_generator
 from src.Classes.Methods.Adaptive_threshold import Adaptive_threshold
 from src.Classes.Methods.Anisotropic_Filter import Anisotropic_Filter
 from src.Classes.Project_mastermind import Project_mastermind
+from src.Constants.algorithm_constants import CONTOUR_VIDEO, SIMPLE_CELL_VIDEO, COMPARISON_VIDEO
 from src.Frontend.Utils import progress_bar
 from src.Classes.Methods.Mgac import Mgac
 from src.Classes.Region import Region
@@ -29,6 +30,7 @@ def generate_mask_video_of_all_cells(source_directory):
             return None
         specified_methods_to_apply = set_methods_to_apply(images_list_paths[0])
         video_path = video_generator.generate_video(images_list=images_list_paths,
+                                                    feature_type=CONTOUR_VIDEO,
                                                     specified_methods_to_apply=specified_methods_to_apply)
         masked_videos_paths_list.append(video_path)
     return masked_videos_paths_list
@@ -41,6 +43,7 @@ def generate_video_of_all_cells(source_directory):
         if progress_bar.is_progress_bar_cancelled():
             return None
         video_path = video_generator.generate_video(images_list=images_list_paths,
+                                                    feature_type=SIMPLE_CELL_VIDEO,
                                                     specified_methods_to_apply=[],
                                                     save_directory=configuration_constants.CELLS_VIDEOS)
         cells_videos_paths_list.append(video_path)
@@ -58,6 +61,7 @@ def generate_video_comparator_of_all_cells(cell_videos, mask_videos):
         comparison_images_path_list = generate_comparison(cell_images_array_list,
                                                           mask_images_array_list)
         video_path = video_generator.generate_video(images_list=comparison_images_path_list,
+                                                    feature_type=COMPARISON_VIDEO,
                                                     specified_methods_to_apply=[],
                                                     save_directory=configuration_constants.COMPARISON_VIDEOS)
         comparison_videos_paths_list.append(video_path)
@@ -100,25 +104,6 @@ def generate_preprocessed_image(cell_image):
     preprocessed_image = video_generator.apply_methods_specified(cell_image, methods_to_apply)
 
     return preprocessed_image
-
-
-def get_images_from_directories(source_directory):
-    directories_list = os.walk(get_source_directory(source_directory))
-    images_list_of_lists = []
-    filtered_list_of_lists = []
-    for directory_wrapper in directories_list:
-        directory_path = directory_wrapper[0]
-        images_list_of_lists.append(video_generator.get_files_from_directory(directory_path))
-    for images_list in images_list_of_lists:
-        if images_list:
-            filtered_list_of_lists.append(images_list)
-    return filtered_list_of_lists
-
-
-def get_source_directory(source_directory=None):
-    if source_directory is None:
-        source_directory = image_file_manipulation.get_directory_path()
-    return source_directory
 
 
 def set_methods_to_apply(image_path):

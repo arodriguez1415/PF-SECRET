@@ -1,5 +1,18 @@
 import cv2 as cv
 
+# Feature types for saving
+
+CONTOUR_VIDEO = "Video de máscara de célula"
+SIMPLE_CELL_VIDEO = "Video de célula"
+COMPARISON_VIDEO = "Video comparativo entre célula y máscara"
+SIMPLE_METRICS_GRAPHS = "Gráficos de métricas simples"
+DISTRIBUTION_METRICS_GRAPHS = "Gráficos de distribución de métricas"
+METRICS_EXCEL = "Métricas en excel"
+MOVEMENT_IMAGE = "Mapa de calor de movimiento"
+TEXTURE_IMAGE = "Mapa de calor de textura"
+MOVEMENT_AND_TEXTURE_COMPARISON_IMAGE = "Comparación de textura y movimiento"
+
+
 # --- Normalize options ---
 
 FROM_0_TO_255 = 255

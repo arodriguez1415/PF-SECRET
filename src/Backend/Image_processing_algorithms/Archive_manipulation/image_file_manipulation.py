@@ -55,6 +55,37 @@ def get_image_dir(file_path):
     return dir_path
 
 
+def get_source_directory(source_directory=None):
+    if source_directory is None:
+        source_directory = get_directory_path()
+    return source_directory
+
+
+def get_images_from_directories(source_directory):
+    directories_list = os.walk(get_source_directory(source_directory))
+    images_list_of_lists = []
+    filtered_list_of_lists = []
+    for directory_wrapper in directories_list:
+        directory_path = directory_wrapper[0]
+        images_list_of_lists.append(get_files_from_directory(directory_path))
+    for images_list in images_list_of_lists:
+        if images_list:
+            filtered_list_of_lists.append(images_list)
+    return filtered_list_of_lists
+
+
+def get_files_from_directory(directory):
+    directory_files_paths_list = os.listdir(directory)
+    correct_directory_files_paths_list = []
+    for file in directory_files_paths_list:
+        if file.endswith(string_constants.TIF_EXTENSION):
+            file_path = os.path.join(directory, file)
+            correct_directory_files_paths_list.append(file_path)
+    if correct_directory_files_paths_list and len(correct_directory_files_paths_list) > 1:
+        correct_directory_files_paths_list.pop()
+    return correct_directory_files_paths_list
+
+
 def is_image(image_path):
     extension = os.path.splitext(image_path)[1]
     admitted_extensions = [".tif"]

@@ -5,6 +5,8 @@ import os
 
 from src.Backend.Image_processing_algorithms.Archive_manipulation.file_manipulation import \
     create_directory_if_not_exists, remove_directory
+from src.Backend.Image_processing_algorithms.Archive_manipulation.image_file_manipulation import \
+    get_files_from_directory
 from src.Backend.Image_processing_algorithms.Archive_manipulation.save_file_manipulation import set_save_name
 from src.Backend.Image_processing_algorithms.Operations import common_operations
 from src.Backend.Image_processing_algorithms.Operations.common_operations import resize_image
@@ -14,7 +16,7 @@ from src.Frontend.Utils import progress_bar
 from src.Frontend.Utils.message import show_error_message
 
 
-def generate_video(images_list=None, specified_methods_to_apply=None,
+def generate_video(images_list=None, feature_type=None, specified_methods_to_apply=None,
                    save_directory=configuration_constants.MASK_VIDEOS):
     images_paths_list = images_list
     if images_list is None:
@@ -22,7 +24,7 @@ def generate_video(images_list=None, specified_methods_to_apply=None,
 
     setup(images_paths_list)
     frames_paths_list = generate_frames(images_paths_list, specified_methods_to_apply)
-    save_video_path = set_save_name(images_paths_list[0], save_directory)
+    save_video_path = set_save_name(feature_type, save_directory)
     save_video(frames_paths_list, save_video_path)
     delete_frames(frames_paths_list)
     remove_directory(configuration_constants.TEMPORARY_VIDEO_DIRECTORY_PATH)
@@ -96,18 +98,6 @@ def save_video(frames_paths_list, video_path):
         resized_frame_array = resize_image(frame_array, width, height)
         video.write(resized_frame_array)
     video.release()
-
-
-def get_files_from_directory(directory):
-    directory_files_paths_list = os.listdir(directory)
-    correct_directory_files_paths_list = []
-    for file in directory_files_paths_list:
-        if file.endswith(string_constants.TIF_EXTENSION):
-            file_path = os.path.join(directory, file)
-            correct_directory_files_paths_list.append(file_path)
-    if correct_directory_files_paths_list and len(correct_directory_files_paths_list) > 1:
-        correct_directory_files_paths_list.pop()
-    return correct_directory_files_paths_list
 
 
 def delete_frames(frames_paths_list):

@@ -1,7 +1,8 @@
 import os
 
+from src.Backend.Image_processing_algorithms.Archive_manipulation.image_file_manipulation import \
+    get_images_from_directories
 from src.Backend.Routines import global_routine
-from src.Backend.Video_processing_algorithms.multiple_cells_video_generator import get_images_from_directories
 from src.Constants import algorithm_constants, configuration_constants, string_constants
 import time
 

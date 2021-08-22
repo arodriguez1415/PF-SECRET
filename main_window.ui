@@ -417,7 +417,7 @@
       </rect>
      </property>
      <property name="currentIndex">
-      <number>5</number>
+      <number>1</number>
      </property>
      <widget class="QWidget" name="blank_page"/>
      <widget class="QWidget" name="anisotropic_filter_options">
@@ -542,6 +542,30 @@
        </property>
        <property name="text">
         <string>?</string>
+       </property>
+      </widget>
+      <widget class="QLabel" name="apply_filter_note_label">
+       <property name="geometry">
+        <rect>
+         <x>30</x>
+         <y>270</y>
+         <width>241</width>
+         <height>261</height>
+        </rect>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>16</pointsize>
+        </font>
+       </property>
+       <property name="text">
+        <string>Nota: Demasiadas iteraciones pueden ralentizar procesos que necesitan del filtro anisotrópico, como la generación del mapa de calor o de textura. Entre 1 y 6 iteraciones es el número normal necesario para eliminar el ruido.</string>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
+       </property>
+       <property name="wordWrap">
+        <bool>true</bool>
        </property>
       </widget>
      </widget>
