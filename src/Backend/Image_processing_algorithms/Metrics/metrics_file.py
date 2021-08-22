@@ -19,16 +19,6 @@ def set_metrics_save_name_from_video(video_path_sample):
     return save_path
 
 
-def set_metrics_save_name_from_image(image_path_sample):
-    image_path_sample = image_path_sample.replace("\\", "/")
-    file_name = image_path_sample.split('/')[-5] + " - " + image_path_sample.split('/')[-4] + " - " + \
-                image_path_sample.split('/')[-3] + " - " + image_path_sample.split('/')[-2]
-    file_name_with_xlsx_extension = file_name + '.xlsx'
-    dir_save_path = configuration_constants.METRICS_DIRECTORY_PATH
-    save_path = dir_save_path + file_name_with_xlsx_extension
-    return save_path
-
-
 def read_metrics_data(file_path):
     metrics_data = pd.read_excel(file_path)
     return metrics_data

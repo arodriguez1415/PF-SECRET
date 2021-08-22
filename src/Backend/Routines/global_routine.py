@@ -5,12 +5,14 @@ import numpy as np
 from PIL import Image
 
 from src.Backend.Image_processing_algorithms.Archive_manipulation.file_manipulation import \
-    create_directory_if_not_exists, move_directory, get_parent_directory_path, move_file, remove_directory
+    create_directory_if_not_exists, move_directory, get_parent_directory_path, move_file, remove_directory, rename_file
 from src.Backend.Image_processing_algorithms.Archive_manipulation.image_file_manipulation import get_source_directory, \
     get_images_from_directories
+from src.Backend.Image_processing_algorithms.Archive_manipulation.save_file_manipulation import set_save_name_for_dir, \
+    set_save_name
 from src.Backend.Image_processing_algorithms.Metrics import metrics_generator, metrics_plotter
-from src.Backend.Image_processing_algorithms.Operations.string_manipulator import generate_random_string, \
-    generate_date_string
+from src.Backend.Image_processing_algorithms.Operations.string_manipulator import generate_date_string, \
+    generate_random_string
 from src.Backend.Routines.estimator import estimate_time_and_space, prepare_estimation_message_and_title, \
     estimate_steps, get_time_message
 from src.Backend.Video_processing_algorithms import multiple_cells_video_generator
@@ -18,7 +20,6 @@ from src.Backend.Video_processing_algorithms.movement_image_generator import cre
 from src.Backend.Video_processing_algorithms.multiple_cells_video_generator import \
     generate_video_comparator_of_all_cells
 from src.Backend.Video_processing_algorithms.texture_image_generator import create_multiple_texture_images
-from src.Backend.Video_processing_algorithms.video_generator import set_save_name
 from src.Classes.Project_mastermind import Project_mastermind
 from src.Constants import algorithm_constants, configuration_constants, string_constants
 from src.Frontend.Utils import plot_comparator, progress_bar
@@ -63,7 +64,7 @@ def routine(sub_routines, save_form):
 
     progress_bar.force_to_close()
     wait_message = show_wait_message(string_constants.WAIT_SAVING_FILES_TITLE, string_constants.WAIT_SAVING_FILES_DESC)
-    save_files(save_form, generated_files, distribution_metrics_path_list)
+    save_files(save_form, source_directory, generated_files, distribution_metrics_path_list)
     after()
     wait_message.done(0)
 
@@ -118,10 +119,9 @@ def contour_comparison_and_metrics_subroutine(sub_routines, source_directory):
 
     if algorithm_constants.METRICS_SUBROUTINE in sub_routines:
         metrics_generated_files, distribution_metrics_path_list = metrics_sub_routine(source_directory,
-                                                                                      videos_filename_list,
                                                                                       masked_videos_path_list)
 
-    generated_files.append(metrics_generated_files)
+    generated_files.extend(metrics_generated_files)
     generated_files.append(comparison_generated_files)
     return generated_files, distribution_metrics_path_list
 
@@ -143,19 +143,19 @@ def comparison_sub_routine(cells_videos_path_list, masked_videos_path_list):
     return generate_video_comparator_of_all_cells(cells_videos_path_list, masked_videos_path_list)
 
 
-def metrics_sub_routine(source_directory, videos_filename_list, masked_videos_paths_list):
+def metrics_sub_routine(source_directory, masked_videos_paths_list):
+    generated_files = []
     metrics_dictionary = {algorithm_constants.AXIS_RATE_METRIC: True, algorithm_constants.PERIMETER_METRIC: True,
                           algorithm_constants.AREA_METRIC: True}
     distribution_metrics_dictionary = metrics_dictionary
     metrics_excel_paths_list = generate_metrics_sub_routine(masked_videos_paths_list, metrics_dictionary)
     simple_metrics_path_list = plot_simple_metrics_sub_routine(source_directory, metrics_excel_paths_list,
-                                                               videos_filename_list, metrics_dictionary)
+                                                               metrics_dictionary)
     distribution_metrics_path_list = plot_distribution_metrics_sub_routine(metrics_excel_paths_list,
                                                                            distribution_metrics_dictionary)
 
-    generated_files = []
-    generated_files.extend(metrics_excel_paths_list)
-    generated_files.extend(simple_metrics_path_list)
+    generated_files.append(metrics_excel_paths_list)
+    generated_files.append(simple_metrics_path_list)
     return generated_files, distribution_metrics_path_list
 
 
@@ -164,21 +164,23 @@ def generate_metrics_sub_routine(masked_videos_paths_list, metrics_dictionary):
     metrics_excel_paths_list = []
     for masked_video_path in masked_videos_paths_list:
         metrics_excel_path = metrics_generator.generate_metrics(masked_video_path, metrics_dictionary)
-        metrics_excel_paths_list.append(metrics_excel_path)
+        metrics_excel_path_renamed = get_parent_directory_path(metrics_excel_path) + \
+                                     algorithm_constants.METRICS_EXCEL + " - " + \
+                                     generate_random_string(number_of_chars=10) + ".xlsx"
+        rename_file(metrics_excel_path, metrics_excel_path_renamed)
+        metrics_excel_paths_list.append(metrics_excel_path_renamed)
 
     return metrics_excel_paths_list
 
 
-def plot_simple_metrics_sub_routine(source_directory, metrics_excel_paths_list, videos_filename_list,
-                                    metrics_dictionary):
+def plot_simple_metrics_sub_routine(source_directory, metrics_excel_paths_list, metrics_dictionary):
     # Save simple metrics stage
     first_cell_image_as_array_list = get_first_cell_image_list(source_directory)
     generated_plot_files_list = []
     for i in range(0, len(metrics_excel_paths_list)):
         metrics_excel_path = metrics_excel_paths_list[i]
         cell_image_array = first_cell_image_as_array_list[i]
-        graph_filename = videos_filename_list[i]
-        graph_save_path = generate_metric_path(graph_filename)
+        graph_save_path = generate_metric_path()
         metrics_values_lists, frames_values_lists, titles_list, x_label_list, y_label_list = metrics_plotter.load_metrics(
             metrics_excel_path, metrics_dictionary)
         metrics_plotter.save_metrics(metrics_values_lists, frames_values_lists, titles_list,
@@ -192,7 +194,7 @@ def plot_distribution_metrics_sub_routine(metrics_excel_paths_list, distribution
     metrics_avg_lists, titles_list, x_label_list, y_label_list = metrics_plotter.load_distribution_metrics(
         metrics_excel_paths_list, distribution_metrics_dictionary)
     generated_plot_files_list = []
-    distribution_save_path = generate_distribution_path(len(metrics_excel_paths_list))
+    distribution_save_path = generate_distribution_path()
     metrics_plotter.save_distribution_metrics(metrics_avg_lists, titles_list, x_label_list,
                                               y_label_list, distribution_save_path)
     generated_plot_files_list.append(distribution_save_path)
@@ -214,8 +216,7 @@ def movement_and_texture_heat_map_sub_routine(sub_routines, source_directory):
         texture_images_array_list, texture_images_path_list = texture_heat_map_sub_routine(source_directory)
 
     if algorithm_constants.MOVEMENT_SUBROUTINE and algorithm_constants.TEXTURE_SUBROUTINE in sub_routines:
-        generated_plot_files_list = movement_and_texture_comparison_sub_routine(source_directory,
-                                                                                motion_images_array_list,
+        generated_plot_files_list = movement_and_texture_comparison_sub_routine(motion_images_array_list,
                                                                                 texture_images_array_list)
 
     generated_files.append(motion_images_path_list)
@@ -242,15 +243,15 @@ def texture_heat_map_sub_routine(source_directory):
     return texture_images_array_list, texture_images_path_list
 
 
-def movement_and_texture_comparison_sub_routine(source_directory, motion_images_array_list, texture_images_array_list):
-    images_list_of_lists = get_images_from_directories(source_directory)
+def movement_and_texture_comparison_sub_routine(motion_images_array_list, texture_images_array_list):
     save_directory = configuration_constants.MOVEMENT_VS_TEXTURE_COMPARISON_DIRECTORY
     generated_plot_files_list = []
 
     for i in range(0, len(motion_images_array_list)):
         movement_image_array = motion_images_array_list[i]
         texture_image_array = texture_images_array_list[i]
-        save_comparison_path = set_save_name(images_list_of_lists[i][0], save_directory, extension=".png")
+        save_comparison_path = set_save_name(algorithm_constants.MOVEMENT_AND_TEXTURE_COMPARISON_IMAGE,
+                                             save_directory, extension=".png")
         images_array_list = [movement_image_array, texture_image_array]
         title = string_constants.MOVEMENT_VS_TEXTURE_VIDEO_TITLE
         sub_titles_list = [string_constants.MOVEMENT_TITLE, string_constants.TEXTURE_VIDEO_TITLE]
@@ -259,20 +260,19 @@ def movement_and_texture_comparison_sub_routine(source_directory, motion_images_
     return generated_plot_files_list
 
 
-def generate_metric_path(filename):
+def generate_metric_path():
     initial_path = configuration_constants.GLOBAL_METRICS_GRAPH_FOLDER
-    middle_name = filename
+    middle_name = algorithm_constants.SIMPLE_METRICS_GRAPHS + " - " + generate_random_string(number_of_chars=10)
     extension = ".png"
     full_path = initial_path + middle_name + extension
     return full_path
 
 
-def generate_distribution_path(cells_number):
+def generate_distribution_path():
     initial_path = configuration_constants.GLOBAL_DISTRIBUTION_METRICS_GRAPH_FOLDER
-    middle_name = "Celulas en distribucion - " + str(cells_number) + " hash - "
-    hash_name = generate_random_string(number_of_chars=10)
+    middle_name = algorithm_constants.DISTRIBUTION_METRICS_GRAPHS
     extension = ".png"
-    full_path = initial_path + middle_name + hash_name + extension
+    full_path = initial_path + middle_name + extension
     return full_path
 
 
@@ -299,27 +299,33 @@ def get_first_cell_image_list(source_directory):
     return first_cell_image_as_array_list
 
 
-def save_files(save_form, list_of_lists_of_generated_files, distribution_metrics_path_list):
+def save_files(save_form, source_directory, list_of_lists_of_generated_files, distribution_metrics_path_list):
     directory_path = generate_date_string()
     create_directory_if_not_exists(configuration_constants.GLOBAL_ROUTINE_DIRECTORY + directory_path)
     if save_form == algorithm_constants.CELL_SAVE_FORM:
-        save_by_cell(directory_path, list_of_lists_of_generated_files, distribution_metrics_path_list)
+        save_by_cell(source_directory, directory_path, list_of_lists_of_generated_files, distribution_metrics_path_list)
     else:
         save_by_feature(directory_path, list_of_lists_of_generated_files)
 
 
-def save_by_cell(target_folder_path, list_of_lists_of_generated_files, distribution_metrics_path_list):
+def save_by_cell(source_directory, target_folder_path,
+                 list_of_lists_of_generated_files, distribution_metrics_path_list):
     cells_length = len(list_of_lists_of_generated_files[0])
+    cells_images_path = get_images_from_directories(source_directory)
 
     for i in range(0, cells_length):
-        cell_directory_path = configuration_constants.GLOBAL_ROUTINE_DIRECTORY + target_folder_path + generate_random_string() + "/"
+        cell_sample = cells_images_path[i][0]
+        cell_directory_path = configuration_constants.GLOBAL_ROUTINE_DIRECTORY + target_folder_path + \
+                              set_save_name_for_dir(cell_sample) + "/"
         create_directory_if_not_exists(cell_directory_path)
         for list_path in list_of_lists_of_generated_files:
             file_path_to_move = list_path[i]
+            print(file_path_to_move)
             move_file(file_path_to_move, cell_directory_path)
 
     for file_path in distribution_metrics_path_list:
-        move_file(file_path, target_folder_path)
+        print(file_path)
+        move_file(file_path, configuration_constants.GLOBAL_ROUTINE_DIRECTORY + target_folder_path)
 
     return
 

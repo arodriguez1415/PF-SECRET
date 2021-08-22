@@ -9,6 +9,7 @@ from src.Backend.Image_processing_algorithms.Archive_manipulation.file_manipulat
     create_directory_if_not_exists, remove_directory
 from src.Backend.Image_processing_algorithms.Archive_manipulation.image_file_manipulation import \
     get_images_from_directories
+from src.Backend.Image_processing_algorithms.Archive_manipulation.save_file_manipulation import set_save_name
 from src.Backend.Image_processing_algorithms.Operations.common_operations import bgr_to_rgb, resize_image
 from src.Backend.Image_processing_algorithms.Texture.k_means import get_descriptors, k_means
 from src.Backend.Video_processing_algorithms import video_generator
@@ -42,7 +43,7 @@ def create_multiple_texture_images(threshold, clusters_quantity, source_director
                                                                                                  threshold)
         texture_images_array_list.append(coloured_classified_image)
         save_directory = configuration_constants.TEXTURE_HEATMAP_IMAGES_DIRECTORY
-        save_texture_path = video_generator.set_save_name(images_list_of_lists[i][0], save_directory,
+        save_texture_path = set_save_name(algorithm_constants.TEXTURE_IMAGE, save_directory,
                                                           extension=".png")
         save_texture_image(coloured_classified_image, save_texture_path)
         texture_images_path.append(save_texture_path)

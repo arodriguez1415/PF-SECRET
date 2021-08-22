@@ -16,7 +16,7 @@ from src.Frontend.Utils import progress_bar
 from src.Frontend.Utils.message import show_error_message
 
 
-def generate_video(images_list=None, specified_methods_to_apply=None,
+def generate_video(images_list=None, feature_type=None, specified_methods_to_apply=None,
                    save_directory=configuration_constants.MASK_VIDEOS):
     images_paths_list = images_list
     if images_list is None:
@@ -24,7 +24,7 @@ def generate_video(images_list=None, specified_methods_to_apply=None,
 
     setup(images_paths_list)
     frames_paths_list = generate_frames(images_paths_list, specified_methods_to_apply)
-    save_video_path = set_save_name(images_paths_list[0], save_directory)
+    save_video_path = set_save_name(feature_type, save_directory)
     save_video(frames_paths_list, save_video_path)
     delete_frames(frames_paths_list)
     remove_directory(configuration_constants.TEMPORARY_VIDEO_DIRECTORY_PATH)

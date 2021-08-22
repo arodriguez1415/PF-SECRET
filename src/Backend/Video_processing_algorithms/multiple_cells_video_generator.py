@@ -14,6 +14,7 @@ from src.Backend.Video_processing_algorithms import video_generator
 from src.Classes.Methods.Adaptive_threshold import Adaptive_threshold
 from src.Classes.Methods.Anisotropic_Filter import Anisotropic_Filter
 from src.Classes.Project_mastermind import Project_mastermind
+from src.Constants.algorithm_constants import CONTOUR_VIDEO, SIMPLE_CELL_VIDEO, COMPARISON_VIDEO
 from src.Frontend.Utils import progress_bar
 from src.Classes.Methods.Mgac import Mgac
 from src.Classes.Region import Region
@@ -29,6 +30,7 @@ def generate_mask_video_of_all_cells(source_directory):
             return None
         specified_methods_to_apply = set_methods_to_apply(images_list_paths[0])
         video_path = video_generator.generate_video(images_list=images_list_paths,
+                                                    feature_type=CONTOUR_VIDEO,
                                                     specified_methods_to_apply=specified_methods_to_apply)
         masked_videos_paths_list.append(video_path)
     return masked_videos_paths_list
@@ -41,6 +43,7 @@ def generate_video_of_all_cells(source_directory):
         if progress_bar.is_progress_bar_cancelled():
             return None
         video_path = video_generator.generate_video(images_list=images_list_paths,
+                                                    feature_type=SIMPLE_CELL_VIDEO,
                                                     specified_methods_to_apply=[],
                                                     save_directory=configuration_constants.CELLS_VIDEOS)
         cells_videos_paths_list.append(video_path)
@@ -58,6 +61,7 @@ def generate_video_comparator_of_all_cells(cell_videos, mask_videos):
         comparison_images_path_list = generate_comparison(cell_images_array_list,
                                                           mask_images_array_list)
         video_path = video_generator.generate_video(images_list=comparison_images_path_list,
+                                                    feature_type=COMPARISON_VIDEO,
                                                     specified_methods_to_apply=[],
                                                     save_directory=configuration_constants.COMPARISON_VIDEOS)
         comparison_videos_paths_list.append(video_path)
