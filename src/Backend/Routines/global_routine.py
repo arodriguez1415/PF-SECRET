@@ -33,10 +33,12 @@ def routine(sub_routines, save_form):
     source_directory = get_source_directory()
 
     if source_directory is None or source_directory == "":
+        global_routine_clean_up()
         return
 
     continue_flag = estimate_time_and_space_sub_routine(sub_routines, source_directory)
     if not continue_flag:
+        global_routine_clean_up()
         return
 
     total_steps = estimate_steps(sub_routines, source_directory)
@@ -65,7 +67,7 @@ def routine(sub_routines, save_form):
     progress_bar.force_to_close()
     wait_message = show_wait_message(string_constants.WAIT_SAVING_FILES_TITLE, string_constants.WAIT_SAVING_FILES_DESC)
     save_files(save_form, source_directory, generated_files, distribution_metrics_path_list)
-    after()
+    global_routine_clean_up()
     wait_message.done(0)
 
 
@@ -95,7 +97,7 @@ def routine_setup():
     create_directory_if_not_exists(configuration_constants.MOVEMENT_VS_TEXTURE_COMPARISON_DIRECTORY)
 
 
-def after():
+def global_routine_clean_up():
     remove_directory(configuration_constants.MASK_VIDEOS)
     remove_directory(configuration_constants.CELLS_VIDEOS)
     remove_directory(configuration_constants.COMPARISON_VIDEOS)
@@ -319,12 +321,11 @@ def save_by_cell(source_directory, target_folder_path,
                               set_save_name_for_dir(cell_sample) + "/"
         create_directory_if_not_exists(cell_directory_path)
         for list_path in list_of_lists_of_generated_files:
-            file_path_to_move = list_path[i]
-            print(file_path_to_move)
-            move_file(file_path_to_move, cell_directory_path)
+            if len(list_path) > i:
+                file_path_to_move = list_path[i]
+                move_file(file_path_to_move, cell_directory_path)
 
     for file_path in distribution_metrics_path_list:
-        print(file_path)
         move_file(file_path, configuration_constants.GLOBAL_ROUTINE_DIRECTORY + target_folder_path)
 
     return
