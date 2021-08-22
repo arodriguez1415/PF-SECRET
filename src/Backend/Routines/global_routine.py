@@ -5,7 +5,7 @@ import numpy as np
 from PIL import Image
 
 from src.Backend.Image_processing_algorithms.Archive_manipulation.file_manipulation import \
-    create_directory_if_not_exists, move_directory, get_parent_directory_path, move_file
+    create_directory_if_not_exists, move_directory, get_parent_directory_path, move_file, remove_directory
 from src.Backend.Image_processing_algorithms.Metrics import metrics_generator, metrics_plotter
 from src.Backend.Image_processing_algorithms.Operations.string_manipulator import generate_random_string, \
     generate_date_string
@@ -47,8 +47,9 @@ def routine(sub_routines, save_form):
     distribution_metrics_path_list = []
 
     if algorithm_constants.CONTOUR_SUBROUTINE in sub_routines:
-        contour_subroutine_files, distribution_metrics_path_list = contour_comparison_and_metrics_subroutine(sub_routines,
-                                                                                                             source_directory)
+        contour_subroutine_files, distribution_metrics_path_list = contour_comparison_and_metrics_subroutine(
+            sub_routines,
+            source_directory)
 
     movement_and_texture_subroutines_files = movement_and_texture_heat_map_sub_routine(sub_routines, source_directory)
 
@@ -59,6 +60,7 @@ def routine(sub_routines, save_form):
     print(get_time_message(total_time))
 
     save_files(save_form, generated_files, distribution_metrics_path_list)
+    after()
 
     progress_bar.force_to_close()
 
@@ -89,8 +91,21 @@ def routine_setup():
     create_directory_if_not_exists(configuration_constants.MOVEMENT_VS_TEXTURE_COMPARISON_DIRECTORY)
 
 
+def after():
+    remove_directory(configuration_constants.MASK_VIDEOS)
+    remove_directory(configuration_constants.CELLS_VIDEOS)
+    remove_directory(configuration_constants.COMPARISON_VIDEOS)
+    remove_directory(configuration_constants.GLOBAL_GRAPHS_FOLDER)
+    remove_directory(configuration_constants.GLOBAL_METRICS_GRAPH_FOLDER)
+    remove_directory(configuration_constants.GLOBAL_DISTRIBUTION_METRICS_GRAPH_FOLDER)
+    remove_directory(configuration_constants.MOVEMENT_HEATMAP_IMAGES_DIRECTORY)
+    remove_directory(configuration_constants.TEXTURE_HEATMAP_IMAGES_DIRECTORY)
+    remove_directory(configuration_constants.MOVEMENT_VS_TEXTURE_COMPARISON_DIRECTORY)
+
+
 def contour_comparison_and_metrics_subroutine(sub_routines, source_directory):
-    masked_videos_path_list, cells_videos_path_list, videos_filename_list, generated_files = contour_sub_routine(source_directory)
+    masked_videos_path_list, cells_videos_path_list, videos_filename_list, generated_files = contour_sub_routine(
+        source_directory)
     metrics_generated_files = []
     comparison_generated_files = []
     distribution_metrics_path_list = []
@@ -285,12 +300,24 @@ def save_files(save_form, list_of_lists_of_generated_files, distribution_metrics
     directory_path = generate_date_string()
     create_directory_if_not_exists(configuration_constants.GLOBAL_ROUTINE_DIRECTORY + directory_path)
     if save_form == algorithm_constants.CELL_SAVE_FORM:
-        save_by_cell(list_of_lists_of_generated_files, distribution_metrics_path_list)
+        save_by_cell(directory_path, list_of_lists_of_generated_files, distribution_metrics_path_list)
     else:
         save_by_feature(directory_path, list_of_lists_of_generated_files)
 
 
-def save_by_cell(list_of_lists_of_generated_files, distribution_metrics_path_list):
+def save_by_cell(target_folder_path, list_of_lists_of_generated_files, distribution_metrics_path_list):
+    cells_length = len(list_of_lists_of_generated_files[0])
+
+    for i in range(0, cells_length):
+        cell_directory_path = configuration_constants.GLOBAL_ROUTINE_DIRECTORY + target_folder_path + generate_random_string() + "/"
+        create_directory_if_not_exists(cell_directory_path)
+        for list_path in list_of_lists_of_generated_files:
+            file_path_to_move = list_path[i]
+            move_file(file_path_to_move, cell_directory_path)
+
+    for file_path in distribution_metrics_path_list:
+        move_file(file_path, target_folder_path)
+
     return
 
 
