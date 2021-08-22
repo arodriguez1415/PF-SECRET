@@ -357,9 +357,6 @@ def analyze_texture_and_movement_metrics(main_window):
             avg_values_array.append(pixels_in_region.mean())
         show_images_array_list[i] = QDrawable_label.draw_region_in_image(show_image_array, square_region)
 
-
-
-
     avg_results = "Promedio de valor de pixel escala grises: " + str(round(avg_values_array[0], 2)) + "\n"
     avg_results += "Promedio de valor de pixel de movimiento: " + str(round(avg_values_array[1], 2)) + "\n"
     avg_results += "Promedio de valor de pixel de textura de imagen: " + str(round(avg_values_array[2], 2)) + "\n"

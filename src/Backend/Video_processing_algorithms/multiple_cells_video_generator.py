@@ -31,6 +31,7 @@ def generate_mask_video_of_all_cells(source_directory):
         specified_methods_to_apply = set_methods_to_apply(images_list_paths[0])
         video_path = video_generator.generate_video(images_list=images_list_paths,
                                                     feature_type=CONTOUR_VIDEO,
+                                                    save_directory=configuration_constants.MASK_VIDEOS,
                                                     specified_methods_to_apply=specified_methods_to_apply)
         masked_videos_paths_list.append(video_path)
     return masked_videos_paths_list

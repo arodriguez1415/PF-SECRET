@@ -17,7 +17,7 @@ from src.Frontend.Utils.message import show_error_message
 
 
 def generate_video(images_list=None, feature_type=None, specified_methods_to_apply=None,
-                   save_directory=configuration_constants.MASK_VIDEOS):
+                   save_directory=configuration_constants.GENERATED_VIDEOS_DEFAULT_DIR):
     images_paths_list = images_list
     if images_list is None:
         images_paths_list = get_original_images()
@@ -35,8 +35,8 @@ def setup(images_paths_list):
     progress_bar.start_progress_bar(string_constants.GENERATE_VIDEO_TITLE,
                                     string_constants.GENERATE_VIDEO_DESCRIPTION, len(images_paths_list))
     create_directory_if_not_exists(configuration_constants.GENERATED_IMAGES_DIR)
+    create_directory_if_not_exists(configuration_constants.GENERATED_VIDEOS_DEFAULT_DIR)
     create_directory_if_not_exists(configuration_constants.TEMPORARY_VIDEO_DIRECTORY_PATH)
-    create_directory_if_not_exists(configuration_constants.MASK_VIDEOS)
 
 
 def get_original_images():

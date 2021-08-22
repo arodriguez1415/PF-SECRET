@@ -3,6 +3,7 @@ from matplotlib import pyplot as plt
 
 from src.Backend.Image_processing_algorithms.Archive_manipulation.file_manipulation import remove_directory
 from src.Backend.Image_processing_algorithms.Archive_manipulation.properties_manipulation import load_properties
+from src.Backend.Routines.global_routine import global_routine_clean_up
 from src.Classes.Methods.Original import Original
 from src.Classes.Project_mastermind import Project_mastermind
 from src.Constants import string_constants, configuration_constants
@@ -36,6 +37,7 @@ def catch_any_exception(error_class, error_type, traceback_object):
         close_any_wait_message()
         enable_process_buttons(main_window)
         project_mastermind.set_cancel_progress_bar_flag(False)
+        global_routine_clean_up()
         return
 
     error_type_str = str(error_type)
@@ -61,6 +63,7 @@ def set_consistent_interface_state():
     progress_bar.force_to_close()
     enable_process_buttons(main_window)
     eliminate_remaining_plots()
+    global_routine_clean_up()
 
 
 
@@ -89,6 +92,10 @@ def enable_process_buttons(main_window):
     enable_button(main_window.generate_metrics_generate_button)
     enable_button(main_window.plot_metrics_load_dataframe_button)
     enable_button(main_window.generate_metrics_load_mask_video_button)
+
+    # Video generator
+
+    enable_button(main_window.generate_video_algorithm_button)
 
     # Global Routine
     enable_button(main_window.global_routine_initiate_button)

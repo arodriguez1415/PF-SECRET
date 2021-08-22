@@ -76,6 +76,10 @@ def configure_information_buttons(main_window, global_routine_params):
     main_window.plot_metrics_distribution_algorithm_metrics.clicked.connect(
         lambda: show_information(string_constants.PLOT_METRICS_DISTRIBUTION_ALGORITHM_HELP))
 
+    main_window.generate_video_algorithm_help.clicked.connect(
+        lambda: show_information(string_constants.VIDEO_GENERATOR_ALGORITHM_HELP)
+    )
+
     main_window.global_routine_algorithm_help.clicked.connect(
         lambda: show_information(string_constants.GLOBAL_ROUTINE_ALGORITHM_HELP))
 
