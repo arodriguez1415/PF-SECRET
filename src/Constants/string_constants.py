@@ -60,6 +60,9 @@ NO_SAVE_OPTIONS_SELECTED_EXCEPTION = "No se seleccionó ninguna opción de guard
 
 # Wait message
 
+WAIT_SAVING_FILES_TITLE = "Guardando archivos"
+WAIT_SAVING_FILES_DESC = "Los archivos generados se están guardando. Esta acción puede tomar unos minutos..."
+
 WAIT_ESTIMATION_MESSAGE_TITLE = "Estimacion"
 WAIT_ESTIMATION_MESSAGE_DESC = "Se esta estimando el costo de tiempo y espacio de la rutina. Espere unos segundos... "
 

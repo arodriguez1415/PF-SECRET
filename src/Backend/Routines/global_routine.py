@@ -6,6 +6,8 @@ from PIL import Image
 
 from src.Backend.Image_processing_algorithms.Archive_manipulation.file_manipulation import \
     create_directory_if_not_exists, move_directory, get_parent_directory_path, move_file, remove_directory
+from src.Backend.Image_processing_algorithms.Archive_manipulation.image_file_manipulation import get_source_directory, \
+    get_images_from_directories
 from src.Backend.Image_processing_algorithms.Metrics import metrics_generator, metrics_plotter
 from src.Backend.Image_processing_algorithms.Operations.string_manipulator import generate_random_string, \
     generate_date_string
@@ -13,7 +15,7 @@ from src.Backend.Routines.estimator import estimate_time_and_space, prepare_esti
     estimate_steps, get_time_message
 from src.Backend.Video_processing_algorithms import multiple_cells_video_generator
 from src.Backend.Video_processing_algorithms.movement_image_generator import create_multiple_motion_images
-from src.Backend.Video_processing_algorithms.multiple_cells_video_generator import get_images_from_directories, \
+from src.Backend.Video_processing_algorithms.multiple_cells_video_generator import \
     generate_video_comparator_of_all_cells
 from src.Backend.Video_processing_algorithms.texture_image_generator import create_multiple_texture_images
 from src.Backend.Video_processing_algorithms.video_generator import set_save_name
@@ -27,7 +29,7 @@ from src.Constants import properties_constants as ps
 def routine(sub_routines, save_form):
     routine_setup()
 
-    source_directory = multiple_cells_video_generator.get_source_directory()
+    source_directory = get_source_directory()
 
     if source_directory is None or source_directory == "":
         return
@@ -59,10 +61,11 @@ def routine(sub_routines, save_form):
     total_time = time.time() - init_time
     print(get_time_message(total_time))
 
+    progress_bar.force_to_close()
+    wait_message = show_wait_message(string_constants.WAIT_SAVING_FILES_TITLE, string_constants.WAIT_SAVING_FILES_DESC)
     save_files(save_form, generated_files, distribution_metrics_path_list)
     after()
-
-    progress_bar.force_to_close()
+    wait_message.done(0)
 
 
 def estimate_time_and_space_sub_routine(sub_routines, source_directory):
@@ -285,7 +288,7 @@ def get_videos_files_names(masked_videos_paths_list):
 
 
 def get_first_cell_image_list(source_directory):
-    images_list_of_lists_paths = multiple_cells_video_generator.get_images_from_directories(source_directory)
+    images_list_of_lists_paths = get_images_from_directories(source_directory)
     first_cell_image_as_array_list = []
     for i in range(0, len(images_list_of_lists_paths)):
         image_path = images_list_of_lists_paths[i][0]
