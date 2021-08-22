@@ -7,10 +7,11 @@ from src.Backend.Image_processing_algorithms.Archive_manipulation.dataframe_file
     create_dataframe_from_descriptors
 from src.Backend.Image_processing_algorithms.Archive_manipulation.file_manipulation import \
     create_directory_if_not_exists, remove_directory
+from src.Backend.Image_processing_algorithms.Archive_manipulation.image_file_manipulation import \
+    get_images_from_directories
 from src.Backend.Image_processing_algorithms.Operations.common_operations import bgr_to_rgb, resize_image
 from src.Backend.Image_processing_algorithms.Texture.k_means import get_descriptors, k_means
 from src.Backend.Video_processing_algorithms import video_generator
-from src.Backend.Video_processing_algorithms.multiple_cells_video_generator import get_images_from_directories
 from src.Classes.Methods.Anisotropic_Filter import Anisotropic_Filter
 from src.Classes.Project_mastermind import Project_mastermind
 from src.Constants import configuration_constants, algorithm_constants, string_constants

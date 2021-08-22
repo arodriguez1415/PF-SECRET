@@ -1,10 +1,10 @@
-import os
 from PIL import Image
 import numpy as np
 
-from src.Backend.Image_processing_algorithms.Archive_manipulation import image_file_manipulation
 from src.Backend.Image_processing_algorithms.Archive_manipulation.file_manipulation import \
     create_directory_if_not_exists, remove_directory
+from src.Backend.Image_processing_algorithms.Archive_manipulation.image_file_manipulation import \
+    get_images_from_directories
 from src.Backend.Image_processing_algorithms.Archive_manipulation.video_file_manipulation import \
     get_video_frames_as_array
 from src.Backend.Image_processing_algorithms.Border_detection.mgac import map_borders
@@ -100,25 +100,6 @@ def generate_preprocessed_image(cell_image):
     preprocessed_image = video_generator.apply_methods_specified(cell_image, methods_to_apply)
 
     return preprocessed_image
-
-
-def get_images_from_directories(source_directory):
-    directories_list = os.walk(get_source_directory(source_directory))
-    images_list_of_lists = []
-    filtered_list_of_lists = []
-    for directory_wrapper in directories_list:
-        directory_path = directory_wrapper[0]
-        images_list_of_lists.append(video_generator.get_files_from_directory(directory_path))
-    for images_list in images_list_of_lists:
-        if images_list:
-            filtered_list_of_lists.append(images_list)
-    return filtered_list_of_lists
-
-
-def get_source_directory(source_directory=None):
-    if source_directory is None:
-        source_directory = image_file_manipulation.get_directory_path()
-    return source_directory
 
 
 def set_methods_to_apply(image_path):

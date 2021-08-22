@@ -5,6 +5,8 @@ import os
 
 from src.Backend.Image_processing_algorithms.Archive_manipulation.file_manipulation import \
     create_directory_if_not_exists, remove_directory
+from src.Backend.Image_processing_algorithms.Archive_manipulation.image_file_manipulation import \
+    get_files_from_directory
 from src.Backend.Image_processing_algorithms.Archive_manipulation.save_file_manipulation import set_save_name
 from src.Backend.Image_processing_algorithms.Operations import common_operations
 from src.Backend.Image_processing_algorithms.Operations.common_operations import resize_image
@@ -96,18 +98,6 @@ def save_video(frames_paths_list, video_path):
         resized_frame_array = resize_image(frame_array, width, height)
         video.write(resized_frame_array)
     video.release()
-
-
-def get_files_from_directory(directory):
-    directory_files_paths_list = os.listdir(directory)
-    correct_directory_files_paths_list = []
-    for file in directory_files_paths_list:
-        if file.endswith(string_constants.TIF_EXTENSION):
-            file_path = os.path.join(directory, file)
-            correct_directory_files_paths_list.append(file_path)
-    if correct_directory_files_paths_list and len(correct_directory_files_paths_list) > 1:
-        correct_directory_files_paths_list.pop()
-    return correct_directory_files_paths_list
 
 
 def delete_frames(frames_paths_list):
