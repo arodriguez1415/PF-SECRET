@@ -1,11 +1,14 @@
 import os
-import random
-import string
+
 import time
 import numpy as np
 from PIL import Image
 
+from src.Backend.Image_processing_algorithms.Archive_manipulation.file_manipulation import \
+    create_directory_if_not_exists, move_directory, get_parent_directory_path, move_file, remove_directory
 from src.Backend.Image_processing_algorithms.Metrics import metrics_generator, metrics_plotter
+from src.Backend.Image_processing_algorithms.Operations.string_manipulator import generate_random_string, \
+    generate_date_string
 from src.Backend.Routines.estimator import estimate_time_and_space, prepare_estimation_message_and_title, \
     estimate_steps, get_time_message
 from src.Backend.Video_processing_algorithms import multiple_cells_video_generator
@@ -21,8 +24,9 @@ from src.Frontend.Utils.message import show_confirmation_message, show_wait_mess
 from src.Constants import properties_constants as ps
 
 
-def routine(sub_routines):
+def routine(sub_routines, save_form):
     routine_setup()
+
     source_directory = multiple_cells_video_generator.get_source_directory()
 
     if source_directory is None or source_directory == "":
@@ -39,13 +43,24 @@ def routine(sub_routines):
 
     init_time = time.time()
 
-    if algorithm_constants.CONTOUR_SUBROUTINE in sub_routines:
-        contour_comparison_and_metrics_subroutine(sub_routines, source_directory)
+    contour_subroutine_files = []
+    distribution_metrics_path_list = []
 
-    movement_and_texture_heat_map_sub_routine(sub_routines, source_directory)
+    if algorithm_constants.CONTOUR_SUBROUTINE in sub_routines:
+        contour_subroutine_files, distribution_metrics_path_list = contour_comparison_and_metrics_subroutine(
+            sub_routines,
+            source_directory)
+
+    movement_and_texture_subroutines_files = movement_and_texture_heat_map_sub_routine(sub_routines, source_directory)
+
+    contour_subroutine_files.extend(movement_and_texture_subroutines_files)
+    generated_files = contour_subroutine_files
 
     total_time = time.time() - init_time
     print(get_time_message(total_time))
+
+    save_files(save_form, generated_files, distribution_metrics_path_list)
+    after()
 
     progress_bar.force_to_close()
 
@@ -63,33 +78,49 @@ def estimate_time_and_space_sub_routine(sub_routines, source_directory):
 
 
 def routine_setup():
+    create_directory_if_not_exists(configuration_constants.GENERATED_IMAGES_DIR)
+    create_directory_if_not_exists(configuration_constants.GLOBAL_ROUTINE_DIRECTORY)
+    create_directory_if_not_exists(configuration_constants.MASK_VIDEOS)
     create_directory_if_not_exists(configuration_constants.CELLS_VIDEOS)
     create_directory_if_not_exists(configuration_constants.COMPARISON_VIDEOS)
-    create_directory_if_not_exists(configuration_constants.GRAPHS_FOLDER)
-    create_directory_if_not_exists(configuration_constants.METRICS_GRAPH_FOLDER)
-    create_directory_if_not_exists(configuration_constants.DISTRIBUTION_METRICS_GRAPH_FOLDER)
+    create_directory_if_not_exists(configuration_constants.GLOBAL_GRAPHS_FOLDER)
+    create_directory_if_not_exists(configuration_constants.GLOBAL_METRICS_GRAPH_FOLDER)
+    create_directory_if_not_exists(configuration_constants.GLOBAL_DISTRIBUTION_METRICS_GRAPH_FOLDER)
+    create_directory_if_not_exists(configuration_constants.MOVEMENT_HEATMAP_IMAGES_DIRECTORY)
+    create_directory_if_not_exists(configuration_constants.TEXTURE_HEATMAP_IMAGES_DIRECTORY)
     create_directory_if_not_exists(configuration_constants.MOVEMENT_VS_TEXTURE_COMPARISON_DIRECTORY)
 
 
-def create_directory_if_not_exists(directory_path):
-    if not os.path.isdir(directory_path):
-        os.mkdir(directory_path)
+def after():
+    remove_directory(configuration_constants.MASK_VIDEOS)
+    remove_directory(configuration_constants.CELLS_VIDEOS)
+    remove_directory(configuration_constants.COMPARISON_VIDEOS)
+    remove_directory(configuration_constants.GLOBAL_GRAPHS_FOLDER)
+    remove_directory(configuration_constants.GLOBAL_METRICS_GRAPH_FOLDER)
+    remove_directory(configuration_constants.GLOBAL_DISTRIBUTION_METRICS_GRAPH_FOLDER)
+    remove_directory(configuration_constants.MOVEMENT_HEATMAP_IMAGES_DIRECTORY)
+    remove_directory(configuration_constants.TEXTURE_HEATMAP_IMAGES_DIRECTORY)
+    remove_directory(configuration_constants.MOVEMENT_VS_TEXTURE_COMPARISON_DIRECTORY)
 
 
 def contour_comparison_and_metrics_subroutine(sub_routines, source_directory):
-    masked_videos_path_list, cells_videos_path_list, videos_filename_list, generated_files = contour_sub_routine(source_directory)
+    masked_videos_path_list, cells_videos_path_list, videos_filename_list, generated_files = contour_sub_routine(
+        source_directory)
     metrics_generated_files = []
     comparison_generated_files = []
+    distribution_metrics_path_list = []
 
     if algorithm_constants.COMPARISON_SUBROUTINE in sub_routines:
         comparison_generated_files = comparison_sub_routine(cells_videos_path_list, masked_videos_path_list)
 
     if algorithm_constants.METRICS_SUBROUTINE in sub_routines:
-        metrics_generated_files = metrics_sub_routine(source_directory, videos_filename_list, masked_videos_path_list)
+        metrics_generated_files, distribution_metrics_path_list = metrics_sub_routine(source_directory,
+                                                                                      videos_filename_list,
+                                                                                      masked_videos_path_list)
 
-    generated_files.extend(metrics_generated_files)
-    generated_files.extend(comparison_generated_files)
-    return generated_files
+    generated_files.append(metrics_generated_files)
+    generated_files.append(comparison_generated_files)
+    return generated_files, distribution_metrics_path_list
 
 
 def contour_sub_routine(source_directory):
@@ -100,9 +131,7 @@ def contour_sub_routine(source_directory):
     masked_videos_paths_list = multiple_cells_video_generator.generate_mask_video_of_all_cells(source_directory)
     videos_filename_list = get_videos_files_names(masked_videos_paths_list)
 
-    generated_files = []
-    generated_files.extend(cells_videos_paths_list)
-    generated_files.extend(masked_videos_paths_list)
+    generated_files = [cells_videos_paths_list, masked_videos_paths_list]
 
     return masked_videos_paths_list, cells_videos_paths_list, videos_filename_list, generated_files
 
@@ -124,8 +153,7 @@ def metrics_sub_routine(source_directory, videos_filename_list, masked_videos_pa
     generated_files = []
     generated_files.extend(metrics_excel_paths_list)
     generated_files.extend(simple_metrics_path_list)
-    generated_files.extend(distribution_metrics_path_list)
-    return generated_files
+    return generated_files, distribution_metrics_path_list
 
 
 def generate_metrics_sub_routine(masked_videos_paths_list, metrics_dictionary):
@@ -187,9 +215,9 @@ def movement_and_texture_heat_map_sub_routine(sub_routines, source_directory):
                                                                                 motion_images_array_list,
                                                                                 texture_images_array_list)
 
-    generated_files.extend(motion_images_path_list)
-    generated_files.extend(texture_images_path_list)
-    generated_files.extend(generated_plot_files_list)
+    generated_files.append(motion_images_path_list)
+    generated_files.append(texture_images_path_list)
+    generated_files.append(generated_plot_files_list)
     return generated_files
 
 
@@ -229,7 +257,7 @@ def movement_and_texture_comparison_sub_routine(source_directory, motion_images_
 
 
 def generate_metric_path(filename):
-    initial_path = configuration_constants.METRICS_GRAPH_FOLDER
+    initial_path = configuration_constants.GLOBAL_METRICS_GRAPH_FOLDER
     middle_name = filename
     extension = ".png"
     full_path = initial_path + middle_name + extension
@@ -237,9 +265,9 @@ def generate_metric_path(filename):
 
 
 def generate_distribution_path(cells_number):
-    initial_path = configuration_constants.DISTRIBUTION_METRICS_GRAPH_FOLDER
+    initial_path = configuration_constants.GLOBAL_DISTRIBUTION_METRICS_GRAPH_FOLDER
     middle_name = "Celulas en distribucion - " + str(cells_number) + " hash - "
-    hash_name = ''.join(random.choices(string.ascii_lowercase + string.digits, k=10))
+    hash_name = generate_random_string(number_of_chars=10)
     extension = ".png"
     full_path = initial_path + middle_name + hash_name + extension
     return full_path
@@ -266,3 +294,56 @@ def get_first_cell_image_list(source_directory):
         first_cell_image_as_array_list.append(image_array)
 
     return first_cell_image_as_array_list
+
+
+def save_files(save_form, list_of_lists_of_generated_files, distribution_metrics_path_list):
+    directory_path = generate_date_string()
+    create_directory_if_not_exists(configuration_constants.GLOBAL_ROUTINE_DIRECTORY + directory_path)
+    if save_form == algorithm_constants.CELL_SAVE_FORM:
+        save_by_cell(directory_path, list_of_lists_of_generated_files, distribution_metrics_path_list)
+    else:
+        save_by_feature(directory_path, list_of_lists_of_generated_files)
+
+
+def save_by_cell(target_folder_path, list_of_lists_of_generated_files, distribution_metrics_path_list):
+    cells_length = len(list_of_lists_of_generated_files[0])
+
+    for i in range(0, cells_length):
+        cell_directory_path = configuration_constants.GLOBAL_ROUTINE_DIRECTORY + target_folder_path + generate_random_string() + "/"
+        create_directory_if_not_exists(cell_directory_path)
+        for list_path in list_of_lists_of_generated_files:
+            file_path_to_move = list_path[i]
+            move_file(file_path_to_move, cell_directory_path)
+
+    for file_path in distribution_metrics_path_list:
+        move_file(file_path, target_folder_path)
+
+    return
+
+
+def save_by_feature(target_folder_path, list_of_lists_of_generated_files):
+    move_directory(configuration_constants.MASK_VIDEOS,
+                   get_parent_directory_path(configuration_constants.MASK_VIDEOS) + target_folder_path)
+    move_directory(configuration_constants.CELLS_VIDEOS,
+                   get_parent_directory_path(configuration_constants.CELLS_VIDEOS) + target_folder_path)
+    move_directory(configuration_constants.COMPARISON_VIDEOS,
+                   get_parent_directory_path(configuration_constants.COMPARISON_VIDEOS) + target_folder_path)
+    move_directory(configuration_constants.GLOBAL_GRAPHS_FOLDER,
+                   get_parent_directory_path(configuration_constants.GLOBAL_GRAPHS_FOLDER) + target_folder_path)
+    move_directory(configuration_constants.MOVEMENT_HEATMAP_IMAGES_DIRECTORY,
+                   get_parent_directory_path(configuration_constants.MOVEMENT_HEATMAP_IMAGES_DIRECTORY) +
+                   target_folder_path)
+    move_directory(configuration_constants.TEXTURE_HEATMAP_IMAGES_DIRECTORY,
+                   get_parent_directory_path(configuration_constants.TEXTURE_HEATMAP_IMAGES_DIRECTORY) +
+                   target_folder_path)
+    move_directory(configuration_constants.MOVEMENT_VS_TEXTURE_COMPARISON_DIRECTORY,
+                   get_parent_directory_path(configuration_constants.MOVEMENT_VS_TEXTURE_COMPARISON_DIRECTORY) +
+                   target_folder_path)
+
+    metrics_folder_path = configuration_constants.GLOBAL_ROUTINE_DIRECTORY + target_folder_path + configuration_constants.METRICS_FOLDER_NAME
+    create_directory_if_not_exists(metrics_folder_path)
+
+    for file_path_list in list_of_lists_of_generated_files:
+        for file_path in file_path_list:
+            if configuration_constants.METRICS_FOLDER_NAME in file_path:
+                move_file(file_path, metrics_folder_path)

@@ -1,9 +1,10 @@
 import os
-import shutil
 from PIL import Image
 import numpy as np
 
 from src.Backend.Image_processing_algorithms.Archive_manipulation import image_file_manipulation
+from src.Backend.Image_processing_algorithms.Archive_manipulation.file_manipulation import \
+    create_directory_if_not_exists, remove_directory
 from src.Backend.Image_processing_algorithms.Archive_manipulation.video_file_manipulation import \
     get_video_frames_as_array
 from src.Backend.Image_processing_algorithms.Border_detection.mgac import map_borders
@@ -60,7 +61,7 @@ def generate_video_comparator_of_all_cells(cell_videos, mask_videos):
                                                     specified_methods_to_apply=[],
                                                     save_directory=configuration_constants.COMPARISON_VIDEOS)
         comparison_videos_paths_list.append(video_path)
-    shutil.rmtree(configuration_constants.TEMPORARY_VIDEO_DIRECTORY_PATH, ignore_errors=True)
+    remove_directory(configuration_constants.TEMPORARY_VIDEO_DIRECTORY_PATH)
     return comparison_videos_paths_list
 
 
@@ -170,8 +171,3 @@ def get_images(images_list_of_lists):
 
 def setup():
     create_directory_if_not_exists(configuration_constants.TEMPORARY_VIDEO_DIRECTORY_PATH)
-
-
-def create_directory_if_not_exists(directory_path):
-    if not os.path.isdir(directory_path):
-        os.mkdir(directory_path)

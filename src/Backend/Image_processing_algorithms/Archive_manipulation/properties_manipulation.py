@@ -1,6 +1,8 @@
 import os
 import pickle
 
+from src.Backend.Image_processing_algorithms.Archive_manipulation.file_manipulation import \
+    create_directory_if_not_exists
 from src.Backend.Image_processing_algorithms.Preprocessing import adaptive_threshold
 from src.Backend.Image_processing_algorithms.Preprocessing.adaptive_threshold import get_text_method
 from src.Classes.Project_mastermind import Project_mastermind
@@ -9,6 +11,7 @@ from src.Constants import properties_constants as ps
 
 
 def save_properties(dictionary):
+    setup()
     with open(configuration_constants.PROPERTIES_FILE_PATH, 'wb') as file:
         pickle.dump(dictionary, file, pickle.HIGHEST_PROTOCOL)
 
@@ -22,6 +25,10 @@ def load_properties(main_window, global_routine_params):
 
     set_properties(dictionary, main_window, global_routine_params)
     return dictionary
+
+
+def setup():
+    create_directory_if_not_exists(configuration_constants.PROPERTIES_DIRECTORY)
 
 
 def generate_default_properties():

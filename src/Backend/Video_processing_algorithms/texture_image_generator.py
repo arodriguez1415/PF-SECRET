@@ -1,11 +1,12 @@
 import os
-import shutil
 from PIL import Image
 import cv2
 import numpy as np
 
 from src.Backend.Image_processing_algorithms.Archive_manipulation.dataframe_file_manipulation import \
     create_dataframe_from_descriptors
+from src.Backend.Image_processing_algorithms.Archive_manipulation.file_manipulation import \
+    create_directory_if_not_exists, remove_directory
 from src.Backend.Image_processing_algorithms.Operations.common_operations import bgr_to_rgb, resize_image
 from src.Backend.Image_processing_algorithms.Texture.k_means import get_descriptors, k_means
 from src.Backend.Video_processing_algorithms import video_generator
@@ -54,7 +55,7 @@ def create_texture_image_from_video(images_path_for_texture_list=None, clusters_
     uncoloured_classified_image, coloured_classified_image = get_texture_image(frames_path_list,
                                                                                clusters_quantity, threshold)
     video_generator.delete_frames(frames_path_list)
-    shutil.rmtree(configuration_constants.TEMPORARY_VIDEO_DIRECTORY_PATH, ignore_errors=True)
+    remove_directory(configuration_constants.TEMPORARY_VIDEO_DIRECTORY_PATH)
     return uncoloured_classified_image, coloured_classified_image
 
 
@@ -62,13 +63,10 @@ def setup(images_path_for_texture_list):
     progress_bar.start_progress_bar(string_constants.GENERATE_TEXTURE_HEAT_MAP_TITLE,
                                     string_constants.GENERATE_TEXTURE_HEAT_MAP_DESCRIPTION,
                                     len(images_path_for_texture_list) * 2 + 1)
+    create_directory_if_not_exists(configuration_constants.GENERATED_IMAGES_DIR)
+    create_directory_if_not_exists(configuration_constants.GLOBAL_ROUTINE_DIRECTORY)
     create_directory_if_not_exists(configuration_constants.TEMPORARY_VIDEO_DIRECTORY_PATH)
     create_directory_if_not_exists(configuration_constants.TEXTURE_HEATMAP_IMAGES_DIRECTORY)
-
-
-def create_directory_if_not_exists(directory_path):
-    if not os.path.isdir(directory_path):
-        os.mkdir(directory_path)
 
 
 def get_images(images_path_for_texture_list):

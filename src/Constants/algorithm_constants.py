@@ -102,3 +102,8 @@ COMPARISON_SUBROUTINE = "Comparison sub routine"
 METRICS_SUBROUTINE = "Metrics sub routine"
 MOVEMENT_SUBROUTINE = "Movement sub routine"
 TEXTURE_SUBROUTINE = "Texture sub routine"
+
+# Global routine -- Save forms
+
+CELL_SAVE_FORM = "Por célula"
+FEATURE_SAVE_FORM = "Por rutina"

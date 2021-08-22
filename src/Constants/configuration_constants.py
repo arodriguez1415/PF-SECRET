@@ -4,44 +4,46 @@ IMAGE_VIEWER_WIDTH = 600
 IMAGE_VIEWER_HEIGHT = 600
 
 DOCTOR_DIRECTORY = r""
-TEMPORARY_VIDEO_DIRECTORY_PATH = r"./generated/video_frames/"
-METRICS_DIRECTORY_PATH = r"./generated/metrics/"
-GENERATED_IMAGES_DIR = r"./generated/"
+TEMPORARY_VIDEO_DIRECTORY_PATH = r"./Generado/video_frames/"
+GENERATED_IMAGES_DIR = r"./Generado/"
 TEST_IMAGES_DIR = r"./Resources/Mediciones"
 GENERAL_DIRECTORY = r"./Resources"
 SAMPLE_ESTIMATOR_DIRECTORY = r"./Resources/Sample"
+
+# Properties
+PROPERTIES_DIRECTORY = r"./Resources/Properties/"
 PROPERTIES_FILE_PATH = r"./Resources/Properties/properties.pkl"
+
+# Global routine directories
+
+GLOBAL_ROUTINE_DIRECTORY = r"./Generado/Rutina global/"
 
 # Videos directories
 
-CELLS_VIDEOS = r"./generated/Celulas en video/"
-MASK_VIDEOS = r"./generated/Mascaras de contorno/"
-CONTOUR_VIDEOS = r"./generated/Celulas contorneadas/"
-COMPARISON_VIDEOS = r"./generated/Contorno vs realidad/"
+CELLS_VIDEOS = r"./Generado/Rutina global/Celulas en video/"
+MASK_VIDEOS = r"./Generado/Rutina global/Mascaras de contorno/"
+COMPARISON_VIDEOS = r"./Generado/Rutina global/Contorno vs realidad/"
 
 # Movement heat map directory
 
-MOVEMENT_HEATMAP_IMAGES_DIRECTORY = r"./generated/Mapas de movimiento/"
+MOVEMENT_HEATMAP_IMAGES_DIRECTORY = r"./Generado/Rutina global/Mapas de movimiento/"
 
 # Texture heat map directory
 
-TEXTURE_HEATMAP_IMAGES_DIRECTORY = r"./generated/Mapas de textura/"
+TEXTURE_HEATMAP_IMAGES_DIRECTORY = r"./Generado/Rutina global/Mapas de textura/"
 
 # Movement vs Texture heat map comparison directory
 
-MOVEMENT_VS_TEXTURE_COMPARISON_DIRECTORY = r"./generated/Comparacion Movimiento vs Textura/"
+MOVEMENT_VS_TEXTURE_COMPARISON_DIRECTORY = r"./Generado/Rutina global/Comparacion Movimiento vs Textura/"
 
-# Graphs directories
+# Metrics directory
 
-GRAPHS_FOLDER = r"./generated/Graficos/"
-METRICS_GRAPH_FOLDER = r"./generated/Graficos/Metricas/"
-DISTRIBUTION_METRICS_GRAPH_FOLDER = r"./generated/Graficos/Distribucion/"
+METRICS_DIRECTORY_PATH = r"./Generado/Metricas/"
+METRICS_FOLDER_NAME = "Metricas/"
 
-# Texture directories
+# Graphs directories global
 
-TESTS_TEXTURE_DIRECTORY = r"./generated/tests"
-TESTS_K_MEAN_TEXTURE_DIRECTORY = r"./generated/tests/k-means"
-TESTS_KOHONEN_TEXTURE_DIRECTORY = r"./generated/tests/kohonen"
-TESTS_MEAN_SHIFT_TEXTURE_DIRECTORY = r"./generated/tests/mean-shift"
-TESTS_HDBSCAN_TEXTURE_DIRECTORY = r"./generated/tests/HDBScan"
+GLOBAL_GRAPHS_FOLDER = r"./Generado/Rutina global/Graficos/"
+GLOBAL_METRICS_GRAPH_FOLDER = r"./Generado/Rutina global/Graficos/Metricas simples/"
+GLOBAL_DISTRIBUTION_METRICS_GRAPH_FOLDER = r"./Generado/Rutina global/Graficos/Distribucion/"
 

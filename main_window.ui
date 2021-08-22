@@ -417,7 +417,7 @@
       </rect>
      </property>
      <property name="currentIndex">
-      <number>1</number>
+      <number>5</number>
      </property>
      <widget class="QWidget" name="blank_page"/>
      <widget class="QWidget" name="anisotropic_filter_options">
@@ -1447,7 +1447,7 @@
          <x>10</x>
          <y>120</y>
          <width>291</width>
-         <height>361</height>
+         <height>311</height>
         </rect>
        </property>
        <property name="font">
@@ -1599,6 +1599,69 @@
        <property name="text">
         <string>Cambiar parámetros</string>
        </property>
+      </widget>
+      <widget class="QGroupBox" name="global_routine_save_forms_label">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>450</y>
+         <width>291</width>
+         <height>181</height>
+        </rect>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>12</pointsize>
+        </font>
+       </property>
+       <property name="title">
+        <string>Formas de guardado</string>
+       </property>
+       <widget class="QRadioButton" name="global_routine_save_by_cell_option">
+        <property name="enabled">
+         <bool>true</bool>
+        </property>
+        <property name="geometry">
+         <rect>
+          <x>30</x>
+          <y>30</y>
+          <width>231</width>
+          <height>51</height>
+         </rect>
+        </property>
+        <property name="font">
+         <font>
+          <pointsize>18</pointsize>
+         </font>
+        </property>
+        <property name="text">
+         <string>Por célula</string>
+        </property>
+        <property name="checked">
+         <bool>true</bool>
+        </property>
+       </widget>
+       <widget class="QRadioButton" name="global_routine_save_by_feature_option">
+        <property name="geometry">
+         <rect>
+          <x>30</x>
+          <y>90</y>
+          <width>231</width>
+          <height>51</height>
+         </rect>
+        </property>
+        <property name="font">
+         <font>
+          <pointsize>18</pointsize>
+         </font>
+        </property>
+        <property name="text">
+         <string>Por rutina</string>
+        </property>
+        <property name="checked">
+         <bool>false</bool>
+        </property>
+       </widget>
       </widget>
      </widget>
      <widget class="QWidget" name="adaptive_threshold_options">
