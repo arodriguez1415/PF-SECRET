@@ -196,7 +196,6 @@ class Project_mastermind:
 
     def find_current_original_image_index(self):
         original_path = os.path.realpath(self.original_image_path)
-
         for i in range(0, len(self.original_images_in_dir_path)):
             current_path = os.path.realpath(self.original_images_in_dir_path[i])
             if current_path == original_path:
@@ -204,8 +203,7 @@ class Project_mastermind:
                 label_text = str(i + 1) + "/" + str(len(self.original_images_in_dir_path))
                 self.main_window.images_index_label.setText(label_text)
                 return
-            else:
-                raise Exception("Not found")
+        raise Exception("Not found")
 
     def set_image_processing_list(self, image_processing_list):
         self.image_processing_list = image_processing_list
