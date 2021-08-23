@@ -81,6 +81,8 @@ def add_process(main_window):
         return
 
     if actual_image_wrapper is None or not isinstance(actual_image_wrapper.get_method(), Adaptive_threshold):
+        show_error_message(string_constants.NO_PROCESS_USED)
+        enable_button(main_window.adaptive_threshold_add_process_button)
         return
 
     project_mastermind = Project_mastermind.get_instance()
