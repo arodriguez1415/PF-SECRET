@@ -61,8 +61,8 @@ def calculate_texture_in_line(image, x_coordinates, y_coordinates, all_points,
                               all_fractal_dimensions, all_entropy):
     index = 0
     diff = 5
-    width = image.shape[0]
-    height = image.shape[1] # mirar ro
+    height = image.shape[0]
+    width = image.shape[1]
 
     for point in all_points:
         x = point[0]
