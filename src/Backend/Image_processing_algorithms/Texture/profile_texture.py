@@ -61,8 +61,8 @@ def calculate_texture_in_line(image, x_coordinates, y_coordinates, all_points,
                               all_fractal_dimensions, all_entropy):
     index = 0
     diff = 5
-    width = image.shape[0]
-    height = image.shape[1] # mirar ro
+    height = image.shape[0]
+    width = image.shape[1]
 
     for point in all_points:
         x = point[0]
@@ -89,28 +89,28 @@ def plot_profile_texture(image, x_points, y_points, combined_results, x_coordina
         x_label = "Punto del eje Y"
 
     pl.figure()
-    pl.suptitle('Análisis de textura', fontsize=17, fontweight='bold')
+    pl.suptitle('Análisis de textura', fontsize=20, fontweight='bold')
 
     pl.subplot(gs[0, 0])
     pl.plot(x_axis, all_fractal_dimensions, color='green', label='FractalDimension')
     pl.xlabel(x_label, fontsize=11)
     pl.ylabel('Dimensión fractal', fontsize=11)
-    pl.title("Dimensión fractal en el perfil", fontsize=14)
+    pl.title("Dimensión fractal en el perfil", fontsize=15)
 
     pl.subplot(gs[0, 1])
     pl.plot(x_axis, all_entropy, color='red', label='Entropy')
     pl.xlabel(x_label, fontsize=11)
     pl.ylabel('Entropía', fontsize=11)
-    pl.title("Entropía en el perfil", fontsize=14)
+    pl.title("Entropía en el perfil", fontsize=15)
 
     pl.subplot(gs[1, :-1])
     pl.plot(x_axis, combined_results, color='blue', label='Combinated')
     pl.xlabel(x_label, fontsize=11)
     pl.ylabel('Textura', fontsize=11)
-    pl.title("Textura en el perfil", fontsize=14)
+    pl.title("Textura en el perfil", fontsize=15)
 
     pl.subplot(gs[0:, -1])
-    pl.title("Imagen con perfil", fontsize=14)
+    pl.title("Imagen con perfil", fontsize=15)
     pl.imshow(image, cmap=pl.cm.gray, vmin=0, vmax=255)
     pl.axis('off')
     pl.plot(x_points, y_points, linewidth=2, color='blue')
