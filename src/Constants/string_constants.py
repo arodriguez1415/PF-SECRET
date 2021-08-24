@@ -39,14 +39,33 @@ TEXTURE_VIDEO_VIEW_TITLE = "Mapa de calor de la textura del video"
 
 # Error messages
 
+ERROR_TITLE = "Error ocurrido"
+
+UNKNOWN_ERROR = "Ha ocurrido un error inesperado. La interfaz volverá a un estado seguro para evitar errores de " \
+                "arrastre "
+UNKNOWN_ERROR_TYPE = "Tipo de error: "
+
+NO_METRIC_SELECTED = "Debe seleccionar almenos una metrica"
+NO_IMAGE_FILE = "El archivo seleccionado no es una imagen. \n\nSolo se admiten las siguientes extensiones: \n.tif"
+NO_EXCEL_FILE = "El archivo seleccionado no es un excel. Debe tener la extensión '.xlsx'"
+NO_EXCEL_FILES = "Alguno de los archivos seleccionados no es un excel. Deben tener la extensión '.xlsx'"
+NO_VIDEO_FILE = "El archivo seleccionado no es un video. Debe tener la extensión '.avi'"
+NO_VIDEO_FILES = "Alguno de los archivos seleccionados no es un video. Deben tener la extensión '.avi'"
 NO_PATH_SELECTION = "No se seleccionó ningun path"
 NO_MGAC_METHOD_ERROR = "No se aplico el metodo mgac en la imagen aún"
 NO_ALL_IMAGES_READY_FOR_ANALYZE_METRIC_DESCRIPTION = "Para la comparación de la métrica es necesario haber calculado " \
                                                      "el mapa de movimiento y el mapa de textura de imagen y video"
 NO_PROFILE_SELECTED_ERROR = "No se seleccionó ningún perfil para analizar"
 NO_LINE_SELECTED_ERROR = "La figura utilizada para este método debe ser una línea"
+NO_IMAGE_LOADED = "No se cargó ninguna imagen para analizar. Debe elegir una imagen '.tif' en el menu 'Archivo'"
+
+BOTH_SAVE_OPTIONS_SELECTED_EXCEPTION = "No pueden estar ambas opciones seleccionadas"
+NO_SAVE_OPTIONS_SELECTED_EXCEPTION = "No se seleccionó ninguna opción de guardado"
 
 # Wait message
+
+WAIT_SAVING_FILES_TITLE = "Guardando archivos"
+WAIT_SAVING_FILES_DESC = "Los archivos generados se están guardando. Esta acción puede tomar unos minutos..."
 
 WAIT_ESTIMATION_MESSAGE_TITLE = "Estimación"
 WAIT_ESTIMATION_MESSAGE_DESC = "Se esta estimando el costo de tiempo y espacio de la rutina. Espere unos segundos... "
@@ -55,6 +74,10 @@ WAIT_TEXTURE_IMAGE_MESSAGE_TITLE = "Textura de imagen"
 WAIT_TEXTURE_IMAGE_MESSAGE_DESC = "Se esta generando el mapa de textura de la imagen. Espere unos segundos... "
 
 # Confirmation messages
+
+DEFAULT_PARAMETERS_MANUAL_ROUTINE_TITLE = "Restaurar defaults"
+DEFAULT_PARAMETERS_MANUAL_ROUTINE_DESCRIPTION = "¿Esta seguro que quiere volver a tener los parametros default en todas" \
+                                                " las rutinas? Se sobreescribirán los actuales"
 
 GLOBAL_ROUTINE_ESTIMATION_TITLE = "Estimación de resultados"
 GLOBAL_ROUTINE_TIME_ESTIMATION = "Estimación de tiempo requerido: "
@@ -67,6 +90,8 @@ NO_REGION_FOUND_DESCRIPTION = "No se seleccionó ninguna región. Se tomará com
 # Information messages
 
 INFORMATION_TITLE = "Information"
+
+PROGRESS_BAR_CANCELLED = "Progreso cancelado"
 
 ADAPTIVE_THRESHOLD_WINDOW_SIZE_HELP = "Mensaje de prueba para mostrar una informacion"
 ADAPTIVE_THRESHOLD_C_CONSTANT_HELP = "Mensaje de prueba para mostrar una informacion"
@@ -107,6 +132,8 @@ PLOT_METRICS_LOAD_HELP = "Mensaje de prueba para mostrar una informacion"
 PLOT_METRICS_ALGORITHM_HELP = "Mensaje de prueba para mostrar una informacion"
 
 PLOT_METRICS_DISTRIBUTION_ALGORITHM_HELP = "Mensaje de prueba para mostrar una informacion"
+
+VIDEO_GENERATOR_ALGORITHM_HELP = "Mensaje de prueba para mostrar una informacion"
 
 GLOBAL_ROUTINE_ALGORITHM_HELP = "Mensaje de prueba para mostrar una informacion"
 
@@ -154,15 +181,15 @@ SIMPLE_METRICS_Y_LABEL = "Tiempo en frames"
 # Distribution Metrics plot
 
 PERIMETER_DISTRIBUTION_TITLE = "Distribución de perímetros"
-PERIMETER_DISTRIBUTION_X_LABEL = "Valores de perímetro en píxeles"
+PERIMETER_DISTRIBUTION_X_LABEL = "Valores de perímetro en pixeles"
 
 AREA_DISTRIBUTION_TITLE = "Distribución de áreas"
-AREA_DISTRIBUTION_X_LABEL = "Valores de áreas en pixeles"
+AREA_DISTRIBUTION_X_LABEL = "Valores de areas en pixeles"
 
-AXIS_RATIO_DISTRIBUTION_TITLE = "Distribución de razón de ejes"
+AXIS_RATIO_DISTRIBUTION_TITLE = "Distribución de razon de ejes"
 AXIS_RATIO_DISTRIBUTION_X_LABEL = "Valores de razón de ejes"
 
-DISTRIBUTION_METRICS_Y_LABEL = "Cantidad de células"
+DISTRIBUTION_METRICS_Y_LABEL = "Frecuencia"
 
 # Titles of some global routine metric plots
 
@@ -185,5 +212,3 @@ TEXTURE_VIDEO_TITLE = "Imagen de Textura-Video"
 TEXTURE_IMAGE_VS_TEXTURE_VIDEO = "Textura-Imagen vs Textura-Video"
 
 FOUR_GRID_COMPARISON = "Valor de la región en las 4 vistas"
-
-
