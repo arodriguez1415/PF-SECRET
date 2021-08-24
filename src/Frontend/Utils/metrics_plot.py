@@ -51,7 +51,7 @@ def save_plot_distribution_metrics(metrics_avg_lists, plot_title_list, x_label_l
 
     for i in range(0, 3):
         axis_to_plot = ax[i]
-        axis_to_plot.hist(metrics_avg_lists[i])
+        axis_to_plot.hist(metrics_avg_lists[i], bins='fd')
         axis_to_plot.set_title(plot_title_list[i], fontsize=15)
         axis_to_plot.set_xlabel(x_label_list[i], fontsize=11)
         axis_to_plot.set_ylabel(y_label_list[i], fontsize=11)
