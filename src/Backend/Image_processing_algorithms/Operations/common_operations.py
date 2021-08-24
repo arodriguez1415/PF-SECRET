@@ -70,7 +70,10 @@ def resize_image(image_array, width, height):
     return resized_image
 
 
-def show_coloured_image(rgb_coloured_matrix):
+def show_coloured_image(rgb_coloured_matrix, label):
+    plt.axis('off')
     plt.imshow(rgb_coloured_matrix, cmap="hot")
-    plt.colorbar(label="Texture", orientation="vertical")
+    plt.colorbar(label=label, orientation="vertical")
+    mng = plt.get_current_fig_manager()
+    mng.window.showMaximized()
     plt.show()

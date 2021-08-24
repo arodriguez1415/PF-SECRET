@@ -86,12 +86,15 @@ def show_texture_image_video(image_viewer):
 def compare_to_original(image_viewer):
     project_mastermind = Project_mastermind.get_instance()
     original_image = project_mastermind.get_original_image()
+    original_dim = original_image.ndim
     image_viewer_wrapper = image_viewer.actual_image_wrapper
     actual_image_array = image_viewer_wrapper.image_array
+    actual_dim = actual_image_array.ndim
     images_array_list = [original_image, actual_image_array]
     title = string_constants.ORIGINAL_VS_ACTUAL_TITLE
     sub_titles_list = [string_constants.ORIGINAL_TITLE, string_constants.ACTUAL_TITLE]
-    plot_comparator.plot_original_vs_actual(images_array_list, title, sub_titles_list)
+    with_heatmap = False if actual_dim == original_dim else True
+    plot_comparator.plot_original_vs_actual(images_array_list, title, sub_titles_list, with_heatmap)
 
 
 def compare_movement_vs_texture_image():
@@ -103,7 +106,8 @@ def compare_movement_vs_texture_image():
     images_array_list = [movement_image_array, texture_image_array]
     title = string_constants.MOVEMENT_VS_TEXTURE_IMAGE_TITLE
     sub_titles_list = [string_constants.MOVEMENT_TITLE, string_constants.TEXTURE_IMAGE_TITLE]
-    plot_comparator.plot_comparison(images_array_list, title, sub_titles_list)
+    labels = ["Movimiento", "Textura"]
+    plot_comparator.plot_comparison(images_array_list, title, sub_titles_list, labels)
 
 
 def compare_movement_vs_texture_video():
@@ -115,7 +119,8 @@ def compare_movement_vs_texture_video():
     images_array_list = [movement_image_array, texture_image_video_array]
     title = string_constants.MOVEMENT_VS_TEXTURE_VIDEO_TITLE
     sub_titles_list = [string_constants.MOVEMENT_TITLE, string_constants.TEXTURE_VIDEO_TITLE]
-    plot_comparator.plot_comparison(images_array_list, title, sub_titles_list)
+    labels = ["Movimiento", "Textura"]
+    plot_comparator.plot_comparison(images_array_list, title, sub_titles_list, labels)
 
 
 def compare_texture_image_vs_texture_video():
@@ -127,4 +132,5 @@ def compare_texture_image_vs_texture_video():
     images_array_list = [texture_image_array, texture_image_video_array]
     title = string_constants.TEXTURE_IMAGE_VS_TEXTURE_VIDEO
     sub_titles_list = [string_constants.TEXTURE_IMAGE_TITLE, string_constants.TEXTURE_VIDEO_TITLE]
-    plot_comparator.plot_comparison(images_array_list, title, sub_titles_list)
+    labels = ["Textura", "Textura"]
+    plot_comparator.plot_comparison(images_array_list, title, sub_titles_list, labels)
