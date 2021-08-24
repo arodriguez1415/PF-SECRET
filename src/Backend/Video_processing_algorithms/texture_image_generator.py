@@ -4,6 +4,8 @@ from PIL import Image
 import cv2
 import numpy as np
 
+import matplotlib.pyplot as plt
+
 from src.Backend.Image_processing_algorithms.Archive_manipulation.dataframe_file_manipulation import \
     create_dataframe_from_descriptors
 from src.Backend.Image_processing_algorithms.Operations.common_operations import bgr_to_rgb, resize_image
@@ -28,6 +30,18 @@ def classify_single_image(image_array, clusters_quantity=20):
     return uncoloured_classified_image, coloured_classified_image
 
 
+def plot_figure_heatmap(image, title, label, save_path):
+    fig = plt.figure(figsize=(9.75, 3))
+    fig.suptitle(title, fontsize=20, fontweight='bold')
+
+    plt.axis('off')
+    plt.imshow(image, cmap="hot")
+    plt.colorbar(label=label, orientation="vertical")
+
+    fig.set_size_inches(8, 6)
+    plt.savefig(save_path, dpi=500)
+
+
 def create_multiple_texture_images(threshold, clusters_quantity, source_directory):
     images_list_of_lists = get_images_from_directories(source_directory)
     texture_images_array_list = []
@@ -40,7 +54,7 @@ def create_multiple_texture_images(threshold, clusters_quantity, source_director
         save_directory = configuration_constants.TEXTURE_HEATMAP_IMAGES_DIRECTORY
         save_texture_path = video_generator.set_save_name(images_list_of_lists[i][0], save_directory,
                                                           extension=".png")
-        save_texture_image(coloured_classified_image, save_texture_path)
+        plot_figure_heatmap(coloured_classified_image, "Mapa de textura", "Textura", save_texture_path)
         texture_images_path.append(save_texture_path)
     return texture_images_array_list, texture_images_path
 

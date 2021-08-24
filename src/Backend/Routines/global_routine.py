@@ -215,6 +215,7 @@ def movement_and_texture_comparison_sub_routine(source_directory, motion_images_
     images_list_of_lists = get_images_from_directories(source_directory)
     save_directory = configuration_constants.MOVEMENT_VS_TEXTURE_COMPARISON_DIRECTORY
     generated_plot_files_list = []
+    labels = ["Movimiento", "Textura"]
 
     for i in range(0, len(motion_images_array_list)):
         movement_image_array = motion_images_array_list[i]
@@ -223,7 +224,7 @@ def movement_and_texture_comparison_sub_routine(source_directory, motion_images_
         images_array_list = [movement_image_array, texture_image_array]
         title = string_constants.MOVEMENT_VS_TEXTURE_VIDEO_TITLE
         sub_titles_list = [string_constants.MOVEMENT_TITLE, string_constants.TEXTURE_VIDEO_TITLE]
-        plot_comparator.plot_comparison(images_array_list, title, sub_titles_list, save_path=save_comparison_path)
+        plot_comparator.plot_comparison(images_array_list, title, sub_titles_list, labels, save_path=save_comparison_path)
         generated_plot_files_list.append(save_comparison_path)
     return generated_plot_files_list
 

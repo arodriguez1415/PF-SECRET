@@ -1,7 +1,7 @@
 import os
 import shutil
 
-from PIL import Image
+import matplotlib.pyplot as plt
 
 import numpy as np
 import cv2
@@ -16,6 +16,18 @@ from src.Constants import properties_constants as ps
 from src.Frontend.Utils import progress_bar
 
 
+def plot_figure_heatmap(image, title, label, save_path):
+    fig = plt.figure(figsize=(9.75, 3))
+    fig.suptitle(title, fontsize=20, fontweight='bold')
+
+    plt.axis('off')
+    plt.imshow(image, cmap="hot")
+    plt.colorbar(label=label, orientation="vertical")
+
+    fig.set_size_inches(8, 6)
+    plt.savefig(save_path, dpi=500)
+
+
 def create_multiple_motion_images(threshold, source_directory):
     images_list_of_lists = get_images_from_directories(source_directory)
     coloured_motion_images_list = []
@@ -25,9 +37,8 @@ def create_multiple_motion_images(threshold, source_directory):
                                                                                             images_list_of_lists[i])
         coloured_motion_images_list.append(c_motion_image)
         save_directory = configuration_constants.MOVEMENT_HEATMAP_IMAGES_DIRECTORY
-        save_motion_path = video_generator.set_save_name(images_list_of_lists[i][0], save_directory,
-                                                         extension=".png")
-        save_motion_image(c_motion_image, save_motion_path)
+        save_motion_path = video_generator.set_save_name(images_list_of_lists[i][0], save_directory, extension=".png")
+        plot_figure_heatmap(c_motion_image, "Mapa de movimiento", "Movimiento", save_motion_path)
         coloured_motion_images_save_path_list.append(save_motion_path)
     return coloured_motion_images_list, coloured_motion_images_save_path_list
 
@@ -100,11 +111,6 @@ def create_directory_if_not_exists(directory_path):
         os.mkdir(directory_path)
 
 
-def save_motion_image(coloured_motion_image_array, save_motion_path):
-    im = Image.fromarray(coloured_motion_image_array)
-    im.save(save_motion_path)
-
-
 def get_grayscale(frame_path):
     frame = cv2.imread(os.path.join(frame_path))
     rows, cols, dimensions = frame.shape
@@ -150,8 +156,6 @@ def get_frame_motion(current_frame, previous_frame, accumulated_motion):
 def normalize_values(accumulated_motion):
     max_value = np.max(accumulated_motion)
     rows, cols = accumulated_motion.shape
-    if max_value == 0:
-        max_value = 1
     for row in range(rows):
         for col in range(cols):
             accumulated_motion[row][col] = accumulated_motion[row][col] * 255 / max_value
