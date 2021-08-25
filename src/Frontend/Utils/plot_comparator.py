@@ -128,7 +128,7 @@ def plot_four_comparison(images_array_list, weight_image_array_list, title, sub_
 
     grid = ImageGrid(fig, 111,
                      nrows_ncols=(2, 2),
-                     axes_pad=1.1,
+                     axes_pad=1,
                      share_all=True,
                      cbar_location="right",
                      cbar_mode="each",

@@ -357,8 +357,8 @@ def analyze_texture_and_movement_metrics(main_window):
     avg_results = []
     avg_results.append("Promedio de valor de pixel escala grises: " + str(round(avg_values_array[0], 2)))
     avg_results.append("Promedio de valor de pixel de movimiento: " + str(round(avg_values_array[1], 2)))
-    avg_results.append("Promedio de valor de pixel de textura de imagen: " + str(round(avg_values_array[2], 2)))
-    avg_results.append("Promedio de valor de pixel de textura de video: " + str(round(avg_values_array[3], 2)))
+    avg_results.append("Promedio de valor de pixel de textura-imagen: " + str(round(avg_values_array[2], 2)))
+    avg_results.append("Promedio de valor de pixel de textura-video: " + str(round(avg_values_array[3], 2)))
 
     title = FOUR_GRID_COMPARISON
     sub_titles = [ORIGINAL_TITLE, MOVEMENT_TITLE, TEXTURE_IMAGE_TITLE, TEXTURE_VIDEO_TITLE]
