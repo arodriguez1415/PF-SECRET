@@ -17,7 +17,6 @@ def plot_original_vs_actual(images, title, sub_titles, with_heatmap=False):
 
         mng = plt.get_current_fig_manager()
         mng.window.showMaximized()
-        plt.show()
 
 
 def plot_original_vs_actual_with_heatmap(images, title, sub_titles):
@@ -83,9 +82,46 @@ def plot_comparison(images, title, sub_titles, labels, save_path=None):
         plt.show()
 
 
-def plot_four_comparison(images, movement_weight_array, title, sub_titles, avg_results):
+def plot_coloured_image(matrix_values, rgb_coloured_matrix, title, label, save_path=None):
+    fig = plt.figure(figsize=(9.75, 3))
+    colorbar_ticks = 6
+    fig.suptitle(title, fontsize=20, fontweight='bold')
+
+    grid = ImageGrid(fig, 111,
+                     nrows_ncols=(1, 1),
+                     axes_pad=1,
+                     share_all=True,
+                     cbar_location="right",
+                     cbar_mode="each",
+                     cbar_size="7%",
+                     cbar_pad=0.15,
+                     )
+
+    max_movement_steps = matrix_values.max()
+    colorbar_custom_ticks = [0]
+    for j in reversed(range(1, colorbar_ticks)):
+        tick = int(max_movement_steps / j)
+        colorbar_custom_ticks.append(tick)
+
+    im = grid[0].imshow(rgb_coloured_matrix, cmap=plt.get_cmap("hot"))
+    grid[0].axis('off')
+    grid.cbar_axes[0].colorbar(im)
+    cax = grid.cbar_axes[0]
+    axis = cax.axis[cax.orientation]
+    axis.label.set_text(label)
+    grid.cbar_axes[0].set_yticklabels(colorbar_custom_ticks)
+
+    if save_path is not None:
+        fig.set_size_inches(8, 6)
+        plt.savefig(save_path, dpi=500)
+    else:
+        mng = plt.get_current_fig_manager()
+        mng.window.showMaximized()
+        plt.show()
+
+
+def plot_four_comparison(images_array_list, weight_image_array_list, title, sub_titles, avg_results):
     fig = plt.figure(figsize=(16, 8))
-    movement_heatmap_index = 1
     colorbar_ticks = 6
     fig.suptitle(title, fontsize=20, fontweight='bold')
     labels = ["", "Movimiento", "Textura", "Textura"]
@@ -100,16 +136,19 @@ def plot_four_comparison(images, movement_weight_array, title, sub_titles, avg_r
                      cbar_pad=0.15,
                      )
 
-    max_movement_steps = movement_weight_array.max()
-    colorbar_custom_ticks = [0]
+    colorbar_custom_ticks_lists = []
 
-    for i in reversed(range(1, colorbar_ticks)):
-        tick = int(max_movement_steps / i)
-        colorbar_custom_ticks.append(tick)
+    for i in range(0, len(weight_image_array_list)):
+        max_movement_steps = weight_image_array_list[i].max()
+        colorbar_custom_ticks = [0]
+        for j in reversed(range(1, colorbar_ticks)):
+            tick = int(max_movement_steps / j)
+            colorbar_custom_ticks.append(tick)
+        colorbar_custom_ticks_lists.append(colorbar_custom_ticks)
 
     color_map_array = [plt.get_cmap("gray"), plt.get_cmap("hot"), plt.get_cmap("hot"), plt.get_cmap("hot")]
-    for i in range(0, len(images)):
-        im = grid[i].imshow(images[i], cmap=color_map_array[i])
+    for i in range(0, len(images_array_list)):
+        im = grid[i].imshow(images_array_list[i], cmap=color_map_array[i])
         grid[i].set_title(sub_titles[i], fontsize=15)
         grid[i].axis('off')
         grid.cbar_axes[i].colorbar(im)
@@ -117,8 +156,7 @@ def plot_four_comparison(images, movement_weight_array, title, sub_titles, avg_r
         axis = cax.axis[cax.orientation]
         axis.label.set_text(labels[i])
         grid[i].text(0.5, -0.1, avg_results[i], size=12, ha="center", transform=grid[i].transAxes)
-        if i == movement_heatmap_index:
-            grid.cbar_axes[i].set_yticklabels(colorbar_custom_ticks)
+        grid.cbar_axes[i].set_yticklabels(colorbar_custom_ticks_lists[i])
 
     mng = plt.get_current_fig_manager()
     mng.window.showMaximized()

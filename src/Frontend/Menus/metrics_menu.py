@@ -288,6 +288,7 @@ def generate_image_texture_view(main_window):
     uncoloured_classified_image, coloured_classified_image = classify_single_image(current_image_array,
                                                                                    clusters_quantity=clusters_quantity)
     message_box.done(0)
+    uncoloured_classified_image = normalize_to_range(uncoloured_classified_image, max_value=clusters_quantity)
     texture_image_wrapper = Image_wrapper(uncoloured_classified_image)
     texture_heat_map_image_wrapper = Image_wrapper(coloured_classified_image)
     project_mastermind.set_texture_image(texture_image_wrapper)
@@ -303,6 +304,7 @@ def generate_video_texture_view(main_window):
     uncoloured_classified_image, coloured_classified_image = create_texture_image_from_video(
         clusters_quantity=clusters_quantity,
         threshold=threshold)
+    uncoloured_classified_image = normalize_to_range(uncoloured_classified_image, max_value=clusters_quantity)
     texture_image_wrapper = Image_wrapper(uncoloured_classified_image)
     texture_heat_map_image_wrapper = Image_wrapper(coloured_classified_image)
     project_mastermind.set_texture_image_video(texture_image_wrapper)
@@ -330,7 +332,6 @@ def analyze_texture_and_movement_metrics(main_window):
         return
 
     original_array = project_mastermind.get_original_image()
-    movement_array = project_mastermind.get_normalized_movement_wrapper().image_array
     texture_image_array = project_mastermind.get_texture_image().image_array
     texture_video_array = project_mastermind.get_texture_image_video().image_array
 
@@ -350,22 +351,18 @@ def analyze_texture_and_movement_metrics(main_window):
         show_image_array = resize_image(show_images_array_list[i], width, height)
         weight_image_array = resize_image(weight_image_array_list[i], width, height)
         pixels_in_region = region.get_pixels_in_region(weight_image_array)
-        if i != movement_avg_index:
-            normalized_pixels_in_region = normalize_to_range(pixels_in_region, max_value=255)
-            avg_values_array.append(normalized_pixels_in_region.mean())
-        else:
-            avg_values_array.append(pixels_in_region.mean())
+        avg_values_array.append(pixels_in_region.mean())
         show_images_array_list[i] = QDrawable_label.draw_region_in_image(show_image_array, square_region)
 
     avg_results = []
     avg_results.append("Promedio de valor de pixel escala grises: " + str(round(avg_values_array[0], 2)))
     avg_results.append("Promedio de valor de pixel de movimiento: " + str(round(avg_values_array[1], 2)))
-    avg_results.append("Promedio de valor de pixel de textura de imagen: " + str(round(avg_values_array[2], 2)))
-    avg_results.append("Promedio de valor de pixel de textura de video: " + str(round(avg_values_array[3], 2)))
+    avg_results.append("Promedio de valor de pixel de textura-imagen: " + str(round(avg_values_array[2], 2)))
+    avg_results.append("Promedio de valor de pixel de textura-video: " + str(round(avg_values_array[3], 2)))
 
     title = FOUR_GRID_COMPARISON
     sub_titles = [ORIGINAL_TITLE, MOVEMENT_TITLE, TEXTURE_IMAGE_TITLE, TEXTURE_VIDEO_TITLE]
-    plot_four_comparison(show_images_array_list, movement_weight_array, title, sub_titles, avg_results)
+    plot_four_comparison(show_images_array_list, weight_image_array_list, title, sub_titles, avg_results)
     enable_button(main_window.analyze_movement_and_texture_button)
 
 

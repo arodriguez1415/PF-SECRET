@@ -1,6 +1,7 @@
 from src.Backend.Image_processing_algorithms.Archive_manipulation.properties_manipulation import \
     save_video_texture_params, save_image_texture_params, save_movement_params
-from src.Backend.Image_processing_algorithms.Operations.common_operations import show_coloured_image, resize_image
+from src.Backend.Image_processing_algorithms.Operations.common_operations import resize_image, \
+    normalize_to_range
 from src.Backend.Image_processing_algorithms.Texture import profile_texture
 from src.Backend.Video_processing_algorithms.movement_image_generator import create_motion_image
 from src.Backend.Video_processing_algorithms.texture_image_generator import create_texture_image_from_video, \
@@ -12,6 +13,7 @@ from src.Constants import string_constants, configuration_constants
 from src.Frontend.Utils import progress_bar
 from src.Frontend.Utils.button_controller import disable_button, enable_button
 from src.Frontend.Utils.message import show_wait_message, show_error_message
+from src.Frontend.Utils.plot_comparator import plot_coloured_image
 from src.Frontend.Utils.viewer_buttons import enable_view_button
 
 import matplotlib.pyplot as plt
@@ -25,7 +27,7 @@ def configure_texture_menu_connections(main_window):
     main_window.texture_and_movement_generate_texture_heat_map_menu_option.triggered.connect(
         lambda: texture_classification_options(main_window))
 
-    main_window.generate_heat_map_button.clicked.connect(lambda: generate_heat_map(main_window))
+    main_window.generate_heat_map_button.clicked.connect(lambda: generate_movement_heat_map(main_window))
     main_window.texture_profile_apply_button.clicked.connect(lambda: generate_profile_texture(main_window))
     main_window.texture_classification_image_button.clicked.connect(lambda: classify_image_texture(main_window))
     main_window.texture_classification_video_button.clicked.connect(lambda: classify_video_texture(main_window))
@@ -59,7 +61,7 @@ def texture_classification_options(main_window):
     return
 
 
-def generate_heat_map(main_window):
+def generate_movement_heat_map(main_window):
     disable_button(main_window.generate_heat_map_button)
     project_mastermind = Project_mastermind.get_instance()
 
@@ -76,8 +78,9 @@ def generate_heat_map(main_window):
     project_mastermind.set_normalized_movement_image(movement_normalized_image_wrapper)
     project_mastermind.set_movement_image(movement_image_wrapper)
     project_mastermind.set_movement_heat_map_image(movement_heat_map_image_wrapper)
-    plot_image_with_heatbar(string_constants.MOVEMENT_VIEW_TITLE)
-    show_coloured_image(coloured_motion_image_array, label="Movimiento")
+    plot_coloured_image(uncolored_motion_image_array, coloured_motion_image_array,
+                        title=string_constants.GENERATE_MOTION_HEAT_MAP_TITLE,
+                        label=string_constants.CBAR_MOVEMENT_LABEL)
     main_window.image_viewer.set_screen_image(movement_heat_map_image_wrapper)
     progress_bar.force_to_close()
     save_movement_params(main_window)
@@ -125,8 +128,10 @@ def classify_image_texture(main_window):
     uncoloured_classified_image, coloured_classified_image = classify_single_image(current_image_array,
                                                                                    clusters_quantity=clusters_quantity)
     message_box.done(0)
-    plot_image_with_heatbar(string_constants.TEXTURE_IMAGE_VIEW_TITLE)
-    show_coloured_image(coloured_classified_image, label="Textura")
+    uncoloured_classified_image = normalize_to_range(uncoloured_classified_image, max_value=clusters_quantity)
+    plot_coloured_image(uncoloured_classified_image, coloured_classified_image,
+                        title=string_constants.GENERATE_TEXTURE_HEAT_MAP_TITLE,
+                        label=string_constants.CBAR_TEXTURE_LABEL)
     texture_image_wrapper = Image_wrapper(uncoloured_classified_image)
     texture_heat_map_image_wrapper = Image_wrapper(coloured_classified_image)
     project_mastermind.set_texture_image(texture_image_wrapper)
@@ -152,8 +157,10 @@ def classify_video_texture(main_window):
     uncoloured_classified_image, coloured_classified_image = create_texture_image_from_video(
         clusters_quantity=clusters_quantity,
         threshold=threshold)
-    plot_image_with_heatbar(string_constants.TEXTURE_VIDEO_VIEW_TITLE)
-    show_coloured_image(coloured_classified_image, label="Textura")
+    uncoloured_classified_image = normalize_to_range(uncoloured_classified_image, max_value=clusters_quantity)
+    plot_coloured_image(uncoloured_classified_image, coloured_classified_image,
+                        title=string_constants.GENERATE_TEXTURE_HEAT_MAP_TITLE,
+                        label=string_constants.CBAR_TEXTURE_LABEL)
     texture_image_wrapper = Image_wrapper(uncoloured_classified_image)
     texture_heat_map_image_wrapper = Image_wrapper(coloured_classified_image)
     project_mastermind.set_texture_image_video(texture_image_wrapper)
@@ -163,9 +170,3 @@ def classify_video_texture(main_window):
     save_video_texture_params(main_window)
     enable_button(main_window.texture_classification_video_button)
     enable_view_button(string_constants.TEXTURE_VIDEO_VIEW)
-
-
-def plot_image_with_heatbar(string):
-    fig, ax = plt.subplots(nrows=1, ncols=1)
-    fig.suptitle(string, fontsize=20, fontweight='bold')
-    plt.subplots_adjust(left=0.3, right=0.78)
