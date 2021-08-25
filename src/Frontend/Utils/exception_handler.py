@@ -108,4 +108,5 @@ def eliminate_remaining_plots():
 def close_any_wait_message():
     project_mastermind = Project_mastermind.get_instance()
     wait_message = project_mastermind.get_wait_message()
-    wait_message.done(0)
+    if wait_message is not None:
+        wait_message.done(0)
