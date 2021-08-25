@@ -93,7 +93,8 @@ def compare_to_original(image_viewer):
     images_array_list = [original_image, actual_image_array]
     title = string_constants.ORIGINAL_VS_ACTUAL_TITLE
     sub_titles_list = [string_constants.ORIGINAL_TITLE, string_constants.ACTUAL_TITLE]
-    with_heatmap = False if actual_dim == original_dim else True
+    # with_heatmap = False if actual_dim == original_dim else True
+    with_heatmap = False
     plot_comparator.plot_original_vs_actual(images_array_list, title, sub_titles_list, with_heatmap)
 
 

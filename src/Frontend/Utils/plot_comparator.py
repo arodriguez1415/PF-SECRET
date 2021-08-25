@@ -17,7 +17,6 @@ def plot_original_vs_actual(images, title, sub_titles, with_heatmap=False):
 
         mng = plt.get_current_fig_manager()
         mng.window.showMaximized()
-        plt.show()
 
 
 def plot_original_vs_actual_with_heatmap(images, title, sub_titles):
@@ -83,8 +82,8 @@ def plot_comparison(images, title, sub_titles, labels, save_path=None):
         plt.show()
 
 
-def show_coloured_image(matrix_values, rgb_coloured_matrix, title, label):
-    fig = plt.figure(figsize=(16, 8))
+def plot_coloured_image(matrix_values, rgb_coloured_matrix, title, label, save_path=None):
+    fig = plt.figure(figsize=(9.75, 3))
     colorbar_ticks = 6
     fig.suptitle(title, fontsize=20, fontweight='bold')
 
@@ -112,8 +111,13 @@ def show_coloured_image(matrix_values, rgb_coloured_matrix, title, label):
     axis.label.set_text(label)
     grid.cbar_axes[0].set_yticklabels(colorbar_custom_ticks)
 
-    mng = plt.get_current_fig_manager()
-    mng.window.showMaximized()
+    if save_path is not None:
+        fig.set_size_inches(8, 6)
+        plt.savefig(save_path, dpi=500)
+    else:
+        mng = plt.get_current_fig_manager()
+        mng.window.showMaximized()
+        plt.show()
 
 
 def plot_four_comparison(images_array_list, weight_image_array_list, title, sub_titles, avg_results):

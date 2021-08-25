@@ -1,9 +1,6 @@
 import os
-from PIL import Image
 import cv2
 import numpy as np
-import matplotlib.pyplot as plt
-
 
 from src.Backend.Image_processing_algorithms.Archive_manipulation.dataframe_file_manipulation import \
     create_dataframe_from_descriptors
@@ -12,7 +9,8 @@ from src.Backend.Image_processing_algorithms.Archive_manipulation.file_manipulat
 from src.Backend.Image_processing_algorithms.Archive_manipulation.image_file_manipulation import \
     get_images_from_directories
 from src.Backend.Image_processing_algorithms.Archive_manipulation.save_file_manipulation import set_save_name
-from src.Backend.Image_processing_algorithms.Operations.common_operations import bgr_to_rgb, resize_image
+from src.Backend.Image_processing_algorithms.Operations.common_operations import bgr_to_rgb, resize_image, \
+    normalize_to_range
 from src.Backend.Image_processing_algorithms.Texture.k_means import get_descriptors, k_means
 from src.Backend.Video_processing_algorithms import video_generator
 from src.Classes.Methods.Anisotropic_Filter import Anisotropic_Filter
@@ -20,6 +18,7 @@ from src.Classes.Project_mastermind import Project_mastermind
 from src.Constants import configuration_constants, algorithm_constants, string_constants
 from src.Constants import properties_constants as ps
 from src.Frontend.Utils import progress_bar
+from src.Frontend.Utils.plot_comparator import plot_coloured_image
 
 
 def classify_single_image(image_array, clusters_quantity=20):
@@ -31,18 +30,6 @@ def classify_single_image(image_array, clusters_quantity=20):
     uncoloured_classified_image = k_means(dataframe, clusters_quantity=clusters_quantity)
     coloured_classified_image = bgr_to_rgb(cv2.applyColorMap(uncoloured_classified_image, cv2.COLORMAP_HOT))
     return uncoloured_classified_image, coloured_classified_image
-
-
-def plot_figure_heatmap(image, title, label, save_path):
-    fig = plt.figure(figsize=(9.75, 3))
-    fig.suptitle(title, fontsize=20, fontweight='bold')
-
-    plt.axis('off')
-    plt.imshow(image, cmap="hot")
-    plt.colorbar(label=label, orientation="vertical")
-
-    fig.set_size_inches(8, 6)
-    plt.savefig(save_path, dpi=500)
 
 
 def create_multiple_texture_images(threshold, clusters_quantity, source_directory):
@@ -59,7 +46,10 @@ def create_multiple_texture_images(threshold, clusters_quantity, source_director
         save_directory = configuration_constants.TEXTURE_HEATMAP_IMAGES_DIRECTORY
         save_texture_path = set_save_name(algorithm_constants.TEXTURE_IMAGE, save_directory,
                                                           extension=".png")
-        plot_figure_heatmap(coloured_classified_image, "Mapa de textura", "Textura", save_texture_path)
+        uncoloured_classified_image = normalize_to_range(uncoloured_classified_image, max_value=clusters_quantity)
+        plot_coloured_image(uncoloured_classified_image, coloured_classified_image,
+                            string_constants.GENERATE_TEXTURE_HEAT_MAP_TITLE,
+                            string_constants.CBAR_TEXTURE_LABEL, save_texture_path)
         texture_images_path.append(save_texture_path)
     return texture_images_array_list, texture_images_path
 
@@ -167,8 +157,3 @@ def get_grayscale(image_path):
         for col in range(cols):
             grayscale_frame[row][col] = frame[row][col][0]
     return grayscale_frame
-
-
-def save_texture_image(texture_image_array, save_texture_path):
-    im = Image.fromarray(texture_image_array)
-    im.save(save_texture_path)

@@ -1,11 +1,9 @@
 import os
 
-from PIL import Image
 
 import numpy as np
 import cv2
 
-import matplotlib.pyplot as plt
 
 from src.Backend.Image_processing_algorithms.Archive_manipulation.file_manipulation import \
     create_directory_if_not_exists, remove_directory
@@ -20,18 +18,7 @@ from src.Constants import configuration_constants, string_constants
 from src.Constants import properties_constants as ps
 from src.Constants.algorithm_constants import MOVEMENT_IMAGE
 from src.Frontend.Utils import progress_bar
-
-
-def plot_figure_heatmap(image, title, label, save_path):
-    fig = plt.figure(figsize=(9.75, 3))
-    fig.suptitle(title, fontsize=20, fontweight='bold')
-
-    plt.axis('off')
-    plt.imshow(image, cmap="hot")
-    plt.colorbar(label=label, orientation="vertical")
-
-    fig.set_size_inches(8, 6)
-    plt.savefig(save_path, dpi=500)
+from src.Frontend.Utils.plot_comparator import plot_coloured_image
 
 
 def create_multiple_motion_images(threshold, source_directory):
@@ -46,7 +33,10 @@ def create_multiple_motion_images(threshold, source_directory):
         coloured_motion_images_list.append(c_motion_image)
         save_directory = configuration_constants.MOVEMENT_HEATMAP_IMAGES_DIRECTORY
         save_motion_path = set_save_name(MOVEMENT_IMAGE, save_directory, extension=".png")
-        plot_figure_heatmap(c_motion_image, "Mapa de movimiento", "Movimiento", save_motion_path)
+        plot_coloured_image(unc_motion_image, c_motion_image,
+                            string_constants.GENERATE_MOTION_HEAT_MAP_TITLE,
+                            string_constants.CBAR_MOVEMENT_LABEL,
+                            save_motion_path)
         coloured_motion_images_save_path_list.append(save_motion_path)
     return coloured_motion_images_list, coloured_motion_images_save_path_list
 

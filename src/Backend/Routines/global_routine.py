@@ -248,7 +248,7 @@ def texture_heat_map_sub_routine(source_directory):
 def movement_and_texture_comparison_sub_routine(motion_images_array_list, texture_images_array_list):
     save_directory = configuration_constants.MOVEMENT_VS_TEXTURE_COMPARISON_DIRECTORY
     generated_plot_files_list = []
-    labels = ["Movimiento", "Textura"]
+    labels = [string_constants.CBAR_MOVEMENT_LABEL, string_constants.CBAR_TEXTURE_LABEL]
 
     for i in range(0, len(motion_images_array_list)):
         movement_image_array = motion_images_array_list[i]
