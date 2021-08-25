@@ -215,4 +215,6 @@ TEXTURE_IMAGE_VS_TEXTURE_VIDEO = "Textura-Imagen vs Textura-Video"
 
 FOUR_GRID_COMPARISON = "Valor de la región en las 4 vistas"
 
+CBAR_MOVEMENT_LABEL = "Movimiento"
+CBAR_TEXTURE_LABEL = "Textura"
 

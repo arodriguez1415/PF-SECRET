@@ -68,12 +68,3 @@ def resize_image(image_array, width, height):
     new_dimension = (width, height)
     resized_image = cv2.resize(image_array.astype("uint8"), new_dimension)
     return resized_image
-
-
-def show_coloured_image(rgb_coloured_matrix, label):
-    plt.axis('off')
-    plt.imshow(rgb_coloured_matrix, cmap="hot")
-    plt.colorbar(label=label, orientation="vertical")
-    mng = plt.get_current_fig_manager()
-    mng.window.showMaximized()
-    plt.show()
