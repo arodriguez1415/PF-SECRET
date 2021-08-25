@@ -1,6 +1,7 @@
 from src.Backend.Image_processing_algorithms.Archive_manipulation.properties_manipulation import \
     save_video_texture_params, save_image_texture_params, save_movement_params
-from src.Backend.Image_processing_algorithms.Operations.common_operations import show_coloured_image, resize_image
+from src.Backend.Image_processing_algorithms.Operations.common_operations import show_coloured_image, resize_image, \
+    normalize_to_range
 from src.Backend.Image_processing_algorithms.Texture import profile_texture
 from src.Backend.Video_processing_algorithms.movement_image_generator import create_motion_image
 from src.Backend.Video_processing_algorithms.texture_image_generator import create_texture_image_from_video, \
@@ -127,6 +128,7 @@ def classify_image_texture(main_window):
     message_box.done(0)
     plot_image_with_heatbar(string_constants.TEXTURE_IMAGE_VIEW_TITLE)
     show_coloured_image(coloured_classified_image, label="Textura")
+    uncoloured_classified_image = normalize_to_range(uncoloured_classified_image, max_value=clusters_quantity)
     texture_image_wrapper = Image_wrapper(uncoloured_classified_image)
     texture_heat_map_image_wrapper = Image_wrapper(coloured_classified_image)
     project_mastermind.set_texture_image(texture_image_wrapper)
@@ -154,6 +156,7 @@ def classify_video_texture(main_window):
         threshold=threshold)
     plot_image_with_heatbar(string_constants.TEXTURE_VIDEO_VIEW_TITLE)
     show_coloured_image(coloured_classified_image, label="Textura")
+    uncoloured_classified_image = normalize_to_range(uncoloured_classified_image, max_value=clusters_quantity)
     texture_image_wrapper = Image_wrapper(uncoloured_classified_image)
     texture_heat_map_image_wrapper = Image_wrapper(coloured_classified_image)
     project_mastermind.set_texture_image_video(texture_image_wrapper)
