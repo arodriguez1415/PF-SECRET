@@ -62,40 +62,61 @@ def enable_related_button(view_button, comparison_view_button):
 def show_main_image(image_viewer):
     project_mastermind = Project_mastermind.get_instance()
     original_image_wrapper = project_mastermind.get_last_image_wrapper()
+    project_mastermind.set_current_view(string_constants.MAIN_VIEW)
     image_viewer.set_screen_image(original_image_wrapper)
 
 
 def show_movement_image(image_viewer):
     project_mastermind = Project_mastermind.get_instance()
     movement_heat_map_image_wrapper = project_mastermind.get_movement_heat_map_image()
+    project_mastermind.set_current_view(string_constants.MOVEMENT_VIEW)
     image_viewer.set_screen_image(movement_heat_map_image_wrapper)
 
 
 def show_texture_image(image_viewer):
     project_mastermind = Project_mastermind.get_instance()
     texture_heat_map_image_wrapper = project_mastermind.get_texture_heat_map_image()
+    project_mastermind.set_current_view(string_constants.TEXTURE_IMAGE_VIEW)
     image_viewer.set_screen_image(texture_heat_map_image_wrapper)
 
 
 def show_texture_image_video(image_viewer):
     project_mastermind = Project_mastermind.get_instance()
     texture_heat_map_image_video_wrapper = project_mastermind.get_texture_heat_map_image_video()
+    project_mastermind.set_current_view(string_constants.TEXTURE_VIDEO_VIEW)
     image_viewer.set_screen_image(texture_heat_map_image_video_wrapper)
 
 
 def compare_to_original(image_viewer):
     project_mastermind = Project_mastermind.get_instance()
     original_image = project_mastermind.get_original_image()
-    original_dim = original_image.ndim
     image_viewer_wrapper = image_viewer.actual_image_wrapper
     actual_image_array = image_viewer_wrapper.image_array
-    actual_dim = actual_image_array.ndim
     images_array_list = [original_image, actual_image_array]
+    view_name = project_mastermind.get_current_view()
+    weight_image_array, cbar_flag = get_weight_image(view_name)
     title = string_constants.ORIGINAL_VS_ACTUAL_TITLE
     sub_titles_list = [string_constants.ORIGINAL_TITLE, string_constants.ACTUAL_TITLE]
-    # with_heatmap = False if actual_dim == original_dim else True
-    with_heatmap = False
-    plot_comparator.plot_original_vs_actual(images_array_list, title, sub_titles_list, with_heatmap)
+    plot_comparator.plot_original_vs_actual(images_array_list, weight_image_array, title,
+                                            sub_titles_list, cbar_flag)
+
+
+def get_weight_image(view_name):
+    project_mastermind = Project_mastermind.get_instance()
+    if view_name == string_constants.MAIN_VIEW:
+        cbar_flag = False
+        return project_mastermind.get_last_image(), cbar_flag
+    elif view_name == string_constants.MOVEMENT_VIEW:
+        cbar_flag = True
+        return project_mastermind.movement_image_wrapper().image_array, cbar_flag
+    elif view_name == string_constants.TEXTURE_IMAGE_VIEW:
+        cbar_flag = True
+        return project_mastermind.texture_image_wrapper().image_array, cbar_flag
+    elif view_name == string_constants.TEXTURE_VIDEO_VIEW:
+        cbar_flag = True
+        return project_mastermind.texture_image_video_wrapper().image_array, cbar_flag
+    else:
+        raise string_constants.VIEW_NOT_FOUND
 
 
 def compare_movement_vs_texture_image():

@@ -10,7 +10,7 @@ from src.Backend.Image_processing_algorithms.Archive_manipulation.image_file_man
     get_images_from_directories
 from src.Backend.Image_processing_algorithms.Archive_manipulation.save_file_manipulation import set_save_name
 from src.Backend.Image_processing_algorithms.Operations.common_operations import bgr_to_rgb, resize_image, \
-    normalize_to_range
+    normalize_to_range, rgb_to_gray
 from src.Backend.Image_processing_algorithms.Texture.k_means import get_descriptors, k_means
 from src.Backend.Video_processing_algorithms import video_generator
 from src.Classes.Methods.Anisotropic_Filter import Anisotropic_Filter
@@ -24,6 +24,7 @@ from src.Frontend.Utils.plot_comparator import plot_coloured_image
 def classify_single_image(image_array, clusters_quantity=20):
     descriptors_labels = [algorithm_constants.GLCM_MEAN, algorithm_constants.GLCM_ENTROPY,
                           algorithm_constants.GLCM_HOMOGENEITY, algorithm_constants.GLCM_DISSIMILARITY]
+    image_array = rgb_to_gray(image_array)
     list_descriptors_dict = []
     list_descriptors_dict = get_descriptors(list_descriptors_dict, image_array, descriptors_labels)
     dataframe = create_dataframe_from_descriptors(list_descriptors_dict)
@@ -119,13 +120,14 @@ def get_anisotropic_iterations():
 
 
 def get_texture_image(images_path_list, clusters_quantity, threshold):
-    height, width = get_grayscale(images_path_list[0]).shape
+    height, width = rgb_to_gray(cv2.imread(os.path.join(images_path_list[0]))).shape
     accumulated_texture = np.zeros((width, height), np.uint8)
     accumulated_texture = resize_image(accumulated_texture, width, height)
     descriptors_labels = [algorithm_constants.GLCM_MEAN, algorithm_constants.GLCM_ENTROPY,
                           algorithm_constants.GLCM_HOMOGENEITY, algorithm_constants.GLCM_DISSIMILARITY]
     for i in range(0, len(images_path_list)):
-        current_image_array = get_grayscale(images_path_list[i])
+        current_image_array = cv2.imread(os.path.join(images_path_list[i]))
+        current_image_array = rgb_to_gray(current_image_array)
         current_image_array = resize_image(current_image_array, width, height)
         ret, current_image_array = cv2.threshold(current_image_array, threshold, 255, cv2.THRESH_BINARY)
         accumulated_texture += current_image_array
@@ -147,13 +149,3 @@ def normalize_values(accumulated_motion):
         for col in range(cols):
             accumulated_motion[row][col] = accumulated_motion[row][col] * 255 / max_value
     return accumulated_motion
-
-
-def get_grayscale(image_path):
-    frame = cv2.imread(os.path.join(image_path))
-    rows, cols, dimensions = frame.shape
-    grayscale_frame = np.zeros((rows, cols), np.uint8)
-    for row in range(rows):
-        for col in range(cols):
-            grayscale_frame[row][col] = frame[row][col][0]
-    return grayscale_frame

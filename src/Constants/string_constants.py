@@ -64,6 +64,8 @@ NO_PROCESS_USED = "Para añadir un proceso de umbralización adaptativa, mueva l
 BOTH_SAVE_OPTIONS_SELECTED_EXCEPTION = "No pueden estar ambas opciones seleccionadas"
 NO_SAVE_OPTIONS_SELECTED_EXCEPTION = "No se seleccionó ninguna opción de guardado"
 
+VIEW_NOT_FOUND = "Vista no encontrada"
+
 # Wait message
 
 WAIT_SAVING_FILES_TITLE = "Guardando archivos"
