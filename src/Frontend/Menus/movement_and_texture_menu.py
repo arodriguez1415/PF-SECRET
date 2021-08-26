@@ -82,6 +82,7 @@ def generate_movement_heat_map(main_window):
                         title=string_constants.GENERATE_MOTION_HEAT_MAP_TITLE,
                         label=string_constants.CBAR_MOVEMENT_LABEL)
     main_window.image_viewer.set_screen_image(movement_heat_map_image_wrapper)
+    project_mastermind.set_current_view(string_constants.MOVEMENT_VIEW)
     progress_bar.force_to_close()
     save_movement_params(main_window)
     enable_button(main_window.generate_heat_map_button)
@@ -137,6 +138,7 @@ def classify_image_texture(main_window):
     project_mastermind.set_texture_image(texture_image_wrapper)
     project_mastermind.set_texture_heat_map_image(texture_heat_map_image_wrapper)
     main_window.image_viewer.set_screen_image(texture_heat_map_image_wrapper)
+    project_mastermind.set_current_view(string_constants.TEXTURE_IMAGE_VIEW)
     progress_bar.force_to_close()
     save_image_texture_params(main_window)
     enable_button(main_window.texture_classification_image_button)
@@ -166,6 +168,7 @@ def classify_video_texture(main_window):
     project_mastermind.set_texture_image_video(texture_image_wrapper)
     project_mastermind.set_texture_heat_map_image_video(texture_heat_map_image_wrapper)
     main_window.image_viewer.set_screen_image(texture_heat_map_image_wrapper)
+    project_mastermind.set_current_view(string_constants.TEXTURE_VIDEO_VIEW)
     progress_bar.force_to_close()
     save_video_texture_params(main_window)
     enable_button(main_window.texture_classification_video_button)

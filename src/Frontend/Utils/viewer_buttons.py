@@ -1,6 +1,8 @@
 import src.Frontend.Utils.plot_comparator as plot_comparator
+from src.Backend.Image_processing_algorithms.Operations.common_operations import resize_image
 
 from src.Constants import string_constants
+from src.Constants.configuration_constants import IMAGE_VIEWER_WIDTH, IMAGE_VIEWER_HEIGHT
 from src.Frontend.Utils.button_controller import disable_button, enable_button, is_enabled
 from src.Classes.Project_mastermind import Project_mastermind
 
@@ -92,7 +94,9 @@ def compare_to_original(image_viewer):
     original_image = project_mastermind.get_original_image()
     image_viewer_wrapper = image_viewer.actual_image_wrapper
     actual_image_array = image_viewer_wrapper.image_array
-    images_array_list = [original_image, actual_image_array]
+    height = IMAGE_VIEWER_HEIGHT
+    width = IMAGE_VIEWER_HEIGHT
+    images_array_list = [resize_image(original_image, width, height), resize_image(actual_image_array, width, height)]
     view_name = project_mastermind.get_current_view()
     weight_image_array, cbar_flag = get_weight_image(view_name)
     title = string_constants.ORIGINAL_VS_ACTUAL_TITLE
@@ -108,13 +112,13 @@ def get_weight_image(view_name):
         return project_mastermind.get_last_image(), cbar_flag
     elif view_name == string_constants.MOVEMENT_VIEW:
         cbar_flag = True
-        return project_mastermind.movement_image_wrapper().image_array, cbar_flag
+        return project_mastermind.get_movement_image().image_array, cbar_flag
     elif view_name == string_constants.TEXTURE_IMAGE_VIEW:
         cbar_flag = True
-        return project_mastermind.texture_image_wrapper().image_array, cbar_flag
+        return project_mastermind.get_texture_image().image_array, cbar_flag
     elif view_name == string_constants.TEXTURE_VIDEO_VIEW:
         cbar_flag = True
-        return project_mastermind.texture_image_video_wrapper().image_array, cbar_flag
+        return project_mastermind.get_texture_image_video().image_array, cbar_flag
     else:
         raise string_constants.VIEW_NOT_FOUND
 
