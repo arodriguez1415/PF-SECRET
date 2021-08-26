@@ -22,6 +22,9 @@ class Project_mastermind:
     is_global_progress_bar_active_flag = None
     cancel_progress_bar_flag = False
 
+    # Current view
+    current_view = None
+
     # Application attributes
     properties_dictionary = None
     main_window = None
@@ -169,6 +172,9 @@ class Project_mastermind:
     def get_properties_dictionary(self):
         return self.properties_dictionary
 
+    def get_current_view(self):
+        return self.current_view
+
     def set_wait_message(self, wait_message):
         self.wait_message = wait_message
 
@@ -228,6 +234,9 @@ class Project_mastermind:
 
     def set_texture_image_video(self, texture_image_video):
         self.texture_image_video_wrapper = texture_image_video
+
+    def set_current_view(self, view_name):
+        self.current_view = view_name
 
     def reload_properties(self, new_properties_dictionary):
         self.properties_dictionary = new_properties_dictionary

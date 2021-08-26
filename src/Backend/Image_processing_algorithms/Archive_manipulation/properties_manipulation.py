@@ -231,9 +231,9 @@ def save_image_texture_params(main_window):
 def save_video_texture_params(main_window):
     project_mastermind = Project_mastermind.get_instance()
     prop_dict = project_mastermind.get_properties_dictionary()
-
-    prop_dict[ps.TEXTURE_VIDEO_THRESHOLD] = main_window.texture_classification_video_clusters_input.value()
-    prop_dict[ps.TEXTURE_VIDEO_CLUSTERS] = main_window.texture_classification_video_threshold_input.value()
+    
+    prop_dict[ps.TEXTURE_VIDEO_THRESHOLD] = main_window.texture_classification_video_threshold_input.value()
+    prop_dict[ps.TEXTURE_VIDEO_CLUSTERS] = main_window.texture_classification_video_clusters_input.value()
 
     project_mastermind.reload_properties(prop_dict)
     save_properties(prop_dict)

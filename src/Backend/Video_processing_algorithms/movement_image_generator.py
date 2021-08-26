@@ -10,7 +10,7 @@ from src.Backend.Image_processing_algorithms.Archive_manipulation.file_manipulat
 from src.Backend.Image_processing_algorithms.Archive_manipulation.image_file_manipulation import \
     get_images_from_directories
 from src.Backend.Image_processing_algorithms.Archive_manipulation.save_file_manipulation import set_save_name
-from src.Backend.Image_processing_algorithms.Operations.common_operations import bgr_to_rgb, resize_image
+from src.Backend.Image_processing_algorithms.Operations.common_operations import bgr_to_rgb, resize_image, rgb_to_gray
 from src.Backend.Video_processing_algorithms import video_generator
 from src.Classes.Methods.Anisotropic_Filter import Anisotropic_Filter
 from src.Classes.Project_mastermind import Project_mastermind
@@ -106,25 +106,16 @@ def setup(images_path_for_motion_list):
     create_directory_if_not_exists(configuration_constants.MOVEMENT_HEATMAP_IMAGES_DIRECTORY)
 
 
-def get_grayscale(frame_path):
-    frame = cv2.imread(os.path.join(frame_path))
-    rows, cols, dimensions = frame.shape
-    grayscale_frame = np.zeros((rows, cols), np.uint8)
-    for row in range(rows):
-        for col in range(cols):
-            grayscale_frame[row][col] = frame[row][col][0]
-    return grayscale_frame
-
-
 def get_motion(frames_path_list, threshold):
-    previous_grayscale_frame = get_grayscale(frames_path_list[0])
+    previous_grayscale_frame = rgb_to_gray(cv2.imread(os.path.join(frames_path_list[0])))
     ret, previous_grayscale_frame = cv2.threshold(previous_grayscale_frame, threshold, 255, cv2.THRESH_BINARY)
     height, width = previous_grayscale_frame.shape
     accumulated_motion = np.zeros((width, height), np.uint8)
     accumulated_motion = resize_image(accumulated_motion, width, height)
     progress_bar.increment_value_progress_bar()
     for i in range(0, len(frames_path_list) - 1):
-        current_grayscale_frame = get_grayscale(frames_path_list[i])
+        current_grayscale_frame = cv2.imread(os.path.join(frames_path_list[i]))
+        current_grayscale_frame = rgb_to_gray(current_grayscale_frame)
         current_grayscale_frame = resize_image(current_grayscale_frame, width, height)
         previous_grayscale_frame = resize_image(previous_grayscale_frame, width, height)
         ret, current_grayscale_frame = cv2.threshold(current_grayscale_frame, threshold, 255, cv2.THRESH_BINARY)

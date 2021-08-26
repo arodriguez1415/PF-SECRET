@@ -6,6 +6,8 @@ from matplotlib import pyplot as plt
 from matplotlib.path import Path
 from scipy import ndimage as ndi
 
+from src.Backend.Image_processing_algorithms.Archive_manipulation.file_manipulation import \
+    create_directory_if_not_exists
 from src.Backend.Image_processing_algorithms.Border_detection import mgac_library_functions as mgac_library
 from src.Backend.Image_processing_algorithms.Operations import common_operations
 from src.Backend.Image_processing_algorithms.Operations.common_operations import rgb_to_gray
@@ -14,6 +16,7 @@ from src.Constants import string_constants
 
 
 def mgac(polygon_region, image, iterations, threshold, smoothing, ballon, alpha, sigma, show_process=False):
+    setup()
     borders = get_borders(polygon_region, image, iterations, threshold, smoothing, ballon, alpha, sigma, show_process)
     borders_image, mask_borders_image = get_mgac_image_and_mask(image, borders)
     return borders_image, mask_borders_image
@@ -35,6 +38,9 @@ def get_borders(polygon_region, image, iterations, threshold, smoothing, ballon,
                                                                  balloon=ballon)
     return borders
 
+
+def setup():
+    create_directory_if_not_exists(configuration_constants.GENERATED_IMAGES_DIR)
 
 def get_mgac_image_and_mask(image, borders):
     save_path_borders = configuration_constants.GENERATED_IMAGES_DIR + string_constants.MGAC_BORDER_IMAGE_SAVE_NAME

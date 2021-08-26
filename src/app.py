@@ -14,14 +14,17 @@ app = QtWidgets.QApplication(sys.argv)
 main_window_widget = QtWidgets.QMainWindow()
 main_window = Ui_MainWindow()
 main_window.setupUi(main_window_widget)
+main_window_widget.setFixedSize(main_window_widget.size())
 
 process_list_widget = QtWidgets.QDialog()
 process_list = Ui_ProcessList()
 process_list.setupUi(process_list_widget)
+process_list_widget.setFixedSize(process_list_widget.size())
 
 global_routine_params_widget = QtWidgets.QDialog()
 global_routine_params = Ui_GlobalRoutine()
 global_routine_params.setupUi(global_routine_params_widget)
+global_routine_params_widget.setFixedSize(global_routine_params_widget.size())
 
 main_window_functions.configure_windows(main_window, global_routine_params)
 process_list_functions.configure_window(process_list)

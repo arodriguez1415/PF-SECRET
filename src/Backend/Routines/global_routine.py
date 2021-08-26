@@ -218,8 +218,8 @@ def movement_and_texture_heat_map_sub_routine(sub_routines, source_directory):
         texture_images_array_list, texture_images_path_list = texture_heat_map_sub_routine(source_directory)
 
     if algorithm_constants.MOVEMENT_SUBROUTINE and algorithm_constants.TEXTURE_SUBROUTINE in sub_routines:
-        generated_plot_files_list = movement_and_texture_comparison_sub_routine(motion_images_array_list,
-                                                                                texture_images_array_list)
+        generated_plot_files_list = movement_and_texture_comparison_sub_routine(motion_images_path_list,
+                                                                                texture_images_path_list)
 
     generated_files.append(motion_images_path_list)
     generated_files.append(texture_images_path_list)
@@ -245,20 +245,20 @@ def texture_heat_map_sub_routine(source_directory):
     return texture_images_array_list, texture_images_path_list
 
 
-def movement_and_texture_comparison_sub_routine(motion_images_array_list, texture_images_array_list):
+def movement_and_texture_comparison_sub_routine(motion_images_path_list, texture_images_path_list):
     save_directory = configuration_constants.MOVEMENT_VS_TEXTURE_COMPARISON_DIRECTORY
     generated_plot_files_list = []
-    labels = [string_constants.CBAR_MOVEMENT_LABEL, string_constants.CBAR_TEXTURE_LABEL]
 
-    for i in range(0, len(motion_images_array_list)):
-        movement_image_array = motion_images_array_list[i]
-        texture_image_array = texture_images_array_list[i]
+    for i in range(0, len(motion_images_path_list)):
+        movement_image_array = Image.open(motion_images_path_list[i])
+        texture_image_array = Image.open(texture_images_path_list[i])
         save_comparison_path = set_save_name(algorithm_constants.MOVEMENT_AND_TEXTURE_COMPARISON_IMAGE,
                                              save_directory, extension=".png")
-        images_array_list = [movement_image_array, texture_image_array]
-        title = string_constants.MOVEMENT_VS_TEXTURE_VIDEO_TITLE
-        sub_titles_list = [string_constants.MOVEMENT_TITLE, string_constants.TEXTURE_VIDEO_TITLE]
-        plot_comparator.plot_comparison(images_array_list, title, sub_titles_list, labels, save_path=save_comparison_path)
+        image_size = movement_image_array.size
+        comparison_image = Image.new('RGB', (2 * image_size[0], image_size[1]), (250, 250, 250))
+        comparison_image.paste(movement_image_array, (0, 0))
+        comparison_image.paste(texture_image_array, (image_size[0], 0))
+        comparison_image.save(save_comparison_path, "PNG")
         generated_plot_files_list.append(save_comparison_path)
     return generated_plot_files_list
 

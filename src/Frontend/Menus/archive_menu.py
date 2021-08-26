@@ -45,6 +45,7 @@ def load_image(image_viewer, method, image_path=""):
     project_mastermind.set_original_images_from_dir_path(image_dir)
     project_mastermind.set_original_image_dir(image_dir)
     project_mastermind.add_image_process(image_wrapper)
+    project_mastermind.set_current_view(string_constants.MAIN_VIEW)
     set_image_on_screen(image_wrapper, image_viewer)
     enable_view_button(string_constants.MAIN_VIEW)
 

@@ -2,38 +2,32 @@ import matplotlib.pyplot as plt
 from mpl_toolkits.axes_grid1 import ImageGrid
 
 
-def plot_original_vs_actual(images, title, sub_titles, with_heatmap=False):
-    if with_heatmap:
-        plot_original_vs_actual_with_heatmap(images, title, sub_titles)
-    else:
-        fig, ax = plt.subplots(nrows=1, ncols=2)
-        fig.suptitle(title, fontsize=20, fontweight='bold')
-
-        for i in range(0, len(images)):
-            axis_to_plot = ax[i]
-            axis_to_plot.imshow(images[i], cmap="gray")
-            axis_to_plot.set_title(sub_titles[i], fontsize=15)
-            axis_to_plot.axis('off')
-
-        mng = plt.get_current_fig_manager()
-        mng.window.showMaximized()
-
-
-def plot_original_vs_actual_with_heatmap(images, title, sub_titles):
+def plot_original_vs_actual(images, weight_image_array, title, sub_titles, cbar_flag):
     fig = plt.figure(figsize=(9.75, 3))
-    cmap = ["gray", "hot"]
+    colorbar_ticks = 6
     fig.suptitle(title, fontsize=20, fontweight='bold')
     image = None
+    if cbar_flag:
+        cmap = ["gray", "hot"]
+    else:
+        cmap = ["gray", "gray"]
 
-    grid = ImageGrid(fig, 111,
-                     nrows_ncols=(1, 2),
-                     axes_pad=0.30,
-                     share_all=True,
-                     cbar_location="right",
-                     cbar_mode="single",
-                     cbar_size="7%",
-                     cbar_pad=0.15,
-                     )
+    if cbar_flag:
+        grid = ImageGrid(fig, 111,
+                         nrows_ncols=(1, 2),
+                         axes_pad=0.30,
+                         share_all=True,
+                         cbar_location="right",
+                         cbar_mode="edge",
+                         cbar_size="7%",
+                         cbar_pad=0.15,
+                         )
+    else:
+        grid = ImageGrid(fig, 111,
+                         nrows_ncols=(1, 2),
+                         axes_pad=0.30,
+                         share_all=True,
+                         )
 
     for i in range(0, len(images)):
         ax = grid[i]
@@ -42,8 +36,15 @@ def plot_original_vs_actual_with_heatmap(images, title, sub_titles):
         grid[i].axis('off')
 
     # Colorbar
-    grid[1].cax.colorbar(image)
-    grid[1].cax.toggle_label(True)
+    if cbar_flag:
+        grid[1].cax.colorbar(image)
+        grid[1].cax.toggle_label(True)
+        max_movement_steps = weight_image_array.max()
+        colorbar_custom_ticks = [0]
+        for j in reversed(range(1, colorbar_ticks)):
+            tick = int(max_movement_steps / j)
+            colorbar_custom_ticks.append(tick)
+        grid[1].cax.set_yticklabels(colorbar_custom_ticks)
 
     mng = plt.get_current_fig_manager()
     mng.window.showMaximized()
