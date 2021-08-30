@@ -160,12 +160,13 @@ ANALYZE_MOVEMENT_AND_TEXTURE_ALGORITHM_HELP = "Una vez que haya generado las vis
 
 GENERATE_METRICS_LOAD_HELP = "Cargue la ruta al archivo que contiene la máscara de la imagen."
 GENERATE_METRICS_ALGORITHM_HELP = "Una vez cargada la ruta del archivo que contiene a la máscara y seleccionada las métricas " \
-                                  "a calcular, haz click en Generar métricas para obtener los gráficos."
+                                  "a calcular, haz click en Generar métricas para obtener los gráficos en el tiempo de cada una."
 
 GENERATE_MULTIPLE_CELLS_METRICS_ALGORITHM_HELP = "Haz click en Generar métrica. Debera seleccionar COMPLETAR"
 
-PLOT_METRICS_LOAD_HELP = "COMPLETAR"
-PLOT_METRICS_ALGORITHM_HELP = "COMPLETAR"
+PLOT_METRICS_LOAD_HELP = "Cargue la ruta al archivo .xlsx que contiene la información para generar los gráficos."
+PLOT_METRICS_ALGORITHM_HELP = "Una vez cargada la ruta al archivo .xlsx y elegidas las métricas para graficar, haz click" \
+                              "en Graficar métricas"
 
 PLOT_METRICS_DISTRIBUTION_ALGORITHM_HELP = "Elija la metrica para graficar su distribución y haz click en Graficar " \
                                            "distribución. Deberá seleccionar el archivo .xlsx del cual se tomara la " \
