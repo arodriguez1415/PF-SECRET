@@ -2,6 +2,8 @@ import os
 
 from PyQt5 import QtCore
 
+from src.Backend.Image_processing_algorithms.Archive_manipulation.file_manipulation import \
+    create_directory_if_not_exists
 from src.Classes.QDrawable_label import QDrawable_label
 import src.Frontend.Menus.archive_menu as archive_menu
 import src.Frontend.Menus.movement_and_texture_menu as texture_menu
@@ -11,13 +13,14 @@ import src.Frontend.Menus.preprocessing_menu as preprocessing_menu
 import src.Frontend.Menus.border_detection_menu as border_detection_menu
 import src.Frontend.Menus.metrics_menu as metrics_menu
 import src.Frontend.Menus.routines_menu as routines_menu
+from src.Constants import configuration_constants
 from src.Frontend.Menus import video_menu
 from src.Frontend.Utils import viewer_buttons, information_buttons, exception_handler
 from src.Frontend.Utils.viewer_buttons import disable_extra_views, disable_main_view
 
 
 def set_style(main_window):
-    stylesheet_rel_path = "./Resources/Stylesheets/main_window_stylesheet.css"
+    stylesheet_rel_path = "./src/Resources/Stylesheets/main_window_stylesheet.css"
     abs_file = os.path.abspath(stylesheet_rel_path)
     file = open(abs_file, 'r')
     stylesheet_content = file.read()
@@ -38,7 +41,16 @@ def set_initial_configuration(main_window):
     disable_main_view(main_window)
     disable_extra_views(main_window)
     toolBox.disable_toolbox(main_window)
+    setup_directories()
     return
+
+
+def setup_directories():
+    create_directory_if_not_exists(configuration_constants.GENERATED_IMAGES_DIR)
+    create_directory_if_not_exists(configuration_constants.METRICS_DIRECTORY_PATH)
+    create_directory_if_not_exists(configuration_constants.GENERATED_VIDEOS_DEFAULT_DIR)
+    create_directory_if_not_exists(configuration_constants.GLOBAL_ROUTINE_DIRECTORY)
+    create_directory_if_not_exists(configuration_constants.PROPERTIES_DIRECTORY)
 
 
 def configure_main_window_connections(main_window, global_routine_params):

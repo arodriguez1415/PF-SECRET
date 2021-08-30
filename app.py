@@ -43,8 +43,6 @@ def start_application():
 
 
 def main():
-    os.chdir(sys.argv[0])
-    print("Current working directory: {0}".format(os.getcwd()))
     start_application()
 
 

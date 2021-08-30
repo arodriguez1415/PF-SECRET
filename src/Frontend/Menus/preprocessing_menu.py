@@ -37,7 +37,7 @@ def adaptive_threshold_options(main_window):
 def set_highlight(main_window):
     highlight_labels = [main_window.adaptive_threshold_highlight, main_window.adaptive_threshold_highlight_2,
                         main_window.adaptive_threshold_highlight_3]
-    gif_animation = QMovie(r"./Resources/Icons/arrow.gif")
+    gif_animation = QMovie(r"./src/Resources/Icons/arrow.gif")
     gif_animation.start()
     for i in range(0, len(highlight_labels)):
         highlight_label = highlight_labels[i]
