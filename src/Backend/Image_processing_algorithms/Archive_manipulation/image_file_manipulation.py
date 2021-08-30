@@ -37,12 +37,15 @@ def get_multiple_images_path():
     return file_path_list
 
 
-def get_directory_path():
+def get_directory_path(path=None):
     root = Tk()
     root.withdraw()
     project_mastermind = Project_mastermind.get_instance()
     properties_dictionary = project_mastermind.get_properties_dictionary()
-    initial_absolute_directory_path = os.path.abspath(properties_dictionary[IMAGES_SOURCE_FOLDER])
+    if path is None:
+        initial_absolute_directory_path = os.path.abspath(properties_dictionary[IMAGES_SOURCE_FOLDER])
+    else:
+        initial_absolute_directory_path = os.path.abspath(path)
     directory_path = filedialog.askdirectory(initialdir=initial_absolute_directory_path,
                                              title=string_constants.CHOOSE_DIRECTORY_WINDOW)
     root.destroy()

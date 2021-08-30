@@ -3442,6 +3442,7 @@
     </property>
     <addaction name="load_main_image_menu_option"/>
     <addaction name="set_images_source_directory_menu_option"/>
+    <addaction name="set_output_directory_menu_option"/>
     <addaction name="restore_defaults_menu_option"/>
    </widget>
    <widget class="QMenu" name="preprocessing_menu">
@@ -3808,6 +3809,11 @@
   <action name="generate_video_with_process_menu_option">
    <property name="text">
     <string>Generar video de célula con procesos</string>
+   </property>
+  </action>
+  <action name="set_output_directory_menu_option">
+   <property name="text">
+    <string>Setear carpeta de output</string>
    </property>
   </action>
  </widget>

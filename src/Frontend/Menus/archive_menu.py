@@ -6,8 +6,8 @@ from src.Classes.Image_wrapper import Image_wrapper
 from src.Classes.Methods.Original import Original
 from src.Classes.Project_mastermind import Project_mastermind
 from src.Classes.Image_loader import Image_loader
-from src.Constants import string_constants
-from src.Constants.properties_constants import IMAGES_SOURCE_FOLDER
+from src.Constants import string_constants, configuration_constants
+from src.Constants.properties_constants import IMAGES_SOURCE_FOLDER, OUTPUT_FOLDER
 from src.Constants.string_constants import DEFAULT_PARAMETERS_MANUAL_ROUTINE_TITLE, \
     DEFAULT_PARAMETERS_MANUAL_ROUTINE_DESCRIPTION
 from src.Frontend.Utils.message import show_error_message, show_confirmation_message
@@ -19,6 +19,7 @@ def configure_archive_menu_connections(main_window):
     image_viewer = main_window.image_viewer
     main_window.load_main_image_menu_option.triggered.connect(lambda: load_image(image_viewer, method=Original()))
     main_window.set_images_source_directory_menu_option.triggered.connect(lambda: set_images_source_directory())
+    main_window.set_output_directory_menu_option.triggered.connect(lambda: set_output_directory())
     main_window.restore_defaults_menu_option.triggered.connect(lambda: set_default_manual_routine_properties())
 
 
@@ -56,12 +57,12 @@ def set_image_on_screen(image_wrapper, image_viewer):
 
 def set_images_source_directory():
     project_mastermind = Project_mastermind.get_instance()
-    source_directory_path = image_file_manipulation.get_directory_path()
+    properties_directory = project_mastermind.get_properties_dictionary()
+    source_directory_path = image_file_manipulation.get_directory_path(properties_directory[IMAGES_SOURCE_FOLDER])
 
     if source_directory_path == "" or source_directory_path is None:
         return
 
-    properties_directory = project_mastermind.get_properties_dictionary()
     properties_directory[IMAGES_SOURCE_FOLDER] = source_directory_path
     save_properties(properties_directory)
     project_mastermind.reload_properties(properties_directory)
@@ -80,3 +81,19 @@ def set_default_manual_routine_properties():
         project_mastermind.reload_properties(props_dictionary)
         set_manual_routines_properties(props_dictionary, project_mastermind.main_window)
         save_properties(props_dictionary)
+
+
+def set_output_directory():
+    project_mastermind = Project_mastermind.get_instance()
+    properties_directory = project_mastermind.get_properties_dictionary()
+    output_directory_path = image_file_manipulation.get_directory_path(properties_directory[OUTPUT_FOLDER])
+    output_directory_path += "/Generado"
+
+    if output_directory_path == "" or output_directory_path is None:
+        return
+
+    properties_directory = project_mastermind.get_properties_dictionary()
+    properties_directory[OUTPUT_FOLDER] = output_directory_path
+    configuration_constants.GENERATED_IMAGES_DIR = output_directory_path
+    save_properties(properties_directory)
+    project_mastermind.reload_properties(properties_directory)
