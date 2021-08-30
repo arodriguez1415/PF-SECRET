@@ -80,7 +80,7 @@ WAIT_TEXTURE_IMAGE_MESSAGE_DESC = "Se esta generando el mapa de textura de la im
 # Confirmation messages
 
 DEFAULT_PARAMETERS_MANUAL_ROUTINE_TITLE = "Restaurar defaults"
-DEFAULT_PARAMETERS_MANUAL_ROUTINE_DESCRIPTION = "¿Esta seguro que quiere volver a tener los parametros default en todas" \
+DEFAULT_PARAMETERS_MANUAL_ROUTINE_DESCRIPTION = "¿Esta seguro que quiere volver a tener los parámetros default en todas" \
                                                 " las rutinas? Se sobreescribirán los actuales"
 
 GLOBAL_ROUTINE_ESTIMATION_TITLE = "Estimación de resultados"
@@ -99,85 +99,107 @@ PROGRESS_BAR_CANCELLED = "Progreso cancelado"
 
 ADAPTIVE_THRESHOLD_WINDOW_SIZE_HELP = "Tamaño de la vecindad de píxeles utilizada para calcular un valor de umbral para el " \
                                       "píxel central. Un tamaño de ventana de 5 representa un entorno de 5x5 alrededor del " \
-                                      "pixel. \nEl valor puede ser tanto par como impar debido a que los valores pares se " \
+                                      "pixel. \n\nEl valor puede ser tanto par como impar debido a que los valores pares se " \
                                       "transforman dentro del método al siguiente impar. \n" "Los valores recomendados son " \
                                       "entre 5 y 13. Valores muy chicos dejaran ruido en la imagen y valores muy grandes " \
                                       "delimitaran la célula de forma poco precisa."
 ADAPTIVE_THRESHOLD_C_CONSTANT_HELP = "Es una constante que se resta al valor del umbral calculado mediante la ventana. " \
-                                     "Valores muy altos haran que toda la imagen se umbralice a cero (fondo negro). " \
+                                     "Valores muy altos harán que toda la imagen se umbralice a cero (fondo negro). " \
                                      "Los valores recomendados son entre 3 y 7. "
 ADAPTIVE_THRESHOLD_METHOD_HELP = "Umbralización de la media: El valor final del umbral que se calcula es la media de los " \
-                                 "pixeles de la ventana menos el valor C." \
+                                 "píxeles de la ventana menos el valor C. " \
                                  "\nUmbralización gaussiana: El valor final del umbral que se calcula es la suma pesada " \
-                                 "de los pixeles de la ventana menos el valor C."
+                                 "de los píxeles de la ventana menos el valor C."
 ADAPTIVE_THRESHOLD_ALGORITHM_HELP = "Una vez que haya determinado el tamaño de ventana, la constante C y el método " \
-                                    "para calcular el umbral haz click en Añadir proceso para agregar este proceso a la " \
-                                    "cola de procesos que se aplicaran en Generación de video --> Generar video de " \
-                                    "célula con procesos. \n Mediante las barras deslizantes se puede probar el resultado " \
-                                    "automáticamente y luego añadirlo cuando se decida que párametros se usaran."
+                                    "para calcular el umbral haz click en 'Añadir proceso' para agregar este proceso a la " \
+                                    "cola de procesos que se aplicarán en Generación de video --> Generar video de " \
+                                    "célula con procesos. \n\nMediante las barras deslizantes puede ver como cambia la imagen " \
+                                    "en el panel de la izquierda."
 
-ANISOTROPIC_FILTER_TIMES_HELP = "Número de veces que se aplica el filtro sobre la imagen. " \
-                                "Los valores recomendados son entre 1 y 6 iteraciones."
-ANISOTROPIC_FILTER_ALGORITHM_HELP = "Una vez que haya determinado el número de iteraciones haz click en Aplicar para eliminar" \
-                                    "el ruido de la imagen. "
+ANISOTROPIC_FILTER_TIMES_HELP = "Número de veces que se aplica el filtro sobre la imagen. Los valores recomendados " \
+                                "son entre 1 y 6 iteraciones. El valor óptimo depende de la cantidad de ruido que posee " \
+                                "la imagen."
+ANISOTROPIC_FILTER_ALGORITHM_HELP = "Una vez que haya cargado una imagen y determinado el número de iteraciones, haz click " \
+                                    "en 'Aplicar' para eliminar el ruido de la imagen. Los resultados se verán reflejados en " \
+                                    "el panel de la izquierda."
 
 MGAC_ITERATIONS_HELP = "Es una de las condiciones de corte. El algoritmo puede terminar cuando la toda región inicial marcada " \
-                       "ya haya llegado a un borde o por número de iteraciones. En cada iteracion cada pixel de la región " \
-                       "inicial se contrae o expande."
+                       "ya haya llegado a un borde o debido a que se alcanza el número de iteraciones. " \
+                       "En cada iteración cada pixel de la región inicial se contrae o expande."
 MGAC_THRESHOLD_HELP = "Es el valor del umbral para poder considerar a un pixel frontera."
 MGAC_SMOOTHING_HELP = "El smoothing representa que tan exacta va a ser la curva de la región con respecto al " \
                       "objeto. A mayor suavizado se obtiene una curva más redondeada, pero su exactitud es menor. "
-MGAC_BALLOON_HELP = "El valor indica que si la region inicial marcada debe contraerse o expandise en cada iteración. Un valor" \
+MGAC_BALLOON_HELP = "El valor indica que si la región inicial marcada debe contraerse o expandise en cada iteración. Un valor " \
                     "de negativo indica que debe contraerse y un valor positivo indica que debe expandirse."
 MGAC_ALPHA_HELP = "COMPLETAR"
 MGAC_SIGMA_HELP = "COMPLETAR"
-MGAC_ALGORITHM_HELP = "Una vez que haya trazado la región inicial sobre la imagen y haya determinado la cantidad de iteraciones" \
-                      ", el valor del umbral, el smoothing, el valor de balloon y las opciones secundarias, haz click en " \
-                      "Aplicar para obtener el contorno de la célula."
+MGAC_ALGORITHM_HELP = "Una vez que haya cargado una imagen, haya trazado la región inicial sobre la misma, " \
+                      "haya determinado la cantidad de iteraciones, el valor del umbral, el smoothing, el valor de balloon " \
+                      "y las opciones secundarias, haz click en 'Aplicar' para obtener el contorno de la célula. Se abrirá una " \
+                      "ventana donde podrá ver la ejecución del algortimo paso por paso."
 
-TEXTURE_PROFILE_ALGORITHM_HELP = "Una vez que haya trazado una línea sobre la imagen (vertical, horizontal u diagonal) haz click " \
-                                 "en Aplicar para obtener el resultado de la textura a lo largo del perfil."
+TEXTURE_PROFILE_ALGORITHM_HELP = "Una vez que haya cargado una imagen, haya trazado una línea (vertical, horizontal " \
+                                 "u diagonal) sobre la misma haz click en 'Aplicar' para obtener el resultado " \
+                                 "de la textura a lo largo del perfil. Se abrirá una ventana donde podra ver los resultados."
 
-TEXTURE_CLASSIFICATION_IMAGE_CLUSTERS_HELP = "Cantidad de grupos en los cuales clasificar los valores de la textura de la imagen."
-TEXTURE_CLASSIFICATION_IMAGE_ALGORITHM_HELP = "Una vez determinada la cantiad de clústers, haz click " \
-                                              "en Clasificar para obtener el mapa de calor de la imagen."
-TEXTURE_CLASSIFICATION_VIDEO_THRESHOLD_HELP = "Mensaje de prueba para mostrar una informacion"
-TEXTURE_CLASSIFICATION_VIDEO_CLUSTERS_HELP = "Cantidad de grupos en los cuales clasificar los valores de la textura de cada " \
-                                             "imagen del video. "
-TEXTURE_CLASSIFICATION_VIDEO_ALGORITHM_HELP = "Una vez determinado el valor del umbral y la cantiad de clústers, haz click " \
-                                              "en Clasificar para obtener el mapa de calor del video."
+TEXTURE_CLASSIFICATION_IMAGE_CLUSTERS_HELP = "Cantidad de grupos (clusters) en los que se clasificará a los valores de la " \
+                                             "textura de la imagen. Al ser un mapa de calor, representa la cantidad de colores " \
+                                             "del mismo."
+TEXTURE_CLASSIFICATION_IMAGE_ALGORITHM_HELP = "Una vez cargada la imagen y determinada la cantidad de clústers, haz click " \
+                                              "en 'Clasificar' para obtener el mapa de calor de la imagen. Se abrirá una " \
+                                            "ventana que contiene el mapa de calor, aunque el mismo también se podrá ver en el " \
+                                            "panel de la izquierda."
+TEXTURE_CLASSIFICATION_VIDEO_THRESHOLD_HELP = "COMPLETAR"
+TEXTURE_CLASSIFICATION_VIDEO_CLUSTERS_HELP = "Cantidad de grupos en los cuales se clasificará a los valores de la textura de " \
+                                             "cada imagen del video. Al ser un mapa de calor, representa la cantidad de " \
+                                             "colores del mismo. "
+TEXTURE_CLASSIFICATION_VIDEO_ALGORITHM_HELP = "Una vez cargada la imagen y determinado el valor del umbral y la cantidad de " \
+                                              "clústers, haz click en 'Clasificar' para obtener el mapa de calor del video. " \
+                                              "Se abrirá una ventana que contiene el mapa de calor, aunque el mismo " \
+                                              "también se podrá ver en el panel de la izquierda."
 
 GENERATE_MOVEMENT_HEAT_MAP_THRESHOLD_HELP = "Valor que se utilizará para umbralizar la imagen y separar la célula del fondo. " \
                                             "Los valores recomendados son entre 12 y 25, dependiendo la intensidad de la imagen."
-GENERATE_MOVEMENT_HEAT_MAP_ALGORITHM_HELP = "Una vez determinado el valor de umbral, haz click en Generar mapa de calor " \
-                                            "para obtener el mapa de calor de la imagen."
+GENERATE_MOVEMENT_HEAT_MAP_ALGORITHM_HELP = "Una vez cargada la imagen y determinado el valor de umbral, haz click en " \
+                                            "'Generar mapa de calor' para obtener el mapa de calor de la imagen. Se abrirá una " \
+                                            "ventana que contiene el mapa de calor, aunque el mismo también se podrá ver en el " \
+                                            "panel de la izquierda."
 
-ANALYZE_MOVEMENT_AND_TEXTURE_GENERATE_VIEWS_HELP = "Una vez determinado los parametros para cada vista, haz click en " \
-                                                   "Generar vistas. Espere hasta que se terminen de generar los mapas de calor " \
-                                                   "y procesa haciendo click en Analizar."
-ANALYZE_MOVEMENT_AND_TEXTURE_ALGORITHM_HELP = "Una vez que haya generado las vistas, haz click en Analizar para poder " \
-                                              "obtener los mapas comparativos."
+ANALYZE_MOVEMENT_AND_TEXTURE_GENERATE_VIEWS_HELP = "Una vez cargada la imagen y determinado los parámetros para cada vista, " \
+                                                   "haz click en 'Generar vistas'. Espere hasta que se terminen de generar los " \
+                                                   "mapas de calor y proceda haciendo click en 'Analizar'."
+ANALYZE_MOVEMENT_AND_TEXTURE_ALGORITHM_HELP = "Una vez que haya generado las vistas, haz click en 'Analizar' para poder " \
+                                              "obtener los mapas comparativos. Puede seleccionar una región cuadrada sobre " \
+                                              "la cual calcular los resultados. Se abrirá una ventana donde podra ver " \
+                                              "los resultados."
 
 GENERATE_METRICS_LOAD_HELP = "Cargue la ruta al archivo que contiene la máscara de la imagen."
-GENERATE_METRICS_ALGORITHM_HELP = "Una vez cargada la ruta del archivo que contiene a la máscara y seleccionada las métricas " \
-                                  "a calcular, haz click en Generar métricas para obtener los gráficos en el tiempo de cada una."
+GENERATE_METRICS_ALGORITHM_HELP = "Una vez cargada la ruta del archivo que contiene a la máscara y seleccionada las " \
+                                  "métricas a calcular, haz click en 'Generar métricas' para COMPLETAR CON DONDE " \
+                                  "VER LOS RESULTADOS"
 
-GENERATE_MULTIPLE_CELLS_METRICS_ALGORITHM_HELP = "Haz click en Generar métrica. Debera seleccionar COMPLETAR"
+GENERATE_MULTIPLE_CELLS_METRICS_ALGORITHM_HELP = "Una vez cargada la ruta del archivo que contiene a la máscara y " \
+                                                 "seleccionada las métricas a calcular, haz click en 'Generar métricas' " \
+                                                 "para COMPLETAR CON DONDE VER LOS RESULTADOS"
 
 PLOT_METRICS_LOAD_HELP = "Cargue la ruta al archivo .xlsx que contiene la información para generar los gráficos."
-PLOT_METRICS_ALGORITHM_HELP = "Una vez cargada la ruta al archivo .xlsx y elegidas las métricas para graficar, haz click" \
-                              "en Graficar métricas"
+PLOT_METRICS_ALGORITHM_HELP = "Una vez cargada la ruta al archivo .xlsx y elegidas la/s métrica/s para graficar, haz click " \
+                              "en 'Graficar métricas'. Se abrirán tantas ventanas como métricas se grafiquen."
 
-PLOT_METRICS_DISTRIBUTION_ALGORITHM_HELP = "Elija la metrica para graficar su distribución y haz click en Graficar " \
-                                           "distribución. Deberá seleccionar el archivo .xlsx del cual se tomara la " \
-                                           "información."
+PLOT_METRICS_DISTRIBUTION_ALGORITHM_HELP = "Elija la/s métrica/s para graficar su distribución y haz click en 'Graficar " \
+                                           "distribución'. Deberá seleccionar el archivo .xlsx del cuál se tomara la " \
+                                           "información. Se abrirán tantas ventanas como métricas se grafiquen."
 
-VIDEO_GENERATOR_ALGORITHM_HELP = "Una vez que se hayan agregado los métodos en la cola haz click en Iniciar para aplicar dicha " \
-                                 "secuencia de métodos en cada frame del video de la imagen seleccionada."
+VIDEO_GENERATOR_ALGORITHM_HELP = "Una vez que se haya cargado una imagen y se hayan agregado los métodos en la cola " \
+                                 "haz click en 'Iniciar' para aplicar dicha secuencia de métodos en cada frame " \
+                                 "del video de la imagen seleccionada."
 
-GLOBAL_ROUTINE_ALGORITHM_HELP = "Una vez determinado que sub-rutinas se ejecutarán y la forma de guardado de los resultados " \
-                                "haz click en Iniciar para seleccionar la carpeta que contiene las células a las que se le " \
-                                "quiere aplicar la rutina global. Se puede seleccionar una carpeta con una o más células."
+GLOBAL_ROUTINE_ALGORITHM_HELP = "Una vez determinado que subrutinas se ejecutarán y la forma de guardado de los resultados " \
+                                "haz click en 'Iniciar' para seleccionar la carpeta que contiene las células a las que se le " \
+                                "quiere aplicar la rutina global. Se puede seleccionar una carpeta con una o más células. " \
+                                "\n\nAparecerá un ventana con el tiempo que llevará procesar la rutina completa, para seguir " \
+                                "haz click en 'Continuar', de lo contrario en 'Cancelar'. " \
+                                "Los resultados estarán guardados dentro de la carpeta Generado."
 
 # Progress Bar
 
