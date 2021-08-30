@@ -99,10 +99,10 @@ PROGRESS_BAR_CANCELLED = "Progreso cancelado"
 
 ADAPTIVE_THRESHOLD_WINDOW_SIZE_HELP = "Tamaño de la vecindad de píxeles utilizada para calcular un valor de umbral para el " \
                                       "píxel central. Un tamaño de ventana de 5 representa un entorno de 5x5 alrededor del " \
-                                      "pixel. \n\nEl valor puede ser tanto par como impar debido a que los valores pares se " \
+                                      "píxel. \n\nEl valor puede ser tanto par como impar debido a que los valores pares se " \
                                       "transforman dentro del método al siguiente impar. \n" "Los valores recomendados son " \
                                       "entre 5 y 13. Valores muy chicos dejaran ruido en la imagen y valores muy grandes " \
-                                      "delimitaran la célula de forma poco precisa."
+                                      "delimitarán la célula de forma poco precisa."
 ADAPTIVE_THRESHOLD_C_CONSTANT_HELP = "Es una constante que se resta al valor del umbral calculado mediante la ventana. " \
                                      "Valores muy altos harán que toda la imagen se umbralice a cero (fondo negro). " \
                                      "Los valores recomendados son entre 3 y 7. "
@@ -113,8 +113,8 @@ ADAPTIVE_THRESHOLD_METHOD_HELP = "Umbralización de la media: El valor final del
 ADAPTIVE_THRESHOLD_ALGORITHM_HELP = "Una vez que haya determinado el tamaño de ventana, la constante C y el método " \
                                     "para calcular el umbral haz click en 'Añadir proceso' para agregar este proceso a la " \
                                     "cola de procesos que se aplicarán en Generación de video --> Generar video de " \
-                                    "célula con procesos. \n\nMediante las barras deslizantes puede ver como cambia la imagen " \
-                                    "en el panel de la izquierda."
+                                    "célula con procesos. \n\nMediante las barras deslizantes se puede ver como cambia " \
+                                    "la imagen en el panel de la izquierda."
 
 ANISOTROPIC_FILTER_TIMES_HELP = "Número de veces que se aplica el filtro sobre la imagen. Los valores recomendados " \
                                 "son entre 1 y 6 iteraciones. El valor óptimo depende de la cantidad de ruido que posee " \
@@ -125,8 +125,8 @@ ANISOTROPIC_FILTER_ALGORITHM_HELP = "Una vez que haya cargado una imagen y deter
 
 MGAC_ITERATIONS_HELP = "Es una de las condiciones de corte. El algoritmo puede terminar cuando la toda región inicial marcada " \
                        "ya haya llegado a un borde o debido a que se alcanza el número de iteraciones. " \
-                       "En cada iteración cada pixel de la región inicial se contrae o expande."
-MGAC_THRESHOLD_HELP = "Es el valor del umbral para poder considerar a un pixel frontera."
+                       "En cada iteración cada píxel de la región inicial se contrae o expande."
+MGAC_THRESHOLD_HELP = "Es el valor del umbral para poder considerar a un píxel frontera."
 MGAC_SMOOTHING_HELP = "El smoothing representa que tan exacta va a ser la curva de la región con respecto al " \
                       "objeto. A mayor suavizado se obtiene una curva más redondeada, pero su exactitud es menor. "
 MGAC_BALLOON_HELP = "El valor indica que si la región inicial marcada debe contraerse o expandise en cada iteración. Un valor " \
@@ -136,7 +136,7 @@ MGAC_SIGMA_HELP = "COMPLETAR"
 MGAC_ALGORITHM_HELP = "Una vez que haya cargado una imagen, haya trazado la región inicial sobre la misma, " \
                       "haya determinado la cantidad de iteraciones, el valor del umbral, el smoothing, el valor de balloon " \
                       "y las opciones secundarias, haz click en 'Aplicar' para obtener el contorno de la célula. Se abrirá una " \
-                      "ventana donde podrá ver la ejecución del algortimo paso por paso."
+                      "ventana donde podrá ver la ejecución del algoritmo paso por paso."
 
 TEXTURE_PROFILE_ALGORITHM_HELP = "Una vez que haya cargado una imagen, haya trazado una línea (vertical, horizontal " \
                                  "u diagonal) sobre la misma haz click en 'Aplicar' para obtener el resultado " \
@@ -170,7 +170,7 @@ ANALYZE_MOVEMENT_AND_TEXTURE_GENERATE_VIEWS_HELP = "Una vez cargada la imagen y 
                                                    "mapas de calor y proceda haciendo click en 'Analizar'."
 ANALYZE_MOVEMENT_AND_TEXTURE_ALGORITHM_HELP = "Una vez que haya generado las vistas, haz click en 'Analizar' para poder " \
                                               "obtener los mapas comparativos. Puede seleccionar una región cuadrada sobre " \
-                                              "la cual calcular los resultados. Se abrirá una ventana donde podra ver " \
+                                              "la cual calcular los resultados. Se abrirá una ventana donde podrá ver " \
                                               "los resultados."
 
 GENERATE_METRICS_LOAD_HELP = "Cargue la ruta al archivo que contiene la máscara de la imagen."
@@ -179,7 +179,7 @@ GENERATE_METRICS_ALGORITHM_HELP = "Una vez cargada la ruta del archivo que conti
                                   "VER LOS RESULTADOS"
 
 GENERATE_MULTIPLE_CELLS_METRICS_ALGORITHM_HELP = "Una vez cargada la ruta del archivo que contiene a la máscara y " \
-                                                 "seleccionada las métricas a calcular, haz click en 'Generar métricas' " \
+                                                 "seleccionada la/s métrica/s a calcular, haz click en 'Generar métricas' " \
                                                  "para COMPLETAR CON DONDE VER LOS RESULTADOS"
 
 PLOT_METRICS_LOAD_HELP = "Cargue la ruta al archivo .xlsx que contiene la información para generar los gráficos."
@@ -187,7 +187,7 @@ PLOT_METRICS_ALGORITHM_HELP = "Una vez cargada la ruta al archivo .xlsx y elegid
                               "en 'Graficar métricas'. Se abrirán tantas ventanas como métricas se grafiquen."
 
 PLOT_METRICS_DISTRIBUTION_ALGORITHM_HELP = "Elija la/s métrica/s para graficar su distribución y haz click en 'Graficar " \
-                                           "distribución'. Deberá seleccionar el archivo .xlsx del cuál se tomara la " \
+                                           "distribución'. Deberá seleccionar el archivo .xlsx del cuál se tomará la " \
                                            "información. Se abrirán tantas ventanas como métricas se grafiquen."
 
 VIDEO_GENERATOR_ALGORITHM_HELP = "Una vez que se haya cargado una imagen y se hayan agregado los métodos en la cola " \
