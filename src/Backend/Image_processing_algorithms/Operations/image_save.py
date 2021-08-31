@@ -1,7 +1,7 @@
 from PIL import Image
 from tkinter import filedialog, Tk
 import numpy as np
-from src.Constants.configuration_constants import GENERATED_IMAGES_DIR
+from  src.Constants import configuration_constants
 import src.Backend.Image_processing_algorithms.Operations.common_operations as common_operations
 from src.Constants.string_constants import WRITE_FILENAME
 
@@ -10,7 +10,7 @@ def get_save_image_path():
     root = Tk()
     root.withdraw()
     save_extension = ".tif"
-    save_file_path = filedialog.asksaveasfilename(initialdir=GENERATED_IMAGES_DIR,
+    save_file_path = filedialog.asksaveasfilename(initialdir=configuration_constants.GENERATED_IMAGES_DIR,
                                                   title=WRITE_FILENAME,
                                                   defaultextension=save_extension,
                                                   filetypes=(("Tif file", "*.tif"),("All Files", "*.*"))

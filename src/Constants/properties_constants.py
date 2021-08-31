@@ -3,6 +3,7 @@
 # Default image path
 
 IMAGES_SOURCE_FOLDER = "images_source_folder"
+OUTPUT_FOLDER = "output_folder"
 
 # Main window properties
 

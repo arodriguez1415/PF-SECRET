@@ -13,7 +13,7 @@ def get_video_as_array(video_path):
 def get_video_path():
     root = Tk()
     root.withdraw()
-    initial_absolute_directory_path = os.path.abspath(configuration_constants.MASK_VIDEOS)
+    initial_absolute_directory_path = os.path.abspath(configuration_constants.GENERATED_VIDEOS_DEFAULT_DIR)
     video_path = filedialog.askopenfilename(initialdir=initial_absolute_directory_path,
                                             title=string_constants.CHOOSE_VIDEO_WINDOW,
                                             filetypes=[("Video file", "*.avi"),
@@ -26,7 +26,7 @@ def get_video_path():
 def get_multiple_videos_path():
     root = Tk()
     root.withdraw()
-    initial_absolute_directory_path = os.path.abspath(configuration_constants.MASK_VIDEOS)
+    initial_absolute_directory_path = os.path.abspath(configuration_constants.GENERATED_VIDEOS_DEFAULT_DIR)
     file_path_list = filedialog.askopenfilenames(initialdir=initial_absolute_directory_path,
                                                  title=string_constants.CHOOSE_MULTIPLE_VIDEOS_WINDOW,
                                                  filetypes=[("Video file", "*.avi"),

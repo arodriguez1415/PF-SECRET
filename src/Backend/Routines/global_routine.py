@@ -22,7 +22,7 @@ from src.Backend.Video_processing_algorithms.multiple_cells_video_generator impo
 from src.Backend.Video_processing_algorithms.texture_image_generator import create_multiple_texture_images
 from src.Classes.Project_mastermind import Project_mastermind
 from src.Constants import algorithm_constants, configuration_constants, string_constants
-from src.Frontend.Utils import plot_comparator, progress_bar
+from src.Frontend.Utils import progress_bar
 from src.Frontend.Utils.message import show_confirmation_message, show_wait_message
 from src.Constants import properties_constants as ps
 
@@ -204,8 +204,6 @@ def plot_distribution_metrics_sub_routine(metrics_excel_paths_list, distribution
 
 
 def movement_and_texture_heat_map_sub_routine(sub_routines, source_directory):
-    motion_images_array_list = []
-    texture_images_array_list = []
     generated_files = []
     motion_images_path_list = []
     texture_images_path_list = []

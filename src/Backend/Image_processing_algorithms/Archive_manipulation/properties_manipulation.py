@@ -32,7 +32,8 @@ def setup():
 
 
 def generate_default_properties():
-    default_properties_dict = {ps.IMAGES_SOURCE_FOLDER: configuration_constants.TEST_IMAGES_DIR}
+    default_properties_dict = {ps.IMAGES_SOURCE_FOLDER: configuration_constants.TEST_IMAGES_DIR,
+                               ps.OUTPUT_FOLDER: configuration_constants.GENERATED_IMAGES_DIR}
     default_properties_dict = generate_default_manual_routines_properties(default_properties_dict)
     default_properties_dict = generate_global_routine_properties(default_properties_dict)
 
@@ -104,11 +105,40 @@ def is_double(potential_float):
 
 
 def set_properties(prop_dict, main_window, global_routine_params):
+    set_paths(prop_dict)
     prop_dict = transform_dict(prop_dict)
 
     set_manual_routines_properties(prop_dict, main_window)
     set_global_routine_properties(prop_dict, global_routine_params)
 
+
+def set_paths(prop_dict):
+    configuration_constants.GENERATED_IMAGES_DIR = prop_dict[ps.OUTPUT_FOLDER]
+    general_path = configuration_constants.GENERATED_IMAGES_DIR
+
+    configuration_constants.TEMPORARY_VIDEO_DIRECTORY_PATH = general_path + "/video_frames/"
+    configuration_constants.GENERATED_VIDEOS_DEFAULT_DIR = general_path + "/Videos/"
+
+    configuration_constants.PROPERTIES_DIRECTORY = r"./src/Resources/Properties/"
+    configuration_constants.PROPERTIES_FILE_PATH = r"./src/Resources/Properties/properties.pkl"
+
+    configuration_constants.GLOBAL_ROUTINE_DIRECTORY = general_path + "/Rutina global/"
+
+    configuration_constants.CELLS_VIDEOS = general_path + "/Rutina global/Celulas en video/"
+    configuration_constants.MASK_VIDEOS = general_path + "/Rutina global/Mascaras de contorno/"
+    configuration_constants.COMPARISON_VIDEOS = general_path + "/Rutina global/Contorno vs realidad/"
+
+    configuration_constants.MOVEMENT_HEATMAP_IMAGES_DIRECTORY = general_path + "/Rutina global/Mapas de movimiento/"
+
+    configuration_constants.TEXTURE_HEATMAP_IMAGES_DIRECTORY = general_path + "/Rutina global/Mapas de textura/"
+    configuration_constants.MOVEMENT_VS_TEXTURE_COMPARISON_DIRECTORY = general_path + "/Rutina global/Comparacion Movimiento vs Textura/"
+
+    configuration_constants.METRICS_DIRECTORY_PATH = general_path + "/Metricas/"
+
+
+    configuration_constants.GLOBAL_GRAPHS_FOLDER = general_path + "/Rutina global/Graficos/"
+    configuration_constants.GLOBAL_METRICS_GRAPH_FOLDER = general_path + "/Rutina global/Graficos/Metricas simples/"
+    configuration_constants.GLOBAL_DISTRIBUTION_METRICS_GRAPH_FOLDER = general_path + "/Rutina global/Graficos/Distribucion/"
 
 def set_manual_routines_properties(prop_dict, main_window):
     set_anisotropic_filter_params(prop_dict, main_window)
