@@ -131,8 +131,12 @@ MGAC_SMOOTHING_HELP = "El smoothing representa que tan exacta va a ser la curva 
                       "objeto. A mayor suavizado se obtiene una curva más redondeada, pero su exactitud es menor. "
 MGAC_BALLOON_HELP = "El valor indica que si la región inicial marcada debe contraerse o expandise en cada iteración. Un valor " \
                     "de negativo indica que debe contraerse y un valor positivo indica que debe expandirse."
-MGAC_ALPHA_HELP = "COMPLETAR"
-MGAC_SIGMA_HELP = "COMPLETAR"
+MGAC_ALPHA_HELP = "El parámetro es utilizado por el algoritmo del gradiente gaussiano. Este parámetro hace que los " \
+                  "bordes encontrados en la imagen sean más oscuros a mayor valor. Los valores recomendados están entre " \
+                  "100 y 300"
+MGAC_SIGMA_HELP = "El parámetro es utilizado por el algoritmo del gradiente gaussiano. Este parámetro indica el tamaño " \
+                  "de la ventana utilizada, a mayor valor de la ventana menos zonas serán tomadas como bordes. Los " \
+                  "valores recomendados están entre 2 y 5"
 MGAC_ALGORITHM_HELP = "Una vez que haya cargado una imagen, haya trazado la región inicial sobre la misma, " \
                       "haya determinado la cantidad de iteraciones, el valor del umbral, el smoothing, el valor de balloon " \
                       "y las opciones secundarias, haz click en 'Aplicar' para obtener el contorno de la célula. Se abrirá una " \
@@ -149,7 +153,8 @@ TEXTURE_CLASSIFICATION_IMAGE_ALGORITHM_HELP = "Una vez cargada la imagen y deter
                                               "en 'Clasificar' para obtener el mapa de calor de la imagen. Se abrirá una " \
                                             "ventana que contiene el mapa de calor, aunque el mismo también se podrá ver en el " \
                                             "panel de la izquierda."
-TEXTURE_CLASSIFICATION_VIDEO_THRESHOLD_HELP = "COMPLETAR"
+TEXTURE_CLASSIFICATION_VIDEO_THRESHOLD_HELP = "Valor que se utilizará para umbralizar la imagen y separar la célula del fondo. " \
+                                            "Los valores recomendados son entre 12 y 25, dependiendo la intensidad de la imagen."
 TEXTURE_CLASSIFICATION_VIDEO_CLUSTERS_HELP = "Cantidad de grupos en los cuales se clasificará a los valores de la textura de " \
                                              "cada imagen del video. Al ser un mapa de calor, representa la cantidad de " \
                                              "colores del mismo. "
@@ -175,12 +180,19 @@ ANALYZE_MOVEMENT_AND_TEXTURE_ALGORITHM_HELP = "Una vez que haya generado las vis
 
 GENERATE_METRICS_LOAD_HELP = "Cargue la ruta al archivo que contiene la máscara de la imagen."
 GENERATE_METRICS_ALGORITHM_HELP = "Una vez cargada la ruta del archivo que contiene a la máscara y seleccionada las " \
-                                  "métricas a calcular, haz click en 'Generar métricas' para COMPLETAR CON DONDE " \
-                                  "VER LOS RESULTADOS"
+                                  "métricas a calcular, haz click en 'Generar métricas' para generar un excel donde se " \
+                                  "guardan las métricas calculadas de la célula. Este excel se guardará dentro de la " \
+                                  "carpeta Métricas, que se encuentra en la ruta asignada como carpeta de Output en la " \
+                                  "solapa Archivo"
 
 GENERATE_MULTIPLE_CELLS_METRICS_ALGORITHM_HELP = "Una vez cargada la ruta del archivo que contiene a la máscara y " \
                                                  "seleccionada la/s métrica/s a calcular, haz click en 'Generar métricas' " \
-                                                 "para COMPLETAR CON DONDE VER LOS RESULTADOS"
+                                                 "para generar un excel por célula donde se " \
+                                                 "guardan las métricas calculadas de la célula. " \
+                                                 "Estos excel se guardará dentro de la " \
+                                                 "carpeta Métricas, que se encuentra en la ruta asignada como " \
+                                                 "carpeta de Output en la " \
+                                                 "solapa Archivo"
 
 PLOT_METRICS_LOAD_HELP = "Cargue la ruta al archivo .xlsx que contiene la información para generar los gráficos."
 PLOT_METRICS_ALGORITHM_HELP = "Una vez cargada la ruta al archivo .xlsx y elegidas la/s métrica/s para graficar, haz click " \
