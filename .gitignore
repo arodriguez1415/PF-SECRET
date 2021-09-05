@@ -132,3 +132,4 @@ dmypy.json
 
 generated/
 src/GUI/constants/path_constants.py
+src/Resources/Properties
