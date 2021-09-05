@@ -3,10 +3,10 @@ from PyQt5.QtGui import QMovie
 
 from src.Backend.Image_processing_algorithms.Archive_manipulation.properties_manipulation import \
     save_adaptive_threshold_params
+from src.Backend.Image_processing_algorithms.Preprocessing import adaptive_threshold
 from src.Classes.Image_wrapper import Image_wrapper
 from src.Classes.Methods.Adaptive_threshold import Adaptive_threshold
 from src.Classes.Project_mastermind import Project_mastermind
-from src.Backend.Image_processing_algorithms.Preprocessing import adaptive_threshold
 from src.Constants import string_constants
 from src.Frontend.Utils.button_controller import disable_button, enable_button
 from src.Frontend.Utils.message import show_error_message

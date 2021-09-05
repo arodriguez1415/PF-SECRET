@@ -1,9 +1,10 @@
+import math
+
 import cv2
 import qimage2ndarray as qimage2ndarray
 from PyQt5.QtCore import QPoint, QSize, QRect, Qt
 from PyQt5.QtGui import QPainter, QPen, QColor, QPixmap
 from PyQt5.QtWidgets import QLabel
-import math
 
 from src.Backend.Image_processing_algorithms.Operations.common_operations import resize_image, gray_to_rgb
 from src.Classes.Project_mastermind import Project_mastermind

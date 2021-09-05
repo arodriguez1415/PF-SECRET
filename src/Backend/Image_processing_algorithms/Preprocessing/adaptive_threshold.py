@@ -1,8 +1,8 @@
-import numpy as np
 import cv2 as cv
+import numpy as np
 
-from src.Constants import algorithm_constants
 from src.Backend.Image_processing_algorithms.Operations import common_operations
+from src.Constants import algorithm_constants
 
 
 def adaptive_threshold(image, window_size, constant, method):

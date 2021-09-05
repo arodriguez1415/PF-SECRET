@@ -1,5 +1,5 @@
-from pathlib import Path
 import os
+from pathlib import Path
 from tkinter import filedialog, Tk
 
 from src.Classes.Project_mastermind import Project_mastermind

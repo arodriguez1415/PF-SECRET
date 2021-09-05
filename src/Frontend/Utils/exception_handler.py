@@ -1,4 +1,5 @@
 import sys
+
 from matplotlib import pyplot as plt
 
 from src.Backend.Image_processing_algorithms.Archive_manipulation.file_manipulation import remove_directory

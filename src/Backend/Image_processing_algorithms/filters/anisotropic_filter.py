@@ -1,6 +1,6 @@
-from medpy.filter.smoothing import anisotropic_diffusion
-from PIL import Image
 import numpy as np
+from PIL import Image
+from medpy.filter.smoothing import anisotropic_diffusion
 
 from src.Backend.Image_processing_algorithms.Operations.common_operations import normalize_to_range
 

@@ -2,10 +2,10 @@ from src.Backend.Image_processing_algorithms.Archive_manipulation import image_f
 from src.Backend.Image_processing_algorithms.Archive_manipulation.image_file_manipulation import is_image
 from src.Backend.Image_processing_algorithms.Archive_manipulation.properties_manipulation import save_properties, \
     generate_default_manual_routines_properties, set_manual_routines_properties
+from src.Classes.Image_loader import Image_loader
 from src.Classes.Image_wrapper import Image_wrapper
 from src.Classes.Methods.Original import Original
 from src.Classes.Project_mastermind import Project_mastermind
-from src.Classes.Image_loader import Image_loader
 from src.Constants import string_constants, configuration_constants
 from src.Constants.properties_constants import IMAGES_SOURCE_FOLDER, OUTPUT_FOLDER
 from src.Constants.string_constants import DEFAULT_PARAMETERS_MANUAL_ROUTINE_TITLE, \

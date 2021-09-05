@@ -1,10 +1,10 @@
-from sklearn.cluster import KMeans
 import numpy as np
+from sklearn.cluster import KMeans
 
-from src.Backend.Image_processing_algorithms.Texture import glcm
 from src.Backend.Image_processing_algorithms.Archive_manipulation.dataframe_file_manipulation import \
     normalize_dataframe_values
 from src.Backend.Image_processing_algorithms.Operations.common_operations import normalize_to_range
+from src.Backend.Image_processing_algorithms.Texture import glcm
 from src.Constants import algorithm_constants
 
 

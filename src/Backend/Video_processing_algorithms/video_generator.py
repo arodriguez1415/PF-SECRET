@@ -1,7 +1,8 @@
-from PIL import Image
+import os
+
 import cv2 as cv
 import numpy as np
-import os
+from PIL import Image
 
 from src.Backend.Image_processing_algorithms.Archive_manipulation.file_manipulation import \
     create_directory_if_not_exists, remove_directory
@@ -10,8 +11,8 @@ from src.Backend.Image_processing_algorithms.Archive_manipulation.image_file_man
 from src.Backend.Image_processing_algorithms.Archive_manipulation.save_file_manipulation import set_save_name
 from src.Backend.Image_processing_algorithms.Operations import common_operations
 from src.Backend.Image_processing_algorithms.Operations.common_operations import resize_image
-from src.Constants import configuration_constants, string_constants
 from src.Classes.Project_mastermind import Project_mastermind
+from src.Constants import configuration_constants, string_constants
 from src.Frontend.Utils import progress_bar
 from src.Frontend.Utils.message import show_error_message
 

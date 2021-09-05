@@ -1,12 +1,12 @@
+from PIL import Image
+
 from src.Backend.Image_processing_algorithms.Archive_manipulation.properties_manipulation import save_mgac_params
+from src.Backend.Image_processing_algorithms.Border_detection import mgac as mgac_functions
 from src.Backend.Image_processing_algorithms.Operations.common_operations import resize_image, rgb_to_gray
 from src.Classes.Image_wrapper import Image_wrapper
 from src.Classes.Methods.Mgac import Mgac
-from src.Classes.Region import Region
 from src.Classes.Project_mastermind import Project_mastermind
-from src.Backend.Image_processing_algorithms.Border_detection import mgac as mgac_functions
-from PIL import Image
-
+from src.Classes.Region import Region
 from src.Constants import configuration_constants, string_constants
 from src.Frontend.Utils.button_controller import disable_button, enable_button
 from src.Frontend.Utils.message import show_error_message
