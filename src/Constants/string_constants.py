@@ -96,17 +96,15 @@ NO_REGION_FOUND_DESCRIPTION = "No se seleccionó ninguna región. Se tomará com
 
 # Information messages
 
-INFORMATION_TITLE = "Information"
+INFORMATION_TITLE = "Información"
 
-SET_INPUT_AND_OUTPUT_FOLDERS = "A continuación se le pedirá que ingresé la ruta del directorio de las imágenes a " \
-                               "analizar así como también el directorio donde quiere que se guarden los resultados.\n" \
+SET_INPUT_AND_OUTPUT_FOLDERS = "A continuación deberá ingresar la ruta del directorio que contiene las imágenes a " \
+                               "analizar, así como también el directorio donde quiere que se guarden los resultados.\n" \
                                "Una vez elegido el directorio de salida, en él se generará una carpeta llamada " \
                                "Generado, donde se guardarán los resultados\n\n" \
-                               "Si más adelante quiere cambiar la ruta de el directiorio de las imágenes a analizar o " \
-                               "la ruta del directorio donde se crea la carpeta de Generado, puede hacerlo en la solapa " \
-                               "de Archivo\n\n" \
-                               "Primero se le pedirá la ruta de input\n" \
-                               "Segundo se le pedirá la ruta de output"
+                               "Si más adelante quiere cambiar la ruta de algunos de estos directorios que se configurarán" \
+                               ", puede hacerlo en la solapa de Archivo.\n\n" \
+                               "Primero se le pedirá la ruta de input. Segundo se le pedirá la ruta de output."
 
 PROGRESS_BAR_CANCELLED = "Progreso cancelado"
 

@@ -1422,7 +1422,7 @@ class Ui_MainWindow(object):
 
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
-        MainWindow.setWindowTitle(_translate("MainWindow", "Análisis y Tratamiento de Imágenes"))
+        MainWindow.setWindowTitle(_translate("MainWindow", "Interfaz"))
         self.actual_compare_to_original.setText(_translate("MainWindow", "Comparar con original"))
         self.image_viewer.setText(_translate("MainWindow", "No hay ninguna imagen cargada"))
         self.main_image_button.setText(_translate("MainWindow", "Imagen Principal"))
