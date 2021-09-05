@@ -1,8 +1,10 @@
-from PIL import Image
 from tkinter import filedialog, Tk
+
 import numpy as np
-from  src.Constants import configuration_constants
+from PIL import Image
+
 import src.Backend.Image_processing_algorithms.Operations.common_operations as common_operations
+from src.Constants import configuration_constants
 from src.Constants.string_constants import WRITE_FILENAME
 
 

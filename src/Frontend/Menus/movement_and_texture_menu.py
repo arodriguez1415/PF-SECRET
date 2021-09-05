@@ -16,8 +16,6 @@ from src.Frontend.Utils.message import show_wait_message, show_error_message
 from src.Frontend.Utils.plot_comparator import plot_coloured_image
 from src.Frontend.Utils.viewer_buttons import enable_view_button
 
-import matplotlib.pyplot as plt
-
 
 def configure_texture_menu_connections(main_window):
     main_window.texture_and_movement_generate_movement_heat_map_menu_option.triggered.connect(

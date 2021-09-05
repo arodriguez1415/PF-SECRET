@@ -1,9 +1,7 @@
 import os
 
-
-import numpy as np
 import cv2
-
+import numpy as np
 
 from src.Backend.Image_processing_algorithms.Archive_manipulation.file_manipulation import \
     create_directory_if_not_exists, remove_directory

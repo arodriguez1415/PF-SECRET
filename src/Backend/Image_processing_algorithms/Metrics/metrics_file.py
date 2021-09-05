@@ -1,8 +1,9 @@
 import os
+
 import pandas as pd
 
-from src.Constants import configuration_constants
 from src.Constants import algorithm_constants
+from src.Constants import configuration_constants
 
 
 def generate_metrics_dir():

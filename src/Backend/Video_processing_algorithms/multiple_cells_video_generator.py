@@ -1,5 +1,5 @@
-from PIL import Image
 import numpy as np
+from PIL import Image
 
 from src.Backend.Image_processing_algorithms.Archive_manipulation.file_manipulation import \
     create_directory_if_not_exists, remove_directory
@@ -13,13 +13,13 @@ from src.Backend.Image_processing_algorithms.Operations.image_save import save_i
 from src.Backend.Video_processing_algorithms import video_generator
 from src.Classes.Methods.Adaptive_threshold import Adaptive_threshold
 from src.Classes.Methods.Anisotropic_Filter import Anisotropic_Filter
-from src.Classes.Project_mastermind import Project_mastermind
-from src.Constants.algorithm_constants import CONTOUR_VIDEO, SIMPLE_CELL_VIDEO, COMPARISON_VIDEO
-from src.Frontend.Utils import progress_bar
 from src.Classes.Methods.Mgac import Mgac
+from src.Classes.Project_mastermind import Project_mastermind
 from src.Classes.Region import Region
 from src.Constants import configuration_constants
 from src.Constants import properties_constants as ps
+from src.Constants.algorithm_constants import CONTOUR_VIDEO, SIMPLE_CELL_VIDEO, COMPARISON_VIDEO
+from src.Frontend.Utils import progress_bar
 
 
 def generate_mask_video_of_all_cells(source_directory):

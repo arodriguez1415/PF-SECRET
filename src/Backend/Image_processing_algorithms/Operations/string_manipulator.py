@@ -1,6 +1,6 @@
+import datetime
 import random
 import string
-import datetime
 
 
 def generate_random_string(number_of_chars=10):

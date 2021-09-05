@@ -1,10 +1,9 @@
 import src.Frontend.Utils.plot_comparator as plot_comparator
 from src.Backend.Image_processing_algorithms.Operations.common_operations import resize_image
-
-from src.Constants import string_constants
-from src.Constants.configuration_constants import IMAGE_VIEWER_WIDTH, IMAGE_VIEWER_HEIGHT
-from src.Frontend.Utils.button_controller import disable_button, enable_button, is_enabled
 from src.Classes.Project_mastermind import Project_mastermind
+from src.Constants import string_constants
+from src.Constants.configuration_constants import IMAGE_VIEWER_HEIGHT
+from src.Frontend.Utils.button_controller import disable_button, enable_button, is_enabled
 
 
 def configure_viewer_buttons_connections(main_window):

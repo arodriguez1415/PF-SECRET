@@ -1,15 +1,15 @@
-import os
+import sys
 
 from PyQt5 import QtWidgets
-import sys
+
+import src.Frontend.global_routine_params as global_routine_params_functions
 import src.Frontend.main_window as main_window_functions
 import src.Frontend.process_list as process_list_functions
-import src.Frontend.global_routine_params as global_routine_params_functions
 from global_routine_params_ui import Ui_GlobalRoutine
+from main_window import Ui_MainWindow
 from process_list_ui import Ui_ProcessList
 from src.Backend.Image_processing_algorithms.Archive_manipulation.properties_manipulation import load_properties
 from src.Classes.Project_mastermind import Project_mastermind
-from main_window import Ui_MainWindow
 
 
 def start_application():

@@ -1,8 +1,8 @@
+import matplotlib.gridspec as gridspec
+import matplotlib.pylab as pl
 import numpy as np
 # https://stackoverflow.com/questions/50313114/what-is-the-entropy-of-an-image-and-how-is-it-calculated
 import skimage.measure
-import matplotlib.pylab as pl
-import matplotlib.gridspec as gridspec
 from sklearn.preprocessing import normalize
 
 

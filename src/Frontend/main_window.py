@@ -2,17 +2,17 @@ import os
 
 from PyQt5 import QtCore
 
+import src.Frontend.Menus.archive_menu as archive_menu
+import src.Frontend.Menus.border_detection_menu as border_detection_menu
+import src.Frontend.Menus.filter_menu as filter_menu
+import src.Frontend.Menus.metrics_menu as metrics_menu
+import src.Frontend.Menus.movement_and_texture_menu as texture_menu
+import src.Frontend.Menus.preprocessing_menu as preprocessing_menu
+import src.Frontend.Menus.routines_menu as routines_menu
+import src.Frontend.toolBox as toolBox
 from src.Backend.Image_processing_algorithms.Archive_manipulation.file_manipulation import \
     create_directory_if_not_exists
 from src.Classes.QDrawable_label import QDrawable_label
-import src.Frontend.Menus.archive_menu as archive_menu
-import src.Frontend.Menus.movement_and_texture_menu as texture_menu
-import src.Frontend.Menus.filter_menu as filter_menu
-import src.Frontend.toolBox as toolBox
-import src.Frontend.Menus.preprocessing_menu as preprocessing_menu
-import src.Frontend.Menus.border_detection_menu as border_detection_menu
-import src.Frontend.Menus.metrics_menu as metrics_menu
-import src.Frontend.Menus.routines_menu as routines_menu
 from src.Constants import configuration_constants
 from src.Frontend.Menus import video_menu
 from src.Frontend.Utils import viewer_buttons, information_buttons, exception_handler

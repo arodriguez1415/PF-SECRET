@@ -1,5 +1,5 @@
-import numpy as np
 import cv2
+import numpy as np
 
 
 def fast_glcm(img, vmin=0, vmax=255, nbit=8, kernel_size=5):

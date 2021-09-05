@@ -1,6 +1,6 @@
 import os
-
 import time
+
 import numpy as np
 from PIL import Image
 
@@ -22,9 +22,9 @@ from src.Backend.Video_processing_algorithms.multiple_cells_video_generator impo
 from src.Backend.Video_processing_algorithms.texture_image_generator import create_multiple_texture_images
 from src.Classes.Project_mastermind import Project_mastermind
 from src.Constants import algorithm_constants, configuration_constants, string_constants
+from src.Constants import properties_constants as ps
 from src.Frontend.Utils import progress_bar
 from src.Frontend.Utils.message import show_confirmation_message, show_wait_message
-from src.Constants import properties_constants as ps
 
 
 def routine(sub_routines, save_form):

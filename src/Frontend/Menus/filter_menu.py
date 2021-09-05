@@ -1,11 +1,11 @@
+from PIL import Image
+
 from src.Backend.Image_processing_algorithms.Archive_manipulation.properties_manipulation import \
     save_anisotropic_filter_params
 from src.Backend.Image_processing_algorithms.filters import anisotropic_filter as anisotropic_filter_functions
+from src.Classes.Image_wrapper import Image_wrapper
 from src.Classes.Methods.Anisotropic_Filter import Anisotropic_Filter
 from src.Classes.Project_mastermind import Project_mastermind
-from src.Classes.Image_wrapper import Image_wrapper
-from PIL import Image
-
 from src.Constants import string_constants
 from src.Frontend.Utils.button_controller import disable_button, enable_button
 from src.Frontend.Utils.message import show_error_message

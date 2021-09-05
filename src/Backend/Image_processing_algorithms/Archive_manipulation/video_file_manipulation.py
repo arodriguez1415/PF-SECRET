@@ -1,7 +1,8 @@
 import os
 from tkinter import filedialog, Tk
-from cv2 import cv2
+
 import numpy as np
+from cv2 import cv2
 
 from src.Constants import configuration_constants, string_constants
 
