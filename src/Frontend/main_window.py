@@ -41,11 +41,10 @@ def set_initial_configuration(main_window):
     disable_main_view(main_window)
     disable_extra_views(main_window)
     toolBox.disable_toolbox(main_window)
-    setup_directories()
     return
 
 
-def setup_directories():
+def set_initial_setup():
     create_directory_if_not_exists(configuration_constants.GENERATED_IMAGES_DIR)
     create_directory_if_not_exists(configuration_constants.METRICS_DIRECTORY_PATH)
     create_directory_if_not_exists(configuration_constants.GENERATED_VIDEOS_DEFAULT_DIR)

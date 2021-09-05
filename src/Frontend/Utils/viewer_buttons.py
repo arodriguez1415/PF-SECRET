@@ -2,7 +2,7 @@ import src.Frontend.Utils.plot_comparator as plot_comparator
 from src.Backend.Image_processing_algorithms.Operations.common_operations import resize_image
 from src.Classes.Project_mastermind import Project_mastermind
 from src.Constants import string_constants
-from src.Constants.configuration_constants import IMAGE_VIEWER_HEIGHT
+from src.Constants.configuration_constants import IMAGE_VIEWER_HEIGHT, IMAGE_VIEWER_WIDTH
 from src.Frontend.Utils.button_controller import disable_button, enable_button, is_enabled
 
 
@@ -94,7 +94,7 @@ def compare_to_original(image_viewer):
     image_viewer_wrapper = image_viewer.actual_image_wrapper
     actual_image_array = image_viewer_wrapper.image_array
     height = IMAGE_VIEWER_HEIGHT
-    width = IMAGE_VIEWER_HEIGHT
+    width = IMAGE_VIEWER_WIDTH
     images_array_list = [resize_image(original_image, width, height), resize_image(actual_image_array, width, height)]
     view_name = project_mastermind.get_current_view()
     weight_image_array, cbar_flag = get_weight_image(view_name)
@@ -129,10 +129,13 @@ def compare_movement_vs_texture_image():
     movement_image_array = movement_image_wrapper.image_array
     texture_image_array = texture_image_wrapper.image_array
     images_array_list = [movement_image_array, texture_image_array]
+    movement_weight_image_array = project_mastermind.get_movement_image().image_array
+    texture_weight_image_array = project_mastermind.get_texture_image().image_array
+    weight_image_array_list = [movement_weight_image_array, texture_weight_image_array]
     title = string_constants.MOVEMENT_VS_TEXTURE_IMAGE_TITLE
     sub_titles_list = [string_constants.MOVEMENT_TITLE, string_constants.TEXTURE_IMAGE_TITLE]
     labels = ["Movimiento", "Textura"]
-    plot_comparator.plot_comparison(images_array_list, title, sub_titles_list, labels)
+    plot_comparator.plot_comparison(images_array_list, weight_image_array_list, title, sub_titles_list, labels)
 
 
 def compare_movement_vs_texture_video():
@@ -142,10 +145,13 @@ def compare_movement_vs_texture_video():
     movement_image_array = movement_image_wrapper.image_array
     texture_image_video_array = texture_image_video_wrapper.image_array
     images_array_list = [movement_image_array, texture_image_video_array]
+    movement_weight_image_array = project_mastermind.get_movement_image().image_array
+    texture_weight_video_array = project_mastermind.get_texture_image_video().image_array
+    weight_image_array_list = [movement_weight_image_array, texture_weight_video_array]
     title = string_constants.MOVEMENT_VS_TEXTURE_VIDEO_TITLE
     sub_titles_list = [string_constants.MOVEMENT_TITLE, string_constants.TEXTURE_VIDEO_TITLE]
     labels = ["Movimiento", "Textura"]
-    plot_comparator.plot_comparison(images_array_list, title, sub_titles_list, labels)
+    plot_comparator.plot_comparison(images_array_list, weight_image_array_list, title, sub_titles_list, labels)
 
 
 def compare_texture_image_vs_texture_video():
@@ -155,7 +161,10 @@ def compare_texture_image_vs_texture_video():
     texture_image_array = texture_image_wrapper.image_array
     texture_image_video_array = texture_image_video_wrapper.image_array
     images_array_list = [texture_image_array, texture_image_video_array]
+    texture_weight_image_array = project_mastermind.get_texture_image().image_array
+    texture_weight_video_array = project_mastermind.get_texture_image_video().image_array
+    weight_image_array_list = [texture_weight_image_array, texture_weight_video_array]
     title = string_constants.TEXTURE_IMAGE_VS_TEXTURE_VIDEO
     sub_titles_list = [string_constants.TEXTURE_IMAGE_TITLE, string_constants.TEXTURE_VIDEO_TITLE]
     labels = ["Textura", "Textura"]
-    plot_comparator.plot_comparison(images_array_list, title, sub_titles_list, labels)
+    plot_comparator.plot_comparison(images_array_list, weight_image_array_list, title, sub_titles_list, labels)

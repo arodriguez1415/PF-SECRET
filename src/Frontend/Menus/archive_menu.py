@@ -87,7 +87,7 @@ def set_output_directory():
     project_mastermind = Project_mastermind.get_instance()
     properties_directory = project_mastermind.get_properties_dictionary()
     output_directory_path = image_file_manipulation.get_directory_path(properties_directory[OUTPUT_FOLDER])
-    output_directory_path += "/Generado"
+    output_directory_path += "/" + configuration_constants.GENERATED_DIR_NAME
 
     if output_directory_path == "" or output_directory_path is None:
         return

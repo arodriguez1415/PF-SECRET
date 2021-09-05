@@ -1,3 +1,4 @@
+from src.Backend.Image_processing_algorithms.Archive_manipulation.file_manipulation import remove_directory
 from src.Backend.Image_processing_algorithms.Archive_manipulation.properties_manipulation import \
     save_video_texture_params, save_image_texture_params, save_movement_params
 from src.Backend.Image_processing_algorithms.Operations.common_operations import resize_image, \
@@ -83,6 +84,7 @@ def generate_movement_heat_map(main_window):
     project_mastermind.set_current_view(string_constants.MOVEMENT_VIEW)
     progress_bar.force_to_close()
     save_movement_params(main_window)
+    remove_directory(configuration_constants.MOVEMENT_HEATMAP_IMAGES_DIRECTORY)
     enable_button(main_window.generate_heat_map_button)
     enable_view_button(string_constants.MOVEMENT_VIEW)
 
@@ -169,5 +171,6 @@ def classify_video_texture(main_window):
     project_mastermind.set_current_view(string_constants.TEXTURE_VIDEO_VIEW)
     progress_bar.force_to_close()
     save_video_texture_params(main_window)
+    remove_directory(configuration_constants.TEXTURE_HEATMAP_IMAGES_DIRECTORY)
     enable_button(main_window.texture_classification_video_button)
     enable_view_button(string_constants.TEXTURE_VIDEO_VIEW)

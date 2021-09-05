@@ -3,11 +3,14 @@ import pickle
 
 from src.Backend.Image_processing_algorithms.Archive_manipulation.file_manipulation import \
     create_directory_if_not_exists
+from src.Backend.Image_processing_algorithms.Archive_manipulation.image_file_manipulation import get_initial_directory
 from src.Backend.Image_processing_algorithms.Preprocessing import adaptive_threshold
 from src.Backend.Image_processing_algorithms.Preprocessing.adaptive_threshold import get_text_method
 from src.Classes.Project_mastermind import Project_mastermind
 from src.Constants import configuration_constants
 from src.Constants import properties_constants as ps
+from src.Constants.string_constants import SET_INPUT_AND_OUTPUT_FOLDERS, ERROR_INPUT_OUTPUT_FOLDER
+from src.Frontend.Utils.message import show_information_message, show_error_message
 
 
 def save_properties(dictionary):
@@ -32,11 +35,28 @@ def setup():
 
 
 def generate_default_properties():
-    default_properties_dict = {ps.IMAGES_SOURCE_FOLDER: configuration_constants.TEST_IMAGES_DIR,
-                               ps.OUTPUT_FOLDER: configuration_constants.GENERATED_IMAGES_DIR}
+    default_properties_dict = {}
+    default_properties_dict = generate_input_and_output_folders(default_properties_dict)
     default_properties_dict = generate_default_manual_routines_properties(default_properties_dict)
     default_properties_dict = generate_global_routine_properties(default_properties_dict)
 
+    return default_properties_dict
+
+
+def generate_input_and_output_folders(default_properties_dict):
+    show_information_message(SET_INPUT_AND_OUTPUT_FOLDERS)
+    images_directory_input = ""
+    output_directory = ""
+
+    while (images_directory_input == "" or images_directory_input is None) \
+            or (output_directory == "" or output_directory is None):
+        images_directory_input = get_initial_directory()
+        output_directory = get_initial_directory()
+        default_properties_dict[ps.IMAGES_SOURCE_FOLDER] = images_directory_input
+        default_properties_dict[ps.OUTPUT_FOLDER] = output_directory + "/" + configuration_constants.GENERATED_DIR_NAME
+        if (images_directory_input == "" or images_directory_input is None) \
+            or (output_directory == "" or output_directory is None):
+            show_error_message(ERROR_INPUT_OUTPUT_FOLDER)
     return default_properties_dict
 
 
@@ -64,9 +84,11 @@ def generate_default_manual_routines_properties(default_properties_dict):
 
 
 def generate_global_routine_properties(default_properties_dict):
-    default_properties_dict[ps.GLOBAL_ROUTINE_ANISOTROPIC_FILTER_TIMES] = ps.GLOBAL_ROUTINE_ANISOTROPIC_FILTER_TIMES_VALUE
+    default_properties_dict[
+        ps.GLOBAL_ROUTINE_ANISOTROPIC_FILTER_TIMES] = ps.GLOBAL_ROUTINE_ANISOTROPIC_FILTER_TIMES_VALUE
 
-    default_properties_dict[ps.GLOBAL_ROUTINE_ADAPTIVE_THRESHOLD_WINDOW_SIZE] = ps.GLOBAL_ROUTINE_ADAPTIVE_THRESHOLD_WINDOW_SIZE_VALUE
+    default_properties_dict[
+        ps.GLOBAL_ROUTINE_ADAPTIVE_THRESHOLD_WINDOW_SIZE] = ps.GLOBAL_ROUTINE_ADAPTIVE_THRESHOLD_WINDOW_SIZE_VALUE
     default_properties_dict[ps.GLOBAL_ROUTINE_ADAPTIVE_C_CONSTANT] = ps.GLOBAL_ROUTINE_ADAPTIVE_C_CONSTANT_VALUE
     default_properties_dict[ps.GLOBAL_ROUTINE_ADAPTIVE_METHOD] = ps.GLOBAL_ROUTINE_ADAPTIVE_METHOD_VALUE
 
@@ -135,10 +157,10 @@ def set_paths(prop_dict):
 
     configuration_constants.METRICS_DIRECTORY_PATH = general_path + "/Metricas/"
 
-
     configuration_constants.GLOBAL_GRAPHS_FOLDER = general_path + "/Rutina global/Graficos/"
     configuration_constants.GLOBAL_METRICS_GRAPH_FOLDER = general_path + "/Rutina global/Graficos/Metricas simples/"
     configuration_constants.GLOBAL_DISTRIBUTION_METRICS_GRAPH_FOLDER = general_path + "/Rutina global/Graficos/Distribucion/"
+
 
 def set_manual_routines_properties(prop_dict, main_window):
     set_anisotropic_filter_params(prop_dict, main_window)
@@ -227,7 +249,8 @@ def save_adaptive_threshold_params(main_window):
 
     prop_dict[ps.ADAPTIVE_THRESHOLD_WINDOW_SIZE] = main_window.adaptive_threshold_window_size_spinner.value()
     prop_dict[ps.ADAPTIVE_THRESHOLD_C_CONSTANT] = main_window.adaptive_threshold_c_constant_spinner.value()
-    prop_dict[ps.ADAPTIVE_THRESHOLD_METHOD] = int(adaptive_threshold.get_method(main_window.adaptive_threshold_method_box.currentText()))
+    prop_dict[ps.ADAPTIVE_THRESHOLD_METHOD] = int(
+        adaptive_threshold.get_method(main_window.adaptive_threshold_method_box.currentText()))
 
     project_mastermind.reload_properties(prop_dict)
     save_properties(prop_dict)
@@ -261,7 +284,7 @@ def save_image_texture_params(main_window):
 def save_video_texture_params(main_window):
     project_mastermind = Project_mastermind.get_instance()
     prop_dict = project_mastermind.get_properties_dictionary()
-    
+
     prop_dict[ps.TEXTURE_VIDEO_THRESHOLD] = main_window.texture_classification_video_threshold_input.value()
     prop_dict[ps.TEXTURE_VIDEO_CLUSTERS] = main_window.texture_classification_video_clusters_input.value()
 

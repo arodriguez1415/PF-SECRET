@@ -2,6 +2,7 @@ from src.Backend.Image_processing_algorithms.Archive_manipulation import datafra
 from src.Backend.Image_processing_algorithms.Archive_manipulation import video_file_manipulation
 from src.Backend.Image_processing_algorithms.Archive_manipulation.dataframe_file_manipulation import is_excel, \
     are_excels
+from src.Backend.Image_processing_algorithms.Archive_manipulation.file_manipulation import remove_directory
 from src.Backend.Image_processing_algorithms.Archive_manipulation.video_file_manipulation import is_video, are_videos
 from src.Backend.Image_processing_algorithms.Metrics import metrics_generator, metrics_plotter
 from src.Backend.Image_processing_algorithms.Metrics.metrics_plotter import filter_keys
@@ -276,6 +277,7 @@ def generate_movement_view(main_window):
     project_mastermind.set_movement_image(movement_image_wrapper)
     project_mastermind.set_movement_heat_map_image(movement_heat_map_image_wrapper)
     progress_bar.force_to_close()
+    remove_directory(configuration_constants.MOVEMENT_HEATMAP_IMAGES_DIRECTORY)
     enable_view_button(string_constants.MOVEMENT_VIEW)
 
 
@@ -310,6 +312,7 @@ def generate_video_texture_view(main_window):
     project_mastermind.set_texture_image_video(texture_image_wrapper)
     project_mastermind.set_texture_heat_map_image_video(texture_heat_map_image_wrapper)
     progress_bar.force_to_close()
+    remove_directory(configuration_constants.TEXTURE_HEATMAP_IMAGES_DIRECTORY)
     enable_view_button(string_constants.TEXTURE_VIDEO_VIEW)
 
 
@@ -332,6 +335,7 @@ def analyze_texture_and_movement_metrics(main_window):
         return
 
     original_array = project_mastermind.get_original_image()
+    movement_weight_array = project_mastermind.get_movement_image().image_array
     texture_image_array = project_mastermind.get_texture_image().image_array
     texture_video_array = project_mastermind.get_texture_image_video().image_array
 
@@ -339,7 +343,7 @@ def analyze_texture_and_movement_metrics(main_window):
     show_texture_image_array = project_mastermind.get_texture_heat_map_image().image_array
     show_texture_video_array = project_mastermind.get_texture_heat_map_image_video().image_array
 
-    movement_weight_array = project_mastermind.get_movement_image().image_array
+
 
     width, height = configuration_constants.IMAGE_VIEWER_WIDTH, configuration_constants.IMAGE_VIEWER_HEIGHT
     weight_image_array_list = [original_array, movement_weight_array, texture_image_array, texture_video_array]

@@ -1,11 +1,13 @@
 from PyQt5.QtCore import Qt
 
 import src.Backend.Image_processing_algorithms.Operations.image_save as image_saver
+from src.Backend.Image_processing_algorithms.Operations.common_operations import resize_image
 from src.Classes.Image_loader import Image_loader
 from src.Classes.Image_wrapper import Image_wrapper
 from src.Classes.Methods.Original import Original
 from src.Classes.Project_mastermind import Project_mastermind
 from src.Constants.algorithm_constants import DIAGONAL_LINE_TYPE, HORIZONTAL_LINE_TYPE, VERTICAL_LINE_TYPE
+from src.Constants.configuration_constants import IMAGE_VIEWER_HEIGHT, IMAGE_VIEWER_WIDTH
 from src.Constants.string_constants import PROCESS_LIST_WIDGET_TITLE
 from src.Frontend.Utils.button_controller import enable_button, disable_button, select_button, deselect_all
 from src.Frontend.process_list import populate_process_list
@@ -123,14 +125,18 @@ def undo(main_window):
 
 def save_image(main_window):
     deselect_all_and_clear_viewer(main_window)
-    project_mastermind = Project_mastermind.get_instance()
-    current_image_array = project_mastermind.get_last_image()
+    image_viewer = main_window.image_viewer
+    image_viewer_wrapper = image_viewer.actual_image_wrapper
+    actual_image_array = image_viewer_wrapper.image_array
+    height = IMAGE_VIEWER_HEIGHT
+    width = IMAGE_VIEWER_WIDTH
+    actual_image_array = resize_image(actual_image_array, width, height)
     image_save_path = image_saver.get_save_image_path()
 
     if image_save_path == "" or image_save_path is None:
         return
 
-    image_saver.save_image(current_image_array, image_save_path)
+    image_saver.save_image(actual_image_array, image_save_path)
 
 
 def get_next_image(main_window):

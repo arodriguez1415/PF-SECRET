@@ -37,6 +37,14 @@ def get_multiple_images_path():
     return file_path_list
 
 
+def get_initial_directory():
+    root = Tk()
+    root.withdraw()
+    directory_path = filedialog.askdirectory(title=string_constants.CHOOSE_DIRECTORY_WINDOW)
+    root.destroy()
+    return directory_path
+
+
 def get_directory_path(path=None):
     root = Tk()
     root.withdraw()

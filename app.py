@@ -29,17 +29,17 @@ def start_application():
     global_routine_params.setupUi(global_routine_params_widget)
     global_routine_params_widget.setFixedSize(global_routine_params_widget.size())
 
-    project_mastermind = Project_mastermind(app, main_window,
-                                            process_list, process_list_widget,
-                                            global_routine_params, global_routine_params_widget)
-    project_mastermind.reload_properties(load_properties(main_window, global_routine_params))
-
     main_window_functions.configure_windows(main_window, global_routine_params)
     process_list_functions.configure_window(process_list)
     global_routine_params_functions.configure_window(global_routine_params)
 
-
     main_window_widget.show()
+
+    project_mastermind = Project_mastermind(app, main_window,
+                                            process_list, process_list_widget,
+                                            global_routine_params, global_routine_params_widget)
+    project_mastermind.reload_properties(load_properties(main_window, global_routine_params))
+    main_window_functions.set_initial_setup()
     sys.exit(app.exec_())
 
 

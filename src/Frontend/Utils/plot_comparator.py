@@ -51,9 +51,10 @@ def plot_original_vs_actual(images, weight_image_array, title, sub_titles, cbar_
     plt.show()
 
 
-def plot_comparison(images, title, sub_titles, labels, save_path=None):
+def plot_comparison(images, weight_image_array_list, title, sub_titles, labels, save_path=None):
     fig = plt.figure(figsize=(9.75, 3))
     fig.suptitle(title, fontsize=20, fontweight='bold')
+    colorbar_ticks = 6
 
     grid = ImageGrid(fig, 111,
                      nrows_ncols=(1, 2),
@@ -65,6 +66,15 @@ def plot_comparison(images, title, sub_titles, labels, save_path=None):
                      cbar_pad=0.15
                      )
 
+    colorbar_custom_ticks_lists = []
+    for i in range(0, len(weight_image_array_list)):
+        max_movement_steps = weight_image_array_list[i].max()
+        colorbar_custom_ticks = [0]
+        for j in reversed(range(1, colorbar_ticks)):
+            tick = int(max_movement_steps / j)
+            colorbar_custom_ticks.append(tick)
+        colorbar_custom_ticks_lists.append(colorbar_custom_ticks)
+
     for i in range(0, len(images)):
         im = grid[i].imshow(images[i], cmap="hot")
         grid[i].set_title(sub_titles[i], fontsize=15)
@@ -73,6 +83,7 @@ def plot_comparison(images, title, sub_titles, labels, save_path=None):
         cax = grid.cbar_axes[i]
         axis = cax.axis[cax.orientation]
         axis.label.set_text(labels[i])
+        grid.cbar_axes[i].set_yticklabels(colorbar_custom_ticks_lists[i])
 
     if save_path is not None:
         fig.set_size_inches(8, 6)
