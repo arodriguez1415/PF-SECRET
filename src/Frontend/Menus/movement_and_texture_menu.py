@@ -8,6 +8,8 @@ from src.Backend.Video_processing_algorithms.movement_image_generator import cre
 from src.Backend.Video_processing_algorithms.texture_image_generator import create_texture_image_from_video, \
     classify_single_image
 from src.Classes.Image_wrapper import Image_wrapper
+from src.Classes.Methods.Anisotropic_Filter import Anisotropic_Filter
+from src.Classes.Methods.Adaptive_threshold import Adaptive_threshold
 from src.Classes.Project_mastermind import Project_mastermind
 from src.Classes.Region import Region
 from src.Constants import string_constants, configuration_constants
@@ -94,6 +96,12 @@ def generate_profile_texture(main_window):
     project_mastermind = Project_mastermind.get_instance()
     width, height = configuration_constants.IMAGE_VIEWER_WIDTH, configuration_constants.IMAGE_VIEWER_HEIGHT
     current_image_array = project_mastermind.get_last_image()
+
+    list_of_process = project_mastermind.get_image_processing_list()
+    for i in list_of_process:
+        if isinstance(i.get_method(), Anisotropic_Filter) or isinstance(i.get_method(), Adaptive_threshold):
+            show_error_message(string_constants.NO_PREPROCESSING_ALLOWED)
+            return
 
     if project_mastermind.get_last_image() is None:
         show_error_message(string_constants.NO_IMAGE_LOADED)
