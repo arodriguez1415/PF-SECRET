@@ -43,5 +43,9 @@ def get_save_path():
                                                   defaultextension=save_extension,
                                                   filetypes=(("Avi file", "*.avi"),("All Files", "*.*"))
                                                   )
+
+    if type(save_file_path) == tuple:
+        save_file_path = ""
+
     root.destroy()
     return save_file_path

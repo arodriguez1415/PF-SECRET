@@ -18,6 +18,10 @@ def get_image_path():
                                            filetypes=[("Image files", "*.tif"),
                                                       ("tif", "*.TIF"),
                                                       ("All files", "*")])
+
+    if type(file_path) == tuple:
+        file_path = ""
+
     root.destroy()
     return file_path
 
@@ -42,6 +46,10 @@ def get_initial_directory():
     root.withdraw()
     directory_path = filedialog.askdirectory(title=string_constants.CHOOSE_DIRECTORY_WINDOW)
     root.destroy()
+
+    if type(directory_path) == tuple:
+        directory_path = ""
+
     return directory_path
 
 
@@ -56,6 +64,10 @@ def get_directory_path(path=None):
         initial_absolute_directory_path = os.path.abspath(path)
     directory_path = filedialog.askdirectory(initialdir=initial_absolute_directory_path,
                                              title=string_constants.CHOOSE_DIRECTORY_WINDOW)
+
+    if type(directory_path) == tuple:
+        directory_path = ""
+
     root.destroy()
     return directory_path
 
@@ -87,6 +99,7 @@ def get_images_from_directories(source_directory):
 
 def get_files_from_directory(directory):
     directory_files_paths_list = os.listdir(directory)
+    directory_files_paths_list.sort()
     correct_directory_files_paths_list = []
     for file in directory_files_paths_list:
         if file.endswith(string_constants.TIF_EXTENSION):

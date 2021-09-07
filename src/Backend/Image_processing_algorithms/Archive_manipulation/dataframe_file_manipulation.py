@@ -16,7 +16,10 @@ def get_dataframe_path():
                                            title=string_constants.CHOOSE_EXCEL_WINDOW,
                                            filetypes=[("Excel", "*.xlsx"),
                                                       ("xlsx", "*.XLSX"),
-                                                      ("All files", "*")])
+                                                      ("All files", "*")],)
+    if type(file_path) == tuple:
+        file_path = ""
+
     root.destroy()
     return file_path
 

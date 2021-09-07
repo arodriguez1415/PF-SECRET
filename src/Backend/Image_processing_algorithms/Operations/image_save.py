@@ -17,6 +17,9 @@ def get_save_image_path():
                                                   defaultextension=save_extension,
                                                   filetypes=(("Tif file", "*.tif"),("All Files", "*.*"))
                                                   )
+    if type(save_file_path) == tuple:
+        save_file_path = ""
+
     root.destroy()
     return save_file_path
 

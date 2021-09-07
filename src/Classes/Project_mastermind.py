@@ -243,6 +243,7 @@ class Project_mastermind:
 
     def get_files_from_directory(self, directory):
         directory_files_paths_list = os.listdir(directory)
+        directory_files_paths_list.sort()
         correct_directory_files_paths_list = []
         for file in directory_files_paths_list:
             if file.endswith(string_constants.TIF_EXTENSION):

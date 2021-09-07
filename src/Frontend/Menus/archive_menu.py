@@ -1,3 +1,5 @@
+import os
+
 from src.Backend.Image_processing_algorithms.Archive_manipulation import image_file_manipulation
 from src.Backend.Image_processing_algorithms.Archive_manipulation.image_file_manipulation import is_image
 from src.Backend.Image_processing_algorithms.Archive_manipulation.properties_manipulation import save_properties, \
@@ -31,9 +33,7 @@ def load_image(image_viewer, method, image_path=""):
 
     image_dir = image_file_manipulation.get_image_dir(image_path)
 
-    if image_path == "" or image_path is None:
-        return
-    elif not is_image(image_path):
+    if not is_image(image_path):
         show_error_message(string_constants.NO_IMAGE_FILE)
         return
 
