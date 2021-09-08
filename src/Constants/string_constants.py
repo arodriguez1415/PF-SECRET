@@ -83,6 +83,10 @@ WAIT_TEXTURE_IMAGE_MESSAGE_DESC = "Se esta generando el mapa de textura de la im
 
 # Confirmation messages
 
+MGAC_GENERATE_VIDEO_TITLE = "Confirmación de máscara"
+MGAC_GENERATE_VIDEO_DESCRIPTION = "En el procesamiento se detectó el uso del método MGAC. ¿Desea que el video " \
+                                  "generado sea la máscara de la célula?"
+
 DEFAULT_PARAMETERS_MANUAL_ROUTINE_TITLE = "Restaurar defaults"
 DEFAULT_PARAMETERS_MANUAL_ROUTINE_DESCRIPTION = "¿Esta seguro que quiere volver a tener los parámetros default en todas" \
                                                 " las rutinas? Se sobreescribirán los actuales"
@@ -229,6 +233,8 @@ GLOBAL_ROUTINE_ALGORITHM_HELP = "Una vez determinado que subrutinas se ejecutar�
 
 CANCEL_BUTTON_TEXT = "Cancelar"
 CONTINUE_BUTTON_TEXT = "Continuar"
+YES_BUTTON_TEXT = "Sí"
+NO_BUTTON_TEXT = "No"
 
 CALCULATE_PERIMETERS_TITLE = "Calculo de perímetro"
 CALCULATE_PERIMETERS_DESCRIPTION = "Calculando perímetros"

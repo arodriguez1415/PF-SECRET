@@ -31,3 +31,7 @@ Para generar las vistas con PyUIC:
 ```bash
 python -m PyQt5.uic.pyuic main_window.ui -o main_window.py
 ```
+
+
+Agrego esto para que lo veamos en algun momento:
+cv2 no lo reconoce, hay que agregar a mano opencv-python en windows

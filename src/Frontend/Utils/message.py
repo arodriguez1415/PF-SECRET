@@ -33,17 +33,25 @@ def show_wait_message(title, message):
     return messageBox
 
 
-def show_confirmation_message(title, message):
+def show_confirmation_message(title, message, no_button=False):
     msgBox = QMessageBox()
     msgBox.setText(title)
     msgBox.setInformativeText(message)
-    msgBox.setStandardButtons(QMessageBox.Ok | QMessageBox.Cancel)
-    msgBox.setDefaultButton(QMessageBox.Cancel)
-    button_continue = msgBox.button(QMessageBox.Ok)
-    button_continue.setText(string_constants.CONTINUE_BUTTON_TEXT)
-    button_cancel = msgBox.button(QMessageBox.Cancel)
-    button_cancel.setText(string_constants.CANCEL_BUTTON_TEXT)
+    if not no_button:
+        msgBox.setStandardButtons(QMessageBox.Ok | QMessageBox.Cancel)
+        msgBox.setDefaultButton(QMessageBox.Cancel)
+        button_continue = msgBox.button(QMessageBox.Ok)
+        button_continue.setText(string_constants.CONTINUE_BUTTON_TEXT)
+        button_cancel = msgBox.button(QMessageBox.Cancel)
+        button_cancel.setText(string_constants.CANCEL_BUTTON_TEXT)
+    else:
+        msgBox.setStandardButtons(QMessageBox.Yes | QMessageBox.No)
+        msgBox.setDefaultButton(QMessageBox.Yes)
+        button_continue = msgBox.button(QMessageBox.Yes)
+        button_continue.setText(string_constants.YES_BUTTON_TEXT)
+        button_cancel = msgBox.button(QMessageBox.No)
+        button_cancel.setText(string_constants.NO_BUTTON_TEXT)
     ret = msgBox.exec_()
-    if ret == QMessageBox.Ok:
+    if ret == QMessageBox.Yes:
         return True
     return False
