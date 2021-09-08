@@ -52,6 +52,6 @@ def show_confirmation_message(title, message, no_button=False):
         button_cancel = msgBox.button(QMessageBox.No)
         button_cancel.setText(string_constants.NO_BUTTON_TEXT)
     ret = msgBox.exec_()
-    if ret == QMessageBox.Yes:
+    if ret == QMessageBox.Yes or ret == QMessageBox.Ok:
         return True
     return False
